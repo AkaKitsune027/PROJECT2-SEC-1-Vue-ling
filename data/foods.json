@@ -102,7 +102,7 @@
     "type": "food",
     "name": "spicyChickenStirFry",
     "display_name": "ไก่ผัดซอสเผ็ด",
-    "description": "ไก่บาซิลิสก์ผัดกับซอสเผ็ดจักจ้านตัดรสชาติด้วยผักสะอาดพร้อมทาน",
+    "description": "ไก่บาซิลิสก์ผัดกับซอสเผ็ดจัดจ้านตัดรสชาติด้วยผักสะอาดพร้อมทาน",
     "ingredients": ["basiliskMeat", "gobol", "carrot", "amalo", "salt", "sugar"]
   },
   {
