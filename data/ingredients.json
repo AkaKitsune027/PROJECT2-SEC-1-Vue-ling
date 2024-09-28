@@ -1,0 +1,170 @@
+[
+  {
+    "id": 1,
+    "type": "meat",
+    "name": "orcMeat",
+    "display_name": "เนื้อออร์ค",
+    "description": "เผ่าพันธ์ุหมู เดิน2ขา พูดได้มีสติปัญญา",
+    "rank": 2
+  },
+  {
+    "id": 2,
+    "type": "meat",
+    "name": "basiliskMeat",
+    "display_name": "เนื้อบาซิลิกซ์",
+    "description": "ตัวเป็นไก่ หางเป็นงู เนื้อรสชาติดี",
+    "rank": 2
+  },
+  {
+    "id": 3,
+    "type": "meat",
+    "name": "whiteCowMeat",
+    "display_name": "เนื้อวัวขาว",
+    "description": "วัวสีขาว พบได้ทั่วไปตามทุ่งหญ้า เป็นที่นิยมโดยทั่วไป",
+    "rank": 1
+  },
+  {
+    "id": 4,
+    "type": "meat",
+    "name": "dragonMeat",
+    "display_name": "เนื้อมังกร",
+    "description": "เนื่อมังกรโตเต็มไว รสชาติเยี่ยม เพิ่มพลังเวทย์ให้ผู้รับประทาน",
+    "rank": 3
+  },
+  {
+    "id": 5,
+    "type": "meat",
+    "display_name": "หนวดคราเคน",
+    "name": "krakenTentacles",
+    "description": "ปลาหมึกยักษ์ ดุร้าย เหมาะสำหรับเมนูประเภทซุป",
+    "rank": 3
+  },
+  {
+    "id": 6,
+    "type": "meat",
+    "name": "boarMeat",
+    "display_name": "เนื้อหมูป่า",
+    "description": "หมูป่าตัวใหญ่ เนื้อแน่น รสชาติดี",
+    "rank": 1
+  },
+  {
+    "id": 7,
+    "type": "meat",
+    "name": "redEyedSnakeEggs",
+    "display_name": "ไข่งูตาแดง",
+    "description": "ไข่งูตาแดงแสนดุร้าย แต่มีรสชาติดีเยี่ยม หากได้กินแล้วไม่อาจลืมได้",
+    "rank": 3
+  },
+  {
+    "id": 8,
+    "type": "meat",
+    "name": "redMeatFish",
+    "display_name": "ปลาเนื้อแดง",
+    "description": "ปลาตัวใหญ่ เนื้อสีแดงสด พบได้ทั้งทะเลและแม่น้ำ รสชาติดี",
+    "rank": 1
+  },
+  {
+    "id": 9,
+    "type": "meat",
+    "name": "unicornHorn",
+    "display_name": "เขายูนิคอร์น",
+    "description": "เขาม้าวิเศษมีสรรพคุณทางเวทมนย์สูง เหมาะสำหรับทำของหวาน",
+    "rank": 3
+  },
+  {
+    "id": 10,
+    "type": "meat",
+    "name": "slime",
+    "display_name": "สไลม์",
+    "description": "รูปร่างกึ่งของเหลว สีเขียว คล้ายเยนลี่ เป็นมิตรไม่โจมตีสิ่งอื่นก่อน",
+    "rank": 1
+  },
+  {
+    "id": 11,
+    "type": "vegetable",
+    "name": "tamata",
+    "display_name": "ผลทามาทา",
+    "description": "ผลไม้สีแดง รสเปรี้ยวอมหวาน เปนื้อชุ่มฉ่ำ นิยมนำมาทำอาหาร",
+    "rank": 1
+  },
+  {
+    "id": 12,
+    "type": "vegetable",
+    "name": "gobol",
+    "display_name": "โกโบล",
+    "description": "มันฝรั่ง หัวสีเหลืองอ่อน รสชาติมันและนุ่ม นิยมนำไปต้มหรืออบ",
+    "rank": 1
+  },
+  {
+    "id": 13,
+    "type": "vegetable",
+    "name": "galion",
+    "display_name": "กาลิออน",
+    "description": "พืชทรงกลีบ ที่มีกลิ่นหอมฉุน ใช้เพิ่มรสชาติในอาหาร",
+    "rank": 1
+  },
+  {
+    "id": 14,
+    "type": "vegetable",
+    "name": "carrot",
+    "display_name": "แครอท",
+    "description": "รากผักสีส้ม รสหวานกรอบ อุดมไปด้วยวิตามินเอ",
+    "rank": 1
+  },
+  {
+    "id": 15,
+    "type": "vegetable",
+    "name": "gabio",
+    "display_name": "กาบิโอ",
+    "description": "หัวผักทรงกลม ใบเขียวกรอบ นิยมนำมาทำสลัดและผัด",
+    "rank": 1
+  },
+  {
+    "id": 16,
+    "type": "vegetable",
+    "name": "mysticMushroom",
+    "display_name": "เห็ดมนตรา",
+    "description": "เห็ดที่มีสรรพคุณพิเศษ ใช้ทำยาและปรุงอาหารที่ให้พลังพิเศษ",
+    "rank": 2
+  },
+  {
+    "id": 17,
+    "type": "vegetable",
+    "name": "rainbowMushroom",
+    "display_name": "เห็ดสายรุ้ง",
+    "description": "เห็ดสีสันสดใส เติบโตเฉพาะในพื้นที่ที่มีความชุ่มชื้นสูง",
+    "rank": 3
+  },
+  {
+    "id": 18,
+    "type": "vegetable",
+    "name": "orcMushroom",
+    "display_name": "เห็ดออร์ค",
+    "description": "เห็ดสีน้ำตาล กลิ่นแรง พบได้บริเวณที่มีออร์คอาศัยอยู่",
+    "rank": 2
+  },
+  {
+    "id": 19,
+    "type": "vegetable",
+    "name": "lammy",
+    "display_name": "ลามมี่",
+    "description": "ผลไม้สีเหลือง มีรสเปรี้ยว นิยมใช้ทำอาหารรสจัด",
+    "rank": 1
+  },
+  {
+    "id": 20,
+    "type": "vegetable",
+    "name": "amalo",
+    "display_name": "อามาโล่",
+    "description": "พืชสีแดงที่มีความเผ็ดจัด นิยมใช้ในการปรุงรสอาหาร",
+    "rank": 1
+  },
+  {
+    "id": 21,
+    "type": "vegetable",
+    "name": "rice",
+    "display_name": "ข้าว",
+    "description": "เมล็ดธัญพืชสีขาว เป็นอาหารหลักในหลายประเทศ",
+    "rank": 1
+  }
+]

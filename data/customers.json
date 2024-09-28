@@ -1,0 +1,79 @@
+[
+  {
+    "id": 1,
+    "type": "customer",
+    "name": "goblin",
+    "display_name": "ก็อบลิน",
+    "description": "เผ่าพันธ์ุนักล่า ตัวเขียว ดุร้าย ชอบกินเนื้อ ไม่ชอบผัก"
+  },
+  {
+    "id": 2,
+    "type": "customer",
+    "name": "elf_m",
+    "display_name": "เอลฟ์หนุ่ม",
+    "description": "เผ่าพันธ์ที่มีอายุยืน มีหูแหลม ไม่กินเนื้อ"
+  },
+  {
+    "id": 3,
+    "type": "customer",
+    "name": "elf_f",
+    "display_name": "เอลฟ์สาว",
+    "description": "เผ่าพันธ์ที่มีอายุยืน มีหูแหลม ไม่กินเนื้อ"
+  },
+  {
+    "id": 4,
+    "type": "customer",
+    "name": "dwarf",
+    "display_name": "คนเคระ",
+    "description": "เผ่าพันธ์ที่มีรูปร่างเล็กและแข็งแรง ชอบเมนูข้าวและเนื้อ"
+  },
+  {
+    "id": 5,
+    "type": "customer",
+    "name": "wizard",
+    "display_name": "พ่อมด",
+    "description": "ผู้ใช้เวทมนตร์ มีความชำนาญในศิลปะแห่งคาถา ชอบของมึนเมา"
+  },
+  {
+    "id": 6,
+    "type": "customer",
+    "name": "lizardman",
+    "display_name": "ลิซาร์ดแมน",
+    "description": "มนุษย์กึ่งสัตว์เลื้อยคลาน มีเกล็ด ชอบกินเนื้อมังกร"
+  },
+  {
+    "id": 7,
+    "type": "customer",
+    "name": "catman",
+    "display_name": "มนุษย์แมว",
+    "description": "เผ่าพันธ์ที่มีลักษณะคล้ายแมว ชอบเมนูสัตว์น้ำ"
+  },
+  {
+    "id": 8,
+    "type": "customer",
+    "name": "hero",
+    "display_name": "ผู้กล้า",
+    "description": "นักรบผู้มีจิตใจกล้าหาญ ชอบเมนูข้าว"
+  },
+  {
+    "id": 9,
+    "type": "customer",
+    "name": "villager_m",
+    "display_name": "หนุ่มชาวบ้าน",
+    "description": "ผู้คนธรรมดาในหมู่บ้าน ไม่มีความชอบพิเศษ"
+  },
+  {
+    "id": 10,
+    "type": "customer",
+    "name": "villager_f",
+    "display_name": "สาวชาวบ้าน",
+    "description": "ผู้คนธรรมดาในหมู่บ้าน ไม่มีความชอบพิเศษ"
+  },
+  {
+    "id":11,
+    "type": "customer",
+    "name": "orc",
+    "display_name": "ออร์ค",
+    "description": "เผ่าพันธ์ตัวใหญ่และแข็งแกร่ง ชอบเนื้อสัตว์เผ่าพันธ์หมู"
+  }
+]
