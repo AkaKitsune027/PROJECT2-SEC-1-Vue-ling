@@ -4,7 +4,7 @@
     "type": "food",
     "name": "friedOrcsWithVegetables",
     "display_name": "ออร์คผัดผัก",
-    "description": "ผักกลิ่นหอมผัดกับเนื้อออร์แสนฉ่ำรสชาติดีเยี่ยม",
+    "description": "เนื้อออร์คกลิ่นหอมผัดกับผักแสนฉ่ำรสชาติดีเยี่ยม",
     "ingredients": ["orcMeat", "sugar", "salt", "gabio", "galion"]
   },
   {
@@ -12,7 +12,7 @@
     "type": "food",
     "name": "fiveCompanionsStew",
     "display_name": "สตูว์เนื้อ 5 สหาย",
-    "description": "สตูว์เนื้อ 5 ชนิดที่เข้ากันอย่างลงตัว พร้อมผักสด",
+    "description": "สตูว์เนื้อ 5 ชนิดที่เข้ากันอย่างลงตัวพร้อมด้วยผักสดเป็นเครื่องเคียง",
     "ingredients": [
       "meat1",
       "meat2",
@@ -30,23 +30,23 @@
     "type": "food",
     "name": "beachSoup",
     "display_name": "ซุปชายหาด",
-    "description": "ซุปทะเลรสสดชื่น ที่มีส่วนผสมจากหนวดคราเคนและปลาสด",
+    "description": "ซุปทะเลรสสดชื่นที่มีส่วนผสมจากหนวดคราเคนและปลาสด",
     "ingredients": ["krakenTentacles", "redMeatFish", "tamata", "lammy", "sugar"]
   },
   {
     "id": 4,
     "type": "food",
     "name": "grilledBoarWithSalt",
-    "display_name": "หมูขนย่างเกลือ",
-    "description": "หมูขนย่างเกลือหอมฉุย ผสมผสานรสชาติอย่างลงตัว",
+    "display_name": "หมูป่าย่างเกลือ",
+    "description": "หมูป่าย่างเกลือหอมฉุย ผสมผสานกับรสชาติกลมกล่อมลงตัว",
     "ingredients": ["boarMeat", "salt", "galion", "orcMushroom"]
   },
   {
     "id": 5,
     "type": "food",
     "name": "rainbowPudding",
-    "display_name": "แรนโบว์พุดดิ้ง",
-    "description": "พุดดิ้งหลากสีที่ทำจากหัวใจยูนิคอร์นและเห็ดสายรุ้ง",
+    "display_name": "เรนโบว์พุดดิ้ง",
+    "description": "พุดดิ้งหลากสีที่ทำจากเขายูนิคอร์นบดและเห็ดสายรุ้ง ให้รสชาติหอมหวานน่ากิน",
     "ingredients": [
       "unicornHorn",
       "slime",
@@ -76,7 +76,7 @@
     "type": "food",
     "name": "riceWithEgg",
     "display_name": "ข้าวหน้าไข่",
-    "description": "ข้าวสวยร้อนๆ เสิร์ฟพร้อมไข่งูตาแดง และเครื่องปรุงที่เข้ากัน",
+    "description": "ข้าวสวยร้อน ๆ เสิร์ฟพร้อมกับไข่งูตาแดงที่หาได้ยาก",
     "ingredients": ["rice", "redEyesSnakeEgg", "salt", "tamata", "galion"]
   },
   {
@@ -84,7 +84,7 @@
     "type": "food",
     "name": "kingPorkFrieRice",
     "display_name": "ข้าวผัดราชาหมู",
-    "description": "ข้าวผัดสูตรพิเศษที่ใช้เนื้อออร์คและหมูขนปรุงอย่างลงตัว",
+    "description": "ข้าวผัดสูตรพิเศษที่ใช้เนื้อออร์คและหมูป่าปรุงสุกกับเครื่องเทศอย่างลงตัว",
     "ingredients": [
       "orcMeat",
       "boarMeat",
@@ -102,7 +102,7 @@
     "type": "food",
     "name": "spicyChickenStirFry",
     "display_name": "ไก่ผัดซอสเผ็ด",
-    "description": "ไก่บาซิลิกผัดกับซอสเผ็ดและผักสด รสชาติเผ็ดจัดจ้าน",
+    "description": "ไก่บาซิลิสก์ผัดกับซอสเผ็ดจักจ้านตัดรสชาติด้วยผักสะอาดพร้อมทาน",
     "ingredients": ["basiliskMeat", "gobol", "carrot", "amalo", "salt", "sugar"]
   },
   {
@@ -110,7 +110,7 @@
     "type": "food",
     "name": "riceWithMeat",
     "display_name": "ข้าวหน้าเนื้อ",
-    "description": "ข้าวหน้าเนื้อรสชาติเยี่ยม พร้อมด้วยเห็ดออร์คและเครื่องปรุง",
+    "description": "ข้าวหน้าเนื้อรสชาติเยี่ยม ผัดพร้อมกับเห็ดออร์ค ผสมผสานกันอย่างลงตัว",
     "ingredients": ["meat", "rice", "orcMushroom", "salt", "sugar"]
   }
 ]
