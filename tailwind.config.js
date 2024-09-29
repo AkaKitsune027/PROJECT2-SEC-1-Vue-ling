@@ -10,7 +10,7 @@ export default {
         'secondary': '#f1c83a',
         'third': '#a15852',
         'base': '#6f6f4b',
-        'alert': '#4a2b30',
+        'alert': '#4a2b30'
       }
     }
   },
