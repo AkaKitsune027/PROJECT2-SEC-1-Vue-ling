@@ -14,7 +14,6 @@ export default {
         base: "#6f6f4b",
         alert: "#4a2b30",
       },
-
       fontFamily: {
         sunday: ["SUNDAY"],
       },
