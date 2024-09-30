@@ -25,7 +25,7 @@ import SeasoningBar from '@/components/SeasoningBar.vue'
 
                     <button class="bg-[#ACC6AA] flex justify-center items-center w-12 rounded-lg h-10">
                         <div @click="toggleBgm" class="m-2 cursor-pointer group">
-                            <svg class="group-hover:fill-slate-500" xmlns=" http://www.w3.org/2000/svg" width="35"
+                            <svg class="group-hover:fill-slate-500" xmlns="http://www.w3.org/2000/svg" width="35"
                                 height="35" fill="white" viewBox="0 0 16 16">
                                 <path
                                     d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13s1.12-2 2.5-2 2.5.896 2.5 2m9-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2" />
