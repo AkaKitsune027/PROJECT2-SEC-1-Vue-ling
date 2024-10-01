@@ -6,7 +6,7 @@ import SeasoningBar from '@/components/SeasoningBar.vue'
 
 const router = useRouter()
 
-function routToCustomerOrderModal() {
+function routeToCustomerOrderModal() {
     router.push({ name: 'user-order-modal' })
 }
 
@@ -94,7 +94,7 @@ function routToCustomerOrderModal() {
                 <button class="bg-third border border-white px-6 rounded-lg h-10"><img src="/src/assets/trash.svg"
                         alt="trash"></button>
             </div>
-            <div @click="routToCustomerOrderModal" class="col-start-5 row-start-1 flex justify-center">
+            <div @click="routeToCustomerOrderModal" class="col-start-5 row-start-1 flex justify-center">
                 <button class="bg-[#ACC6AA] w-[7rem]">
                 <img src="../assets/icons/customer.svg" class="w-10">
                 </button>
