@@ -21,7 +21,7 @@ const router = createRouter({
                 {
                     path: 'userOrder',
                     name: 'user-order-modal',
-                    component: () => import('../components/CustonerOrderModal.vue'),
+                    component: () => import('../components/CustomerOrderModal.vue'),
                 }
             ]
             
