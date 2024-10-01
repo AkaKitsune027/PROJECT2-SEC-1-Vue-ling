@@ -1,4 +1,14 @@
 <script setup>
+
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+
+function routToCustomerOrderModal() {
+    router.push({ name: 'user-order-modal' })
+}
 </script>
 
 <template>
@@ -29,6 +39,11 @@
                         <div class="flex">
                             <button class="bg-primary flex justify-center items-center w-12 rounded-lg">
                                 <img src="/trophy.svg" class="w-10" />
+                            </button>
+                        </div>
+                        <div @click="routToCustomerOrderModal" class="flex">
+                            <button class="bg-primary flex justify-center items-center w-12 rounded-lg">
+                                <img src="../assets/icons/customer.svg" class="w-10">
                             </button>
                         </div>
 
@@ -64,9 +79,10 @@
                 </div>
             </div>
         </div>
+
     </div>
 
-
+    <router-view />
 </template>
 
 <style scoped></style>

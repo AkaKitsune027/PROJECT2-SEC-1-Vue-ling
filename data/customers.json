@@ -1,77 +1,77 @@
 [
   {
     "id": 1,
-    "type": "customer",
+    "type": "monster",
     "name": "goblin",
     "display_name": "ก็อบลิน",
     "description": "เผ่าพันธ์ุนักล่า ตัวเขียว ดุร้าย ชอบกินเนื้อและไม่ชอบผัก"
   },
   {
     "id": 2,
-    "type": "customer",
+    "type": "elf",
     "name": "elf_m",
     "display_name": "เอลฟ์หนุ่ม",
     "description": "เผ่าพันธ์ุที่มีอายุยืน มีหูแหลม และไม่กินเนื้อ"
   },
   {
     "id": 3,
-    "type": "customer",
+    "type": "elf",
     "name": "elf_f",
     "display_name": "เอลฟ์สาว",
     "description": "เผ่าพันธ์ุที่มีอายุยืน มีหูแหลม และไม่กินเนื้อ"
   },
   {
     "id": 4,
-    "type": "customer",
+    "type": "human",
     "name": "dwarf",
     "display_name": "คนแคระ",
     "description": "เผ่าพันธ์ุที่มีรูปร่างเล็ก แข็งแรง และชอบเมนูข้าวและเนื้อ"
   },
   {
     "id": 5,
-    "type": "customer",
+    "type": "human",
     "name": "wizard",
     "display_name": "พ่อมด",
     "description": "ผู้ใช้เวทมนตร์ มีความชำนาญในศิลปะแห่งคาถา และชอบของมึนเมา"
   },
   {
     "id": 6,
-    "type": "customer",
+    "type": "monster",
     "name": "lizardman",
     "display_name": "ลิซาร์ดแมน",
     "description": "มนุษย์กึ่งสัตว์เลื้อยคลาน มีเกล็ด และชอบกินเนื้อมังกร"
   },
   {
     "id": 7,
-    "type": "customer",
+    "type": "monster",
     "name": "catman",
     "display_name": "มนุษย์แมว",
     "description": "เผ่าพันธ์ุที่มีลักษณะคล้ายแมว หรือมีรูปร่างบางส่วนเป็นแมว ส่วนมากชอบเมนูสัตว์น้ำ"
   },
   {
     "id": 8,
-    "type": "customer",
+    "type": "human",
     "name": "hero",
     "display_name": "ผู้กล้า",
     "description": "นักรบผู้มีจิตใจกล้าหาญ ชอบเมนูข้าวเพื่อเติมพลังสำหรับผจญภัย"
   },
   {
     "id": 9,
-    "type": "customer",
+    "type": "human",
     "name": "villager_m",
     "display_name": "ชาวบ้านหนุ่ม",
     "description": "ผู้ชายธรรมดา ๆ ในหมู่บ้าน ไม่มีความชอบเป็นพิเศษ"
   },
   {
     "id": 10,
-    "type": "customer",
+    "type": "human",
     "name": "villager_f",
     "display_name": "ชาวบ้านสาว",
     "description": "ผู้หญิงธรรมดา ๆ ในหมู่บ้าน ไม่มีความชอบเป็นพิเศษ"
   },
   {
     "id":11,
-    "type": "customer",
+    "type": "monster",
     "name": "orc",
     "display_name": "ออร์ค",
     "description": "เผ่าพันธ์ุตัวใหญ่และแข็งแกร่ง นิยมกินเนื้อสัตว์เผ่าพันธ์ุหมูเพราะให้สารอาหารเยอะ"
