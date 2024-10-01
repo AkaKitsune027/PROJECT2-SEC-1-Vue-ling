@@ -3,14 +3,14 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { onMounted } from 'vue'
 
-import customesrOderData from '../../data/customers.json'
+import customersOrderData from '../../data/customers.json'
 import foodsData from '../../data/foods.json'
 import ingredientsData from '../../data/ingredients.json'
 
 const router = useRouter()
 
 
-const customer = ref(customesrOderData)
+const customer = ref(customersOrderData)
 const foods = ref(foodsData)
 const ingredients = ref(ingredientsData)
 
