@@ -4,7 +4,7 @@
 
 <template>
     <div class="flex flex-col px-1">
-        <div class="flex-none bg-[#ACC6AA] text-center text-lg">Ingredient</div>
+        <div class="flex-none bg-[#ACC6AA] text-center text-lg font-rowdies">Ingredient</div>
         <div class="flex-auto bg-zinc-700 p-2 flex flex-col items-center gap-2 max-h-[28rem] overflow-y-auto">
             <slot>
                 <div class="text-white">No Ingredient</div>

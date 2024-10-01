@@ -17,9 +17,11 @@ function routeToCustomerOrderModal() {
         <div class="bg-[#71A0A5] border drop-shadow-md w-screen h-[4rem] p-3">
             <div class="grid col-start-1 row-start-1">
                 <!-- <button class="bg-primary w-12 rounded-lg"> -->
-                <button class="bg-[#ACC6AA] w-12 rounded-lg">
-                    <img src="/src/assets/arrow-back.svg" class="w-10" />
-                </button>
+                <RouterLink to="/homepage">
+                    <button class="bg-[#ACC6AA] w-12 rounded-lg">
+                        <img src="/src/assets/arrow-back.svg" class="w-10" />
+                    </button>
+                </RouterLink>
 
                 <div class="grid grid-flow-col col-start-3 row-start-1 justify-end gap-3 px-3">
 
@@ -74,6 +76,7 @@ function routeToCustomerOrderModal() {
                 <SeasoningBar />
             </div>
             <div class="row-span-3 col-span-2 col-start-3 row-start-2 flex justify-center items-center">
+                <div class="shadow-2xl shadow-purple-500 w-full h-full"></div>
                 <img src="/pot2.png" alt="pot" class="select-none">
             </div>
 

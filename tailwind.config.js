@@ -16,6 +16,7 @@ export default {
       },
       fontFamily: {
         sunday: ["SUNDAY"],
+        rowdies: ["ROWDIES"]
       },
     },
   },
