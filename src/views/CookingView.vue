@@ -1,6 +1,14 @@
 <script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import IngredientBar from '@/components/IngredientBar.vue'
 import SeasoningBar from '@/components/SeasoningBar.vue'
+
+const router = useRouter()
+
+function routeToCustomerOrderModal() {
+    router.push({ name: 'user-order-modal' })
+}
 
 </script>
 
@@ -86,12 +94,14 @@ import SeasoningBar from '@/components/SeasoningBar.vue'
                 <button class="bg-third border border-white px-6 rounded-lg h-10"><img src="/src/assets/trash.svg"
                         alt="trash"></button>
             </div>
-            <div class="col-start-5 row-start-1 flex justify-center">
-                <button class="bg-[#ACC6AA] w-[7rem]">Customer</button>
+            <div @click="routeToCustomerOrderModal" class="col-start-5 row-start-1 flex justify-center">
+                <button class="bg-[#ACC6AA] w-[7rem]">
+                <img src="../assets/icons/customer.svg" class="w-10">
+                </button>
             </div>
         </div>
-    </div>
 
+    <RouterView />
 </template>
 
 <style scoped></style>

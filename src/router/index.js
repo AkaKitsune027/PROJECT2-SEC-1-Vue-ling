@@ -16,8 +16,17 @@ const router = createRouter({
         {
             path: '/game',
             name: 'cooking-page',
-            component: () => import('@/views/CookingView.vue')
+            component: () => import('@/views/CookingView.vue'),
+            children: [
+                {
+                    path: 'userOrder',
+                    name: 'user-order-modal',
+                    component: () => import('../components/CustomerOrderModal.vue'),
+                }
+            ]
+            
         }
+
     ]
 })
 
