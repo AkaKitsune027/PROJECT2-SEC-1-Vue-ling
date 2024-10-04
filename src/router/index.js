@@ -6,7 +6,7 @@ const router = createRouter({
         {
             path: '/',
             name: 'login-page',
-            component: () => import('@/views/SignInSignUp.vue')
+            component: () => import('@/views/SignInSignUpView.vue')
         },
         {
             path: '/homepage',
@@ -24,7 +24,7 @@ const router = createRouter({
                     component: () => import('../components/CustomerOrderModal.vue'),
                 }
             ]
-            
+
         }
 
     ]

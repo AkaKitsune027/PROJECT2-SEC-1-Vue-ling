@@ -8,14 +8,24 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#ed9848",
-        secondary: "#f1c83a",
-        third: "#a15852",
-        base: "#6f6f4b",
-        alert: "#4a2b30",
+        primary: "#5c4b6c",
+        secondary: "#aa9377",
+        third: "#71a0a5",
+        base: "#acc6aa",
+        confirm: {
+          100: "#60e64e99",
+          200: "#5c49",
+          300: "#439f3799"
+        },
+        alert: {
+          100: "#d3655b",
+          200: "#a15852",
+          300: "#7e4540"
+        },
       },
       fontFamily: {
         sunday: ["SUNDAY"],
+        rowdies: ["ROWDIES"]
       },
     },
   },
