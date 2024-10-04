@@ -5,7 +5,9 @@
     "name": "orcMeat",
     "display_name": "เนื้อออร์ค",
     "description": "เผ่าพันธ์ุหมู เดินสองขา พูดได้มีสติปัญญา",
-    "rank": 2
+    "rank": 2,
+    "category": ["monster"],
+    "price": 40
   },
   {
     "id": 2,
@@ -13,7 +15,9 @@
     "name": "basiliskMeat",
     "display_name": "เนื้อบาซิลิสก์",
     "description": "ตัวเป็นไก่หางเป็นงู เนื้อรสชาติดี",
-    "rank": 2
+    "rank": 2,
+    "category": ["bird", "reptile", "monster"],
+    "price": 50
   },
   {
     "id": 3,
@@ -21,7 +25,9 @@
     "name": "whiteCowMeat",
     "display_name": "เนื้อวัวขาว",
     "description": "วัวสีขาวพบได้ทั่วไปตามทุ่งหญ้า เป็นวัตถุดิบที่นิยมใช้ประกอบอาหาร",
-    "rank": 1
+    "rank": 1,
+    "category": ["livestock"],
+    "price": 30
   },
   {
     "id": 4,
@@ -29,7 +35,9 @@
     "name": "dragonMeat",
     "display_name": "เนื้อมังกร",
     "description": "เนื้อมังกรโตเต็มไว รสชาติเยี่ยม หาได้ยากและมีราคาสูง เนื้อมังกรนี้สามารถเพิ่มพลังเวทย์ให้กับผู้รับประทานได้",
-    "rank": 3
+    "rank": 3,
+    "category": ["dragon", "magic"],
+    "price": 100
   },
   {
     "id": 5,
@@ -37,7 +45,9 @@
     "name": "krakenTentacles",
     "display_name": "หนวดคราเคน",
     "description": "ปลาหมึกยักษ์ ดุร้าย เหมาะสำหรับเมนูประเภทซุป สร้างรสสัมผัสหนุบหนับให้กับผู้รับประทานได้อย่างดี",
-    "rank": 3
+    "rank": 3,
+    "category": ["seafood", "monster"],
+    "price": 80
   },
   {
     "id": 6,
@@ -45,7 +55,9 @@
     "name": "boarMeat",
     "display_name": "เนื้อหมูป่า",
     "description": "หมูป่าตัวใหญ่ เนื้อแน่น รสชาติดี สร้างพลังงานสูง",
-    "rank": 1
+    "rank": 1,
+    "category": ["wild", "livestock"],
+    "price": 25
   },
   {
     "id": 7,
@@ -53,7 +65,9 @@
     "name": "redEyedSnakeEggs",
     "display_name": "ไข่งูตาแดง",
     "description": "ไข่งูตาแดงแสนดุร้าย แต่มีรสชาติดีเยี่ยมหากได้กินแล้วไม่อาจลืมได้ จัดอยู่ในประเภทอาหารหายาก",
-    "rank": 3
+    "rank": 3,
+    "category": ["reptile", "egg"],
+    "price": 75
   },
   {
     "id": 8,
@@ -61,7 +75,9 @@
     "name": "redMeatFish",
     "display_name": "ปลาเนื้อแดง",
     "description": "ปลาตัวใหญ่เนื้อสีแดงสด พบได้ทั้งในทะเลและแม่น้ำทั่วไป มีรสชาติดี เนื้อนุ่ม",
-    "rank": 1
+    "rank": 1,
+    "category": ["seafood", "fish"],
+    "price": 30
   },
   {
     "id": 9,
@@ -69,7 +85,9 @@
     "name": "unicornHorn",
     "display_name": "เขายูนิคอร์น",
     "description": "เขาม้ายูนิคอร์นวิเศษมีสรรพคุณทางเวทมนตร์สูง เหมาะสำหรับนำมาประกอบอาหารเพื่อสร้างความหวาน",
-    "rank": 3
+    "rank": 3,
+    "category": ["unicorn", "magic"],
+    "price": 95
   },
   {
     "id": 10,
@@ -77,7 +95,9 @@
     "name": "slime",
     "display_name": "สไลม์",
     "description": "เป็นมิตรไม่โจมตีใครก่อน มีลักษณะคล้ายเยลลี รูปร่างกึ่งของเหลวมีหลากสี แต่พบได้มากเป็นสีเขียว รสสัมผัสเหนียวนุ่มชุ่มฉ่ำ",
-    "rank": 1
+    "rank": 1,
+    "category": ["monster"],
+    "price": 20
   },
   {
     "id": 11,
@@ -85,7 +105,9 @@
     "name": "tamata",
     "display_name": "ผลทามาทา",
     "description": "ผลไม้สีแดง มีรสชาติเปรี้ยวอมหวาน เนื้อชุ่มฉ่ำ นิยมนำมาทำอาหาร",
-    "rank": 1
+    "rank": 1,
+    "category": ["fruit", "sweet"],
+    "price": 10
   },
   {
     "id": 12,
@@ -93,7 +115,9 @@
     "name": "gobol",
     "display_name": "โกโบล",
     "description": "มันฝรั่งหัวสีเหลืองอ่อน รสชาติมันและนุ่ม นิยมนำไปต้มหรืออบ",
-    "rank": 1
+    "rank": 1,
+    "category": ["root"],
+    "price": 8
   },
   {
     "id": 13,
@@ -101,7 +125,9 @@
     "name": "galion",
     "display_name": "กาลิออน",
     "description": "พืชชนิดนี้มีลักษณะเป็นกลีบ มีกลิ่นหอมฉุน ใช้เพิ่มรสชาติในอาหารได้ดี",
-    "rank": 1
+    "rank": 1,
+    "category": ["herb", "smell"],
+    "price": 12
   },
   {
     "id": 14,
@@ -109,7 +135,9 @@
     "name": "carrot",
     "display_name": "แครอท",
     "description": "ผักสีส้ม รสหวานกรอบ อุดมไปด้วยวิตามินเอ",
-    "rank": 1
+    "rank": 1,
+    "category": ["root"],
+    "price": 9
   },
   {
     "id": 15,
@@ -117,7 +145,9 @@
     "name": "gabio",
     "display_name": "กาบิโอ",
     "description": "หัวผักทรงกลมใบเขียวกรอบ นิยมนำมาทำสลัดและเมนูผัด",
-    "rank": 1
+    "rank": 1,
+    "category": ["leafy"],
+    "price": 10
   },
   {
     "id": 16,
@@ -125,7 +155,9 @@
     "name": "mysticMushroom",
     "display_name": "เห็ดมนตรา",
     "description": "เห็ดที่มีสรรพคุณพิเศษ ใช้ทำยาและปรุงอาหารที่ให้พลังพิเศษ",
-    "rank": 2
+    "rank": 2,
+    "category": ["mushroom", "magic", "poison"],
+    "price": 60
   },
   {
     "id": 17,
@@ -133,7 +165,9 @@
     "name": "rainbowMushroom",
     "display_name": "เห็ดสายรุ้ง",
     "description": "เห็ดสีสันสดใส เติบโตเฉพาะในพื้นที่ที่มีความชุ่มชื้นสูง กินแล้วอาจมีอาการเมาเล็กน้อย",
-    "rank": 3
+    "rank": 3,
+    "category": ["mushroom", "poison"],
+    "price": 70
   },
   {
     "id": 18,
@@ -141,7 +175,9 @@
     "name": "orcMushroom",
     "display_name": "เห็ดออร์ค",
     "description": "เห็ดสีน้ำตาล กลิ่นแรง พบได้บริเวณที่มีออร์คอาศัยอยู่",
-    "rank": 2
+    "rank": 2,
+    "category": ["mushroom"],
+    "price": 40
   },
   {
     "id": 19,
@@ -149,7 +185,9 @@
     "name": "lammy",
     "display_name": "ลามมี่",
     "description": "ผลไม้สีเหลือง มีรสเปรี้ยว นิยมใช้ทำอาหารรสจัด",
-    "rank": 1
+    "rank": 1,
+    "category": ["fruit", "sour"],
+    "price": 10
   },
   {
     "id": 20,
@@ -157,7 +195,9 @@
     "name": "amalo",
     "display_name": "อามาโล่",
     "description": "พืชสีแดงที่มีความเผ็ดจัด นิยมใช้ในการปรุงรสอาหาร",
-    "rank": 1
+    "rank": 1,
+    "category": ["spicy", "herb"],
+    "price": 15
   },
   {
     "id": 21,
@@ -165,7 +205,9 @@
     "name": "rice",
     "display_name": "ข้าว",
     "description": "เมล็ดธัญพืชสีขาว เป็นอาหารหลักในหลายประเทศ",
-    "rank": 1
+    "rank": 1,
+    "category": ["grain"],
+    "price": 5
   },
   {
     "id": 22,
@@ -173,6 +215,8 @@
     "name": "tempo",
     "display_name": "เทมโป",
     "description": "ทำจากถั่วหมัก มีสีขาวนุ่ม นิยมรับประทานในหมู่เอลฟ์",
-    "rank": 1
+    "rank": 1,
+    "category": ["fermented"],
+    "price": 20
   }
 ]
