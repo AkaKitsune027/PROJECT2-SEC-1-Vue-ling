@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "backend": "json-server --watch ./data/db.json --port 5201"
+    "backend": "json-server --watch ./data/db.json --port 5001"
   },
   "dependencies": {
     "json-server": "^1.0.0-beta.3",
