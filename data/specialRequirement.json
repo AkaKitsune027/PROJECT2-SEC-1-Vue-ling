@@ -24,7 +24,7 @@
     "goodReview": "ข้าวหอม นุ่มมากๆ กินแล้วประทับใจ",
     "condition": [
       {
-        "type": "specificmodify",
+        "type": "specificModify",
         "value": {
           "rice": 1
         }
@@ -35,7 +35,7 @@
     "id": 3,
     "type": "human",
     "description": "ฉันจะชอบมากถ้าคุณเพิ่ม เนื้อวัวขาว 1 ชิ้น",
-    "badReview": ".... กินแล้วจะตายมั้ย",
+    "badReview": "... กินแล้วจะตายมั้ย",
     "normalReview": "อาหารพอกินได้ แต่ยังไม่ถึงขั้นดี",
     "goodReview": "อย่างที่คิดเนื้อมันดีจริงๆ ชอบสุดๆ",
     "condition": [
@@ -125,37 +125,9 @@
     "goodReview": "เจ้าเป็นได้แน่สุดยอดเชฟน่ะ!!!",
     "condition": [
       {
-        "type": "haveOnly",
+        "type": 'modifyByCategory',
         "value": {
-          "meat": "dragonMeat"
-        }
-      },
-      {
-        "type": "specificModify",
-        "value": {
-          "dragonMeat": -5
-        }
-      },
-      {
-        "type": "doNotHave",
-        "value": ["amalo"]
-      },
-      {
-        "type": "looseModify",
-        "value": {
-          "meat": 1
-        }
-      },
-      {
-        "type": "mustHave",
-        "value": ["mysticMushroom", "rainbowMushroom"]
-      },
-      {
-        "type": "replace",
-        "value": {
-          "replace": "meat",
-          "with": "tempo",
-          "quantity": 1
+            "category": 'seafood'
         }
       }
     ]
@@ -316,7 +288,7 @@
     "condition": [
       {
         "type": "doNotHave",
-        "value": ["orcMeat","boarMeat","galion","mysticMushroom","rainbowMushroom"]
+        "value": ["orcMeat", "boarMeat", "galion", "mysticMushroom", "rainbowMushroom"]
       }
     ]
   },
