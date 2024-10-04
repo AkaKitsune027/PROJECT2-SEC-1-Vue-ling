@@ -13,7 +13,7 @@ const order = ref(null)
 function genarateOrder() {
     const randomCustomerIndex = Math.floor(Math.random() * customersData.length)
     const randomFoodIndex = Math.floor(Math.random() * foodsData.length)
-    
+
     const customer = customersData[randomCustomerIndex]
     const food = foodsData[randomFoodIndex]
 
@@ -23,7 +23,7 @@ function genarateOrder() {
     const specialRequirement = filteredSpecialRequirements[randomSpecialRequirementIndex]
 
     return {
-        customer, 
+        customer,
         food,
         specialRequirement
     }
@@ -31,8 +31,8 @@ function genarateOrder() {
 
 onMounted(() => {
     order.value = genarateOrder()
-    console.log(order.value);
-    
+    console.log(order.value)
+
 })
 
 const randomFoods = () => {
@@ -78,9 +78,11 @@ const closeModal = () => {
             <div class="flex justify-center bg-white">
                 <img :src="`/customer/${order?.customer.name}.png`" class="w-40 h-40">
             </div>
-            <p class="bg-primary text-white text-md text-center py-1 border border-white">ลูกค้า : {{ order?.customer.display_name }}
+            <p class="bg-primary text-white text-md text-center py-1 border border-white">ลูกค้า : {{
+                order?.customer.display_name }}
             </p>
-            <p class="bg-white p-2"> ฉันต้องการ {{ order?.food.display_name }} </p> <p>{{ order?.specialRequirement.description }}</p>
+            <p class="bg-white p-2"> ฉันต้องการ {{ order?.food.display_name }} </p>
+            <p class="bg-white p-2">{{ order?.specialRequirement.description }}</p>
 
             <div class="flex justify-around py-4">
                 <div

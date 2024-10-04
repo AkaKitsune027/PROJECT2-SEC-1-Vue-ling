@@ -125,9 +125,9 @@
     "goodReview": "เจ้าเป็นได้แน่สุดยอดเชฟน่ะ!!!",
     "condition": [
       {
-        "type": 'modifyByCategory',
+        "type": "modifyByCategory",
         "value": {
-            "category": 'seafood'
+            "category": "seafood"
         }
       }
     ]
@@ -291,5 +291,5 @@
         "value": ["orcMeat", "boarMeat", "galion", "mysticMushroom", "rainbowMushroom"]
       }
     ]
-  },
+  }
 ]
