@@ -10,6 +10,43 @@ function routeToCustomerOrderModal() {
     router.push({ name: 'user-order-modal' })
 }
 
+const meats = ref([
+    {
+        "id": 10,
+        "type": "meat",
+        "name": "slime",
+        "display_name": "สไลม์",
+        "description": "เป็นมิตรไม่โจมตีใครก่อน มีลักษณะคล้ายเยลลี รูปร่างกึ่งของเหลวมีหลากสี แต่พบได้มากเป็นสีเขียว รสสัมผัสเหนียวนุ่มชุ่มฉ่ำ",
+        "rank": 1
+    },
+    {
+        "id": 22,
+        "type": "meat",
+        "name": "tempo",
+        "display_name": "เทมโป",
+        "description": "ทำจากถั่วหมัก มีสีขาวนุ่ม นิยมรับประทานในหมู่เอลฟ์",
+        "rank": 1
+    }
+])
+const vegetables = ref([
+    {
+        "id": 20,
+        "type": "vegetable",
+        "name": "amalo",
+        "display_name": "อามาโล่",
+        "description": "พืชสีแดงที่มีความเผ็ดจัด นิยมใช้ในการปรุงรสอาหาร",
+        "rank": 1
+    },
+    {
+        "id": 21,
+        "type": "vegetable",
+        "name": "rice",
+        "display_name": "ข้าว",
+        "description": "เมล็ดธัญพืชสีขาว เป็นอาหารหลักในหลายประเทศ",
+        "rank": 1
+    }
+])
+
 </script>
 
 <template>
@@ -50,7 +87,7 @@ function routeToCustomerOrderModal() {
                             <path fill-rule="evenodd" d="M14 11V2h1v9zM6 3v10H5V3z" />
                             <path d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3L5 4z" />
                         </svg>
-                        <svgS class="group-hover:fill-slate-500" width="35" height="35" viewBox="0 0 35 35" fill="#f44"
+                        <!-- <svg class="group-hover:fill-slate-500" width="35" height="35" viewBox="0 0 35 35" fill="#f44"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M13.125 28.4375C13.125 30.8547 10.675 32.8125 7.65626 32.8125C7.21095 32.8125 6.77803 32.7699 6.36351 32.6895C6.7751 32.4975 7.16075 32.2317 7.50049 31.892L10.9549 28.4375L12.6819 26.7105L13.125 26.2674V28.4375Z"
@@ -64,7 +101,7 @@ function routeToCustomerOrderModal() {
                             <path
                                 d="M10.9375 6.35468C10.9375 5.81239 11.1389 5.28943 11.5027 4.88725C11.8665 4.48507 12.3667 4.23235 12.9063 4.17812L25.1222 2.95653L20.2611 7.81764L13.125 8.53125V14.9537L10.9375 17.1412V8.75V6.5625V6.35468Z"
                                 fill="white" />
-                        </svgS>
+                        </svg> -->
                     </div>
                 </button>
 
@@ -74,24 +111,20 @@ function routeToCustomerOrderModal() {
 
     <div class="bg-[url('/bg.png')] bg-cover w-screen h-[calc(100vh-4rem)] grid grid-cols-5 grid-rows-6 gap-2">
         <div class="grid row-span-5 py-6">
-            <IngredientBar>
-                <template #meat>
-
-                </template>
-            </IngredientBar>
+            <IngredientBar :meats="meats" :vegetables="vegetables" />
         </div>
         <div class="row-start-6 col-start-2 flex items-end">
             <SeasoningBar />
         </div>
         <div class="row-span-3 col-span-2 col-start-3 row-start-2 flex justify-center items-center">
-            <img src="/pot2.png" alt="pot" class="select-none" />
+            <img src="/pot.png" alt="pot" class="select-none" />
         </div>
 
         <div
             class="bg-[#ACC6AA] col-span-2 col-start-3 row-start-5 flex justify-center rounded-xl shadow-neutral-500 shadow-md">
             <div class="flex justify-center place-items-center gap-3">
                 <div v-for="n in 2" :key="n" class="bg-white rounded-lg w-10/12 h-20">
-                    <img src="/unicorn-horn.png" alt="unicorn-horn"
+                    <img src="/meat/unicorn-horn.png" alt="unicorn-horn"
                         class="h-full border border-gray-600 border-dashed rounded-lg">
                 </div>
             </div>
@@ -103,14 +136,16 @@ function routeToCustomerOrderModal() {
                 !!</button>
         </div>
         <div class="col-start-4 row-start-6 flex justify-center place-items-center">
-            <button class="bg-third hover:bg-[#7f4641] border border-white px-6 rounded-lg h-10"><img
+            <button class="bg-alert-200 hover:bg-[#7f4641] border border-white px-6 rounded-lg h-10"><img
                     src="/src/assets/trash.svg" alt="trash"></button>
         </div>
         <div @click="routeToCustomerOrderModal" class="col-start-5 row-start-1 flex justify-center">
             <div class="bg-[#614b3c] h-[50%] px-2 shadow-neutral-500 shadow-md"></div>
             <div class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md shadow-neutral-500 shadow-md">
                 <div class="relative bg-white w-[5rem] h-[60%] flex justify-center cursor-pointer">
-                    <div class="-top-[0.5rem] -left-[0.5rem] bg-red-600 w-4 h-4 rounded-lg absolute"></div>
+                    <div
+                        class="-top-[0.5rem] -left-[0.5rem] bg-red-600 w-4 h-4 rounded-lg absolute border border-white ">
+                    </div>
                     <img src="../assets/person-fill.svg" class="w-[90%]" />
                 </div>
             </div>
