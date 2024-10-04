@@ -40,7 +40,7 @@ function routeToCustomerOrderModal() {
                                 <path fill-rule="evenodd" d="M14 11V2h1v9zM6 3v10H5V3z" />
                                 <path d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3L5 4z" />
                             </svg>
-                            <svgS class="group-hover:fill-slate-500" width="35" height="35" viewBox="0 0 35 35"
+                            <svg class="group-hover:fill-slate-500" width="35" height="35" viewBox="0 0 35 35"
                                 fill="#f44" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M13.125 28.4375C13.125 30.8547 10.675 32.8125 7.65626 32.8125C7.21095 32.8125 6.77803 32.7699 6.36351 32.6895C6.7751 32.4975 7.16075 32.2317 7.50049 31.892L10.9549 28.4375L12.6819 26.7105L13.125 26.2674V28.4375Z"
@@ -54,7 +54,7 @@ function routeToCustomerOrderModal() {
                                 <path
                                     d="M10.9375 6.35468C10.9375 5.81239 11.1389 5.28943 11.5027 4.88725C11.8665 4.48507 12.3667 4.23235 12.9063 4.17812L25.1222 2.95653L20.2611 7.81764L13.125 8.53125V14.9537L10.9375 17.1412V8.75V6.5625V6.35468Z"
                                     fill="white" />
-                            </svgS>
+                            </svg>
                         </div>
                     </button>
                 </div>
@@ -96,11 +96,11 @@ function routeToCustomerOrderModal() {
             </div>
             <div @click="routeToCustomerOrderModal" class="col-start-5 row-start-1 flex justify-center">
                 <button class="bg-[#ACC6AA] w-[7rem]">
-                <img src="../assets/icons/customer.svg" class="w-10">
+                    <img src="../assets/icons/customer.svg" class="w-10">
                 </button>
             </div>
         </div>
-
+    </div>
     <RouterView />
 </template>
 
