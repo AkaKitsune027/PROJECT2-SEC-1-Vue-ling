@@ -3,60 +3,55 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { onMounted } from 'vue'
 
-import customersOrderData from '../../data/customers.json'
+import customersData from '../../data/customers.json'
 import foodsData from '../../data/foods.json'
 import ingredientsData from '../../data/ingredients.json'
+import specialRequirementData from '../../data/specialRequirement.json'
 
-const router = useRouter()
+const order = ref(null)
 
+function genarateOrder() {
+    const randomCustomerIndex = Math.floor(Math.random() * customersData.length)
+    const randomFoodIndex = Math.floor(Math.random() * foodsData.length)
+    
+    const customer = customersData[randomCustomerIndex]
+    const food = foodsData[randomFoodIndex]
 
-const customer = ref(customersOrderData)
-const foods = ref(foodsData)
-const ingredients = ref(ingredientsData)
+    const filteredSpecialRequirements = specialRequirementData.filter(sr => customer.type === sr.type)
+    const randomSpecialRequirementIndex = Math.floor(Math.random() * filteredSpecialRequirements.length)
 
-const randomIndex = (length) => Math.floor(Math.random() * length)
-const randomCustomerIndex = ref(0)
-const randomFoodIndex = ref(0)
-const randomIngredientsIndex = ref(0)
+    const specialRequirement = filteredSpecialRequirements[randomSpecialRequirementIndex]
 
-const generateRandomIndices = () => {
-    randomCustomerIndex.value = randomIndex(customer.value.length)
-    randomFoodIndex.value = randomIndex(foods.value.length)
-    randomIngredientsIndex.value = randomIndex(ingredients.value.length)
+    return {
+        customer, 
+        food,
+        specialRequirement
+    }
 }
 
 onMounted(() => {
-    generateRandomIndices()
+    order.value = genarateOrder()
+    console.log(order.value);
+    
 })
 
-
-const randomFoods = () => {
-    return Math.floor(Math.random() * 10); // สุ่มเลข 0-9
-}
-
-const randomCustomers = () => {
-    return Math.floor(Math.random() * 11); // สุ่มเลข 0-9
-}
-
-
 const closeModal = () => {
-    router.back()
+    router.push({ name: 'cooking-page' })
 }
-console.log(customer.value[2].name);
-
 
 </script>
 
 <template>
     <div class="fixed inset-0 flex items-center justify-center bg-opacity-50">
         <div class="bg-white p-3 rounded-lg shadow-lg w-1/3">
-            <h2 class="text-lg font-bold mb-4">{{ customer[randomCustomerIndex].display_name }}</h2>
+            <h2 class="text-lg font-bold mb-4">{{ order?.customer.display_name }}</h2>
             <div class="flex justify-center">
-                <img :src="`/${customer[randomCustomerIndex].name}.png`" class="w-40 h-40">
+                <img :src="`/${order?.customer.name}.png`" class="w-40 h-40">
             </div>
-            <p>{{ customer[randomCustomerIndex].description }}</p>
-            <p class="text-xl text-orange-600">Required: {{ foods[randomFoodIndex].display_name }}</p>
-            <p class="text-xl text-green-600">Special:</p>
+            <p>{{ order?.customer.description }}</p>
+            <p class="text-xl text-orange-600">Required: {{ order?.food.display_name }}</p>
+            <p class="text-xl text-green-600">Special:{{ order?.specialRequirement.description }}
+            </p>
             <button @click="closeModal" class="bg-red-500 text-white px-4 py-2 mt-4 rounded">
                 ปิด Modal
             </button>
