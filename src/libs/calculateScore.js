@@ -47,6 +47,7 @@ const conditions = [
 ]
 
 
+
  function calculatePrice(order, result){
   
  }
