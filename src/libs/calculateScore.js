@@ -48,6 +48,6 @@ const conditions = [
 
 
 
- function calculatePrice(order, result){
+ function calculatePrice(order, result) {
   
  }
