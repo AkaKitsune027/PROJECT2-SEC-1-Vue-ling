@@ -8,6 +8,7 @@ import foodsData from '../../data/foods.json'
 import ingredientsData from '../../data/ingredients.json'
 import specialRequirementData from '../../data/specialRequirement.json'
 
+const router = useRouter()
 const order = ref(null)
 
 function genarateOrder() {
