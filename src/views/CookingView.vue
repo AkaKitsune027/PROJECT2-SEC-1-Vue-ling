@@ -41,7 +41,8 @@ function routeToCustomerOrderModal() {
                                 <path d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3L5 4z" />
                             </svg>
                             <svgS class="group-hover:fill-slate-500" width="35" height="35" viewBox="0 0 35 35"
-                                fill="#f44" xmlns="http://www.w3.org/2000/svg">
+                                fill="#f44" >
+                                <!-- xmlns="http://www.w3.org/2000/svg" -->
                                 <path
                                     d="M13.125 28.4375C13.125 30.8547 10.675 32.8125 7.65626 32.8125C7.21095 32.8125 6.77803 32.7699 6.36351 32.6895C6.7751 32.4975 7.16075 32.2317 7.50049 31.892L10.9549 28.4375L12.6819 26.7105L13.125 26.2674V28.4375Z"
                                     fill="white" />
@@ -100,7 +101,7 @@ function routeToCustomerOrderModal() {
                 </button>
             </div>
         </div>
-
+        </div>
     <RouterView />
 </template>
 
