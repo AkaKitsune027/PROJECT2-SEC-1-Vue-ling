@@ -3,8 +3,10 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import IngredientBar from '@/components/IngredientBar.vue'
 import SeasoningBar from '@/components/SeasoningBar.vue'
+import AchievementBookModal from '@/components/AchievementBookModal.vue'
 
 const router = useRouter()
+const showAchievementBook = ref(false)
 
 function routeToCustomerOrderModal() {
     router.push({ name: 'user-order-modal' })
@@ -47,6 +49,11 @@ const vegetables = ref([
     }
 ])
 
+function openAchievementBook() {
+    showAchievementBook.value = true
+    router.push({ name: 'achievement-book-modal' })
+    console.log(showAchievementBook.value)
+}
 </script>
 
 <template>
@@ -103,6 +110,9 @@ const vegetables = ref([
                             </svg> -->
                     </div>
                 </button>
+            </div>
+            <div>
+                <AchievementBookModal v-if="showAchievementBook" @close="showAchievementBook = false" />
             </div>
         </div>
     </div>

@@ -22,6 +22,11 @@ const router = createRouter({
                     path: 'userOrder',
                     name: 'user-order-modal',
                     component: () => import('../components/CustomerOrderModal.vue'),
+                },
+                {
+                    path: 'achievementBook',
+                    name: 'achievement-book-modal',
+                    component: () => import('../components/AchievementBookModal.vue'),
                 }
             ]
 
