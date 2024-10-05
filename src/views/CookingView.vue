@@ -46,7 +46,6 @@ const vegetables = ref([
         "rank": 1
     }
 ])
-
 </script>
 
 <template>
