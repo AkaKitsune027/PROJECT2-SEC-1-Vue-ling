@@ -7,8 +7,8 @@ export async function getUserbyUserName(userName) {
   return data
 }
 
-export async function createUser(username) {
-  const response = await fetch(SERVER_URL + `/game`, {
-    method: 'POST',
-  })
-}
+// export async function createUser(username) {
+//   const response = await fetch(SERVER_URL + `/game`, {
+//     method: 'POST',
+//   })
+// }
