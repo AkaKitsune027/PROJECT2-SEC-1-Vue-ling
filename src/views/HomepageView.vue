@@ -1,3 +1,12 @@
+<script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+function handleToGame() {
+  router.push({ name: "cooking-page"})
+}
+
+</script>
 <template>
   <div class="menu flex flex-col items-center min-h-screen bg-[#fcfbfb]">
     <div class="w-screen h-20 flex justify-end py-4 px-8">
@@ -26,7 +35,7 @@
     >
       <!-- Buttons Section -->
       <div class="flex flex-col justify-center space-y-4 w-full md:w-auto">
-        <button class="btn-play h-14">PLAY</button>
+        <button @click="handleToGame" class="btn-play h-14">PLAY</button>
         <button class="btn-how text-nowrap h-14">HOW TO PLAY</button>
       </div>
 
