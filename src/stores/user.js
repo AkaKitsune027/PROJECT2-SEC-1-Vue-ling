@@ -1,13 +1,16 @@
 import { getUserByUsername } from "@/libs/userManagement"
+import { defineStore } from "pinia"
+import { ref } from "vue"
 
 export const useUserStore = defineStore("user", () => {
   const user = ref(null)
 
   async function login(username, password) {
-    const user = await getUserByUsername(username)
+    const actualUser = await getUserByUsername(username)
 
-    if (user && user.password === password) {
-      user.value = user
+    if (actualUser && actualUser.password === password) {
+      user.value = actualUser
+      console.log("Login success: ", user.value)
     } else {
       user.value = null // ถ้า username หรือ password ไม่ถูกต้อง
     }
