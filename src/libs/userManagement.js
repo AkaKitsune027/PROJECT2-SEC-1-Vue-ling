@@ -7,14 +7,8 @@ export async function getUserbyUserName(userName) {
   return data
 }
 
-// export async function transferAndDeleteStatus(statusId, newStatusId) {
-//   const response = await fetchWithAuth(
-//     SERVER_URL + `/v2/statuses/${statusId}/${newStatusId}`,
-//     {
-//       method: 'DELETE'
-//     }
-//   )
-//   const data = await response.json()
-//   console.log(data)
-//   return data
-// }
+export async function createUser(username) {
+  const response = await fetch(SERVER_URL + `/game`, {
+    method: 'POST',
+  })
+}
