@@ -6,7 +6,6 @@ import SeasoningBar from '@/components/SeasoningBar.vue'
 import AchievementBookModal from '@/components/AchievementBookModal.vue'
 
 const router = useRouter()
-const showAchievementBook = ref(false)
 
 function routeToCustomerOrderModal() {
     router.push({ name: 'user-order-modal' })
@@ -50,7 +49,6 @@ const vegetables = ref([
 ])
 
 function openAchievementBook() {
-    showAchievementBook.value = true
     router.push({ name: 'achievement-book-modal' })
     console.log(showAchievementBook.value)
 }
@@ -80,6 +78,7 @@ function openAchievementBook() {
                 </button>
 
                 <button
+                    @click="openAchievementBook"
                     class="bg-[#ACC6AA] hover:bg-[#90a58e] flex justify-center items-center w-12 rounded-lg h-10 border border-white">
                     <img src="/src/assets/trophy.svg" class="w-10" />
                 </button>
@@ -111,9 +110,9 @@ function openAchievementBook() {
                     </div>
                 </button>
             </div>
-            <div>
+            <!-- <div>
                 <AchievementBookModal v-if="showAchievementBook" @close="showAchievementBook = false" />
-            </div>
+            </div> -->
         </div>
     </div>
 

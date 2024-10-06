@@ -25,10 +25,10 @@ export default {
       },
       fontFamily: {
         sunday: ["SUNDAY"],
-        rowdies: ["ROWDIES"]
+        rowdies: ["ROWDIES"],
+        'noto-thai': ['"Noto Sans Thai"', 'sans-serif'],
       },
     },
   },
   // plugins: [daisyui]
 }
-

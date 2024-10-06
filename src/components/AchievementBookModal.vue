@@ -1,18 +1,22 @@
 <script setup>
-import { defineProps, ref } from "vue"
+import { ref } from "vue"
 import { useRouter } from "vue-router"
 
 // Accept the showBook prop from the parent component
-const props = defineProps({
-  showBook: Boolean,
-})
+// const props = defineProps({
+//   showBook: Boolean,
+// })
 
 const router = useRouter()
 const dish = ref({})
 const showSelectedDish = ref(false)
 
+// const getData() {
+  
+// }
+
 const closeModal = () => {
-  router.back()
+  router.push({ name: "cooking-page" })
 }
 
 function OpenSelectedDish() {
@@ -72,7 +76,7 @@ function OpenSelectedDish() {
           <img src="/beachSoup.png" alt="beach-soup" />
           <img src="/rainbowPudding.png" alt="rainbow-pudding" />
           <img
-            v-for="n in 5"
+            v-for="n in 6"
             :key="n"
             src="/unknownBowl.png"
             alt="unknown-bowl"
@@ -84,8 +88,8 @@ function OpenSelectedDish() {
 
     <!-- Selected Dish -->
     <div
-      v-show="showSelectedDish"
-      class="relative bg-white rounded-lg shadow w-[600px] h-auto ml-10"
+      v-if="showSelectedDish"
+      class="relative bg-white rounded-lg shadow w-[600px] h-auto mx-10"
     >
       <div class="body p-4">
         <h1 class="text-4xl font-bold text-gray-600 mt-4 text-center">
@@ -98,19 +102,24 @@ function OpenSelectedDish() {
         </div>
         <div class="description px-12 py-2">
           <p class="text-2xl font-bold text-gray-600">Description</p>
-          <p class="text-lg ps-4 py-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <p
+            class="font-noto-thai font-semibold text-gray-600 text-lg ps-4 py-2"
+          >
+            ข้าวสวยร้อน ๆ เสิร์ฟพร้อมกับไข่งูตาแดงที่หาได้ยาก
           </p>
         </div>
         <div class="ingredients px-12 py-2">
           <p class="text-2xl font-bold text-gray-600">Ingredients</p>
-          <div class="flex flex-row gap-4 m-4">
+          <div class="container flex flex-row justify-items-center gap-4 m-4 w-96 h-auto overflow-x-auto">
             <div
-              class="flex flex-col gap-2 px-2 py-2 rounded-lg w-20 bg-gray-200"
-              v-for="n in 5"
+              class="flex flex-col gap-2 mb-4 px-2 py-2 rounded-lg min-w-20 bg-gray-200"
+              v-for="n in 8"
               :key="n"
             >
-              <img src="/redEyedSnakeEggs.png" alt="red-eyed-snake-eggs" />
+              <img
+                src="/public/meat/redEyedSnakeEggs.png"
+                alt="red-eyed-snake-eggs"
+              />
               <p class="text-sm">Red Eyed Snake Eggs</p>
             </div>
           </div>
@@ -120,4 +129,22 @@ function OpenSelectedDish() {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+::-webkit-scrollbar {
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #b6b6b6;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+</style>
