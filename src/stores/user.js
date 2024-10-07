@@ -15,12 +15,5 @@ export const useUserStore = defineStore("user", () => {
       user.value = null // ถ้า username หรือ password ไม่ถูกต้อง
     }
   }
-
-  async function getData() {
-    const data = await getAllUser()
-    console.log(data)
-    return data.value
-  }
-
-  return { user, login, getData }
+  return { user, login }
 })
