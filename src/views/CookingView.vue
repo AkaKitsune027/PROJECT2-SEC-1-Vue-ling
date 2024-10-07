@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
 import IngredientBar from '@/components/IngredientBar.vue'
 import SeasoningBar from '@/components/SeasoningBar.vue'
@@ -9,6 +9,32 @@ const router = useRouter()
 function routeToCustomerOrderModal() {
     router.push({ name: 'user-order-modal' })
 }
+
+// Image animation
+const countInteractive = ref(0)
+const currentCauldronImageFrame = ref(0)
+const currentImage = computed(() => {
+    // if (countInteractive.value > 3) countInteractive.value = 1
+    const cauldronImage = ['/cauldron.png', '/1.png', '/2.png', '/3.png', '/4.png']
+    return cauldronImage[currentCauldronImageFrame.value]
+})
+
+let cauldronInterval = null
+const handleCauldronClick = () => {
+    if (countInteractive.value > 3 || cauldronInterval) return
+
+    cauldronInterval = setInterval(() => {
+        currentCauldronImageFrame.value++
+        if (currentCauldronImageFrame.value > 4) {
+            currentCauldronImageFrame.value = 0
+            countInteractive.value++
+            console.log('CurrentCountInteractive: ' + countInteractive.value)
+            clearInterval(cauldronInterval)
+            cauldronInterval = null
+        }
+    }, 700)
+}
+
 
 const meats = ref([
     {
@@ -115,15 +141,13 @@ const vegetables = ref([
             <SeasoningBar />
         </div>
         <div class="row-span-3 col-span-2 col-start-3 row-start-2 flex justify-center items-center">
-            <img src="/pot.png" alt="pot" class="select-none" />
+            <img :src="currentImage" alt="caudron" class="select-none cursor-pointer" @click="handleCauldronClick" />
         </div>
 
         <div
             class="bg-[#ACC6AA] col-span-2 col-start-3 row-start-5 flex justify-center rounded-xl shadow-neutral-500 shadow-md">
             <div class="flex justify-center place-items-center gap-3">
                 <div v-for="n in 2" :key="n" class="bg-white rounded-lg w-10/12 h-20">
-                    <img src="/meat/unicorn-horn.png" alt="unicorn-horn"
-                        class="h-full border border-gray-600 border-dashed rounded-lg">
                 </div>
             </div>
         </div>

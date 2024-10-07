@@ -9,6 +9,8 @@ export async function getUserByUsername(username) {
     return data[0]
   } catch (error) {
     console.error(error)
+  }
+}
 
 //Post method - Load new user
 export async function createUser(newUser) {
@@ -26,6 +28,7 @@ export async function createUser(newUser) {
     console.log('Error:', error)
   }
 }
+
 
 //Delete method - Delete account 
 export async function deleteUser(username) {

@@ -44,7 +44,7 @@ console.log(countItems)
             <div v-show="selectedPage === 0" v-for="meat in meats" :key="meat.id" class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border]
                 cursor-pointer rounded-lg w-10/12 h-20 flex justify-center" @click="countItems++">
                 <div
-                    class="bg-secondary text-white rounded-full w-[20%] h-[40%] flex justify-center border-2 border-[#6a5944]">
+                    class="bg-secondary-100 text-white rounded-full w-[20%] h-[40%] flex justify-center border-2 border-[#6a5944]">
                     {{ countItems }}
                 </div>
 
