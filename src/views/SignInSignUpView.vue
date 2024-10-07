@@ -7,8 +7,9 @@ import { useRoute } from "vue-router"
 const userStore = useUserStore()
 const route = useRoute()
 const router = useRouter()
-const isSignUp = ref(false)
-const isSignupStep = ref(false)
+
+const isSignUp = computed(() => route.name === "signUp-page")
+
 const username = ref("")
 const password = ref("")
 const confirmPassword = ref("")
@@ -26,7 +27,14 @@ async function handleLoginOrSignUp() {
       alert("Invalid username or password")
     }
   } else {
-    alert("ยังไม่มี Sign Up นะ")
+    // alert("ยังไม่มี Sign Up นะ")
+    await userStore.signup(username.value, password.value)
+
+    if (userStore.user) {
+      router.push({ name: "home-page" })
+    } else {
+      alert("Can not create user")
+    }
   }
 }
 
@@ -36,8 +44,6 @@ const toggleForm = () => {
   } else {
     router.push({ name: "login-page" })
   }
-  isSignUp.value = !isSignUp.value
-  isSignupStep.value = false
 }
 
 const validatePassword = () => {
@@ -90,13 +96,12 @@ const handleSignUp = () => {
     <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg">
       <form @submit.prevent="handleLoginOrSignUp" class="space-y-2">
         <div
-          v-if="!isSignupStep"
           class="text-center text-4xl text-[#6c4949] bold"
         >
           <p>{{ isSignUp ? "Sign Up" : "Sign In" }}</p>
         </div>
 
-        <div v-if="$route.name === 'signUp-page'">
+        <div v-if="isSignUp">
           <!-- Sign Up Form -->
           <div v-if="isSignUp">
             <!-- ขั้นตอนแรกของ Sign Up -->
@@ -144,7 +149,7 @@ const handleSignUp = () => {
 
           <div class="mt-2">
             <button
-              @click="handleSignUp"
+        
               type="submit"
               :disabled="!username || !password || !confirmPassword"
               class="w-full bg-[#3f6a45] bold text-white py-3 rounded-lg hover:bg-brown-700 disabled:bg-gray-400"
