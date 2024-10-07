@@ -1,10 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 import IngredientBar from '@/components/IngredientBar.vue'
 import SeasoningBar from '@/components/SeasoningBar.vue'
-import AchievementBookModal from '@/components/AchievementBookModal.vue'
 
+const userStore = useUserStore()
 const router = useRouter()
 
 function routeToCustomerOrderModal() {
@@ -48,9 +49,12 @@ const vegetables = ref([
     }
 ])
 
-function openAchievementBook() {
-    router.push({ name: 'achievement-book-modal' })
-    console.log(showAchievementBook.value)
+async function openAchievementBook() {
+    const data = await useUserStore.getData
+    console.log(data)
+    
+    router.push({ name: "achievement-book-modal" })
+    // console.log(showAchievementBook.value)
 }
 </script>
 
@@ -110,9 +114,6 @@ function openAchievementBook() {
                     </div>
                 </button>
             </div>
-            <!-- <div>
-                <AchievementBookModal v-if="showAchievementBook" @close="showAchievementBook = false" />
-            </div> -->
         </div>
     </div>
 

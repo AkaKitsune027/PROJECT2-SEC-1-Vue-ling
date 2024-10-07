@@ -5,8 +5,20 @@ export async function getUserByUsername(username) {
   try {
     response = await fetch(SERVER_URL + `/user?username=${username}`)
     const data = await response.json()
-    console.log('fetching user by username: ', data)
+    console.log("fetching user by username: ", data)
     return data[0]
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export async function getAllUser() {
+  let response
+  try {
+    response = await fetch(SERVER_URL + `/user`)
+    const data = await response.json()
+    console.log("fetching users: ", data)
+    return data
   } catch (error) {
     console.error(error)
   }

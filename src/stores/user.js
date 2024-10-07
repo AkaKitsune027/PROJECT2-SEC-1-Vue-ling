@@ -17,9 +17,10 @@ export const useUserStore = defineStore("user", () => {
   }
 
   async function getData() {
-    const  data = await getUserByUsername(username)
-    return data
+    const data = await getAllUser()
+    console.log(data)
+    return data.value
   }
 
-  return { user, login, data, getData }
+  return { user, login, getData }
 })
