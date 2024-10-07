@@ -72,30 +72,51 @@ export async function getUserByUsername(username) {
     return data[0] || null
   } catch (error) {
     console.error(error)
+
+//Post method - Load new user
+export async function createUser(newUser) {
+  try {
+    const response = await fetch(SERVER_URL + `/game`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newUser),
+    })
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.log('Error:', error)
   }
 }
-export async function createUser(username, password) {
-  const newUser = { ...templateUser }
-  newUser.username = username
-  newUser.password = password
-  const response = await fetch(SERVER_URL + `/user?username=${username}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newUser),
-  })
-  const createdUser = await response.json()
-  return createdUser
+
+//Delete method - Delete account 
+export async function deleteUser(username) {
+  try {
+    const res = await fetch(SERVER_URL + `/game`, {
+      method: 'DELETE',
+    })
+  } catch (error) {
+    console.log('Error:', error)
+  }
 }
 
-// export async function createUser(username) {
-//   const response = await fetch(SERVER_URL + `/game`, {
-//     method: 'POST',
-//   })
-// }
-
-export async function validateUsername(username) {
-  const user = await getUserByUsername(username)
-  return user === null
+//Patch method - Edit user data
+export async function patchUser() {
+  try {
+    const res = await fetch(SERVER_URL + `/game`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        description: 'Edit successful.'
+      }),
+    })
+    const editedData = await res.json()
+    return editedData
+  } catch (error) {
+    console.log('Error:', error)
+  }
 }
+
