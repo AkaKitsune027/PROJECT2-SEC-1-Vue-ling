@@ -20,8 +20,8 @@ const handleToHomepage = () => {
       </h2>
       <img src="/Home.svg" alt="Restaurant" class="w-24 h-24 object-cover ml-36 mt-4" />
       <label class="block text-[#6c4949] font-bold mt-4" for="restaurant-name"
-        >RESTAURANT NAME <span class="text-red-600">*</span></label
-      >
+        >RESTAURANT NAME <span class="text-red-600">*</span>
+      </label>
       <input
         v-model="restaurantName"
         id="restaurant-name"
