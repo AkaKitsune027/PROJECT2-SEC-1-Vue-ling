@@ -141,11 +141,13 @@ const vegetables = ref([
         <div @click="routeToCustomerOrderModal" class="col-start-5 row-start-1 flex justify-center">
             <div class="bg-[#614b3c] h-[50%] px-2 shadow-neutral-500 shadow-md"></div>
             <div class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md shadow-neutral-500 shadow-md">
-                <div class="relative bg-white w-[5rem] h-[60%] flex justify-center cursor-pointer">
-                    <div
-                        class="-top-[0.5rem] -left-[0.5rem] bg-red-600 w-4 h-4 rounded-lg absolute border border-white ">
-                    </div>
-                    <img src="../assets/person-fill.svg" class="w-[90%]" />
+                <div class="bg-white w-[5rem] h-[60%] flex cursor-pointer rounded-md">
+                    <span class="fixed flex h-3 w-3">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
+                    </span>
+                    <img src="../assets/person-fill.svg" class="w-[90%] justify-center" />
                 </div>
             </div>
             <div class="bg-[#614b3c] h-[50%] px-2 shadow-neutral-500 shadow-md"></div>
