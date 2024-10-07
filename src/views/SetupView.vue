@@ -5,7 +5,7 @@ import { ref } from "vue"
 const router = useRouter()
 const restaurantName = ref("")
 
-const handleToHomepage = () => {
+const handleSetOutletName = () => {
   router.push({ name: "home-page" })
 }
 </script>
@@ -31,7 +31,7 @@ const handleToHomepage = () => {
       />
 
       <button
-        @click="handleToHomepage"
+        @click="handleSetOutletName"
         :disabled="!restaurantName"
         class="w-full bold bg-[#3f6a45] text-white py-3 rounded-lg hover:bg-brown-700 mt-2 disabled:bg-gray-400"
       >

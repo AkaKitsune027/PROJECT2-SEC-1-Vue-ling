@@ -6,7 +6,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: { name: 'login-page' }
+      redirect: { name: 'home-page' }
     },
     {
       path: '/signIn',
@@ -44,6 +44,23 @@ const router = createRouter({
       ]
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  const userStore = useUserStore()
+  if (['home-page', 'cooking-page'].includes(to.name)) {
+    if (userStore.user) {
+      if (userStore.user.outletName === '') {
+        next({ name: 'setup-page' })
+      } else {
+        next()
+      }
+    } else {
+      next({ name: 'login-page' })
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

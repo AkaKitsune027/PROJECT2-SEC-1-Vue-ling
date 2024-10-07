@@ -1,35 +1,193 @@
 {
-    "user":[
-        {
+  "user": [
+    {
+      "id": "1",
+      "username": "int203",
+      "password": "int203",
+      "outletName": "เจ๊วีตามสั่ง",
+      "userDetail": {
+        "gold": 500,
+        "popularity": 0,
+        "ingredients": [
+          {
             "id": 1,
-            "username": "int203",
-            "password": "int203",
-            "outletName": "เจ๊วีตามสั่ง",
-            "userDetail":{
-                "gold": 500,
-                "popularity": 0,
-                "ingredients":[
-                    {
-                    "id": 1,
-                    "amount": 1
-                    }
-                ],
-                "currentOrder":{
-                    "customerId": 1,
-                    "foodId": 1,
-                    "specialRequirementId": 1
-                },
-                "fiveStarMenus":[
-                    {
-                     "foodId": 1,
-                     "specialRequirementId": 1,
-                     "ingredientsId": 1,
-                     "customerId": 1                    
-                    }
-                    
-                ]
-                
-            }
-        }
-    ]
+            "amount": 1
+          }
+        ],
+        "currentOrder": {
+          "customerId": 1,
+          "foodId": 1,
+          "specialRequirementId": 1
+        },
+        "fiveStarMenus": [
+          {
+            "foodId": 1,
+            "isUnlock": "true"
+          },
+          {
+            "foodId": 2,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 3,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 4,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 5,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 6,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 7,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 8,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 9,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 10,
+            "isUnlock": "false"
+          }
+        ]
+      }
+    },
+    {
+      "id": "6f89",
+      "username": "admin",
+      "password": "11111111",
+      "outletName": "",
+      "userDetail": {
+        "gold": 500,
+        "popularity": 0,
+        "ingredients": [
+          {
+            "id": 1,
+            "amount": 5
+          }
+        ],
+        "currentOrder": {
+          "customerId": 1,
+          "foodId": 1,
+          "specialRequirementId": 1
+        },
+        "fiveStarMenus": [
+          {
+            "foodId": 1,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 2,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 3,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 4,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 5,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 6,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 7,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 8,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 9,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 10,
+            "isUnlock": "false"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cc3f",
+      "username": "vee123",
+      "password": "123456789",
+      "outletName": "",
+      "userDetail": {
+        "gold": 500,
+        "popularity": 0,
+        "ingredients": [
+          {
+            "id": 1,
+            "amount": 5
+          }
+        ],
+        "currentOrder": {
+          "customerId": 1,
+          "foodId": 1,
+          "specialRequirementId": 1
+        },
+        "fiveStarMenus": [
+          {
+            "foodId": 1,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 2,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 3,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 4,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 5,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 6,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 7,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 8,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 9,
+            "isUnlock": "false"
+          },
+          {
+            "foodId": 10,
+            "isUnlock": "false"
+          }
+        ]
+      }
+    }
+  ]
 }
