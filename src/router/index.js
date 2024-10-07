@@ -1,3 +1,4 @@
+import { useUserStore } from "@/stores/user"
 import { createRouter, createWebHistory } from "vue-router"
 
 const router = createRouter({
@@ -16,12 +17,20 @@ const router = createRouter({
       path: '/signUp',
       name: 'signUp-page',
       component: () => import('@/views/SignInSignUpView.vue')
+
     },
     {
       path: '/homepage',
       name: 'home-page',
-      component: () => import('@/views/HomepageView.vue')
+      component: () => import('@/views/HomepageView.vue'),
+      
     },
+    {
+      path: '/setup',
+      name: 'setup-page',
+      component: () => import('@/views/SetupView.vue')
+    },
+    
     {
       path: '/game',
       name: 'cooking-page',
