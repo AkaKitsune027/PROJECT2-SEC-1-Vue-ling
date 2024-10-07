@@ -1,10 +1,12 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 import IngredientBar from '@/components/IngredientBar.vue'
 import SeasoningBar from '@/components/SeasoningBar.vue'
 import GoldAndPopularity from '@/components/goldAndPopularity.vue';
 
+const userStore = useUserStore()
 const router = useRouter()
 
 function routeToCustomerOrderModal() {
@@ -48,6 +50,13 @@ const vegetables = ref([
     }
 ])
 
+async function openAchievementBook() {
+    const data = await useUserStore.getData
+    console.log(data)
+    
+    router.push({ name: "achievement-book-modal" })
+    // console.log(showAchievementBook.value)
+}
 </script>
 
 <template>
@@ -74,6 +83,7 @@ const vegetables = ref([
                 </button>
 
                 <button
+                    @click="openAchievementBook"
                     class="bg-[#ACC6AA] hover:bg-[#90a58e] flex justify-center items-center w-12 rounded-lg h-10 border border-white">
                     <img src="/src/assets/trophy.svg" class="w-10" />
                 </button>

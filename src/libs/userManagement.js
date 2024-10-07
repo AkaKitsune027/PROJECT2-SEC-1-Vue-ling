@@ -5,12 +5,13 @@ export async function getUserByUsername(username) {
   try {
     response = await fetch(SERVER_URL + `/user?username=${username}`)
     const data = await response.json()
-    console.log('fetching user by username: ', data)
+    console.log("fetching user by username: ", data)
     return data[0]
   } catch (error) {
     console.error(error)
   }
 }
+
 //Post method - Load new user
 export async function createUser(newUser) {
   try {
@@ -57,4 +58,3 @@ export async function patchUser() {
     console.log('Error:', error)
   }
 }
-

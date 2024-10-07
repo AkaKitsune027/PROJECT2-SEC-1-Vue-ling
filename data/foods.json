@@ -82,7 +82,7 @@
   {
     "id": 8,
     "type": "food",
-    "name": "kingPorkFrieRice",
+    "name": "kingPorkFriedRice",
     "display_name": "ข้าวผัดราชาหมู",
     "description": "ข้าวผัดสูตรพิเศษที่ใช้เนื้อออร์คและหมูป่าปรุงสุกกับเครื่องเทศอย่างลงตัว",
     "ingredients": [
@@ -114,4 +114,3 @@
     "ingredients": ["meat", "rice", "orcMushroom", "salt", "sugar"]
   }
 ]
-         
