@@ -15,8 +15,5 @@ export const useUserStore = defineStore("user", () => {
       user.value = null // ถ้า username หรือ password ไม่ถูกต้อง
     }
   }
-
-  
-
   return { user, login }
 })
