@@ -52,4 +52,5 @@ const handleSetOutletName = () => {
   background-image: linear-gradient(10deg, #a15852 0%, #eeaa69 100%);
   overflow: hidden;
 }
+  
 </style>
