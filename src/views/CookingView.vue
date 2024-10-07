@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import IngredientBar from '@/components/IngredientBar.vue'
 import SeasoningBar from '@/components/SeasoningBar.vue'
+import GoldAndPopularity from '@/components/goldAndPopularity.vue';
 
 const router = useRouter()
 
@@ -138,6 +139,11 @@ const vegetables = ref([
                 <img src="/src/assets/trash.svg" alt="trash" />
             </button>
         </div>
+
+        <div class="col-start-4 row-start-1 ">
+            <GoldAndPopularity />
+        </div>
+
         <div @click="routeToCustomerOrderModal" class="col-start-5 row-start-1 flex justify-center">
             <div class="bg-[#614b3c] h-[50%] px-2 shadow-neutral-500 shadow-md"></div>
             <div class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md shadow-neutral-500 shadow-md">
