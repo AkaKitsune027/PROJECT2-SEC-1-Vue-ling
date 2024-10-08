@@ -1,7 +1,9 @@
 <script setup>
+import { useUserStore } from "@/stores/user";
 import { useRouter } from "vue-router"
 
 const router = useRouter()
+const userStore = useUserStore()
 
 function handleToGame() {
   router.push({ name: "cooking-page" })
@@ -44,12 +46,12 @@ function handleToGame() {
         class="bg-[#ffffff] p-8 rounded-lg justify-center shadow-2xl flex flex-col items-center w-full md:w-5/12 h-96"
       >
         <img src="/Home.svg" alt="Restaurant" class="w-24 h-24 object-cover" />
-        <p class="text-center font-bold text-lg text-[#2d2d2d]">username</p>
+        <p class="text-center font-bold text-lg text-[#2d2d2d]">{{ userStore.user.username }}</p>
         <p class="text-[#2d2d2d] text-lg mt-4">YOUR RESTAURANT</p>
         <label
           class="bg-[#96ab97] w-full h-16 text-center py-4 text-white rounded-md text-lg"
         >
-          MASTER OF GOBLIN
+          {{ userStore.user.outletName }}
         </label>
       </div>
     </div>

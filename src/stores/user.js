@@ -1,4 +1,8 @@
-import { getUserByUsername } from "@/libs/userManagement"
+import {
+  createUser,
+  getUserByUsername,
+  validateUsername,
+} from "@/libs/userManagement"
 import { defineStore } from "pinia"
 import { ref } from "vue"
 
@@ -15,5 +19,20 @@ export const useUserStore = defineStore("user", () => {
       user.value = null // ถ้า username หรือ password ไม่ถูกต้อง
     }
   }
-  return { user, login }
+
+  async function signup(username, password) {
+     const isUsernameValid = await validateUsername(username)
+     if (isUsernameValid) {
+       const createdUser = await createUser(username, password)
+
+       if (createdUser) {
+         user.value = createdUser
+       } else {
+         alert("Failed to create user")
+       }
+     } else {
+       alert("Please enter a different username")
+     }
+  }
+  return { user, login, signup }
 })
