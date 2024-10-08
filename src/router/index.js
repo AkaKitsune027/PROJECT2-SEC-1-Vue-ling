@@ -33,6 +33,7 @@ const router = createRouter({
       path: "/game",
       name: "cooking-page",
       component: () => import("@/views/CookingView.vue"),
+
       children: [
         {
           path: "userOrder",
@@ -61,6 +62,16 @@ router.beforeEach((to, from, next) => {
     } else {
       next({ name: "login-page" })
     }
+  } else {
+    next()
+  }
+})
+
+router.beforeEach((to, from, next) => {
+  const userStore = useUserStore()
+
+  if (to.name !== 'login-page' && userStore.user === null) {
+    next({ name: 'login-page' })
   } else {
     next()
   }

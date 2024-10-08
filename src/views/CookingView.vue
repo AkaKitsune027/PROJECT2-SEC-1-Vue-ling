@@ -1,17 +1,50 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import IngredientBar from '@/components/IngredientBar.vue'
 import SeasoningBar from '@/components/SeasoningBar.vue'
-import GoldAndPopularity from '@/components/goldAndPopularity.vue';
+
+import GoldAndPopularity from '@/components/goldAndPopularity.vue'
+import { useUserStore } from '@/stores/user'
+
 
 const userStore = useUserStore()
 const router = useRouter()
+const userStore = useUserStore()
 
 function routeToCustomerOrderModal() {
     router.push({ name: 'user-order-modal' })
 }
+
+// Image animation
+const cauldronRef = ref(null)
+const countInteractive = ref(0)
+const currentCauldronImageFrame = ref(0)
+const currentImage = computed(() => {
+    const cauldronImage = ['/cauldron.png', '/1.png', '/2.png', '/3.png', '/4.png']
+    return cauldronImage[currentCauldronImageFrame.value]
+})
+
+let cauldronInterval = null
+const handleCauldronClick = () => {
+    if (countInteractive.value > 2 || cauldronInterval) return
+
+    cauldronRef.value.classList.add('animate-stir')
+
+    cauldronInterval = setInterval(() => {
+        currentCauldronImageFrame.value++
+        if (currentCauldronImageFrame.value > 4) {
+            currentCauldronImageFrame.value = 0
+            countInteractive.value++
+            console.log('CurrentCountInteractive: ' + countInteractive.value)
+            clearInterval(cauldronInterval)
+            cauldronInterval = null
+            cauldronRef.value.classList.remove('animate-stir')
+        }
+    }, 700)
+}
+
 
 const meats = ref([
     {
@@ -120,21 +153,21 @@ async function openAchievementBook() {
 
     <div class="bg-[url('/bg.png')] bg-cover w-screen h-[calc(100vh-4rem)] grid grid-cols-5 grid-rows-6 gap-2">
         <div class="grid row-span-5 py-6">
-            <IngredientBar :meats="meats" :vegetables="vegetables" />
+            <IngredientBar :userIngredients="userStore.user.userDetail.ingredients" />
         </div>
         <div class="row-start-6 col-start-2 flex items-end">
             <SeasoningBar />
         </div>
         <div class="row-span-3 col-span-2 col-start-3 row-start-2 flex justify-center items-center">
-            <img src="/pot.png" alt="pot" class="select-none" />
+            <!-- ! Cauldron -->
+            <img ref="cauldronRef" :src="currentImage" alt="caudron" class="select-none cursor-pointer"
+                @click="handleCauldronClick" />
         </div>
 
         <div
-            class="bg-[#ACC6AA] col-span-2 col-start-3 row-start-5 flex justify-center rounded-xl shadow-neutral-500 shadow-md">
+            class="bg-[#ACC6AA] col-span-2 col-start-3 row-start-5 flex justify-center rounded-xl shadow-neutral-500 shadow-md z-20">
             <div class="flex justify-center place-items-center gap-3">
                 <div v-for="n in 2" :key="n" class="bg-white rounded-lg w-10/12 h-20">
-                    <img src="/meat/unicorn-horn.png" alt="unicorn-horn"
-                        class="h-full border border-gray-600 border-dashed rounded-lg">
                 </div>
             </div>
         </div>
@@ -172,4 +205,30 @@ async function openAchievementBook() {
     <RouterView />
 </template>
 
-<style scoped></style>
+<style scoped>
+.animate-stir {
+    animation: stir 3.5s;
+}
+
+@keyframes stir {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(10deg);
+    }
+
+    50% {
+        transform: rotate(-10deg);
+    }
+
+    75% {
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+</style>
