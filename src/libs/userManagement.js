@@ -33,7 +33,7 @@ export async function createUser(newUser) {
 //Delete method - Delete account 
 export async function deleteUser(username) {
   try {
-    const res = await fetch(SERVER_URL + `/game`, {
+    const res = await fetch(SERVER_URL + '/user', {
       method: 'DELETE',
     })
   } catch (error) {
@@ -42,19 +42,18 @@ export async function deleteUser(username) {
 }
 
 //Patch method - Edit user data
-export async function patchUser() {
+export async function patchUser(userId, patchData) {
   try {
-    const res = await fetch(SERVER_URL + `/game`, {
+    const res = await fetch(`${SERVER_URL}/user/${userId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        description: 'Edit successful.'
-      }),
+      body: JSON.stringify(patchData),
     })
-    const editedData = await res.json()
-    return editedData
+    const patchedData = await res.json()
+    console.log('Patch data', patchData, patchedData)
+    return patchedData
   } catch (error) {
     console.log('Error:', error)
   }

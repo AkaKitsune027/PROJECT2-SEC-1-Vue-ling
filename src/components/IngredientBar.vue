@@ -1,30 +1,77 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref, watch, watchEffect } from 'vue'
+import ingredientData from '../../data/ingredients.json'
+import { useUserStore } from '@/stores/user'
+import { patchUser } from '@/libs/userManagement'
 
-defineProps({
-    meats: {
-        type: Array,
-    },
-    vegetables: {
-        type: Array,
+
+const props = defineProps({
+    // meats: {
+    //     type: Array,
+    // },
+    // vegetables: {
+    //     type: Array,
+    // }
+    userIngredients: {
+        type: Array
     }
 })
 
+const userStore = useUserStore()
 const selectedPage = ref(0)
 
 const handleSelectPage = (pageNumber) => {
     selectedPage.value = pageNumber
 }
 
-const countItems = ref(1)
+const meats = ref([])
+const vegetables = ref([])
 
-console.log(countItems)
+watchEffect(() => {
+    const mappedIngredients = props.userIngredients.map((ingd) => {
+        const ingredient = (Array.from(ingredientData)).find((ingdData) => ingd.id === ingdData.id)
+        ingredient['amount'] = ingd.amount
+        return ingredient
+    })
+
+    const userMeats = []
+    const userVegetables = []
+
+    for (const ingd of mappedIngredients) {
+        if (ingd.type === 'meat') userMeats.push(ingd)
+        else userVegetables.push(ingd)
+    }
+
+    meats.value = userMeats
+    vegetables.value = userVegetables
+})
+
+const handleIngredientClick = async (targetIngredient) => {
+    // const currentAmount = userStore.user.userDetail.ingredients.find((ingd) => ingd.id === targetIngredient.id).amount
+    console.log(targetIngredient)
+    const copyUserDetail = { ...userStore.user.userDetail }
+    copyUserDetail.ingredients = copyUserDetail.ingredients.map((ingd) => {
+        return {
+            id: ingd.id,
+            amount: targetIngredient.id === ingd.id ? ((ingd.amount - 1 >= 0) ? ingd.amount - 1 : 0) : ingd.amount
+        }
+    })
+
+    console.dir(copyUserDetail)
+
+    const patchedUser = await patchUser(userStore.user.id, { userDetail: copyUserDetail })
+    if (patchedUser?.id) {
+        userStore.user = patchedUser
+    } else {
+        console.error('Error to update user data.')
+    }
+}
 
 </script>
 
 <template>
 
-    <div class="flex flex-col px-1 ">
+    <div class="flex flex-col px-1 overflow-hidden">
         <div class="flex-none bg-base text-center text-xl font-rowdies rounded-md p-2 shadow-neutral-500 shadow-md">
             <p class="py-3">Ingredient</p>
             <div class="flex  rounded-lg">
@@ -42,22 +89,21 @@ console.log(countItems)
         <div
             class="flex-auto bg-zinc-700 p-2 flex flex-col items-center gap-2 max-h-[28rem] overflow-y-auto custom-scrollbar shadow-neutral-500 shadow-md">
             <div v-show="selectedPage === 0" v-for="meat in meats" :key="meat.id" class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border]
-                cursor-pointer rounded-lg w-10/12 h-20 flex justify-center" @click="countItems++">
+                cursor-pointer rounded-lg w-10/12 h-20 flex justify-center" @click="handleIngredientClick(meat)">
                 <div
                     class="bg-secondary-100 text-white rounded-full w-[20%] h-[40%] flex justify-center border-2 border-[#6a5944]">
-                    {{ countItems }}
+                    {{ meat.amount }}
                 </div>
-
-                <img :src="`/meat/${meat.name}.png`" alt="${meat.name}" class="w-24">
+                <img :src="`/meat/${meat.name}.png`" :alt="meat.name" class="w-24">
             </div>
 
             <div v-show="selectedPage === 1" v-for="vegetable in vegetables" :key="vegetable.id" class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border]
-                cursor-pointer rounded-lg w-10/12 h-20 flex justify-center" @click="countItems++">
-                <div class=" bg-secondary text-white rounded-full w-[20%] h-[40%] flex justify-center border-2
-                border-[#6a5944]">
-                    {{ countItems }}
+            cursor-pointer rounded-lg w-10/12 h-20 flex justify-center" @click="handleIngredientClick(vegetable)">
+                <div class="bg-secondary-100 text-white rounded-full w-[20%] h-[40%] flex justify-center border-2
+            border-[#6a5944]">
+                    {{ vegetable.amount }}
                 </div>
-                <img :src="`/vegetable/${vegetable.name}.png`" alt="${vegetable.name}" class="w-24">
+                <img :src="`/vegetable/${vegetable.name}.png`" :alt="vegetable.name" class="w-24">
             </div>
         </div>
         <div class="bg-zinc-700 h-[5rem] flex justify-center items-center shadow-neutral-500 shadow-md">
