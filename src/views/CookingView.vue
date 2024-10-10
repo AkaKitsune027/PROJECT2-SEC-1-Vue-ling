@@ -73,7 +73,7 @@ const vegetables = ref([
         "id": 21,
         "type": "vegetable",
         "name": "rice",
-        "display_name": "ข้าว",
+        "display_name": "ข้าว"
         "description": "เมล็ดธัญพืชสีขาว เป็นอาหารหลักในหลายประเทศ",
         "rank": 1
     }
