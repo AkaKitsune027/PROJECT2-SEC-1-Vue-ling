@@ -64,12 +64,10 @@ const templateUser = {
 
 //Add method - create new user
 export async function getUserByUsername(username) {
-  let response
   try {
-    response = await fetch(SERVER_URL + `/user?username=${username}`)
+    const response = await fetch(SERVER_URL + `/users?username=${username}`)
     const data = await response.json()
-    console.log("fetching user by username: ", data)
-    return data[0] || null
+    return data.length > 0 ? data[0] : null
   } catch (error) {
     console.error(error)
   }
@@ -80,7 +78,7 @@ export async function createUser(username, password) {
   const newUser = { ...templateUser }
   newUser.username = username
   newUser.password = password
-  const response = await fetch(SERVER_URL + `/user?username=${username}`, {
+  const response = await fetch(SERVER_URL + '/users', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -100,7 +98,7 @@ export async function validateUsername(username) {
 //Delete method - Delete account 
 export async function deleteUser(username) {
   try {
-    const res = await fetch(SERVER_URL + '/user', {
+    const res = await fetch(SERVER_URL + '/users', {
       method: 'DELETE',
     })
   } catch (error) {
@@ -111,7 +109,7 @@ export async function deleteUser(username) {
 //Patch method - Edit user data
 export async function patchUser(userId, patchData) {
   try {
-    const res = await fetch(`${SERVER_URL}/user/${userId}`, {
+    const res = await fetch(`${SERVER_URL}/users/${userId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

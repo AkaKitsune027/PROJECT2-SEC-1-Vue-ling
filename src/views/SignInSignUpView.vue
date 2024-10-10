@@ -8,7 +8,7 @@ const userStore = useUserStore()
 const route = useRoute()
 const router = useRouter()
 
-const isSignUp = computed(() => route.name === "signUp-page")
+const isSignUp = computed(() => route.name === "signup-page")
 
 const username = ref("")
 const password = ref("")
@@ -40,7 +40,7 @@ async function handleLoginOrSignUp() {
 
 const toggleForm = () => {
   if (route.name === "login-page") {
-    router.push({ name: "signUp-page" })
+    router.push({ name: "signup-page" })
   } else {
     router.push({ name: "login-page" })
   }
@@ -84,9 +84,7 @@ const handleSignUp = () => {
 </script>
 
 <template>
-  <div
-    class="page flex flex-col items-center justify-center min-h-screen bg-pink-50 isekai-background"
-  >
+  <div class="page flex flex-col items-center justify-center min-h-screen bg-pink-50 isekai-background">
     <div class="w-full max-w-md relative">
       <h1 class="text-6xl mb-8 text-center bold text-shadow text-[#fcfbfb]">
         ISEKAI COOKING
@@ -95,9 +93,7 @@ const handleSignUp = () => {
 
     <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg">
       <form @submit.prevent="handleLoginOrSignUp" class="space-y-2">
-        <div
-          class="text-center text-4xl text-[#6c4949] bold"
-        >
+        <div class="text-center text-4xl text-[#6c4949] bold">
           <p>{{ isSignUp ? "Sign Up" : "Sign In" }}</p>
         </div>
 
@@ -105,55 +101,31 @@ const handleSignUp = () => {
           <!-- Sign Up Form -->
           <div v-if="isSignUp">
             <!-- ขั้นตอนแรกของ Sign Up -->
-            <label class="block text-[#6c4949] font-bold" for="username"
-              >USERNAME <span class="text-red-600">*</span></label
-            >
-            <input
-              v-model="username"
-              id="username"
-              type="text"
-              required
-              class="w-full p-3 rounded-lg border bg-[#96ab97] border-[#4c4541] focus:outline-none focus:border-[#4c4541]"
-            />
+            <label class="block text-[#6c4949] font-bold" for="username">USERNAME <span
+                class="text-red-600">*</span></label>
+            <input v-model="username" id="username" type="text" required
+              class="w-full p-3 rounded-lg border bg-[#96ab97] border-[#4c4541] focus:outline-none focus:border-[#4c4541]" />
 
-            <label class="block text-[#6c4949] font-bold mt-2" for="password"
-              >PASSWORD <span class="text-red-600">*</span></label
-            >
-            <input
-              v-model="password"
-              id="password"
-              type="password"
-              required
-              class="w-full p-3 rounded-lg border bg-[#96ab97] border-[#4c4541] focus:outline-none focus:border-[#4c4541]"
-            />
+            <label class="block text-[#6c4949] font-bold mt-2" for="password">PASSWORD <span
+                class="text-red-600">*</span></label>
+            <input v-model="password" id="password" type="password" required
+              class="w-full p-3 rounded-lg border bg-[#96ab97] border-[#4c4541] focus:outline-none focus:border-[#4c4541]" />
             <p v-if="passwordError" class="text-red-600 text-sm">
               {{ passwordError }}
             </p>
 
-            <label
-              class="block text-[#6c4949] font-bold mt-2"
-              for="confirm-password"
-              >CONFIRM PASSWORD <span class="text-red-600">*</span></label
-            >
-            <input
-              v-model="confirmPassword"
-              id="confirm-password"
-              type="password"
-              required
-              class="w-full p-3 rounded-lg border bg-[#96ab97] border-[#4c4541] focus:outline-none focus:border-[#4c4541]"
-            />
+            <label class="block text-[#6c4949] font-bold mt-2" for="confirm-password">CONFIRM PASSWORD <span
+                class="text-red-600">*</span></label>
+            <input v-model="confirmPassword" id="confirm-password" type="password" required
+              class="w-full p-3 rounded-lg border bg-[#96ab97] border-[#4c4541] focus:outline-none focus:border-[#4c4541]" />
             <p v-if="confirmPasswordError" class="text-red-600 text-sm">
               {{ confirmPasswordError }}
             </p>
           </div>
 
           <div class="mt-2">
-            <button
-        
-              type="submit"
-              :disabled="!username || !password || !confirmPassword"
-              class="w-full bg-[#3f6a45] bold text-white py-3 rounded-lg hover:bg-brown-700 disabled:bg-gray-400"
-            >
+            <button type="submit" :disabled="!username || !password || !confirmPassword"
+              class="w-full bg-[#3f6a45] bold text-white py-3 rounded-lg hover:bg-brown-700 disabled:bg-gray-400">
               Sign up
             </button>
           </div>
@@ -161,33 +133,18 @@ const handleSignUp = () => {
 
         <div v-else>
           <!-- Sign In Form -->
-          <label class="block text-[#6c4949] font-bold" for="username"
-            >USERNAME <span class="text-red-600">*</span></label
-          >
-          <input
-            v-model="username"
-            id="username"
-            type="text"
-            required
-            class="w-full p-3 rounded-lg border bg-[#96ab97] border-[#4c4541] focus:outline-none focus:border-[#4c4541]"
-          />
-          <label class="block text-[#6c4949] font-bold mt-2" for="password"
-            >PASSWORD <span class="text-red-600">*</span></label
-          >
-          <input
-            v-model="password"
-            id="password"
-            type="password"
-            required
-            class="w-full p-3 rounded-lg border bg-[#96ab97] border-[#4c4541] focus:outline-none focus:border-[#4c4541]"
-          />
+          <label class="block text-[#6c4949] font-bold" for="username">USERNAME <span
+              class="text-red-600">*</span></label>
+          <input v-model="username" id="username" type="text" required
+            class="w-full p-3 rounded-lg border bg-[#96ab97] border-[#4c4541] focus:outline-none focus:border-[#4c4541]" />
+          <label class="block text-[#6c4949] font-bold mt-2" for="password">PASSWORD <span
+              class="text-red-600">*</span></label>
+          <input v-model="password" id="password" type="password" required
+            class="w-full p-3 rounded-lg border bg-[#96ab97] border-[#4c4541] focus:outline-none focus:border-[#4c4541]" />
 
           <div class="mt-2">
-            <button
-              type="submit"
-              :disabled="!username || !password"
-              class="w-full bold bg-[#3f6a45] text-white py-3 rounded-lg hover:bg-brown-700 disabled:bg-gray-400"
-            >
+            <button type="submit" :disabled="!username || !password"
+              class="w-full bold bg-[#3f6a45] text-white py-3 rounded-lg hover:bg-brown-700 disabled:bg-gray-400">
               SIGN IN
             </button>
           </div>
@@ -198,13 +155,9 @@ const handleSignUp = () => {
         <!-- <span v-if="!isSignupStep"> -->
         <span v-if="isSignUp">Already have an account? </span>
         <span v-else>Don't have an account? </span>
-        <a
-          href="#"
-          @click.prevent="toggleForm"
-          class="text-[#3447d7] bold hover:underline"
-        >
+        <RouterLink :to="{ name: isSignUp ? 'login-page' : 'signup-page' }" class="text-[#3447d7] bold hover:underline">
           {{ isSignUp ? "Sign In" : "Sign Up" }}
-        </a>
+        </RouterLink>
         <!-- </span> -->
       </div>
     </div>

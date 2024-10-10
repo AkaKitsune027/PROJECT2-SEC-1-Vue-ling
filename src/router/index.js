@@ -6,17 +6,16 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "home-page",
-      component: () => import("@/views/SignInSignUpView.vue"),
+      redirect: { name: 'home-page' }
     },
     {
-      path: "/signIn",
+      path: "/login",
       name: "login-page",
       component: () => import("@/views/SignInSignUpView.vue"),
     },
     {
-      path: "/signUp",
-      name: "signUp-page",
+      path: "/sign-up",
+      name: "signup-page",
       component: () => import("@/views/SignInSignUpView.vue"),
     },
     {
@@ -70,7 +69,7 @@ router.beforeEach((to, from, next) => {
 router.beforeEach((to, from, next) => {
   const userStore = useUserStore()
 
-  if (to.name !== 'login-page' && userStore.user === null) {
+  if (['login-page', 'signup-page'].includes(to.name) === false && userStore.user === null) {
     next({ name: 'login-page' })
   } else {
     next()
