@@ -77,7 +77,7 @@ const handleIngredientClick = async (targetIngredient) => {
   <div v-if="!showBag" class="flex flex-col px-1">
     <div class="flex-none bg-base text-center text-xl font-rowdies rounded-md p-2 shadow-neutral-500 shadow-md">
       <p class="py-3">Ingredient</p>
-      <div class="flex  rounded-lg">
+      <div class="flex rounded-lg">
         <div @click="handleSelectPage(0)"
           class="flex-1 flex justify-center cursor-pointer bg-[#c3e0c1] hover:bg-[#90a58e] rounded-lg border border-white">
           <img src="/meat.png" alt="meat-bar" class="w-12">
