@@ -1,14 +1,46 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 import IngredientBar from '@/components/IngredientBar.vue'
 import SeasoningBar from '@/components/SeasoningBar.vue'
+import GoldAndPopularity from '@/components/goldAndPopularity.vue'
 
+const userStore = useUserStore()
 const router = useRouter()
 
 function routeToCustomerOrderModal() {
     router.push({ name: 'user-order-modal' })
 }
+
+// Image animation
+const cauldronRef = ref(null)
+const countInteractive = ref(0)
+const currentCauldronImageFrame = ref(0)
+const currentImage = computed(() => {
+    const cauldronImage = ['/cauldron.png', '/1.png', '/2.png', '/3.png', '/4.png']
+    return cauldronImage[currentCauldronImageFrame.value]
+})
+
+let cauldronInterval = null
+const handleCauldronClick = () => {
+    if (countInteractive.value > 2 || cauldronInterval) return
+
+    cauldronRef.value.classList.add('animate-stir')
+
+    cauldronInterval = setInterval(() => {
+        currentCauldronImageFrame.value++
+        if (currentCauldronImageFrame.value > 4) {
+            currentCauldronImageFrame.value = 0
+            countInteractive.value++
+            console.log('CurrentCountInteractive: ' + countInteractive.value)
+            clearInterval(cauldronInterval)
+            cauldronInterval = null
+            cauldronRef.value.classList.remove('animate-stir')
+        }
+    }, 700)
+}
+
 
 const meats = ref([
     {
@@ -41,11 +73,19 @@ const vegetables = ref([
         "id": 21,
         "type": "vegetable",
         "name": "rice",
-        "display_name": "ข้าว",
+        "display_name": "ข้าว",https://github.com/AkaKitsune027/PROJECT2-SEC-1-Vue-ling/pull/17/conflict?name=src%252Fviews%252FCookingView.vue&ancestor_oid=350eed49440edf2d0d0aa3475d3952ebb5c3ad6e&base_oid=d9b5d22eb49e5fef99562a9a0954873702d25dc8&head_oid=b9e2ae0b2867cf285a56ae7483c276641db030e6
         "description": "เมล็ดธัญพืชสีขาว เป็นอาหารหลักในหลายประเทศ",
         "rank": 1
     }
 ])
+
+async function openAchievementBook() {
+    const data = await useUserStore.getData
+    console.log(data)
+
+    router.push({ name: "achievement-book-modal" })
+    // console.log(showAchievementBook.value)
+}
 </script>
 
 <template>
@@ -71,7 +111,7 @@ const vegetables = ref([
                     <img src="/src/assets/book-open.svg" class="w-10" />
                 </button>
 
-                <button
+                <button @click="openAchievementBook"
                     class="bg-[#ACC6AA] hover:bg-[#90a58e] flex justify-center items-center w-12 rounded-lg h-10 border border-white">
                     <img src="/src/assets/trophy.svg" class="w-10" />
                 </button>
@@ -108,21 +148,21 @@ const vegetables = ref([
 
     <div class="bg-[url('/bg.png')] bg-cover w-screen h-[calc(100vh-4rem)] grid grid-cols-5 grid-rows-6 gap-2">
         <div class="grid row-span-5 py-6">
-            <IngredientBar :meats="meats" :vegetables="vegetables" />
+            <IngredientBar :userIngredients="userStore.user.userDetail.ingredients" />
         </div>
         <div class="row-start-6 col-start-2 flex items-end">
             <SeasoningBar />
         </div>
         <div class="row-span-3 col-span-2 col-start-3 row-start-2 flex justify-center items-center">
-            <img src="/pot.png" alt="pot" class="select-none" />
+            <!-- ! Cauldron -->
+            <img ref="cauldronRef" :src="currentImage" alt="caudron" class="select-none cursor-pointer"
+                @click="handleCauldronClick" />
         </div>
 
         <div
-            class="bg-[#ACC6AA] col-span-2 col-start-3 row-start-5 flex justify-center rounded-xl shadow-neutral-500 shadow-md">
+            class="bg-[#ACC6AA] col-span-2 col-start-3 row-start-5 flex justify-center rounded-xl shadow-neutral-500 shadow-md z-20">
             <div class="flex justify-center place-items-center gap-3">
                 <div v-for="n in 2" :key="n" class="bg-white rounded-lg w-10/12 h-20">
-                    <img src="/meat/unicorn-horn.png" alt="unicorn-horn"
-                        class="h-full border border-gray-600 border-dashed rounded-lg">
                 </div>
             </div>
         </div>
@@ -137,14 +177,21 @@ const vegetables = ref([
                 <img src="/src/assets/trash.svg" alt="trash" />
             </button>
         </div>
+
+        <div class="col-start-4 row-start-1 ">
+            <GoldAndPopularity />
+        </div>
+
         <div @click="routeToCustomerOrderModal" class="col-start-5 row-start-1 flex justify-center">
             <div class="bg-[#614b3c] h-[50%] px-2 shadow-neutral-500 shadow-md"></div>
             <div class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md shadow-neutral-500 shadow-md">
-                <div class="relative bg-white w-[5rem] h-[60%] flex justify-center cursor-pointer">
-                    <div
-                        class="-top-[0.5rem] -left-[0.5rem] bg-red-600 w-4 h-4 rounded-lg absolute border border-white ">
-                    </div>
-                    <img src="../assets/person-fill.svg" class="w-[90%]" />
+                <div class="bg-white w-[5rem] h-[60%] flex cursor-pointer rounded-md">
+                    <span class="fixed flex h-3 w-3">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
+                    </span>
+                    <img src="../assets/person-fill.svg" class="w-[90%] justify-center" />
                 </div>
             </div>
             <div class="bg-[#614b3c] h-[50%] px-2 shadow-neutral-500 shadow-md"></div>
@@ -153,4 +200,30 @@ const vegetables = ref([
     <RouterView />
 </template>
 
-<style scoped></style>
+<style scoped>
+.animate-stir {
+    animation: stir 3.5s;
+}
+
+@keyframes stir {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(10deg);
+    }
+
+    50% {
+        transform: rotate(-10deg);
+    }
+
+    75% {
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+</style>

@@ -1,3 +1,14 @@
+<script setup>
+import { useUserStore } from "@/stores/user";
+import { useRouter } from "vue-router"
+
+const router = useRouter()
+const userStore = useUserStore()
+
+function handleToGame() {
+  router.push({ name: "cooking-page" })
+}
+</script>
 <template>
   <div class="menu flex flex-col items-center min-h-screen bg-[#fcfbfb]">
     <div class="w-screen h-20 flex justify-end py-4 px-8">
@@ -26,7 +37,7 @@
     >
       <!-- Buttons Section -->
       <div class="flex flex-col justify-center space-y-4 w-full md:w-auto">
-        <button class="btn-play h-14">PLAY</button>
+        <button @click="handleToGame" class="btn-play h-14">PLAY</button>
         <button class="btn-how text-nowrap h-14">HOW TO PLAY</button>
       </div>
 
@@ -34,17 +45,14 @@
       <div
         class="bg-[#ffffff] p-8 rounded-lg justify-center shadow-2xl flex flex-col items-center w-full md:w-5/12 h-96"
       >
-        <img
-          src="/Home.svg"
-          alt="Restaurant"
-          class="w-24 h-24 object-cover"
-        />
-        <p class="text-center font-bold text-lg text-[#2d2d2d]">USERNAME</p>
+        <img src="/Home.svg" alt="Restaurant" class="w-24 h-24 object-cover" />
+        <p class="text-center font-bold text-lg text-[#2d2d2d]">{{ userStore.user.username }}</p>
         <p class="text-[#2d2d2d] text-lg mt-4">YOUR RESTAURANT</p>
         <label
           class="bg-[#96ab97] w-full h-16 text-center py-4 text-white rounded-md text-lg"
-          >MASTER OF GOBLIN</label
         >
+          {{ userStore.user.outletName }}
+        </label>
       </div>
     </div>
   </div>

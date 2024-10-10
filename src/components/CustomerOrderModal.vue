@@ -36,14 +36,6 @@ onMounted(() => {
 
 })
 
-const randomFoods = () => {
-    return Math.floor(Math.random() * 10) // สุ่มเลข 0-9
-}
-
-const randomCustomers = () => {
-    return Math.floor(Math.random() * 11) // สุ่มเลข 0-9
-}
-
 const closeModal = () => {
     router.push({ name: 'cooking-page' })
 }
@@ -83,7 +75,7 @@ const closeModal = () => {
                 order?.customer.display_name }}
             </p>
             <p class="bg-white p-2"> ฉันต้องการ {{ order?.food.display_name }} </p>
-            <p class="bg-white p-2">{{ order?.specialRequirement.description }}</p>
+            <p class="bg-white px-2">แต่{{ order?.specialRequirement.description }}</p>
 
             <div class="flex justify-around py-4">
                 <div

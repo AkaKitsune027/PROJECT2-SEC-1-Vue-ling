@@ -9,7 +9,9 @@ export default {
     extend: {
       colors: {
         primary: "#5c4b6c",
-        secondary: "#aa9377",
+        secondary: {
+          100: "#aa9377",
+        },
         third: "#71a0a5",
         base: "#acc6aa",
         confirm: {
@@ -25,10 +27,10 @@ export default {
       },
       fontFamily: {
         sunday: ["SUNDAY"],
-        rowdies: ["ROWDIES"]
+        rowdies: ["ROWDIES"],
+        'noto-thai': ['"Noto Sans Thai"', 'sans-serif'],
       },
     },
   },
   // plugins: [daisyui]
 }
-
