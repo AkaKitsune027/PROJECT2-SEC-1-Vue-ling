@@ -153,14 +153,14 @@ async function openAchievementBook() {
         <div class="row-start-6 col-start-2 flex items-end">
             <SeasoningBar />
         </div>
-        <div class="row-span-3 col-span-2 col-start-3 row-start-2 flex justify-center items-center">
+        <div class="row-span-3 col-span-2 col-start-3 row-start-2 flex justify-center items-center z-60">
             <!-- ! Cauldron -->
             <img ref="cauldronRef" :src="currentImage" alt="caudron" class="select-none cursor-pointer"
                 @click="handleCauldronClick" />
         </div>
 
         <div
-            class="bg-[#ACC6AA] col-span-2 col-start-3 row-start-5 flex justify-center rounded-xl shadow-neutral-500 shadow-md z-20">
+            class="bg-[#ACC6AA] col-span-2 col-start-3 row-start-5 flex justify-center rounded-xl shadow-neutral-500 shadow-md z-0">
             <div class="flex justify-center place-items-center gap-3">
                 <div v-for="n in 2" :key="n" class="bg-white rounded-lg w-10/12 h-20">
                 </div>
