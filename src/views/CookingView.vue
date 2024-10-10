@@ -22,6 +22,9 @@ const currentImage = computed(() => {
     return cauldronImage[currentCauldronImageFrame.value]
 })
 
+const isShow = ref(true)
+// const switchShow = this.isShow != this.isShow
+
 let cauldronInterval = null
 const handleCauldronClick = () => {
     if (countInteractive.value > 2 || cauldronInterval) return
@@ -91,7 +94,6 @@ async function openAchievementBook() {
 <template>
     <div class="bg-[#71A0A5] border drop-shadow-md w-screen h-[4rem] p-3 ">
         <div class="flex justify-between">
-            <!-- <button class="bg-primary w-12 rounded-lg"> -->
             <RouterLink to="/homepage">
                 <button class="bg-[#ACC6AA] hover:bg-[#90a58e] w-12 rounded-lg border border-white">
                     <img src="/src/assets/arrow-back.svg" class="w-10" />
@@ -178,7 +180,7 @@ async function openAchievementBook() {
             </button>
         </div>
 
-        <div class="col-start-4 row-start-1 ">
+        <div class="col-start-4 row-start-1">
             <GoldAndPopularity />
         </div>
 
@@ -195,6 +197,21 @@ async function openAchievementBook() {
                 </div>
             </div>
             <div class="bg-[#614b3c] h-[50%] px-2 shadow-neutral-500 shadow-md"></div>
+        </div>
+
+        <div v-show="isShow" class="col-start-5 row-start-3 row-span-1 flex flex-col justify-center items-center">
+            <div class="my-9">
+                <img src="/src/assets/arrow-up.svg" class="animate-bounce w-[70%] h-[70%] my-9 fill-red-600" />
+            </div>
+            <div class="col-start-5 row-start-4 row-span-2 flex">
+                <div class="bg-white p-10 rounded-lg mb-5">
+                    <p class="text-red-600 py-2">* โปรดระวัง: หากคุณคลิกที่ปุ่มออเดอร์
+                        คุณจะต้องเลือกระหว่างรับออเดอร์หรือไม่รับออเดอร์ *</p>
+                    <li>ถ้าคุณรับออเดอร์ คุณจะต้องทำอาหารให้เสร็จและในระหว่างนั้นจะไม่สามารถสั่งซื้อของได้</li>
+                    <li class="py-4">ถ้าคุณไม่รับออเดอร์ คุณจะต้องเสียค่าขื่อเสียง</li>
+                    <button @click="" class="bg-green-500 rounded-lg px-3 text-white flex">เข้าใจแล้วล่ะ</button>
+                </div>
+            </div>
         </div>
     </div>
     <RouterView />
