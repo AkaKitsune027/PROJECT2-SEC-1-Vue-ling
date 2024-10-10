@@ -68,21 +68,24 @@ const closeModal = () => {
     <div class="flex-auto bg-zinc-700 p-2 flex flex-col items-center gap-2 max-h-[28rem] overflow-y-auto custom-scrollbar shadow-neutral-500 shadow-md">
       
       <!-- แสดง meat เมื่อ selectedPage === 0 -->
-      <div v-show="selectedPage === 0" v-for="meat in meats" :key="meat.id" class="bg-white flex justify-between items-center w-10/12 h-16 rounded-lg p-2">
-        <img :src="`/meat/${meat.name}.png`" alt="${meat.name}" class="w-12">
+      <div v-show="selectedPage === 0" v-for="meat in meats" :key="meat.id" class="bg-white flex justify-between items-center w-10/12 h-20 rounded-lg p-2">
+        <div class="flex flex-col items-center">
+          <img :src="`/meat/${meat.name}.png`" alt="${meat.name}" class="w-12">
+          <p class="text-sm text-gray-700">{{ meat.display_name }}</p>
+        </div>
         <div class="flex gap-2">
-          <!-- เรียกใช้ openModal เมื่อกดปุ่ม Sell หรือ Buy -->
-          <button @click="openModal(meat, 'sell')" class="bg-red-400 hover:bg-red-600 text-white py-1 px-2 rounded-lg">Sell</button>
           <button @click="openModal(meat, 'buy')" class="bg-green-400 hover:bg-green-600 text-white py-1 px-2 rounded-lg">Buy</button>
         </div>
       </div>
 
       <!-- แสดง vegetable เมื่อ selectedPage === 1 -->
-      <div v-show="selectedPage === 1" v-for="vegetable in vegetables" :key="vegetable.id" class="bg-white flex justify-between items-center w-10/12 h-16 rounded-lg p-2">
-        <img :src="`/vegetable/${vegetable.name}.png`" alt="${vegetable.name}" class="w-12">
+      <div v-show="selectedPage === 1" v-for="vegetable in vegetables" :key="vegetable.id" class="bg-white flex justify-between items-center w-10/12 h-20 rounded-lg p-2">
+        <div class="flex flex-col items-center">
+          <img :src="`/vegetable/${vegetable.name}.png`" alt="${vegetable.name}" class="w-12">
+          <p class="text-sm text-gray-700">{{ vegetable.display_name }}</p>
+        </div>
         <div class="flex gap-2">
-          <!-- เรียกใช้ openModal เมื่อกดปุ่ม Sell หรือ Buy -->
-          <button @click="openModal(vegetable, 'sell')" class="bg-red-400 hover:bg-red-600 text-white py-1 px-2 rounded-lg">Sell</button>
+          <!-- เรียกใช้ openModal เมื่อกดปุ่ม  Buy -->
           <button @click="openModal(vegetable, 'buy')" class="bg-green-400 hover:bg-green-600 text-white py-1 px-2 rounded-lg">Buy</button>
         </div>
       </div>

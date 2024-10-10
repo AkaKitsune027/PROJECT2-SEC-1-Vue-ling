@@ -44,13 +44,14 @@ const handleCancel = () => {
 </script>
 
 <template>
-  <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
     <div class="bg-white w-1/3 p-5 rounded-lg shadow-lg text-center relative overflow-visible">
       <h2 class="text-2xl font-bold">{{ type === 'sell' ? 'Sale' : 'Buy' }}</h2>
       
       <!-- แสดงรูปภาพ item ที่กด -->
       <div class="my-4">
         <img :src="`/${item.type}/${item.name}.png`" alt="item" class="mx-auto w-32 h-32">
+        <p class="text-xl">{{ item.display_name }}</p>
       </div>
       
       <div class="flex items-center justify-center gap-3">
@@ -60,7 +61,7 @@ const handleCancel = () => {
       </div>
       
       <div class="flex justify-center gap-4 mt-6">
-        <button @click="handleConfirm" class="bg-green-500 text-white px-4 py-2 rounded-lg">Okay</button>
+        <button @click="handleConfirm" class="bg-green-500 text-white px-4 py-2 rounded-lg">Confirm</button>
         <button @click="handleCancel" class="bg-red-500 text-white px-4 py-2 rounded-lg">Cancel</button>
       </div>
 

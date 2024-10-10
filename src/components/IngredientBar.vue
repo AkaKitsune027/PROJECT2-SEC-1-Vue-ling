@@ -49,7 +49,13 @@ const toggleView = () => {
         v-for="meat in meats"
         :key="meat.id"
         class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border] cursor-pointer rounded-lg w-10/12 h-20 flex justify-center">
-        <img :src="`/meat/${meat.name}.png`" alt="${meat.name}" class="w-24" />
+          <div class="relative">
+            <img
+              :src="`/meat/${meat.name}.png`"
+              alt="${meat.name}"
+              class="w-20" />
+            <p class="text-sm text-gray-700 absolute bottom-0 -right-10">{{ meat.display_name }}</p>
+          </div>
       </div>
 
       <div
@@ -57,10 +63,13 @@ const toggleView = () => {
         v-for="vegetable in vegetables"
         :key="vegetable.id"
         class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border] cursor-pointer rounded-lg w-10/12 h-20 flex justify-center">
-        <img
-          :src="`/vegetable/${vegetable.name}.png`"
-          alt="${vegetable.name}"
-          class="w-24" />
+        <div class="relative">
+          <img
+            :src="`/vegetable/${vegetable.name}.png`"
+            alt="${vegetable.name}"
+            class="w-20" />
+          <p class="text-sm text-gray-700 absolute bottom-0 -right-10">{{ vegetable.display_name }}</p>
+        </div>
       </div>
     </div>
     <!-- Button to toggle to IngredientBag -->
@@ -74,7 +83,11 @@ const toggleView = () => {
     </div>
   </div>
 
-  <StoreView v-if="showBag" :meats="meats" :vegetables="vegetables" @toggleBack="toggleView" />
+  <StoreView
+    v-if="showBag"
+    :meats="meats"
+    :vegetables="vegetables"
+    @toggleBack="toggleView" />
 </template>
 
 <style scoped></style>
