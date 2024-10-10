@@ -98,7 +98,7 @@ const handleIngredientClick = async (targetIngredient) => {
           {{ meat.amount }}
         </div>
         <img :src="`/meat/${meat.name}.png`" :alt="meat.name" class="w-24">
-        <p class="text-sm text-gray-700  bottom-0 -right-10">{{ meat.display_name }}</p>
+        <p class="text-sm text-gray-700 bottom-0 -right-10">{{ meat.display_name }}</p>
       </div>
 
       <div v-show="selectedPage === 1" v-for="vegetable in vegetables" :key="vegetable.id" class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border]
