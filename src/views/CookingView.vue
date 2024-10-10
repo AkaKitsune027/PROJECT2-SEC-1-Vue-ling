@@ -73,7 +73,7 @@ const vegetables = ref([
         "id": 21,
         "type": "vegetable",
         "name": "rice",
-        "display_name": "ข้าว",https://github.com/AkaKitsune027/PROJECT2-SEC-1-Vue-ling/pull/17/conflict?name=src%252Fviews%252FCookingView.vue&ancestor_oid=350eed49440edf2d0d0aa3475d3952ebb5c3ad6e&base_oid=d9b5d22eb49e5fef99562a9a0954873702d25dc8&head_oid=b9e2ae0b2867cf285a56ae7483c276641db030e6
+        "display_name": "ข้าว"
         "description": "เมล็ดธัญพืชสีขาว เป็นอาหารหลักในหลายประเทศ",
         "rank": 1
     }
