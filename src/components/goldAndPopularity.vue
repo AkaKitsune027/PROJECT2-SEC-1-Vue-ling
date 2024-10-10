@@ -8,8 +8,8 @@ const userStore = useUserStore()
 </script>
 
 <template>
-    <div class="">
-        <div class=" bg-white bg-opacity-80 text-black rounded-lg shadow-lg p-2 flex space-x-4 items-center">
+    <div>
+        <div class=" bg-white bg-opacity-80 text-black rounded-lg shadow-lg p-2 flex space-x-4 items-center fixed">
             <div class="flex items-center space-x-2">
                 <span class="text-xl font-semibold">💰</span>
                 <span class="text-lg font-bold">{{ userStore.user?.userDetail.gold }}</span>
