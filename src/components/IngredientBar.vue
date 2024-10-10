@@ -92,7 +92,7 @@ const handleIngredientClick = async (targetIngredient) => {
     <div
       class="flex-auto bg-zinc-700 p-2 flex flex-col items-center gap-2 max-h-[28rem] overflow-y-auto custom-scrollbar shadow-neutral-500 shadow-md">
       <div v-show="selectedPage === 0" v-for="meat in meats" :key="meat.id" class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border]
-                cursor-pointer rounded-lg w-10/12 h-20 flex justify-center" @click="handleIngredientClick(meat)">
+          cursor-pointer rounded-lg w-10/12 h-20 flex justify-center" @click="handleIngredientClick(meat)">
         <div
           class="bg-secondary-100 text-white rounded-full w-[20%] h-[40%] flex justify-center border-2 border-[#6a5944]">
           {{ meat.amount }}
