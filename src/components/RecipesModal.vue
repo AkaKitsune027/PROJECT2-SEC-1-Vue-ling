@@ -64,9 +64,7 @@ const closeModal = () => {
                 <div :class="{ 'max-h-40 overflow-y-auto': selectedRecipe.ingredients.length > 5 }">
                     <ul class="list-disc ml-5">
                         <li v-for="ingredient in selectedRecipe.ingredients" :key="ingredient"
-                            class="text-gray-600 flex items-center">
-                            <!-- เพิ่ม checkbox -->
-                            <input type="checkbox" class="mr-2 cursor-pointer" :title="'นี่คือ ' + ingredient" />
+                            class="text-gray-600 flex items-center">      
                             {{ ingredient }}
                         </li>
                     </ul>
