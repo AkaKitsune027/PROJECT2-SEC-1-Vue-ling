@@ -4,7 +4,8 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import IngredientBar from '@/components/IngredientBar.vue'
 import SeasoningBar from '@/components/SeasoningBar.vue'
-import GoldAndPopularity from '@/components/goldAndPopularity.vue'
+import GoldAndPopularity from '@/components/GoldAndPopularity.vue'
+import RecipesModal from '@/components/RecipesModal.vue'
 
 const userStore = useUserStore()
 const router = useRouter()
@@ -177,8 +178,11 @@ async function openAchievementBook() {
                 <img src="/src/assets/trash.svg" alt="trash" />
             </button>
         </div>
-
+        <div class="col-start-2 row-start-1 row-span-4 flex justify-center">
+            <RecipesModal />
+        </div>
         <div class="col-start-4 row-start-1 ">
+            
             <GoldAndPopularity />
         </div>
 
