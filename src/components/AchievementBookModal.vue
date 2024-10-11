@@ -1,8 +1,11 @@
 <script setup>
 import { ref } from "vue"
 import { useRouter } from "vue-router"
+import { useUserStore } from "@/stores/user"
+// import foods from "@assets/foods.json"
 
 const router = useRouter()
+const userStore = useUserStore()
 // const showSelectedDish = ref(false)
 
 const dishes = ref([
@@ -18,7 +21,7 @@ const dishes = ref([
   {
     name: "Fried Orcs with Vegetables",
     image: "friedOrcsWithVegetables.png",
-    unlocked: true,
+    unlocked: false,
   },
   {
     name: "Grilled Boar with Salt",
@@ -98,13 +101,9 @@ const closeModal = () => {
               v-for="(dish, index) in dishes"
               :key="index"
               :class="{ grayscale: !dish.unlocked }"
-              class="gradient rounded-lg shadow-xl border-4 border-[#eed285] p-1"
+              class="gradient rounded-lg shadow-xl border-4 border-[#eed285] p-1 transform transition-all hover:scale-[1.02] duration-200 cursor-pointer"
             >
-              <div
-                v-if="dish.unlocked"
-                class="cursor-pointer"
-                @click="OpenSelectedDish(dish.name)"
-              >
+              <div v-if="dish.unlocked" @click="OpenSelectedDish(dish.name)">
                 <img
                   :src="`/foods/${dish.image}`"
                   alt="dish.name"

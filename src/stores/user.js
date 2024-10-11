@@ -21,18 +21,18 @@ export const useUserStore = defineStore("user", () => {
   }
 
   async function signup(username, password) {
-     const isUsernameValid = await validateUsername(username)
-     if (isUsernameValid) {
-       const createdUser = await createUser(username, password)
+    const isUsernameValid = await validateUsername(username)
+    if (isUsernameValid) {
+      const createdUser = await createUser(username, password)
 
-       if (createdUser) {
-         user.value = createdUser
-       } else {
-         alert("Failed to create user")
-       }
-     } else {
-       alert("Please enter a different username")
-     }
+      if (createdUser) {
+        user.value = createdUser
+      } else {
+        alert("Failed to create user")
+      }
+    } else {
+      alert("Please enter a different username")
+    }
   }
   return { user, login, signup }
 })

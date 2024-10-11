@@ -6,10 +6,10 @@ import { patchUser } from '@/libs/userManagement'
 import StoreView from "./StoreView.vue"
 
 const props = defineProps({
-     meats: {
+    meats: {
         type: Array,
-     },
-     vegetables: {
+    },
+    vegetables: {
         type: Array,
     },
     userIngredients: {
