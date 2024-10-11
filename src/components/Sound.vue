@@ -45,6 +45,7 @@ function playBackgroundMusic() {
         </button>
     </div>
 </template>
+
  
 <style scoped>
 
