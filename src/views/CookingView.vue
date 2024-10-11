@@ -5,12 +5,14 @@ import { useUserStore } from '@/stores/user'
 import IngredientBar from '@/components/IngredientBar.vue'
 import SeasoningBar from '@/components/SeasoningBar.vue'
 import GoldAndPopularity from '@/components/goldAndPopularity.vue'
+import { useGameState } from '@/stores/gameState'
 
-const userStore = useUserStore()
 const router = useRouter()
+const userStore = useUserStore()
+const gameState = useGameState()
 
-function routeToCustomerOrderModal() {
-    router.push({ name: 'user-order-modal' })
+function handleOrderSignClick() {
+    if (gameState.isPreparePhase) router.push({ name: 'user-order-modal' })
 }
 
 // Image animation
@@ -23,11 +25,13 @@ const currentImage = computed(() => {
 })
 
 const isShow = ref(true)
-// const switchShow = this.isShow != this.isShow
+const handle = () => {
+    isShow.value = !isShow.value
+}
 
 let cauldronInterval = null
 const handleCauldronClick = () => {
-    if (countInteractive.value > 2 || cauldronInterval) return
+    if (countInteractive.value > 3 || cauldronInterval) return
 
     cauldronRef.value.classList.add('animate-stir')
 
@@ -184,15 +188,14 @@ async function openAchievementBook() {
             <GoldAndPopularity />
         </div>
 
-        <div @click="routeToCustomerOrderModal" class="col-start-5 row-start-1 flex justify-center">
+        <div @click="handleOrderSignClick" class="col-start-5 row-start-1 flex justify-center">
             <div class="bg-[#614b3c] h-[50%] px-2 shadow-neutral-500 shadow-md"></div>
             <div class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md shadow-neutral-500 shadow-md">
-                <div class="bg-white w-[5rem] h-[60%] flex cursor-pointer rounded-md">
-                    <span class="fixed flex h-3 w-3">
-                        <span
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
-                    </span>
+                <div class="bg-white w-[5rem] h-[60%] grid place-items-center relative cursor-pointer rounded-md">
+                    <div class="absolute h-3 w-3 -translate-x-1 -translate-y-1 top-0 left-0">
+                        <div class="animate-ping absolute h-full w-full rounded-full bg-red-600 opacity-75"></div>
+                        <div class="relative rounded-full h-3 w-3 bg-red-600"></div>
+                    </div>
                     <img src="../assets/person-fill.svg" class="w-[90%] justify-center" />
                 </div>
             </div>
@@ -200,7 +203,7 @@ async function openAchievementBook() {
         </div>
 
         <div v-show="isShow" class="col-start-5 row-start-3 row-span-1 flex flex-col justify-center items-center">
-            <div class="my-9">
+            <div class="my-9 pointer-events-none">
                 <img src="/src/assets/arrow-up.svg" class="animate-bounce w-[70%] h-[70%] my-9 fill-red-600" />
             </div>
             <div class="col-start-5 row-start-4 row-span-2 flex">
@@ -208,8 +211,8 @@ async function openAchievementBook() {
                     <p class="text-red-600 py-2">* โปรดระวัง: หากคุณคลิกที่ปุ่มออเดอร์
                         คุณจะต้องเลือกระหว่างรับออเดอร์หรือไม่รับออเดอร์ *</p>
                     <li>ถ้าคุณรับออเดอร์ คุณจะต้องทำอาหารให้เสร็จและในระหว่างนั้นจะไม่สามารถสั่งซื้อของได้</li>
-                    <li class="py-4">ถ้าคุณไม่รับออเดอร์ คุณจะต้องเสียค่าขื่อเสียง</li>
-                    <button @click="" class="bg-green-500 rounded-lg px-3 text-white flex">เข้าใจแล้วล่ะ</button>
+                    <li class="py-4">ถ้าคุณไม่รับออเดอร์ คุณจะต้องเสียค่าชื่อเสียง</li>
+                    <button @click="handle" class="bg-green-500 rounded-lg px-3 text-white flex">เข้าใจแล้วล่ะ</button>
                 </div>
             </div>
         </div>

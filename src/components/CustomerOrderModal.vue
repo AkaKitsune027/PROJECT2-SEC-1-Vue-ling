@@ -5,10 +5,11 @@ import { onMounted } from 'vue'
 
 import customersData from '../../data/customers.json'
 import foodsData from '../../data/foods.json'
-import ingredientsData from '../../data/ingredients.json'
 import specialRequirementData from '../../data/specialRequirement.json'
+import { useGameState } from '@/stores/gameState'
 
 const router = useRouter()
+const gameState = useGameState()
 const order = ref(null)
 
 function genarateOrder() {
@@ -30,18 +31,19 @@ function genarateOrder() {
     }
 }
 
-function disableBtn() {
-
-}
-
 onMounted(() => {
     order.value = genarateOrder()
     console.log(order.value)
 
 })
 
-const closeModal = () => {
-    router.push({ name: 'cooking-page' })
+const handleCancelOrder = () => {
+    router.back()
+}
+
+const handleConfirmOrder = () => {
+    gameState.isPreparePhase = false
+    router.back()
 }
 
 </script>
@@ -82,15 +84,15 @@ const closeModal = () => {
             <p class="bg-white px-2">แต่{{ order?.specialRequirement.description }}</p>
 
             <div class="flex justify-around py-4">
-                <div
-                    class="bg-confirm-200 hover:bg-confirm-300 w-16 h-14 flex justify-center items-center cursor-pointer border border-gray-500 hover:border hover:border-white rounded-lg">
+                <div @click="handleConfirmOrder" class="bg-confirm-200 hover:bg-confirm-300 w-16 h-14 flex justify-center items-center
+                    cursor-pointer border border-gray-500 hover:border hover:border-white rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="70" height="60" fill="black"
                         class="hover:fill-confirm-100" viewBox="0 0 16 16">
                         <path
                             d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
                     </svg>
                 </div>
-                <div @click="disableBtn"
+                <div @click="handleCancelOrder"
                     class="bg-alert-200 hover:bg-alert-300 w-16 h-14 flex justify-center items-center cursor-pointer border border-gray-500 hover:border hover:border-white  rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="70" height="60" fill="black"
                         class="hover:fill-alert-100" viewBox="0 0 16 16">
