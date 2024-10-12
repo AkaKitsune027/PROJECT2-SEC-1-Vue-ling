@@ -13,7 +13,7 @@ const userRecipes = userStore.user.userDetail.recipes;
 const unlockedRecipes = computed(() => {
     // กรองสูตรที่ปลดล็อกแล้วจาก foods.json โดยเช็ค isUnlock ของ user
     return foods.filter((food) =>
-        userRecipes.some((recipe) => recipe.id === food.id && recipe.isUnlock === 'true')
+        userRecipes.some((recipe) => recipe.id === food.id && recipe.isUnlock === true)
     );
 });
 
@@ -47,6 +47,8 @@ const closeModal = () => {
                 <!-- แสดงรายการสูตรอาหาร -->
                 <option v-for="recipe in unlockedRecipes" :key="recipe.id" :value="recipe"
                     class="text-slate-800 rounded-md  cursor-pointer">
+                <!-- ใช้ display_name เป็นข้อความที่แสดงในรายการ -->
+                 
                     {{ recipe.display_name }}
                 </option>
             </select>
