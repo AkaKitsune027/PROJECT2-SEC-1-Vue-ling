@@ -1,54 +1,48 @@
 <script setup>
-import { ref } from "vue"
+import { ref, computed } from "vue"
 import { useRouter } from "vue-router"
 import { useUserStore } from "@/stores/user"
-// import foods from "@assets/foods.json"
+import foodsData from "../../data/foods.json"
+import ingredientsData from "../../data/ingredients.json"
 
 const router = useRouter()
 const userStore = useUserStore()
-// const showSelectedDish = ref(false)
+const selectedMenu = ref(null) // Store the selected menu details
+const selectedMenuIngredients = ref([])
 
-const dishes = ref([
-  { name: "Rice with Egg", image: "riceWithEgg.png", unlocked: false },
-  { name: "Rice with Meat", image: "riceWithMeat.png", unlocked: true },
-  { name: "Beach Soup", image: "beachSoup.png", unlocked: true },
-  { name: "Dragon Steak", image: "dragonSteak.png", unlocked: true },
-  {
-    name: "Five Companions Stew",
-    image: "fiveCompanionsStew.png",
-    unlocked: true,
-  },
-  {
-    name: "Fried Orcs with Vegetables",
-    image: "friedOrcsWithVegetables.png",
-    unlocked: false,
-  },
-  {
-    name: "Grilled Boar with Salt",
-    image: "grilledBoarWithSalt.png",
-    unlocked: true,
-  },
-  {
-    name: "King Pork Fried Rice",
-    image: "kingPorkFriedRice.png",
-    unlocked: true,
-  },
-  {
-    name: "Spicy Chicken Stir Fry",
-    image: "spicyChickenStirFry.png",
-    unlocked: true,
-  },
-  { name: "Rainbow Pudding", image: "rainbowPudding.png", unlocked: true },
-])
+// Map fiveStarMenus to corresponding food data
+const mappedFiveStarMenus = computed(() => {
+  return userStore.user?.userDetail?.fiveStarMenus.map((menu) => {
+    const food = foodsData.find((food) => food.id === menu.foodId) // Assuming foods.json has an 'id' field
+    // const ingredient = ingredientsData.find((ingredient) => ingredient.id === food.ingredients[0]
+    // )
+    return {
+      ...food,
+      // ...ingredient,
+      isUnlock: menu.isUnlock,
+    }
+  })
+})
 
 const closeModal = () => {
   router.push({ name: "cooking-page" })
 }
 
-// function OpenSelectedDish(dishName) {
-//   showSelectedDish.value = true
-//   console.log(showSelectedDish.value)
-// }
+function showSelectedMenu(menu) {
+  if (menu.isUnlock) {
+    selectedMenu.value = menu // Set the selected menu data
+    console.log(`Selected menu: ${menu.name}`)
+
+    // const ingredients =
+  }
+  // else {
+  //   console.log(`Locked menu: ${menu.name}`)
+  // }
+
+  // showSelectedMenu.value = false
+  // showSelectedMenu.value = true
+  // console.log(showSelectedMenu.value)
+}
 </script>
 
 <template>
@@ -98,19 +92,25 @@ const closeModal = () => {
           </div>
           <div class="pt-0 p-8 grid grid-cols-3 grid-rows-3 gap-6">
             <div
-              v-for="(dish, index) in dishes"
+              @click="showSelectedMenu(menu)"
+              v-for="(menu, index) in mappedFiveStarMenus"
               :key="index"
-              :class="{ grayscale: !dish.unlocked }"
-              class="gradient rounded-lg shadow-xl border-4 border-[#eed285] p-1 transform transition-all hover:scale-[1.02] duration-200 cursor-pointer"
+              :class="{
+                grayscale: !menu.isUnlock,
+                'hover:scale-[1.03] duration-300': menu.isUnlock,
+              }"
+              class="gradient rounded-lg shadow-xl border-4 border-[#eed285] p-1 cursor-pointer"
             >
-              <div v-if="dish.unlocked" @click="OpenSelectedDish(dish.name)">
+              <div v-if="menu.isUnlock">
                 <img
-                  :src="`/foods/${dish.image}`"
-                  alt="dish.name"
+                  :src="`/foods/${menu.name}.png`"
+                  alt="food.name"
                   class="w-full h-auto drop-shadow-[0_8px_5px_rgba(0,0,0,0.3)]"
                 />
-                <p class="text-center mt-1 font-semibold text-gray-600">
-                  {{ dish.name }}
+                <p
+                  class="text-center mt-1 font-semibold text-lg font-noto-thai text-gray-600"
+                >
+                  {{ menu.display_name }}
                 </p>
               </div>
 
@@ -130,25 +130,34 @@ const closeModal = () => {
       </div>
     </div>
 
-    <!-- Selected Dish -->
+    <!-- Selected Menu -->
     <div class="relative bg-white rounded-lg shadow w-[600px] h-auto mx-10">
       <div class="body p-4">
-        <h1 class="text-4xl font-bold text-gray-600 my-4 text-center">
-          <!-- {{ dish.name }} -->
-          Menu Name
+        <h1
+          class="text-4xl font-bold text-gray-600 my-4 font-noto-thai text-center"
+        >
+          {{ selectedMenu?.display_name || "Menu Name" }}
         </h1>
         <div class="flex justify-center items-center">
-          <!-- <img :src="dish.image" alt="dish"> -->
-          <!-- <img :src="`/foods/${dish.image}`" alt="dish" class="w-60" /> -->
-          <img src="/unknownDish.png" alt="unknown dish" class="w-60" />
+          <img
+            :src="
+              selectedMenu
+                ? `/foods/${selectedMenu?.name}.png`
+                : '/unknownDish.png'
+            "
+            :alt="selectedMenu?.name || 'unknown dish'"
+            class="w-60"
+          />
         </div>
         <div class="description px-12 py-2">
           <p class="text-2xl font-bold text-gray-600">Description</p>
           <p
             class="font-noto-thai font-medium text-gray-600 text-lg indent-6 ps-4 py-2"
           >
-            This dish is currently locked. Unlock it by completing <br />
-            5 stars!
+            {{
+              selectedMenu?.description ||
+              "This dish is currently locked. Unlock it by completing 5 stars!"
+            }}
           </p>
         </div>
         <div class="ingredients px-12 py-2">
@@ -158,14 +167,38 @@ const closeModal = () => {
           >
             <div
               class="flex flex-col gap-2 mb-4 px-2 py-2 rounded-lg min-w-20 bg-gray-200"
+              v-if="!selectedMenu"
               v-for="n in 8"
               :key="n"
+            >
+              <img
+                :src="
+                  selectedMenu
+                    ? `/meat/${selectedMenu?.ingredients}.png`
+                    : '/unknownIngredient.png'
+                "
+                :alt="selectedMenu?.ingredients || 'unknown ingredient'"
+              />
+              <p class="text-sm text-center">Unknown Ingredient</p>
+            </div>
+            <div
+              class="flex flex-col gap-2 mb-4 px-2 py-2 rounded-lg min-w-20 bg-gray-200"
+              v-for="ingredient in selectedMenu?.ingredients || []"
+              :key="ingredient"
+              v-else
             >
               <!-- <img
                 src="/public/meat/redEyedSnakeEggs.png"
                 alt="red-eyed-snake-eggs"
               /> -->
-              <img src="/unknownIngredient.png" alt="" />
+              <img
+                :src="
+                  selectedMenu
+                    ? `/meat/${selectedMenu?.ingredients}.png`
+                    : '/unknownIngredient.png'
+                "
+                :alt="selectedMenu?.ingredients || 'unknown ingredient'"
+              />
               <p class="text-sm text-center">Unknown Ingredient</p>
             </div>
           </div>

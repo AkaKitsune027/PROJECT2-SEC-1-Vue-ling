@@ -20,43 +20,43 @@ const templateUser = {
     fiveStarMenus: [
       {
         foodId: 1,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 2,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 3,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 4,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 5,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 6,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 7,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 8,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 9,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 10,
-        isUnlock: "false",
+        isUnlock: false,
       },
     ],
   },
