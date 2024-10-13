@@ -11,8 +11,13 @@ const router = useRouter()
 const userStore = useUserStore()
 const gameState = useGameState()
 
+const isShow = ref(true)
+const handleGameGuideConfirm = () => {
+    isShow.value = !isShow.value
+}
 function handleOrderSignClick() {
-    if (gameState.isPreparePhase) router.push({ name: 'user-order-modal' })
+    if (gameState.isPreparePhase) router.push({ name: 'prepare-modal' })
+    else router.push({ name: 'cooking-modal' })
 }
 
 // Image animation
@@ -24,10 +29,6 @@ const currentImage = computed(() => {
     return cauldronImage[currentCauldronImageFrame.value]
 })
 
-const isShow = ref(true)
-const handle = () => {
-    isShow.value = !isShow.value
-}
 
 let cauldronInterval = null
 const handleCauldronClick = () => {
@@ -206,13 +207,16 @@ async function openAchievementBook() {
             <div class="my-9 pointer-events-none">
                 <img src="/src/assets/arrow-up.svg" class="animate-bounce w-[70%] h-[70%] my-9 fill-red-600" />
             </div>
+            <!-- <div class="col-start-5 row-start- row-span-2 flex">
+            </div> -->
             <div class="col-start-5 row-start-4 row-span-2 flex">
                 <div class="bg-white p-10 rounded-lg mb-5">
                     <p class="text-red-600 py-2">* โปรดระวัง: หากคุณคลิกที่ปุ่มออเดอร์
                         คุณจะต้องเลือกระหว่างรับออเดอร์หรือไม่รับออเดอร์ *</p>
                     <li>ถ้าคุณรับออเดอร์ คุณจะต้องทำอาหารให้เสร็จและในระหว่างนั้นจะไม่สามารถสั่งซื้อของได้</li>
                     <li class="py-4">ถ้าคุณไม่รับออเดอร์ คุณจะต้องเสียค่าชื่อเสียง</li>
-                    <button @click="handle" class="bg-green-500 rounded-lg px-3 text-white flex">เข้าใจแล้วล่ะ</button>
+                    <button @click="handleGameGuideConfirm"
+                        class="bg-green-500 rounded-lg px-3 text-white flex">เข้าใจแล้วล่ะ</button>
                 </div>
             </div>
         </div>

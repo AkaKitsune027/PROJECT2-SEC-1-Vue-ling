@@ -102,9 +102,9 @@ const handleIngredientClick = async (targetIngredient) => {
                 </div>
                 <div class="flex">
                     <img :src="`/meat/${meat.name}.png`" :alt="meat.name" class="w-16" />
-                    <span class="font-serif h-7 px-3 rounded-lg items-center">{{
+                    <span class="font-serif h-7 px-3 rounded-lg">{{
                         meat.display_name
-                        }}</span>
+                    }}</span>
                 </div>
             </div>
 
@@ -115,10 +115,10 @@ const handleIngredientClick = async (targetIngredient) => {
                     {{ vegetable.amount }}
                 </div>
                 <div class="flex">
-                    <img :src="`/vegetable/${vegetable.name}.png`" :alt="vegetable.name" class="w-18" />
-                    <span class="font-serif h-7 px-3 rounded-lg items-center">{{
+                    <img :src="`/vegetable/${vegetable.name}.png`" :alt="vegetable.name" class="w-16" />
+                    <span class="font-serif h-7 px-3 rounded-lg">{{
                         vegetable.display_name
-                        }}</span>
+                    }}</span>
                 </div>
             </div>
         </div>
