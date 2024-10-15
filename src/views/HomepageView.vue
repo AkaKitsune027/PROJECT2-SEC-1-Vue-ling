@@ -1,12 +1,17 @@
 <script setup>
 import { useUserStore } from "@/stores/user";
 import { useRouter } from "vue-router"
+import { useSoundStore } from "@/stores/sounds";
+
+
 
 const router = useRouter()
 const userStore = useUserStore()
+const soundStore = useSoundStore();
 
 function handleToGame() {
-  router.push({ name: "cooking-page" })
+  router.push({ name: "cooking-page" });
+  soundStore.playSound('bgm', '/sounds/background.mp3');
 }
 </script>
 <template>

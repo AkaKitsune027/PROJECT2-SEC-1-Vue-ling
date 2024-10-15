@@ -1,65 +1,107 @@
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 const templateUser = {
-  username: "",
-  password: "",
-  outletName: "",
+  username: '',
+  password: '',
+  outletName: '',
   userDetail: {
     gold: 500,
     popularity: 0,
     ingredients: [
       {
         id: 1,
-        amount: 5,
+        amount: 5
+      }
+    ],
+    recipes: [
+      {
+        id: 1,
+        isUnlock: true
       },
+      {
+        id: 2,
+        isUnlock: true
+      },
+      {
+        id: 3,
+        isUnlock: true
+      },
+      {
+        id: 4,
+        isUnlock: true
+      },
+      {
+        id: 5,
+        isUnlock: true
+      },
+      {
+        id: 6,
+        isUnlock: true
+      },
+      {
+        id: 7,
+        isUnlock: true
+      },
+      {
+        id: 8,
+        isUnlock: true
+      },
+      {
+        id: 9,
+        isUnlock: true
+      },
+      {
+        id: 10,
+        isUnlock: true
+      }
     ],
     currentOrder: {
       customerId: 1,
       foodId: 1,
-      specialRequirementId: 1,
+      specialRequirementId: 1
     },
     fiveStarMenus: [
       {
         foodId: 1,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 2,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 3,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 4,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 5,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 6,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 7,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 8,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 9,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 10,
-        isUnlock: false,
-      },
-    ],
-  },
+        isUnlock: false
+      }
+    ]
+  }
 }
 
 export async function getUserById(id) {
@@ -89,11 +131,11 @@ export async function createUser(username, password) {
   newUser.username = username
   newUser.password = password
   const response = await fetch(SERVER_URL + '/users', {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify(newUser),
+    body: JSON.stringify(newUser)
   })
   const createdUser = await response.json()
   return createdUser
@@ -104,12 +146,11 @@ export async function validateUsername(username) {
   return user === null
 }
 
-
-//Delete method - Delete account 
+//Delete method - Delete account
 export async function deleteUser(username) {
   try {
     const res = await fetch(SERVER_URL + '/users', {
-      method: 'DELETE',
+      method: 'DELETE'
     })
   } catch (error) {
     console.log('Error:', error)
@@ -122,9 +163,9 @@ export async function patchUser(userId, patchData) {
     const res = await fetch(`${SERVER_URL}/users/${userId}`, {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(patchData),
+      body: JSON.stringify(patchData)
     })
     const patchedData = await res.json()
     console.log('Patch data', patchData, patchedData)
