@@ -11,10 +11,8 @@ import GoldAndPopularity from '@/components/GoldAndPopularity.vue'
 import RecipesModal from '@/components/RecipesModal.vue'
 import Sound from '@/components/Sound.vue'
 
-const soundStore = useSoundStore()
-const userStore = useUserStore()
-
 const router = useRouter()
+const soundStore = useSoundStore()
 const userStore = useUserStore()
 const gameState = useGameState()
 
@@ -54,7 +52,7 @@ const handleCauldronClick = () => {
             cauldronRef.value.classList.remove('animate-stir')
         }
     }, 700)
-    soundStore.playSound('sfx', '/sounds/boiling-water-sound.mp3');
+    soundStore.playSound('sfx', '/sounds/boiling-water-sound.mp3')
 }
 
 
@@ -172,7 +170,7 @@ async function openAchievementBook() {
             <RecipesModal />
         </div>
         <div class="col-start-4 row-start-1 ">
-           
+
             <GoldAndPopularity />
         </div>
 
