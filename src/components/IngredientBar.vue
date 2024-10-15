@@ -3,8 +3,9 @@ import { computed, ref, watch, watchEffect } from 'vue'
 import ingredientData from '../../data/ingredients.json'
 import { useUserStore } from '@/stores/user'
 import { patchUser } from '@/libs/userManagement'
-import StoreView from "../views/StoreView.vue"
 import { useGameState } from '@/stores/gameState'
+
+defineEmits(['toggleFoodStoreClick'])
 
 const props = defineProps({
     meats: {
@@ -25,10 +26,6 @@ const selectedPage = ref(0)
 
 const handleSelectPage = (pageNumber) => {
     selectedPage.value = pageNumber
-}
-
-const toggleView = () => {
-    showBag.value = !showBag.value // Toggle between IngredientBar and IngredientBag
 }
 
 const meats = ref([])
@@ -74,11 +71,18 @@ const handleIngredientClick = async (targetIngredient) => {
     }
 
 }
+
+const handleToggleFoodStoreClick = () => {
+    emits('toggleFoodStoreClick')
+}
 </script>
 
 <template>
-    <div v-if="!showBag" class="flex flex-col px-1">
-        <div class="flex-none bg-base text-center text-xl font-rowdies rounded-md p-2 shadow-neutral-500 shadow-md">
+    <div class="relative flex flex-col overflow-hidden rounded-r-xl">
+        <div
+            class="pointer-events-none w-full h-16 absolute bottom-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.5)_100%)]">
+        </div>
+        <div class="flex-none bg-base text-center text-xl font-rowdies p-2">
             <p class="py-3">Ingredient</p>
             <div class="flex  rounded-lg">
                 <div @click="handleSelectPage(0)"
@@ -91,9 +95,8 @@ const handleIngredientClick = async (targetIngredient) => {
                 </div>
             </div>
         </div>
-
         <div
-            class="flex-auto bg-zinc-700 p-2 flex flex-col items-center gap-2 max-h-[28rem] overflow-y-auto custom-scrollbar shadow-neutral-500 shadow-md">
+            class="flex-auto bg-zinc-700 p-2 flex flex-col items-center gap-2 max-h-[28rem] overflow-y-auto custom-scrollbar">
             <div v-show="selectedPage === 0" v-for="meat in meats" :key="meat.id" class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border]
             cursor-pointer rounded-lg w-10/12 h-20 flex" @click="handleIngredientClick(meat)">
                 <div class="bg-secondary-100 text-white p-1 rounded-full h-[40%] flex items-center justify-between border-2
@@ -107,7 +110,6 @@ const handleIngredientClick = async (targetIngredient) => {
                         }}</span>
                 </div>
             </div>
-
             <div v-show="selectedPage === 1" v-for="vegetable in vegetables" :key="vegetable.id" class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border]
             cursor-pointer rounded-lg w-10/12 h-20 flex" @click="handleIngredientClick(vegetable)">
                 <div class="bg-secondary-100 text-white p-1 rounded-full h-[40%] flex justify-center items-center border-2
@@ -121,18 +123,17 @@ const handleIngredientClick = async (targetIngredient) => {
                         }}</span>
                 </div>
             </div>
-
-        </div>
-        <!-- ! Button to toggle to IngredientBag -->
-        <div class="bg-zinc-700 h-[5rem] flex justify-center items-center shadow-neutral-500 shadow-md">
-            <button @click="toggleView" :disabled="gameState.isPreparePhase === false"
-                class="bg-[#ACC6AA] hover:bg-[#90a58e] p-2 rounded-xl h-fit border border-white">
-                <img src="/src/assets/bag.svg" alt="shop" class="h-8" />
-            </button>
         </div>
     </div>
+    <!-- ! Button to toggle to IngredientBag -->
+    <!-- <div class="bg-zinc-700 h-[5rem] flex justify-center items-center shadow-neutral-500 shadow-md">
+        <button @click="handleToggleFoodStoreClick" :disabled="gameState.isPreparePhase === false"
+            class="bg-[#ACC6AA] hover:bg-[#90a58e] p-2 rounded-xl h-fit border border-white">
+            <img src="/src/assets/bag.svg" alt="shop" class="h-8" />
+        </button>
+    </div> -->
 
-    <StoreView v-else :meats="meats" :vegetables="vegetables" @toggleBack="toggleView" />
+    <!-- <StoreView v-else @toggleBack="toggleView" /> -->
 
 </template>
 

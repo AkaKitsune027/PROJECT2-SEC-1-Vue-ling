@@ -10,6 +10,7 @@ import { useGameState } from '@/stores/gameState'
 import GoldAndPopularity from '@/components/GoldAndPopularity.vue'
 import RecipesModal from '@/components/RecipesModal.vue'
 import Sound from '@/components/Sound.vue'
+import ShopBar from '@/components/ShopBar.vue'
 
 const router = useRouter()
 const soundStore = useSoundStore()
@@ -33,6 +34,7 @@ const currentImage = computed(() => {
     const cauldronImage = ['/cauldron.png', '/1.png', '/2.png', '/3.png', '/4.png']
     return cauldronImage[currentCauldronImageFrame.value]
 })
+const isShopping = ref(false)
 
 
 let cauldronInterval = null
@@ -55,50 +57,16 @@ const handleCauldronClick = () => {
     soundStore.playSound('sfx', '/sounds/boiling-water-sound.mp3')
 }
 
-
-const meats = ref([
-    {
-        "id": 10,
-        "type": "meat",
-        "name": "slime",
-        "display_name": "สไลม์",
-        "description": "เป็นมิตรไม่โจมตีใครก่อน มีลักษณะคล้ายเยลลี รูปร่างกึ่งของเหลวมีหลากสี แต่พบได้มากเป็นสีเขียว รสสัมผัสเหนียวนุ่มชุ่มฉ่ำ",
-        "rank": 1
-    },
-    {
-        "id": 22,
-        "type": "meat",
-        "name": "tempo",
-        "display_name": "เทมโป",
-        "description": "ทำจากถั่วหมัก มีสีขาวนุ่ม นิยมรับประทานในหมู่เอลฟ์",
-        "rank": 1
-    }
-])
-const vegetables = ref([
-    {
-        "id": 20,
-        "type": "vegetable",
-        "name": "amalo",
-        "display_name": "อามาโล่",
-        "description": "พืชสีแดงที่มีความเผ็ดจัด นิยมใช้ในการปรุงรสอาหาร",
-        "rank": 1
-    },
-    {
-        "id": 21,
-        "type": "vegetable",
-        "name": "rice",
-        "display_name": "ข้าว",
-        "description": "เมล็ดธัญพืชสีขาว เป็นอาหารหลักในหลายประเทศ",
-        "rank": 1
-    }
-])
-
 async function openAchievementBook() {
     const data = await useUserStore.getData
     console.log(data)
 
     router.push({ name: "achievement-book-modal" })
     // console.log(showAchievementBook.value)
+}
+
+const handleToggleFoodStoreClick = () => {
+    isShopping.value = !isShopping.value
 }
 </script>
 
@@ -134,11 +102,28 @@ async function openAchievementBook() {
         </div>
     </div>
 
-    <div class="bg-[url('/bg.png')] bg-cover w-screen h-[calc(100vh-4rem)] grid grid-cols-5 grid-rows-6 gap-2">
-        <div class="grid row-span-5 py-6">
-            <IngredientBar :userIngredients="userStore.user.userDetail.ingredients" />
+    <div class="bg-[url('/bg.png')] bg-cover w-screen h-[calc(100vh-4rem)] grid grid-cols-5 grid-rows-6">
+        <div class="grid row-span-5 pt-6">
+            <IngredientBar v-if="!isShopping" :userIngredients="userStore.user.userDetail.ingredients" />
+            <ShopBar v-else-if="isShopping" />
         </div>
-        <div class="row-start-6 col-start-2 flex items-end">
+        <div class="row-start-6 col-start-1 pt-2">
+            <!-- ? Toggle Food Store Button -->
+            <div class="bg-zinc-700 h-[5rem] rounded-r-xl grid place-items-center">
+                <button @click="handleToggleFoodStoreClick" :disabled="gameState.isPreparePhase === false"
+                    class="bg-[#ACC6AA] hover:bg-[#90a58e] w-[calc(100%-2rem)] h-[calc(100%-2rem)] rounded-xl border border-white grid place-items-center">
+                    <div v-show="!isShopping" class="flex justify-center items-center gap-2">
+                        <img src="/src/assets/bag.svg" alt="shop" class="h-6" />
+                        <div class="text-xl text-white">Shop</div>
+                    </div>
+                    <div v-show="isShopping" class="flex justify-center items-center gap-2">
+                        <img src="/src/assets/home.svg" alt="home" class="h-6" />
+                        <div class="text-xl text-white">Back</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <div class="row-start-6 col-start-2 flex justify-center items-end">
             <SeasoningBar />
         </div>
         <div class="row-span-3 col-span-2 col-start-3 row-start-2 flex justify-center items-center z-60">
@@ -170,7 +155,6 @@ async function openAchievementBook() {
             <RecipesModal />
         </div>
         <div class="col-start-4 row-start-1 ">
-
             <GoldAndPopularity />
         </div>
 

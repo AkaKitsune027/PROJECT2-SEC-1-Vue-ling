@@ -1,23 +1,19 @@
 <script setup>
-import { ref, defineEmits } from 'vue' // Import ref และ defineEmits
+import { ref, defineEmits, computed } from 'vue' // Import ref และ defineEmits
 import BuySellConfirmModal from '../components/BuySellConfirmModal.vue'
+import ingredientsData from '../../data/ingredients.json'
 
 const isModalVisible = ref(false) // สถานะ modal เปิดหรือปิด
 const modalType = ref('') // เก็บว่าเป็น 'buy' หรือ 'sell'
 const selectedItem = ref(null) // เก็บข้อมูลของ item ที่ต้องการซื้อหรือขาย
 
-// รับ props meats และ vegetables
-defineProps({
-  meats: {
-    type: Array,
-  },
-  vegetables: {
-    type: Array,
-  }
+const meats = computed(() => {
+  return ingredientsData.filter(ingredient => ingredient.type === 'meat')
 })
 
-// ใช้ defineEmits เพื่อ emit event 'toggleBack' กลับไปยัง parent component
-const emit = defineEmits(['toggleBack'])
+const vegetables = computed(() => {
+  return ingredientsData.filter(ingredient => ingredient.type === 'vegetable')
+})
 
 // State เพื่อควบคุมการแสดง meat หรือ vegetable
 const selectedPage = ref(0)
@@ -25,11 +21,6 @@ const selectedPage = ref(0)
 // ฟังก์ชันเพื่อเปลี่ยนหมวดหมู่
 const handleSelectPage = (pageNumber) => {
   selectedPage.value = pageNumber
-}
-
-// ฟังก์ชันเพื่อส่ง event กลับไปยัง parent component
-const emitToggle = () => {
-  emit('toggleBack') // ส่ง event 'toggleBack' กลับไปยัง IngredientBar.vue
 }
 
 // ฟังก์ชันสำหรับเปิด Modal
@@ -46,10 +37,12 @@ const closeModal = () => {
 </script>
 
 <template>
-  <div class="flex flex-col px-1">
+  <div class="relative flex flex-col overflow-hidden rounded-r-xl">
+    <div class="pointer-events-none w-full h-16 absolute bottom-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.5)_100%)]">
+    </div>
     <!-- ส่วนหัวสำหรับเลือกหมวดหมู่ -->
-    <div class="flex-none bg-[#ACC6AA] text-center text-xl font-rowdies rounded-md p-2 shadow-neutral-500 shadow-md">
-      <p class="py-3">Store</p>
+    <div class="flex-none bg-base text-center text-xl font-rowdies p-2">
+      <p class="py-3">Shop</p>
       <div class="flex  rounded-lg">
         <!-- ปุ่มเลือก Meat -->
         <div @click="handleSelectPage(0)"
@@ -66,13 +59,13 @@ const closeModal = () => {
 
     <!-- แสดงเนื้อหา Meat หรือ Vegetable ขึ้นอยู่กับ selectedPage -->
     <div
-      class="flex-auto bg-zinc-700 p-2 flex flex-col items-center gap-2 max-h-[28rem] overflow-y-auto custom-scrollbar shadow-neutral-500 shadow-md">
+      class="flex-auto bg-zinc-700 p-2 flex flex-col items-center gap-2 max-h-[28rem] overflow-y-auto custom-scrollbar">
 
       <!-- แสดง meat เมื่อ selectedPage === 0 -->
       <div v-show="selectedPage === 0" v-for="meat in meats" :key="meat.id"
         class="bg-white flex justify-between items-center w-10/12 h-20 rounded-lg p-2">
         <div class="flex flex-col items-center">
-          <img :src="`/meat/${meat.name}.png`" alt="${meat.name}" class="w-12">
+          <img :src="`/meat/${meat.name}.png`" :alt="meat.name" class="w-12">
           <p class="text-sm text-gray-700">{{ meat.display_name }}</p>
         </div>
         <div class="flex gap-2">
@@ -85,7 +78,7 @@ const closeModal = () => {
       <div v-show="selectedPage === 1" v-for="vegetable in vegetables" :key="vegetable.id"
         class="bg-white flex justify-between items-center w-10/12 h-20 rounded-lg p-2">
         <div class="flex flex-col items-center">
-          <img :src="`/vegetable/${vegetable.name}.png`" alt="${vegetable.name}" class="w-12">
+          <img :src="`/vegetable/${vegetable.name}.png`" :alt="vegetable.name" class="w-12">
           <p class="text-sm text-gray-700">{{ vegetable.display_name }}</p>
         </div>
         <div class="flex gap-2">
@@ -97,12 +90,11 @@ const closeModal = () => {
     </div>
 
     <!-- ปุ่มกลับไปยัง IngredientBar -->
-    <div class="bg-zinc-700 h-[5rem] flex justify-center items-center shadow-neutral-500 shadow-md">
+    <!-- <div class="bg-zinc-700 h-[5rem] flex justify-center items-center shadow-neutral-500 shadow-md">
       <button @click="emitToggle" class="bg-[#ACC6AA] hover:bg-[#90a58e] p-2 rounded-xl h-fit border border-white">
         <img src="/src/assets/home.svg" alt="back" class="h-8">
       </button>
-    </div>
-
+    </div> -->
     <!-- เรียกใช้ Modal เมื่อ isModalVisible เป็น true -->
     <BuySellConfirmModal v-if="isModalVisible" :item="selectedItem" :type="modalType" @close="closeModal" />
   </div>
