@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { onMounted } from 'vue'
 
@@ -13,10 +13,19 @@ import { updateUserDetails } from '@/libs/userManagement'
 const router = useRouter()
 const route = useRoute()
 const gameState = useGameState()
+const rawOrder = ref(null)
 const order = ref(null)
 const userStore = useUserStore()
 
 const isPrepareOrder = computed(() => route.name === "prepare-modal")
+
+watch(() => rawOrder.value, () => {
+    order.value = {
+        customer: customersData.find(c => c.id === rawOrder.value?.customerId),
+        food: foodsData.find(f => f.id === rawOrder.value?.foodId),
+        specialRequirement: specialRequirementData.find(s => s.id === rawOrder.value?.specialRequirementId),
+    }
+}, { immediate: true, deep: true })
 
 function genarateOrder() {
     const randomCustomerIndex = Math.floor(Math.random() * customersData.length)
@@ -31,45 +40,52 @@ function genarateOrder() {
     const specialRequirement = filteredSpecialRequirements[randomSpecialRequirementIndex]
 
     return {
-        customer,
-        food,
-        specialRequirement
+        customerId: customer.id,
+        foodId: food.id,
+        specialRequirementId: specialRequirement.id,
     }
 }
 
 onMounted(async () => {
     const currentOrder = userStore.user.userDetail.currentOrder
-    console.log('currentOrder:', currentOrder)
     if (currentOrder) {
-        order.value = {
-            customer: customersData.find(c => c.id === currentOrder.customerId),
-            food: foodsData.find(f => f.id === currentOrder.foodId),
-            specialRequirement: specialRequirementData.find(s => s.id === currentOrder.specialRequirementId),
-        }
+        rawOrder.value = currentOrder
         return
     }
-    order.value = genarateOrder()
-    await updateUserDetails(userStore.user.id, { 'currentOrder': order.value })
+    rawOrder.value = genarateOrder()
+    userStore.user.userDetail = await updateUserDetails(userStore.user.id, {
+        'currentOrder': rawOrder.value,
+        isCurrentOrderCommitted: false
+    })
 })
 
 const closeModal = () => {
     router.push({ name: 'cooking-page' })
 }
 
-const handleCancelOrder = () => {
+const handleCancelOrder = async () => {
     if (gameState.isPreparePhase) {
         router.replace({ name: "cooking-page" })
     }
     else {
         router.replace({ name: "cooking-page" })
         gameState.isPreparePhase = true
+        rawOrder.value = genarateOrder()
+        console.log('regenerated:', rawOrder.value);
+        userStore.user.userDetail = await updateUserDetails(userStore.user.id, {
+            'currentOrder': rawOrder.value,
+            isCurrentOrderCommitted: false
+        })
     }
 }
 
-const handleConfirmOrder = () => {
+const handleConfirmOrder = async () => {
     if (gameState.isPreparePhase) {
         router.replace({ name: "cooking-modal" })
         gameState.isPreparePhase = false
+        userStore.user.userDetail = await updateUserDetails(userStore.user.id, {
+            isCurrentOrderCommitted: true
+        })
         console.log(gameState.isPreparePhase)
     }
     else {
@@ -138,7 +154,7 @@ const handleConfirmOrder = () => {
             <p class="text-xl bg-base text-center font-bold border border-white">ใบสั่งอาหาร </p>
 
             <div class="flex justify-end fixed">
-                <button class="bg-third m-2 p-2 rounded-lg" :title="order?.customer.description">
+                <button class="bg-third m-2 p-2 rounded-lg" :title="order.customer?.description">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search"
                         viewBox="0 0 16 16">
                         <path
@@ -149,14 +165,14 @@ const handleConfirmOrder = () => {
 
             <div class="flex justify-center bg-white">
                 <!-- <img :src="`/customer/${order?.customer.name}.png`" class="w-40 h-40"> -->
-                <img :src="`/customer/${order?.customer.name}.png`" class="w-40 h-40">
+                <img :src="`/customer/${order.customer?.name}.png`" class="w-40 h-40">
             </div>
             <p class="bg-primary text-white text-md text-center py-1 border border-white">ลูกค้า : {{
-                order?.customer.display_name }}
+                order.customer?.display_name }}
             </p>
 
-            <p class="bg-white p-2"> ฉันต้องการ {{ order?.food.display_name }} </p>
-            <p class="bg-white px-2">แต่{{ order?.specialRequirement.description }}</p>
+            <p class="bg-white p-2"> ฉันต้องการ {{ order.food?.display_name }} </p>
+            <p class="bg-white px-2">แต่{{ order.specialRequirement?.description }}</p>
 
             <div class="flex justify-around py-4">
 
