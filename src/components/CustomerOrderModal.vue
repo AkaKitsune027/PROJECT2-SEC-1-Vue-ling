@@ -94,7 +94,7 @@ const handleConfirmOrder = () => {
             <p class="bg-primary text-white text-md text-center py-1 border border-white">
                 คุณพร้อมจะรับออเดอร์หรือไม่?
             </p>
-            <p class="bg-white text-alert-100 text-center py-3">* ถ้าคุณกดตกลงอยู่ทำอาหารให้ลูกค้าแล้ว
+            <p class="bg-white text-alert-100 text-center py-3">* ถ้าคุณกดตกลงที่จะทำอาหารให้ลูกค้าแล้ว
                 คุณจะไม่สามารถออกไปซื้อของในระหว่างนั้นได้
                 *</p>
 
