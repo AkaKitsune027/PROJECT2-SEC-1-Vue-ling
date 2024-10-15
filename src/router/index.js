@@ -35,12 +35,17 @@ const router = createRouter({
 
       children: [
         {
-          path: "userOrder",
-          name: "user-order-modal",
+          path: "prepare-order",
+          name: "prepare-modal",
           component: () => import("../components/CustomerOrderModal.vue"),
         },
         {
-          path: "achievementBook",
+          path: "cooking-order",
+          name: "cooking-modal",
+          component: () => import("../components/CustomerOrderModal.vue"),
+        },
+        {
+          path: "achievement-book",
           name: "achievement-book-modal",
           component: () => import("../components/AchievementBookModal.vue"),
         },

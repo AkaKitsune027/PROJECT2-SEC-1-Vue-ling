@@ -104,6 +104,16 @@ const templateUser = {
   }
 }
 
+export async function getUserById(id) {
+  try {
+    const response = await fetch(SERVER_URL + `/users?id=${id}`)
+    const data = await response.json()
+    return data.length > 0 ? data[0] : null
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 //Add method - create new user
 export async function getUserByUsername(username) {
   try {
@@ -163,4 +173,27 @@ export async function patchUser(userId, patchData) {
   } catch (error) {
     console.log('Error:', error)
   }
+}
+
+export async function updateUserDetails(userId, updateData) {
+  let oldUserDetail = null
+  try {
+    const userData = await getUserById(userId)
+    oldUserDetail = userData.userDetail
+  } catch (error) {
+    console.error(error)
+  }
+
+  const newUserDetail = {
+    ...oldUserDetail,
+    ...updateData
+  }
+
+  let patchedUser = null
+  try {
+    patchedUser = await patchUser(userId, { userDetail: newUserDetail })
+  } catch (error) {
+    console.error(error)
+  }
+  return patchedUser.userDetail
 }
