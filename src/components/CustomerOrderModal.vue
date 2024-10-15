@@ -7,11 +7,14 @@ import customersData from '../../data/customers.json'
 import foodsData from '../../data/foods.json'
 import specialRequirementData from '../../data/specialRequirement.json'
 import { useGameState } from '@/stores/gameState'
+import { useUserStore } from '@/stores/user'
+import { updateUserDetails } from '@/libs/userManagement'
 
 const router = useRouter()
 const route = useRoute()
 const gameState = useGameState()
 const order = ref(null)
+const userStore = useUserStore()
 
 const isPrepareOrder = computed(() => route.name === "prepare-modal")
 
@@ -34,10 +37,19 @@ function genarateOrder() {
     }
 }
 
-onMounted(() => {
+onMounted(async () => {
+    const currentOrder = userStore.user.userDetail.currentOrder
+    console.log('currentOrder:', currentOrder)
+    if (currentOrder) {
+        order.value = {
+            customer: customersData.find(c => c.id === currentOrder.customerId),
+            food: foodsData.find(f => f.id === currentOrder.foodId),
+            specialRequirement: specialRequirementData.find(s => s.id === currentOrder.specialRequirementId),
+        }
+        return
+    }
     order.value = genarateOrder()
-    console.log(order.value)
-
+    await updateUserDetails(userStore.user.id, { 'currentOrder': order.value })
 })
 
 const closeModal = () => {
@@ -60,7 +72,10 @@ const handleConfirmOrder = () => {
         gameState.isPreparePhase = false
         console.log(gameState.isPreparePhase)
     }
-    else router.replace({ name: "cooking-page" })
+    else {
+        order?.value
+        router.replace({ name: "cooking-page" })
+    }
 }
 
 </script>
@@ -133,12 +148,14 @@ const handleConfirmOrder = () => {
             </div>
 
             <div class="flex justify-center bg-white">
+                <!-- <img :src="`/customer/${order?.customer.name}.png`" class="w-40 h-40"> -->
                 <img :src="`/customer/${order?.customer.name}.png`" class="w-40 h-40">
             </div>
             <p class="bg-primary text-white text-md text-center py-1 border border-white">ลูกค้า : {{
                 order?.customer.display_name }}
             </p>
-            <p class="bg-white p-2"> ฉันต้องการ {{ order?.food.display_name }} </p>
+            <!-- <p class="bg-white p-2"> ฉันต้องการ {{ order?.food.display_name }} </p> -->
+            <p class="bg-white p-2"> ฉันต้องการ {{ }} </p>
             <p class="bg-white px-2">แต่{{ order?.specialRequirement.description }}</p>
 
             <div class="flex justify-around py-4">

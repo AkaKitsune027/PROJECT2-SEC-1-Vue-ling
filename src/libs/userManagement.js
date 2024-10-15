@@ -20,46 +20,56 @@ const templateUser = {
     fiveStarMenus: [
       {
         foodId: 1,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 2,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 3,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 4,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 5,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 6,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 7,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 8,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 9,
-        isUnlock: "false",
+        isUnlock: false,
       },
       {
         foodId: 10,
-        isUnlock: "false",
+        isUnlock: false,
       },
     ],
   },
+}
+
+export async function getUserById(id) {
+  try {
+    const response = await fetch(SERVER_URL + `/users?id=${id}`)
+    const data = await response.json()
+    return data.length > 0 ? data[0] : null
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 //Add method - create new user
@@ -122,4 +132,27 @@ export async function patchUser(userId, patchData) {
   } catch (error) {
     console.log('Error:', error)
   }
+}
+
+export async function updateUserDetails(userId, updateData) {
+  let oldUserDetail = null
+  try {
+    const userData = await getUserById(userId)
+    oldUserDetail = userData.userDetail
+  } catch (error) {
+    console.error(error)
+  }
+
+  const newUserDetail = {
+    ...oldUserDetail,
+    ...updateData
+  }
+
+  let patchedUser = null
+  try {
+    patchedUser = await patchUser(userId, { userDetail: newUserDetail })
+  } catch (error) {
+    console.error(error)
+  }
+  return patchedUser.userDetail
 }
