@@ -154,8 +154,8 @@ const handleConfirmOrder = () => {
             <p class="bg-primary text-white text-md text-center py-1 border border-white">ลูกค้า : {{
                 order?.customer.display_name }}
             </p>
-            <!-- <p class="bg-white p-2"> ฉันต้องการ {{ order?.food.display_name }} </p> -->
-            <p class="bg-white p-2"> ฉันต้องการ {{ }} </p>
+
+            <p class="bg-white p-2"> ฉันต้องการ {{ order?.food.display_name }} </p>
             <p class="bg-white px-2">แต่{{ order?.specialRequirement.description }}</p>
 
             <div class="flex justify-around py-4">
