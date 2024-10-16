@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watchEffect } from 'vue'
+import { computed, onMounted, ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { useSoundStore } from '@/stores/sounds'
@@ -21,6 +21,11 @@ const isShow = ref(true)
 const handleGameGuideConfirm = () => {
     isShow.value = !isShow.value
 }
+
+onMounted(() => {
+    gameState.isPreparePhase = !userStore.user.userDetail.isCurrentOrderCommitted
+})
+
 function handleOrderSignClick() {
     if (gameState.isPreparePhase) router.push({ name: 'prepare-modal' })
     else router.push({ name: 'cooking-modal' })

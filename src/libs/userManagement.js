@@ -15,15 +15,15 @@ const templateUser = {
     recipes: [
       {
         id: 1,
-        isUnlock: true
+        isUnlock: false
       },
       {
         id: 2,
-        isUnlock: true
+        isUnlock: false
       },
       {
         id: 3,
-        isUnlock: true
+        isUnlock: false
       },
       {
         id: 4,
@@ -31,33 +31,34 @@ const templateUser = {
       },
       {
         id: 5,
-        isUnlock: true
+        isUnlock: false
       },
       {
         id: 6,
-        isUnlock: true
+        isUnlock: false
       },
       {
         id: 7,
-        isUnlock: true
+        isUnlock: false
       },
       {
         id: 8,
-        isUnlock: true
+        isUnlock: false
       },
       {
         id: 9,
-        isUnlock: true
+        isUnlock: false
       },
       {
         id: 10,
-        isUnlock: true
+        isUnlock: false
       }
     ],
+    isCurrentOrderCommitted: false,
     currentOrder: {
       customerId: 1,
-      foodId: 1,
-      specialRequirementId: 1
+      foodId: 4,
+      specialRequirementId: 14
     },
     fiveStarMenus: [
       {
