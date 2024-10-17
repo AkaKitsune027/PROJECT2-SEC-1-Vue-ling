@@ -30,7 +30,7 @@ watchEffect(() => {
     console.log(props.userIngredients)
 
     const mappedIngredients = props.userIngredients.map((ingd) => {
-        const ingredient = (Array.from(ingredientData)).find((ingdData) => ingd.id === ingdData.id)
+        const ingredient = (ingredientData).find((ingdData) => ingd.id === ingdData.id)
         ingredient['amount'] = ingd.amount
         return ingredient
     })
@@ -59,10 +59,13 @@ const handleIngredientClick = async (targetIngredient) => {
     const updatedUserDetail = await updateUserDetails(userStore.user.id, { ingredients: updateIngredients })
     if (updatedUserDetail) {
         userStore.user.userDetail = updatedUserDetail
+        console.log(updateIngredients);
+
+        gameState.addToCauldron(targetIngredient.id)
     } else {
         console.error('Error to update user data.')
     }
-   
+
 
     console.log(gameState.cauldron)
     console.dir(updatedUserDetail)
@@ -103,7 +106,7 @@ const handleToggleFoodStoreClick = () => {
                     <img :src="`/meat/${meat.name}.png`" :alt="meat.name" class="w-16" />
                     <span class="font-serif h-7 px-3 rounded-lg">{{
                         meat.display_name
-                        }}</span>
+                    }}</span>
                 </div>
             </div>
             <div v-show="selectedPage === 1" v-for="vegetable in vegetables" :key="vegetable.id" class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border]
@@ -116,7 +119,7 @@ const handleToggleFoodStoreClick = () => {
                     <img :src="`/vegetable/${vegetable.name}.png`" :alt="vegetable.name" class="w-16" />
                     <span class="font-serif h-7 px-3 rounded-lg">{{
                         vegetable.display_name
-                        }}</span>
+                    }}</span>
                 </div>
             </div>
         </div>
