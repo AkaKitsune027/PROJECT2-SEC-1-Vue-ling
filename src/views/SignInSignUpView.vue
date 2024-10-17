@@ -72,15 +72,6 @@ watch(confirmPassword, () => {
   validateConfirmPassword()
 })
 
-const handleSignUp = () => {
-  // if (isSignUp.value && !isSignupStep.value) {
-  //   // แสดงขั้นตอนการสร้างร้านเมื่อกดปุ่ม Sign Up
-  //   // isSignupStep.value = true
-  // } else if (isSignUp.value && isSignupStep.value) {
-  //   // ถ้าอยู่ในขั้นตอนสร้างร้านแล้วให้ไปหน้า Home หลังจากสร้างร้านเสร็จ
-  //   router.push({ name: "home-page" })
-  // }
-}
 </script>
 
 <template>
@@ -124,7 +115,7 @@ const handleSignUp = () => {
           </div>
 
           <div class="mt-2">
-            <button type="submit" :disabled="!username || !password || !confirmPassword"
+            <button type="submit" :disabled="!username || !password || password.length < 8 || !confirmPassword || password !== confirmPassword "
               class="w-full bg-[#3f6a45] bold text-white py-3 rounded-lg hover:bg-brown-700 disabled:bg-gray-400">
               Sign up
             </button>
