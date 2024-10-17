@@ -1,65 +1,118 @@
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 const templateUser = {
-  username: "",
-  password: "",
-  outletName: "",
+  username: '',
+  password: '',
+  outletName: '',
   userDetail: {
     gold: 500,
     popularity: 0,
     ingredients: [
       {
         id: 1,
-        amount: 5,
-      },
+        amount: 5
+      }
     ],
+    recipes: [
+      {
+        id: 1,
+        isUnlock: false
+      },
+      {
+        id: 2,
+        isUnlock: false
+      },
+      {
+        id: 3,
+        isUnlock: false
+      },
+      {
+        id: 4,
+        isUnlock: true
+      },
+      {
+        id: 5,
+        isUnlock: false
+      },
+      {
+        id: 6,
+        isUnlock: false
+      },
+      {
+        id: 7,
+        isUnlock: false
+      },
+      {
+        id: 8,
+        isUnlock: false
+      },
+      {
+        id: 9,
+        isUnlock: false
+      },
+      {
+        id: 10,
+        isUnlock: false
+      }
+    ],
+    isCurrentOrderCommitted: false,
     currentOrder: {
       customerId: 1,
-      foodId: 1,
-      specialRequirementId: 1,
+      foodId: 4,
+      specialRequirementId: 14
     },
     fiveStarMenus: [
       {
         foodId: 1,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 2,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 3,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 4,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 5,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 6,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 7,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 8,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 9,
-        isUnlock: false,
+        isUnlock: false
       },
       {
         foodId: 10,
-        isUnlock: false,
-      },
-    ],
-  },
+        isUnlock: false
+      }
+    ]
+  }
+}
+
+export async function getUserById(id) {
+  try {
+    const response = await fetch(SERVER_URL + `/users?id=${id}`)
+    const data = await response.json()
+    return data.length > 0 ? data[0] : null
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 //Add method - create new user
@@ -79,11 +132,11 @@ export async function createUser(username, password) {
   newUser.username = username
   newUser.password = password
   const response = await fetch(SERVER_URL + '/users', {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify(newUser),
+    body: JSON.stringify(newUser)
   })
   const createdUser = await response.json()
   return createdUser
@@ -94,12 +147,11 @@ export async function validateUsername(username) {
   return user === null
 }
 
-
-//Delete method - Delete account 
+//Delete method - Delete account
 export async function deleteUser(username) {
   try {
     const res = await fetch(SERVER_URL + '/users', {
-      method: 'DELETE',
+      method: 'DELETE'
     })
   } catch (error) {
     console.log('Error:', error)
@@ -112,9 +164,9 @@ export async function patchUser(userId, patchData) {
     const res = await fetch(`${SERVER_URL}/users/${userId}`, {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(patchData),
+      body: JSON.stringify(patchData)
     })
     const patchedData = await res.json()
     console.log('Patch data', patchData, patchedData)
@@ -122,4 +174,27 @@ export async function patchUser(userId, patchData) {
   } catch (error) {
     console.log('Error:', error)
   }
+}
+
+export async function updateUserDetails(userId, updateData) {
+  let oldUserDetail = null
+  try {
+    const userData = await getUserById(userId)
+    oldUserDetail = userData.userDetail
+  } catch (error) {
+    console.error(error)
+  }
+
+  const newUserDetail = {
+    ...oldUserDetail,
+    ...updateData
+  }
+
+  let patchedUser = null
+  try {
+    patchedUser = await patchUser(userId, { userDetail: newUserDetail })
+  } catch (error) {
+    console.error(error)
+  }
+  return patchedUser.userDetail
 }

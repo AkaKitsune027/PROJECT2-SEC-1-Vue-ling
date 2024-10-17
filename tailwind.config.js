@@ -11,6 +11,7 @@ export default {
         primary: "#5c4b6c",
         secondary: {
           100: "#aa9377",
+          200: "#7e6d58"
         },
         third: "#71a0a5",
         base: "#acc6aa",
@@ -28,7 +29,7 @@ export default {
       fontFamily: {
         sunday: ["SUNDAY"],
         rowdies: ["ROWDIES"],
-        'noto-thai': ['"Noto Sans Thai"', 'sans-serif'],
+        'noto-thai': ['Noto Sans Thai', 'sans-serif'],
       },
     },
   },
