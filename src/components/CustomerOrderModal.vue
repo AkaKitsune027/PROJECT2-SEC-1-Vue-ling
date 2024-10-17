@@ -19,6 +19,8 @@ const userStore = useUserStore()
 
 const isPrepareOrder = computed(() => route.name === "prepare-modal")
 
+const emits = defineEmits(['handleConfirmOrder'])
+
 watch(() => rawOrder.value, () => {
     order.value = {
         customer: customersData.find(c => c.id === rawOrder.value?.customerId),
@@ -87,11 +89,13 @@ const handleConfirmOrder = async () => {
             isCurrentOrderCommitted: true
         })
         console.log(gameState.isPreparePhase)
+        emits('handleConfirmOrder')
     }
     else {
         order?.value
         router.replace({ name: "cooking-page" })
     }
+
 }
 
 </script>
@@ -101,7 +105,7 @@ const handleConfirmOrder = async () => {
     <!-- Prepare phase -->
     <div v-if="isPrepareOrder" class="fixed inset-0 flex items-center justify-center bg-opacity-50">
         <div class="bg-[#b4a690] p-3 rounded-lg shadow-lg w-1/3 border border-[#706149]">
-            <p class="text-xl bg-base text-center font-bold border border-white">โอ๊ะ โอ๊ะ เหมือนว่าลูกค้าจะมานะ?</p>
+            <p class="text-xl bg-base text-center font-bold border border-white">โอ๊ะ โอ๋ เหมือนว่าลูกค้าจะมานะ?</p>
 
             <div class="flex justify-center bg-white">
                 <img src="/person.png" class="w-40 h-40">

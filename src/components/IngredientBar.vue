@@ -62,14 +62,7 @@ const handleIngredientClick = async (targetIngredient) => {
     } else {
         console.error('Error to update user data.')
     }
-    // watchEffect(() => {
-    //     updateIngredients.forEach((ingd) => {
-    //         if (ingd.amount--) {
-    //             gameState.cauldron.push(ingd)
-    //             gameState.addToCauldron(ingd)
-    //         }
-    //     })
-    // })
+   
 
     console.log(gameState.cauldron)
     console.dir(updatedUserDetail)

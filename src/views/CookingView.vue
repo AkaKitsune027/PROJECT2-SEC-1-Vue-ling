@@ -18,6 +18,10 @@ const userStore = useUserStore()
 const gameState = useGameState()
 
 const isShow = ref(true)
+const handleConfirmOrderClick = () => {
+    if (isShopping.value) isShopping.value = false
+}
+
 const handleGameGuideConfirm = () => {
     isShow.value = !isShow.value
 }
@@ -40,6 +44,7 @@ const currentImage = computed(() => {
     return cauldronImage[currentCauldronImageFrame.value]
 })
 const isShopping = ref(false)
+
 
 
 let cauldronInterval = null
@@ -195,7 +200,7 @@ const handleToggleFoodStoreClick = () => {
             </div>
         </div>
     </div>
-    <RouterView />
+    <RouterView @handleConfirmOrder="handleConfirmOrderClick" />
 </template>
 
 <style scoped>
