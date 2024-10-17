@@ -5,7 +5,7 @@
     "name": "friedOrcsWithVegetables",
     "display_name": "ออร์คผัดผัก",
     "description": "เนื้อออร์คกลิ่นหอมผัดกับผักแสนฉ่ำรสชาติดีเยี่ยม",
-    "ingredients": ["orcMeat", "sugar", "salt", "gabio", "galion"]
+    "ingredients": ["orcMeat", "gabio", "galion", "salt", "sugar"]
   },
   {
     "id": 2,
@@ -19,10 +19,10 @@
       "meat",
       "meat",
       "meat",
-      "sugar",
-      "salt",
       "gobol",
-      "carrot"
+      "carrot",
+      "salt",
+      "sugar"
     ]
   },
   {
@@ -39,48 +39,33 @@
     "name": "grilledBoarWithSalt",
     "display_name": "หมูป่าย่างเกลือ",
     "description": "หมูป่าย่างเกลือหอมฉุย ผสมผสานกับรสชาติกลมกล่อมลงตัว",
-    "ingredients": ["boarMeat", "salt", "galion", "orcMushroom"]
+    "ingredients": ["boarMeat", "galion", "orcMushroom", "salt"]
   },
   {
     "id": 5,
-    "type": "food",
-    "name": "rainbowPudding",
-    "display_name": "เรนโบว์พุดดิ้ง",
-    "description": "พุดดิ้งหลากสีที่ทำจากเขายูนิคอร์นบดและเห็ดสายรุ้ง ให้รสชาติหอมหวานน่ากิน",
-    "ingredients": [
-      "unicornHorn",
-      "slime",
-      "lammy",
-      "tamata",
-      "sugar",
-      "rainbowMushroom"
-    ]
-  },
-  {
-    "id": 6,
     "type": "food",
     "name": "dragonSteak",
     "display_name": "สเต๊กมังกร",
     "description": "สเต๊กเนื้อมังกรย่าง หอมกรุ่นด้วยเครื่องเทศและผักสด",
     "ingredients": [
       "dragonMeat",
-      "salt",
       "galion",
       "mysticMushroom",
       "gobol",
-      "carrot"
+      "carrot",
+      "salt"
     ]
   },
   {
-    "id": 7,
+    "id": 6,
     "type": "food",
     "name": "riceWithEgg",
     "display_name": "ข้าวหน้าไข่",
     "description": "ข้าวสวยร้อน ๆ เสิร์ฟพร้อมกับไข่งูตาแดงที่หาได้ยาก",
-    "ingredients": ["rice", "redEyesSnakeEgg", "salt", "tamata", "galion"]
+    "ingredients": ["rice", "redEyesSnakeEggs", "tamata", "galion", "salt"]
   },
   {
-    "id": 8,
+    "id": 7,
     "type": "food",
     "name": "kingPorkFriedRice",
     "display_name": "ข้าวผัดราชาหมู",
@@ -88,7 +73,7 @@
     "ingredients": [
       "orcMeat",
       "boarMeat",
-      "redEyesSnakeEgg",
+      "redEyesSnakeEggs",
       "rice",
       "galion",
       "carrot",
@@ -98,7 +83,7 @@
     ]
   },
   {
-    "id": 9,
+    "id": 8,
     "type": "food",
     "name": "spicyChickenStirFry",
     "display_name": "ไก่ผัดซอสเผ็ด",
@@ -106,11 +91,26 @@
     "ingredients": ["basiliskMeat", "gobol", "carrot", "amalo", "salt", "sugar"]
   },
   {
-    "id": 10,
+    "id": 9,
     "type": "food",
     "name": "riceWithMeat",
     "display_name": "ข้าวหน้าเนื้อ",
     "description": "ข้าวหน้าเนื้อรสชาติเยี่ยม ผัดพร้อมกับเห็ดออร์ค ผสมผสานกันอย่างลงตัว",
     "ingredients": ["meat", "rice", "orcMushroom", "salt", "sugar"]
+  },
+  {
+    "id": 10,
+    "type": "food",
+    "name": "rainbowPudding",
+    "display_name": "เรนโบว์พุดดิ้ง",
+    "description": "พุดดิ้งหลากสีที่ทำจากเขายูนิคอร์นบดและเห็ดสายรุ้ง ให้รสชาติหอมหวานน่ากิน",
+    "ingredients": [
+      "unicornHorn",
+      "slime",
+      "lammy",
+      "tamata",
+      "rainbowMushroom",
+      "sugar"
+    ]
   }
 ]
