@@ -13,7 +13,7 @@ const userRecipes = userStore.user.userDetail.recipes;
 const unlockedRecipes = computed(() => {
     // กรองสูตรที่ปลดล็อกแล้วจาก foods.json โดยเช็ค isUnlock ของ user
     return foods.filter((food) =>
-        userRecipes.some((recipe) => recipe.id === food.id && recipe.isUnlock === true)
+        userRecipes?.some((recipe) => recipe.id === food.id && recipe.isUnlock === true)
     );
 });
 
