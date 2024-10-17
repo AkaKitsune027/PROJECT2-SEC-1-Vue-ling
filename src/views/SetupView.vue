@@ -1,12 +1,26 @@
 <script setup>
 import { useRouter } from "vue-router"
 import { ref } from "vue"
+import { patchUser } from "@/libs/userManagement"
+import { useUserStore } from "@/stores/user"
 
 const router = useRouter()
 const restaurantName = ref("")
+const userStore = useUserStore()
 
-const handleSetOutletName = () => {
-  router.push({ name: "home-page" })
+const handleSetOutletName = async () => {
+  const patchData = { outletName: restaurantName.value }
+
+  try {
+    const patchedUser = await patchUser(userStore.user.id, patchData)
+
+    if (patchedUser.id) {
+      userStore.user = patchedUser
+      router.push({ name: "home-page" }) 
+    }
+  } catch (error) {
+    console.error("Error updating restaurant name:", error)
+  }
 }
 </script>
 

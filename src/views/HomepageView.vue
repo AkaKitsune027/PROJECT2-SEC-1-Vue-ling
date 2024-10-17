@@ -13,6 +13,8 @@ function handleToGame() {
   router.push({ name: "cooking-page" });
   soundStore.playSound('bgm', '/sounds/background.mp3');
 }
+
+
 </script>
 <template>
   <div class="menu flex flex-col items-center min-h-screen bg-[#fcfbfb]">
@@ -44,6 +46,7 @@ function handleToGame() {
       <div class="flex flex-col justify-center space-y-4 w-full md:w-auto">
         <button @click="handleToGame" class="btn-play h-14">PLAY</button>
         <button class="btn-how text-nowrap h-14">HOW TO PLAY</button>
+        <button class="btn-delete text-nowrap h-14">DELETE</button>
       </div>
 
       <!-- Restaurant Info Section -->
@@ -80,6 +83,15 @@ function handleToGame() {
 }
 
 .btn-how {
+  background-color: #61544b;
+  color: white;
+  padding: 10px 5vw;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+.btn-delete {
   background-color: #61544b;
   color: white;
   padding: 10px 5vw;
