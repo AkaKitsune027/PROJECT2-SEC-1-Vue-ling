@@ -1,19 +1,13 @@
 <script setup>
-import { computed, ref, watch, watchEffect } from 'vue'
+import { computed, onMounted, ref, watch, watchEffect } from 'vue'
 import ingredientData from '../../data/ingredients.json'
 import { useUserStore } from '@/stores/user'
-import { patchUser } from '@/libs/userManagement'
+import { getUserById, patchUser, updateUserDetails } from '@/libs/userManagement'
 import { useGameState } from '@/stores/gameState'
 
 defineEmits(['toggleFoodStoreClick'])
 
 const props = defineProps({
-    meats: {
-        type: Array,
-    },
-    vegetables: {
-        type: Array,
-    },
     userIngredients: {
         type: Array
     }
@@ -32,6 +26,9 @@ const meats = ref([])
 const vegetables = ref([])
 
 watchEffect(() => {
+
+    console.log(props.userIngredients)
+
     const mappedIngredients = props.userIngredients.map((ingd) => {
         const ingredient = (Array.from(ingredientData)).find((ingdData) => ingd.id === ingdData.id)
         ingredient['amount'] = ingd.amount
@@ -51,25 +48,24 @@ watchEffect(() => {
 })
 
 const handleIngredientClick = async (targetIngredient) => {
-    // const currentAmount = userStore.user.userDetail.ingredients.find((ingd) => ingd.id === targetIngredient.id).amount
-    console.log(targetIngredient)
-    const copyUserDetail = { ...userStore.user.userDetail }
-    copyUserDetail.ingredients = copyUserDetail.ingredients.map((ingd) => {
+    const updateIngredients = userStore.user.userDetail.ingredients.map((ingd) => {
         return {
             id: ingd.id,
             amount: targetIngredient.id === ingd.id ? ((ingd.amount - 1 >= 0) ? ingd.amount - 1 : 0) : ingd.amount
         }
     })
 
-    console.dir(copyUserDetail)
 
-    const patchedUser = await patchUser(userStore.user.id, { userDetail: copyUserDetail })
-    if (patchedUser?.id) {
-        userStore.user = patchedUser
+    const updatedUserDetail = await updateUserDetails(userStore.user.id, { ingredients: updateIngredients })
+    if (updatedUserDetail) {
+        userStore.user.userDetail = updatedUserDetail
     } else {
         console.error('Error to update user data.')
     }
+   
 
+    console.log(gameState.cauldron)
+    console.dir(updatedUserDetail)
 }
 
 const handleToggleFoodStoreClick = () => {
