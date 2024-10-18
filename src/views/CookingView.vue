@@ -56,7 +56,7 @@ const handleCauldronClick = () => {
 
     cauldronInterval = setInterval(() => {
         currentCauldronImageFrame.value++
-        if (currentCauldronImageFrame.value > 4) {
+        if (currentCauldronImageFrame.value > remainingClick) {
             currentCauldronImageFrame.value = 0
             countInteractive.value++
             console.log('CurrentCountInteractive: ' + countInteractive.value)
@@ -68,12 +68,13 @@ const handleCauldronClick = () => {
     soundStore.playSound('sfx', '/sounds/boiling-water-sound.mp3')
 }
 
+const remainingClick = 4
+
 async function openAchievementBook() {
     const data = await useUserStore.getData
     console.log(data)
 
     router.push({ name: "achievement-book-modal" })
-    // console.log(showAchievementBook.value)
 }
 
 const handleToggleFoodStoreClick = () => {
@@ -157,9 +158,14 @@ async function openScoreModal() {
         <div class="row-span-3 col-span-2 col-start-3 row-start-3 flex justify-center items-center z-60">
             <!-- ! Cauldron -->
             <div v-show="!gameState.isPreparePhase" class="row-start-4 col-start-4 fixed">
-                <img src="/src/assets/mouse.svg" class="w-16 select-none pointer-events-none">
-                <div class="row-start-4 col-start-3 bg-white w-fit z-20 select-none pointer-events-none">click to mix it
-                    4 times !
+                <div>
+                    <img src="/src/assets/mouse.svg" class="w-16 select-none pointer-events-none hover:bg-white" />
+                    <div class="animate-ping absolute h-full w-full rounded-full bg-white opacity-75"></div>
+                </div>
+                <div
+                    class="row-start-4 col-start-3 bg-white w-fit p-4 rounded-md z-20 select-none pointer-events-none my-3">
+                    คลิกอีก <span class="text-red-600 font-bold">{{ remainingClick - countInteractive }}</span>
+                    ครั้งเพื่อคนส่วนผสมเข้าด้วยกัน !
                 </div>
             </div>
             <img ref="cauldronRef" :src="currentImage" alt="cauldron" class="select-none pointer-events-none" />
@@ -188,8 +194,7 @@ async function openScoreModal() {
         </div>
 
         <div class="col-start-5 row-start-6 flex justify-center place-items-center">
-            <button
-                @click="openScoreModal"
+            <button @click="openScoreModal"
                 class="bg-[#77628C] hover:bg-[#5c4b6c] border border-white px-6 rounded-lg h-20 w-52 text-3xl text-white font-rowdies">
                 Serve !!
             </button>
