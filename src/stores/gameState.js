@@ -8,13 +8,13 @@ export const useGameState = defineStore('gameState', () => {
 
     function addToCauldron(ingdId) {
         cauldron.value.push(ingdId)
-        
+
     }
 
-    function cancelCooking() {
+    function dropCooking() {
         cauldron.value = []
     }
 
-    return { cauldron, isPreparePhase, addToCauldron, cancelCooking }
+    return { cauldron, isPreparePhase, addToCauldron, dropCooking }
 })
 
