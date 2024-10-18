@@ -47,17 +47,29 @@ const handleConfirm = async () => {
   if (currentGold >= totalPrice.value) {
     // มีเงินเพียงพอ ทำการหักเงิน
     const updatedGold = currentGold - totalPrice.value
+    // ตรวจสอบว่ามีวัตถุดิบนี้อยู่ใน inventory หรือไม่
+    const ingredientIndex = userStore.user.userDetail.ingredients.findIndex(ingd => ingd.id === props.item.id)
 
+    // ถ้ามีอยู่แล้วเพิ่มจำนวน ถ้าไม่มีให้เพิ่มใหม่
+    if (ingredientIndex !== -1) {
+      userStore.user.userDetail.ingredients[ingredientIndex].amount += quantity.value
+    } else {
+      userStore.user.userDetail.ingredients.push({
+        id: props.item.id,
+        amount: quantity.value
+      })
+    }
     // อัปเดตข้อมูลผู้ใช้
     const updateData = {
-        gold: updatedGold
+        gold: updatedGold,
+        ingredients: userStore.user.userDetail.ingredients
+
     }
 
     try {
       const updatedUserDetails = await updateUserDetails(userStore.user.id, updateData)
       if (updatedUserDetails && updatedUserDetails.gold === updatedGold) {
         userStore.user.userDetail.gold = updatedUserDetails.gold
-        userStore.user.userDetail.ingredients.find(ingd => ingd.id === props.item.id).amount += quantity.value
         await updateUser(userStore.user.id, userStore.user)
       } else {
         useUserStore.user = null
@@ -67,8 +79,7 @@ const handleConfirm = async () => {
       console.error(error)
     }
   } else {
-    // ตั้งใจจะทำเป็น alert
-    console.log('Gold ไม่เพียงพอสำหรับการซื้อ')
+    alert('Gold ไม่เพียงพอสำหรับการซื้อ')
   }
 
   emit('close') // ปิด modal หลังจากการซื้อเสร็จสิ้น

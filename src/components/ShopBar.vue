@@ -4,8 +4,7 @@ import BuySellConfirmModal from '../components/BuySellConfirmModal.vue'
 import ingredientsData from '../../data/ingredients.json'
 
 const isModalVisible = ref(false) // สถานะ modal เปิดหรือปิด
-const modalType = ref('') // เก็บว่าเป็น 'buy' หรือ 'sell'
-const selectedItem = ref(null) // เก็บข้อมูลของ item ที่ต้องการซื้อหรือขาย
+const selectedItem = ref(null) // เก็บข้อมูลของ item ที่ต้องการซื้อ
 
 const meats = computed(() => {
   return ingredientsData.filter(ingredient => ingredient.type === 'meat')
