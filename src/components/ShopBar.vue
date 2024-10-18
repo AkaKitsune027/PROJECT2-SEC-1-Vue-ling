@@ -4,8 +4,7 @@ import BuySellConfirmModal from '../components/BuySellConfirmModal.vue'
 import ingredientsData from '../../data/ingredients.json'
 
 const isModalVisible = ref(false) // สถานะ modal เปิดหรือปิด
-const modalType = ref('') // เก็บว่าเป็น 'buy' หรือ 'sell'
-const selectedItem = ref(null) // เก็บข้อมูลของ item ที่ต้องการซื้อหรือขาย
+const selectedItem = ref(null) // เก็บข้อมูลของ item ที่ต้องการซื้อ
 
 const meats = computed(() => {
   return ingredientsData.filter(ingredient => ingredient.type === 'meat')
@@ -24,9 +23,8 @@ const handleSelectPage = (pageNumber) => {
 }
 
 // ฟังก์ชันสำหรับเปิด Modal
-const openModal = (item, type) => {
+const openModal = (item) => {
   selectedItem.value = item
-  modalType.value = type
   isModalVisible.value = true
 }
 
@@ -68,8 +66,9 @@ const closeModal = () => {
           <img :src="`/meat/${meat.name}.png`" :alt="meat.name" class="w-12">
           <p class="text-sm text-gray-700">{{ meat.display_name }}</p>
         </div>
-        <div class="flex gap-2">
-          <button @click="openModal(meat, 'buy')"
+        <div class="flex items-center gap-2">
+          <p class="text-sm text-gray-700">{{ meat.price }}$</p>
+          <button @click="openModal(meat)"
             class="bg-green-400 hover:bg-green-600 text-white py-1 px-2 rounded-lg">Buy</button>
         </div>
       </div>
@@ -81,9 +80,9 @@ const closeModal = () => {
           <img :src="`/vegetable/${vegetable.name}.png`" :alt="vegetable.name" class="w-12">
           <p class="text-sm text-gray-700">{{ vegetable.display_name }}</p>
         </div>
-        <div class="flex gap-2">
-          <!-- เรียกใช้ openModal เมื่อกดปุ่ม  Buy -->
-          <button @click="openModal(vegetable, 'buy')"
+        <div class="flex items-center gap-2">
+          <p class="text-sm text-gray-700">{{ vegetable.price }}$</p>
+          <button @click="openModal(vegetable)"
             class="bg-green-400 hover:bg-green-600 text-white py-1 px-2 rounded-lg">Buy</button>
         </div>
       </div>
@@ -96,7 +95,7 @@ const closeModal = () => {
       </button>
     </div> -->
     <!-- เรียกใช้ Modal เมื่อ isModalVisible เป็น true -->
-    <BuySellConfirmModal v-if="isModalVisible" :item="selectedItem" :type="modalType" @close="closeModal" />
+    <BuySellConfirmModal v-if="isModalVisible" :item="selectedItem" @close="closeModal" />
   </div>
 </template>
 
