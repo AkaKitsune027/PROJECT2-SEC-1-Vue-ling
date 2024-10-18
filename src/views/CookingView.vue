@@ -89,6 +89,12 @@ const ingredientInCauldron = computed(() => {
     return ingredientInCauldron
 })
 
+async function openScoreModal() {
+    // const data = await useUserStore.getData
+    // console.log(data)
+
+    router.push({ name: "calculate-score-modal" })
+}
 </script>
 
 <template>
@@ -174,8 +180,9 @@ const ingredientInCauldron = computed(() => {
 
         <div class="col-start-5 row-start-6 flex justify-center place-items-center">
             <button
-                class="bg-[#77628C] hover:bg-[#5c4b6c] border border-white px-6 rounded-lg h-20 w-52 text-3xl text-white font-rowdies">Serve
-                !!
+                @click="openScoreModal"
+                class="bg-[#77628C] hover:bg-[#5c4b6c] border border-white px-6 rounded-lg h-20 w-52 text-3xl text-white font-rowdies">
+                Serve !!
             </button>
         </div>
         <div class="col-start-2 row-start-1 row-span-4 flex justify-center">
