@@ -6,11 +6,11 @@ import { useUserStore } from '@/stores/user'
 
 const gameState = useGameState()
 
-function useSugar() {
+function useSalt() {
     gameState.cauldron.push(23)
 }
 
-function useSalt() {
+function useSugar() {
     gameState.cauldron.push(24)
 }
 
