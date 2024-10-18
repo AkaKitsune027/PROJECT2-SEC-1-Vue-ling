@@ -73,7 +73,7 @@ const handleCancelOrder = async () => {
         router.replace({ name: "cooking-page" })
         gameState.isPreparePhase = true
         rawOrder.value = genarateOrder()
-        console.log('regenerated:', rawOrder.value);
+        console.log('regenerated:', rawOrder.value)
         userStore.user.userDetail = await updateUserDetails(userStore.user.id, {
             'currentOrder': rawOrder.value,
             isCurrentOrderCommitted: false
@@ -159,16 +159,16 @@ const handleConfirmOrder = async () => {
 
             <div class="flex justify-end fixed">
                 <button class="bg-third m-2 p-2 rounded-lg" :title="order.customer?.description">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" class="bi bi-search"
                         viewBox="0 0 16 16">
                         <path
                             d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
                 </button>
+                <p class="flex items-center text-gray-600">ชี้ค้างไว้เพื่อสำรวจลูกค้า</p>
             </div>
 
-            <div class="flex justify-center bg-white">
-                <!-- <img :src="`/customer/${order?.customer.name}.png`" class="w-40 h-40"> -->
+            <div class="flex justify-center bg-white py-14">
                 <img :src="`/customer/${order.customer?.name}.png`" class="w-40 h-40">
             </div>
             <p class="bg-primary text-white text-md text-center py-1 border border-white">ลูกค้า : {{
@@ -178,7 +178,7 @@ const handleConfirmOrder = async () => {
             <p class="bg-white p-2"> ฉันต้องการ {{ order.food?.display_name }} </p>
             <p class="bg-white px-2">แต่{{ order.specialRequirement?.description }}</p>
 
-            <div class="flex justify-around py-4">
+            <div class="flex justify-around py-2">
 
             </div>
             <div class="flex justify-center">
