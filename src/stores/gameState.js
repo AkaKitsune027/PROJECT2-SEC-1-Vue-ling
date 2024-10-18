@@ -6,14 +6,15 @@ export const useGameState = defineStore('gameState', () => {
 
     const isPreparePhase = ref(true)
 
-    function addToCauldron(ingredient) {
-        cauldron.value.push(ingredient)
+    function addToCauldron(ingdId) {
+        cauldron.value.push(ingdId)
+
     }
 
-    function cancelCooking() {
+    function dropCooking() {
         cauldron.value = []
     }
 
-    return { cauldron, isPreparePhase }
+    return { cauldron, isPreparePhase, addToCauldron, dropCooking }
 })
 
