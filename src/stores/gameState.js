@@ -8,7 +8,6 @@ export const useGameState = defineStore('gameState', () => {
 
     function addToCauldron(ingdId) {
         cauldron.value.push(ingdId)
-
     }
 
     function dropCooking() {
