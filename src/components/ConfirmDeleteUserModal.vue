@@ -2,11 +2,9 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-// ใช้ router สำหรับ navigation
 const router = useRouter();
-const isModalVisible = ref(true); // ควบคุมการแสดง/ซ่อนของ modal
+const isModalVisible = ref(true)
 
-// ฟังก์ชันปิด modal และนำผู้ใช้กลับไปยังหน้า home-page
 const closeModal = () => {
     isModalVisible.value = false;
     router.push({ name: 'home-page' });

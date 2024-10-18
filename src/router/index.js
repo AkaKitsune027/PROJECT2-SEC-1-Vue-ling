@@ -22,6 +22,14 @@ const router = createRouter({
       path: "/homepage",
       name: "home-page",
       component: () => import("@/views/HomepageView.vue"),
+
+      children: [
+        {
+          path: "how-to-play",
+          name: "how-to-play-modal",
+          component: () => import("../components/HowToPlayModal.vue"),
+        },
+      ],
     },
     {
       path: "/setup",

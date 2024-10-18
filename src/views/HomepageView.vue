@@ -1,7 +1,9 @@
 <script setup>
+import { ref } from "vue"
 import { useUserStore } from "@/stores/user";
 import { useRouter } from "vue-router"
 import { useSoundStore } from "@/stores/sounds";
+<<<<<<< HEAD
 import { ref } from "vue";
 import ConfirmDeleteUserModal from "@/components/ConfirmDeleteUserModal.vue";
 
@@ -10,15 +12,32 @@ const router = useRouter()
 const userStore = useUserStore()
 const soundStore = useSoundStore()
 const isDeleteModalVisible = ref(false)
+=======
+import HowToPlayModal from "@/components/HowToPlayModal.vue"
+
+const router = useRouter()
+const userStore = useUserStore()
+const soundStore = useSoundStore();
+const showHowToPlayModal = ref(false)
+
+>>>>>>> 50affeefec0201502981989f3117c053774eceed
 
 function handleToGame() {
   router.push({ name: "cooking-page" });
   soundStore.playSound('bgm', '/sounds/background.mp3');
 }
 
+<<<<<<< HEAD
 function deleteUser() {
   isDeleteModalVisible.value = true
 }
+=======
+function handleHowToPlay() {
+  showHowToPlayModal.value = true;
+}
+
+
+>>>>>>> 50affeefec0201502981989f3117c053774eceed
 </script>
 <template>
   <div class="menu flex flex-col items-center min-h-screen bg-[#fcfbfb]">
@@ -41,11 +60,11 @@ function deleteUser() {
     >
       ISEKAI COOKING
     </h1>
-
-    <!-- Left Section: Buttons and Right Section: Restaurant Info -->
+  
     <div
       class="flex flex-col justify-center md:flex-row mt-8 space-y-4 md:space-y-0 md:space-x-8 p-6 md:p-8 w-4/5"
     >
+<<<<<<< HEAD
       <!-- Buttons Section -->
       <div class="flex flex-col justify-center space-y-4 w-full md:w-auto">
         <button @click="handleToGame" class="btn-play h-14">PLAY</button>
@@ -53,31 +72,64 @@ function deleteUser() {
         <button @click="deleteUser" class="btn-delete text-nowrap h-14">DELETE</button>
       </div>
 
+=======
+>>>>>>> 50affeefec0201502981989f3117c053774eceed
       <!-- Restaurant Info Section -->
       <div
-        class="bg-[#ffffff] p-8 rounded-lg justify-center shadow-2xl flex flex-col items-center w-full md:w-5/12 h-96"
+        class="bg-[#f9f9f6] p-8 rounded-lg justify-center shadow-2xl flex flex-col items-center w-full md:w-5/12 h-96"
       >
-        <img src="/Home.svg" alt="Restaurant" class="w-24 h-24 object-cover" />
+        <img src="/logoHome2.png" alt="Restaurant" class="w-32 h-32 object-cover " />
         <p class="text-center font-bold text-lg text-[#2d2d2d]">{{ userStore.user.username }}</p>
         <p class="text-[#2d2d2d] text-lg mt-4">YOUR RESTAURANT</p>
         <label
-          class="bg-[#96ab97] w-full h-16 text-center py-4 text-white rounded-md text-lg"
+          class="bg-[#98ab96a5] w-full h-16 text-center py-4 text-white rounded-md text-lg"
         >
           {{ userStore.user.outletName }}
         </label>
       </div>
+
+      <!-- Buttons Section -->
+      <div class="flex flex-col justify-center space-y-4 w-full md:w-auto">
+        <button @click="handleToGame" class="btn-play h-14">PLAY</button>
+        <button @click="handleHowToPlay" class="btn-how text-nowrap h-14">HOW TO PLAY</button>
+        <button class="btn-delete text-nowrap h-14">DELETE</button>
+      </div>
     </div>
+<<<<<<< HEAD
     <ConfirmDeleteUserModal v-if="isDeleteModalVisible" />
+=======
+    <HowToPlayModal v-if="showHowToPlayModal" @close="showHowToPlayModal = false" />
+>>>>>>> 50affeefec0201502981989f3117c053774eceed
   </div>
 </template>
 
 <style scoped>
 .menu {
   font-family: "SUNDAY";
-  background-image: linear-gradient(10deg, #e1bbb8 0%, #5a7d6b 100%);
+  text-emphasis: none;-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  background-image: url("/kitchen-room5.png");
+  background-size: cover;
 }
 
-.btn-play {
+
+.btn-play, .btn-how, .btn-delete {
+  background-color: #61544b;
+  color: white;
+  padding: 10px 5vw;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.5s ease, box-shadow 0.5s ease; 
+}
+
+.btn-play:hover, .btn-how:hover, .btn-delete:hover {
+  background-color: #D4A373;
+  transform: translateY(-5px); 
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* .btn-play {
   background-color: #61544b;
   color: white;
   padding: 10px 5vw;
@@ -104,9 +156,9 @@ function deleteUser() {
   font-size: 1rem;
   font-weight: bold;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
+} */
 
 h1 {
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 </style>

@@ -148,7 +148,7 @@ export async function validateUsername(username) {
 }
 
 //Delete method - Delete account
-export async function deleteUser(username) {
+export async function deleteUser(username,password) {
   try {
     const res = await fetch(SERVER_URL + '/users', {
       method: 'DELETE'
