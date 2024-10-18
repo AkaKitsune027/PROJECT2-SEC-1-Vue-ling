@@ -123,7 +123,8 @@ const ingredientInCauldron = computed(() => {
         </div>
     </div>
 
-    <div class="bg-[url('/bg.png')] bg-cover w-screen h-[calc(100vh-4rem)] grid grid-cols-5 grid-rows-6">
+    <div
+        class="bg-[url('/bg.png')] bg-cover w-screen h-[calc(100vh-4rem)] grid grid-cols-5 grid-rows-6 overflow-hidden">
         <div class="grid row-span-5 pt-6">
             <IngredientBar v-if="!isShopping" :userIngredients="userStore.user.userDetail.ingredients" />
             <ShopBar v-else-if="isShopping" />
@@ -149,25 +150,33 @@ const ingredientInCauldron = computed(() => {
         </div>
         <div class="row-span-3 col-span-2 col-start-3 row-start-3 flex justify-center items-center z-60">
             <!-- ! Cauldron -->
-            <img ref="cauldronRef" :src="currentImage" alt="cauldron" class="select-none cursor-pointer"
-                @click="handleCauldronClick" />
-        </div>
-
-        <div
-            class="bg-[#ACC6AA] col-span-2 col-start-3 row-start-6 flex rounded-xl shadow-neutral-500 shadow-md z-0 relative justify-center">
-            <div class="flex justify-center place-items-center gap-2 flex-wrap mx-6 w-[60%]">
-                <div v-for="(ingd, index) in ingredientInCauldron" :key="index"
-                    class="bg-white border-2 border-[#e9d1ff] rounded-lg w-10 h-10 flex justify-center items-center ">
-                    <img :src="`/${ingd.type}/${ingd.name}.png`" class="w-10 h-10">
+            <div v-show="!gameState.isPreparePhase" class="row-start-4 col-start-4 fixed">
+                <img src="/src/assets/mouse.svg" class="w-16 select-none pointer-events-none">
+                <div class="row-start-4 col-start-3 bg-white w-fit z-20 select-none pointer-events-none">click to mix it
+                    4 times !
                 </div>
             </div>
-            <!-- ปุ่มถังขยะ -->
-            <div class="w-28 flex items-center justify-end">
-                <div class="flex justify-end transform">
-                    <button @click="gameState.dropCooking"
-                        class="bg-alert-200 hover:bg-[#7f4641] border border-white w-12 rounded-lg flex justify-center">
-                        <img src="/src/assets/trash.svg" alt="trash" class="w-6" />
-                    </button>
+            <img ref="cauldronRef" :src="currentImage" alt="cauldron" class="select-none pointer-events-none" />
+            <button @click="handleCauldronClick"
+                class="absolute rounded-full w-[26%] h-[49%] translate-y-[7%] cursor-pointer"></button>
+        </div>
+
+        <div class="col-start-3 row-start-6 col-span-2">
+            <div class="bg-[#ACC6AA] flex rounded-xl shadow-neutral-500 shadow-md relative justify-center h-full">
+                <div class="flex justify-center place-items-center gap-2 flex-wrap mx-6 w-[60%]">
+                    <div v-for="(ingd, index) in ingredientInCauldron" :key="index"
+                        class="bg-white border-2 border-[#e9d1ff] rounded-lg w-10 h-10 flex justify-center items-center ">
+                        <img :src="`/${ingd.type}/${ingd.name}.png`" class="w-10 h-10">
+                    </div>
+                </div>
+                <!-- ปุ่มถังขยะ -->
+                <div class="w-28 flex items-center justify-end">
+                    <div class="flex justify-end transform">
+                        <button @click="gameState.dropCooking"
+                            class="bg-alert-200 hover:bg-[#7f4641] border border-white w-12 rounded-lg flex justify-center">
+                            <img src="/src/assets/trash.svg" alt="trash" class="w-6" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -189,9 +198,9 @@ const ingredientInCauldron = computed(() => {
             <div class="bg-[#614b3c] h-[50%] px-2 shadow-neutral-500 shadow-md"></div>
             <div class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md shadow-neutral-500 shadow-md">
                 <div class="bg-white w-[5rem] h-[60%] grid place-items-center relative cursor-pointer rounded-md">
-                    <div class="absolute h-3 w-3 -translate-x-1 -translate-y-1 top-0 left-0">
+                    <div class="absolute h-5 w-5 -translate-x-1 -translate-y-1 top-0 left-0">
                         <div class="animate-ping absolute h-full w-full rounded-full bg-red-600 opacity-75"></div>
-                        <div class="relative rounded-full h-3 w-3 bg-red-600"></div>
+                        <div class="relative rounded-full h-4 w-4 bg-red-600"></div>
                     </div>
                     <img src="../assets/person-fill.svg" class="w-[90%] justify-center" />
                 </div>
