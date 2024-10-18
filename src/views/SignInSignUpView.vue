@@ -75,16 +75,16 @@ watch(confirmPassword, () => {
 </script>
 
 <template>
-  <div class="page flex flex-col items-center justify-center min-h-screen bg-pink-50 isekai-background">
-    <div class="w-full max-w-md relative">
-      <h1 class="text-6xl mb-8 text-center bold text-shadow text-[#fcfbfb]">
+  <div class="page font-sunday  flex flex-col items-center justify-center min-h-screen bg-pink-50 isekai-background">
+    <div class="w-full max-w-md relative font-bold">
+      <h1 class="text-6xl mb-8 text-center  text-shadow text-[#fcfbfb]">
         ISEKAI COOKING
       </h1>
     </div>
 
     <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg">
       <form @submit.prevent="handleLoginOrSignUp" class="space-y-2">
-        <div class="text-center text-4xl text-[#6c4949] bold">
+        <div class="text-center text-4xl text-[#6c4949] font-bold">
           <p>{{ isSignUp ? "Sign Up" : "Sign In" }}</p>
         </div>
 
@@ -135,7 +135,7 @@ watch(confirmPassword, () => {
 
           <div class="mt-2">
             <button type="submit" :disabled="!username || !password"
-              class="w-full bold bg-[#3f6a45] text-white py-3 rounded-lg hover:bg-brown-700 disabled:bg-gray-400">
+              class="w-full font-bold bg-[#3f6a45] text-white py-3 rounded-lg hover:bg-brown-700 disabled:bg-gray-400">
               SIGN IN
             </button>
           </div>
@@ -146,7 +146,7 @@ watch(confirmPassword, () => {
         <!-- <span v-if="!isSignupStep"> -->
         <span v-if="isSignUp">Already have an account? </span>
         <span v-else>Don't have an account? </span>
-        <RouterLink :to="{ name: isSignUp ? 'login-page' : 'signup-page' }" class="text-[#3447d7] bold hover:underline">
+        <RouterLink :to="{ name: isSignUp ? 'login-page' : 'signup-page' }" class="text-[#3447d7] font-bold hover:underline">
           {{ isSignUp ? "Sign In" : "Sign Up" }}
         </RouterLink>
         <!-- </span> -->
@@ -156,9 +156,9 @@ watch(confirmPassword, () => {
 </template>
 
 <style scoped>
-.page {
-  font-family: "SUNDAY";
-}
+/* .page {
+  font-family: "nuku";
+} */
 
 .absolute {
   position: absolute;
