@@ -198,3 +198,19 @@ export async function updateUserDetails(userId, updateData) {
   }
   return patchedUser.userDetail
 }
+
+export async function updateUser(userId, updateData) {
+  try {
+    const res = await fetch(`${SERVER_URL}/users/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updateData),
+    })
+    const updatedData = await res.json()
+    return updatedData
+  } catch (error) {
+    console.log("Error:", error)
+  }
+}
