@@ -13,7 +13,6 @@ const props = defineProps({
     }
 })
 
-const test = ref(true)
 const userStore = useUserStore()
 const gameState = useGameState()
 const showBag = ref(false)
@@ -27,7 +26,6 @@ const meats = ref([])
 const vegetables = ref([])
 
 watchEffect(() => {
-
     console.log(props.userIngredients)
 
     const mappedIngredients = props.userIngredients.map((ingd) => {
@@ -48,7 +46,15 @@ watchEffect(() => {
     vegetables.value = userVegetables
 })
 
+let clickCount = ref(0) // Track the number of ingredient clicks
 const handleIngredientClick = async (targetIngredient) => {
+
+    if (clickCount.value >= 14) return
+    clickCount.value++
+    console.log(`Click Count: ${clickCount.value}`)
+
+    if (targetIngredient.amount < 1) return
+
     const updateIngredients = userStore.user.userDetail.ingredients.map((ingd) => {
         return {
             id: ingd.id,
@@ -82,7 +88,7 @@ const handleToggleFoodStoreClick = () => {
         <div
             class="pointer-events-none w-full h-16 absolute bottom-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.5)_100%)]">
         </div>
-        <div class="flex-none bg-base text-center text-xl font-rowdies p-2">
+        <div class="flex-none bg-base text-center text-xl font-rowdies p-2 ">
             <p class="py-3">Ingredient</p>
             <div class="flex  rounded-lg">
                 <div @click="handleSelectPage(0)"
@@ -90,16 +96,16 @@ const handleToggleFoodStoreClick = () => {
                     <img src="/meat.png" alt="meat-bar" class="w-12">
                 </div>
                 <div @click="handleSelectPage(1)"
-                    class="flex-1 flex justify-center cursor-pointer bg-[#c3e0c1] hover:bg-[#90a58e] rounded-lg border border-white">
+                    class="flex-1 flex justify-center cursor-pointer bg-[#c3e0c1] hover:bg-[#90a58e] rounded-lg border border-white ">
                     <img src="/vegetable.png" alt="vegetable-bar" class="w-12">
                 </div>
             </div>
         </div>
         <div
             class="flex-auto bg-zinc-700 p-2 flex flex-col items-center gap-2 max-h-[28rem] overflow-y-auto custom-scrollbar">
-            <div :disable="test" @click="handleIngredientClick(meat)" v-show="selectedPage === 0" v-for="meat in meats"
+            <button @click="handleIngredientClick(meat)" v-show="selectedPage === 0" v-for="meat in meats"
                 :key="meat.id" class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border]
-            cursor-pointer rounded-lg w-10/12 h-20 flex">
+            cursor-pointer rounded-lg w-10/12 h-20 flex" :class="{ 'grayscale': meat.amount === 0 }">
                 <div class="bg-secondary-100 text-white p-1 rounded-full h-[40%] flex items-center justify-between border-2
             border-secondary-200">
                     {{ meat.amount }}
@@ -110,7 +116,7 @@ const handleToggleFoodStoreClick = () => {
                         meat.display_name
                     }}</span>
                 </div>
-            </div>
+            </button>
             <div v-show="selectedPage === 1" v-for="vegetable in vegetables" :key="vegetable.id" class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border]
             cursor-pointer rounded-lg w-10/12 h-20 flex" @click="handleIngredientClick(vegetable)">
                 <div class="bg-secondary-100 text-white p-1 rounded-full h-[40%] flex justify-center items-center border-2
