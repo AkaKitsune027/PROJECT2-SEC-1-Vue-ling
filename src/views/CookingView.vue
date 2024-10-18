@@ -11,6 +11,7 @@ import GoldAndPopularity from '@/components/GoldAndPopularity.vue'
 import RecipesModal from '@/components/RecipesModal.vue'
 import Sound from '@/components/Sound.vue'
 import ShopBar from '@/components/ShopBar.vue'
+import ingredientsData from '../../data/ingredients.json'
 
 const router = useRouter()
 const soundStore = useSoundStore()
@@ -78,6 +79,16 @@ async function openAchievementBook() {
 const handleToggleFoodStoreClick = () => {
     isShopping.value = !isShopping.value
 }
+
+
+const ingredientInCauldron = computed(() => {
+    const ingredientInCauldron = gameState.cauldron.map(ingdId => {
+        const ingd = ingredientsData.find(element => element.id === ingdId)
+        return ingd
+    })
+    return ingredientInCauldron
+})
+
 </script>
 
 <template>
@@ -136,31 +147,37 @@ const handleToggleFoodStoreClick = () => {
         <div class="row-start-6 col-start-2 flex justify-center items-end">
             <SeasoningBar />
         </div>
-        <div class="row-span-3 col-span-2 col-start-3 row-start-2 flex justify-center items-center z-60">
+        <div class="row-span-3 col-span-2 col-start-3 row-start-3 flex justify-center items-center z-60">
             <!-- ! Cauldron -->
-            <img ref="cauldronRef" :src="currentImage" alt="caudron" class="select-none cursor-pointer"
+            <img ref="cauldronRef" :src="currentImage" alt="cauldron" class="select-none cursor-pointer"
                 @click="handleCauldronClick" />
         </div>
 
         <div
-            class="bg-[#ACC6AA] col-span-2 col-start-3 row-start-5 flex justify-center rounded-xl shadow-neutral-500 shadow-md z-0">
-            <div class="flex justify-center place-items-center gap-3">
-                <div v-for="n in 2" :key="n" class="bg-white rounded-lg w-10/12 h-20">
+            class="bg-[#ACC6AA] col-span-2 col-start-3 row-start-6 flex rounded-xl shadow-neutral-500 shadow-md z-0 relative justify-center">
+            <div class="flex justify-center place-items-center gap-2 flex-wrap mx-6 w-[60%]">
+                <div v-for="(ingd, index) in ingredientInCauldron" :key="index"
+                    class="bg-white border-2 border-[#e9d1ff] rounded-lg w-10 h-10 flex justify-center items-center ">
+                    <img :src="`/${ingd.type}/${ingd.name}.png`" class="w-10 h-10">
+                </div>
+            </div>
+            <!-- ปุ่มถังขยะ -->
+            <div class="w-28 flex items-center justify-end">
+                <div class="flex justify-end transform">
+                    <button @click="gameState.dropCooking"
+                        class="bg-alert-200 hover:bg-[#7f4641] border border-white w-12 rounded-lg flex justify-center">
+                        <img src="/src/assets/trash.svg" alt="trash" class="w-6" />
+                    </button>
                 </div>
             </div>
         </div>
 
-        <div class="col-start-3 row-start-6 flex justify-center place-items-center">
+        <div class="col-start-5 row-start-6 flex justify-center place-items-center">
             <button
-                class="bg-[#77628C] hover:bg-[#5c4b6c] border border-white px-6 rounded-lg h-10 text-xl text-white font-rowdies">Serve
-                !!</button>
-        </div>
-        <div class="col-start-4 row-start-6 flex justify-center place-items-center">
-            <button class="bg-alert-200 hover:bg-[#7f4641] border border-white px-6 rounded-lg h-10">
-                <img src="/src/assets/trash.svg" alt="trash" />
+                class="bg-[#77628C] hover:bg-[#5c4b6c] border border-white px-6 rounded-lg h-20 w-52 text-3xl text-white font-rowdies">Serve
+                !!
             </button>
         </div>
-
         <div class="col-start-2 row-start-1 row-span-4 flex justify-center">
             <RecipesModal />
         </div>
@@ -183,12 +200,12 @@ const handleToggleFoodStoreClick = () => {
         </div>
 
         <div v-show="isShow" class="col-start-5 row-start-3 row-span-1 flex flex-col justify-center items-center">
-            <div class="my-9 pointer-events-none">
+            <!-- <div class="my-9 pointer-events-none">
                 <img src="/src/assets/arrow-up.svg" class="animate-bounce w-[70%] h-[70%] my-9 fill-red-600" />
-            </div>
+            </div> -->
             <!-- <div class="col-start-5 row-start- row-span-2 flex">
             </div> -->
-            <div class="col-start-5 row-start-4 row-span-2 flex">
+            <!-- <div class="col-start-5 row-start-4 row-span-2 flex">
                 <div class="bg-white p-10 rounded-lg mb-5">
                     <p class="text-red-600 py-2">* โปรดระวัง: หากคุณคลิกที่ปุ่มออเดอร์
                         คุณจะต้องเลือกระหว่างรับออเดอร์หรือไม่รับออเดอร์ *</p>
@@ -197,7 +214,7 @@ const handleToggleFoodStoreClick = () => {
                     <button @click="handleGameGuideConfirm"
                         class="bg-green-500 rounded-lg px-3 text-white flex">เข้าใจแล้วล่ะ</button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <RouterView @handleConfirmOrder="handleConfirmOrderClick" />

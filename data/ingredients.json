@@ -218,5 +218,25 @@
     "rank": 1,
     "category": ["fermented"],
     "price": 20
+  },
+  {
+    "id": 23,
+    "type": "seasoning",
+    "name": "bottle-of-salt",
+    "display_name": "เกลือ",
+    "description": "เครื่องปรุงอเนกประสงค์ รสเค็ม ว่ากันว่าชาวต่างโลกเป็นผู้คิดค้นสิ่งนี้",
+    "rank": 1,
+    "category": ["seasoning", "salty"],
+    "price": 0
+  },
+  {
+    "id": 24,
+    "type": "seasoning",
+    "name": "bottle-of-sugar",
+    "display_name": "น้ำตาล",
+    "description": "เครื่องปรุงอเนกประสงค์ รสหวาน ว่ากันว่าชาวต่างโลกเป็นผู้คิดค้นสิ่งนี้",
+    "rank": 1,
+    "category": ["seasoning", "sweet"],
+    "price": 0
   }
 ]
