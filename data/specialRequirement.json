@@ -6,7 +6,7 @@
     "badReview": "มันแย่มาก คุณแน่ใจนะว่ากำลังทำอาหาร แต่ฉันหิวมากช่างเถอะ",
     "normalReview": "ค่อนข้างดีสำหรับพ่อครัวที่ไม่เป็นที่รู้จัก ไว้คราวหลังจะแวะมาอีก",
     "goodReview": "นี่มันอร่อยมากๆ น้ำตาฉันไหลไม่หยุดหลังจากชิมครั้งแรก",
-    "condition": [
+    "conditions": [
       {
         "type": "looseModify",
         "value": {
@@ -22,7 +22,7 @@
     "badReview": "นี่อาหารเหรอ ยี๋~~",
     "normalReview": "พอใช้ได้ แต่ยังไม่ถึงกับดี",
     "goodReview": "ข้าวหอม นุ่มมากๆ กินแล้วประทับใจ",
-    "condition": [
+    "conditions": [
       {
         "type": "specificModify",
         "value": {
@@ -38,7 +38,7 @@
     "badReview": "... กินแล้วจะตายมั้ย",
     "normalReview": "อาหารพอกินได้ แต่ยังไม่ถึงขั้นดี",
     "goodReview": "อย่างที่คิดเนื้อมันดีจริงๆ ชอบสุดๆ",
-    "condition": [
+    "conditions": [
       {
         "type": "specificModify",
         "value": {
@@ -54,7 +54,7 @@
     "badReview": "ข้าต้องการเนื้อ ไม่ใช่เปลือกไม้ ทำไมมันเหนียวจัง",
     "normalReview": "เมืองที่ข้าจากมา ทำได้ดีกว่า แต่ที่เจ้าทำก็พอใช้",
     "goodReview": "มังกรกำลังบินในปากข้า อร้าา~~~",
-    "condition": [
+    "conditions": [
       {
         "type": "specificModify",
         "value": {
@@ -70,7 +70,7 @@
     "badReview": "ข้ากำลังจะตาย เจ้าเอาอะไรให้ข้ากิน แหวะ!!",
     "normalReview": "อร่อยดีสำหรับอาหารชาวรากหญ้า",
     "goodReview": "ข้าจะเรียกท่านว่าพ่อ ท่านพ่อๆ ข้าขออีกจาน",
-    "condition": [
+    "conditions": [
       {
         "type": "doNotHave",
         "value": ["galion", "tamata", "carrot"]
@@ -84,7 +84,7 @@
     "badReview": "มันห่วยมากจนข้าไม่อยากตายอีกต่อไป",
     "normalReview": "ชิ ไม่มีพิษเหรอ",
     "goodReview": "มันมีพิษ!? เยี่ยม!! ท่านปู่บนสวรรค์ข้ากำลังไปหาท่าน!!",
-    "condition": [
+    "conditions": [
       {
         "type": "mustHave",
         "value": ["mysticMushroom", "rainbowMushroom"]
@@ -98,7 +98,7 @@
     "badReview": "ฮุบ อ้วกกก...",
     "normalReview": "งั้นๆ",
     "goodReview": "ยังสู้แม่ข้าไม่ได้ แต่ถือว่าพยายามได้ดี",
-    "condition": []
+    "conditions": []
   },
   {
     "id": 8,
@@ -107,7 +107,7 @@
     "badReview": "หมูที่บ้านข้าคงชอบมัน",
     "normalReview": "เจ้าทำได้ดี แต่หนทางข้างหน้าอีกยาวไกล",
     "goodReview": "*งื้มๆๆ //ยกนิ้วโป้ง",
-    "condition": [
+    "conditions": [
       {
         "type": "specificModify",
         "value": {
@@ -123,11 +123,12 @@
     "badReview": "เจ้าอยากเป็นเชฟ? เลิกฝันเถอะ",
     "normalReview": "อร่อยดี เเต่ข้าว่ามันดีกว่านี้ได้",
     "goodReview": "เจ้าเป็นได้แน่สุดยอดเชฟน่ะ!!!",
-    "condition": [
+    "conditions": [
       {
         "type": "modifyByCategory",
         "value": {
-            "category": "seafood"
+          "category": "seafood",
+          "quntity": 1
         }
       }
     ]
@@ -139,13 +140,12 @@
     "badReview": "อาหารนี่ทำให้ฉันรู้สึกไม่ดี ใช้เทมโป ผิดสูตร",
     "normalReview": "อาหารไม่แย่ แต่มีบางจุดที่ต้องปรับปรุง",
     "goodReview": "อาหารยอดเยี่ยม! คุณใส่ใจการเลือกเทมโปอย่างดี",
-    "condition": [
+    "conditions": [
       {
         "type": "replace",
         "value": {
           "replace": "meat",
-          "with": "tempo",
-          "quantity": 1
+          "with": "tempo"
         }
       }
     ]
@@ -157,7 +157,7 @@
     "badReview": " ชวิ้ง *เสียงชักดาบออกจากฝัก",
     "normalReview": "อาหารโอเค แต่ผักยังไม่สดพอ",
     "goodReview": "ทำดีมากเจ้ามนุษย์ เจ้าสนใจแต่งงานกับข้ามั้ย?",
-    "condition": [
+    "conditions": [
       {
         "type": "doNotHaveInType",
         "value": ["meat"]
@@ -165,6 +165,7 @@
       {
         "type": "double",
         "value": "vegetable"
+        
       }
     ]
   },
@@ -175,7 +176,7 @@
     "badReview": "ฉันยอมกินอึของออร์คดีกว่ากินสิ่งนี้!",
     "normalReview": "พอใช้ได้สำหรับพวกลิงอย่างเจ้าละนะ",
     "goodReview": "ผักสดอร่อย ทำได้ดีมากเจ้ามนุษย์!",
-    "condition": [
+    "conditions": [
       {
         "type": "doNotHaveInType",
         "value": ["meat"]
@@ -189,7 +190,7 @@
     "badReview": "ฉันจะไม่กินอาหารของพวกลิงอย่างเจ้าอีกต่อไป!",
     "normalReview": "พอใช้ได้ แต่ยังต้องปรับปรุง",
     "goodReview": "อร่อย! อาหารมนุษย์ก็ไม่แย่อย่างที่คิด",
-    "condition": []
+    "conditions": []
   },
   {
     "id": 14,
@@ -198,7 +199,7 @@
     "badReview": "เเหวะ!! หูก็อบลินยังรสชาติดีกว่านี้",
     "normalReview": "ก็ดีกว่าไม่มีอะไรกิน",
     "goodReview": "*งั่มๆๆ อะอ่อยอากเอ้าอะอุด",
-    "condition": []
+    "conditions": []
   },
   {
     "id": 15,
@@ -207,9 +208,9 @@
     "badReview": "เนื้อมันน้อยเกินไป! ไม่พอกิน!",
     "normalReview": "ถือว่าใช้ได้ แต่ฉันอยากได้เนื้อมากกว่านี้",
     "goodReview": "เนื้อเยอะมาก! สมกับที่ฉันต้องการ",
-    "condition": [
+    "conditions": [
       {
-        "type": "doubleMeat",
+        "type": "double",
         "value": "meat"
       }
     ]
@@ -221,7 +222,7 @@
     "badReview": "เนื้อแห้งเกินไป แถมให้มานิดเดียว!",
     "normalReview": "ก็โอเค แต่เนื้อไม่พอกับความหิวของฉัน",
     "goodReview": "อู๊ดๆ! เนื้อออร์คสุดยอดดด",
-    "condition": [
+    "conditions": [
       {
         "type": "specificModify",
         "value": {
@@ -237,13 +238,12 @@
     "badReview": "ข้าต้องการเนื้อมังกร ไม่ใช่จิ้งจก",
     "normalReview": "ไม่ดีไม่แย่ พอกินได้",
     "goodReview": "มังกร! มังกร! อร้ากกก!!!",
-    "condition": [
+    "conditions": [
       {
         "type": "replace",
         "value": {
           "replace": "meat",
-          "with": "dragonMeat",
-          "quantity": 1
+          "with": "dragonMeat"
         }
       }
     ]
@@ -255,7 +255,7 @@
     "badReview": "... เสิร์ฟของแบบนี้ เจ้าอยากตายสินะ?",
     "normalReview": "เจ้ารอดตายไปได้อย่างฉิวเฉียด",
     "goodReview": "หอมมาก! เนื้อหวาน! อร่อยสุดๆ",
-    "condition": [
+    "conditions": [
       {
         "type": "doNotHaveInType",
         "value": ["vegetable"]
@@ -269,7 +269,7 @@
     "badReview": "หวานขนาดนี้ เจ้าคิดว่าข้าเป็นเด็กสามขวบเหรอ?",
     "normalReview": "ยังเผ็ดไม่พอแต่พอกินได้",
     "goodReview": "เผ็ดดด! เยี่ยมเลย!",
-    "condition": [
+    "conditions": [
       {
         "type": "specificModify",
         "value": {
@@ -285,10 +285,16 @@
     "badReview": "จะ.. เจ้าใส่อะไรมา ข้าบอกแล้วว่า.. *อ๊อคค",
     "normalReview": "พอใช้ได้ แต่ข้ารู้สึกคันตามตัวนิดหน่อยนะ",
     "goodReview": "อาหารอร่อยมาก เจ้ามีความสามารถสูงมากเลยนะ",
-    "condition": [
+    "conditions": [
       {
         "type": "doNotHave",
-        "value": ["orcMeat", "boarMeat", "galion", "mysticMushroom", "rainbowMushroom"]
+        "value": [
+          "orcMeat",
+          "boarMeat",
+          "galion",
+          "mysticMushroom",
+          "rainbowMushroom"
+        ]
       }
     ]
   }

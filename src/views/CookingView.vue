@@ -12,6 +12,7 @@ import RecipesModal from '@/components/RecipesModal.vue'
 import Sound from '@/components/Sound.vue'
 import ShopBar from '@/components/ShopBar.vue'
 import ingredientsData from '../../data/ingredients.json'
+import { calculatePrice } from '../libs/calculateScore'
 
 const router = useRouter()
 const soundStore = useSoundStore()
@@ -81,13 +82,12 @@ const handleToggleFoodStoreClick = () => {
 }
 
 
-const ingredientInCauldron = computed(() => {
-    const ingredientInCauldron = gameState.cauldron.map(ingdId => {
-        const ingd = ingredientsData.find(element => element.id === ingdId)
-        return ingd
-    })
-    return ingredientInCauldron
-})
+
+const handleServeClick = () => {
+    const bill = calculatePrice()
+    console.log(bill);
+    
+}
 
 </script>
 
@@ -156,7 +156,7 @@ const ingredientInCauldron = computed(() => {
         <div
             class="bg-[#ACC6AA] col-span-2 col-start-3 row-start-6 flex rounded-xl shadow-neutral-500 shadow-md z-0 relative justify-center">
             <div class="flex justify-center place-items-center gap-2 flex-wrap mx-6 w-[60%]">
-                <div v-for="(ingd, index) in ingredientInCauldron" :key="index"
+                <div v-for="(ingd, index) in gameState.ingredientInCauldron" :key="index"
                     class="bg-white border-2 border-[#e9d1ff] rounded-lg w-10 h-10 flex justify-center items-center ">
                     <img :src="`/${ingd.type}/${ingd.name}.png`" class="w-10 h-10">
                 </div>
@@ -173,7 +173,7 @@ const ingredientInCauldron = computed(() => {
         </div>
 
         <div class="col-start-5 row-start-6 flex justify-center place-items-center">
-            <button
+            <button @click="handleServeClick"
                 class="bg-[#77628C] hover:bg-[#5c4b6c] border border-white px-6 rounded-lg h-20 w-52 text-3xl text-white font-rowdies">Serve
                 !!
             </button>

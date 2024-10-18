@@ -5,7 +5,7 @@
     "name": "friedOrcsWithVegetables",
     "display_name": "ออร์คผัดผัก",
     "description": "เนื้อออร์คกลิ่นหอมผัดกับผักแสนฉ่ำรสชาติดีเยี่ยม",
-    "ingredients": ["orcMeat", "gabio", "galion", "salt", "sugar"]
+    "ingredients": ["orcMeat", "gabio", "galion", "bottle-of-salt", "bottle-of-sugar"]
   },
   {
     "id": 2,
@@ -21,8 +21,8 @@
       "meat",
       "gobol",
       "carrot",
-      "salt",
-      "sugar"
+      "bottle-of-salt",
+      "bottle-of-sugar"
     ]
   },
   {
@@ -31,15 +31,15 @@
     "name": "beachSoup",
     "display_name": "ซุปชายหาด",
     "description": "ซุปทะเลรสสดชื่นที่มีส่วนผสมจากหนวดคราเคนและปลาสด",
-    "ingredients": ["krakenTentacles", "redMeatFish", "tamata", "lammy", "sugar"]
+    "ingredients": ["krakenTentacles", "redMeatFish", "tamata", "lammy", "bottle-of-sugar"]
   },
   {
     "id": 4,
     "type": "food",
-    "name": "grilledBoarWithSalt",
+    "name": "grilledBoarWithbottle-of-salt",
     "display_name": "หมูป่าย่างเกลือ",
     "description": "หมูป่าย่างเกลือหอมฉุย ผสมผสานกับรสชาติกลมกล่อมลงตัว",
-    "ingredients": ["boarMeat", "galion", "orcMushroom", "salt"]
+    "ingredients": ["boarMeat", "galion", "orcMushroom", "bottle-of-salt"]
   },
   {
     "id": 5,
@@ -53,7 +53,7 @@
       "mysticMushroom",
       "gobol",
       "carrot",
-      "salt"
+      "bottle-of-salt"
     ]
   },
   {
@@ -62,7 +62,7 @@
     "name": "riceWithEgg",
     "display_name": "ข้าวหน้าไข่",
     "description": "ข้าวสวยร้อน ๆ เสิร์ฟพร้อมกับไข่งูตาแดงที่หาได้ยาก",
-    "ingredients": ["rice", "redEyesSnakeEggs", "tamata", "galion", "salt"]
+    "ingredients": ["rice", "redEyesSnakeEggs", "tamata", "galion", "bottle-of-salt"]
   },
   {
     "id": 7,
@@ -78,8 +78,8 @@
       "galion",
       "carrot",
       "gabio",
-      "salt",
-      "sugar"
+      "bottle-of-salt",
+      "bottle-of-sugar"
     ]
   },
   {
@@ -88,7 +88,7 @@
     "name": "spicyChickenStirFry",
     "display_name": "ไก่ผัดซอสเผ็ด",
     "description": "ไก่บาซิลิสก์ผัดกับซอสเผ็ดจัดจ้านตัดรสชาติด้วยผักสะอาดพร้อมทาน",
-    "ingredients": ["basiliskMeat", "gobol", "carrot", "amalo", "salt", "sugar"]
+    "ingredients": ["basiliskMeat", "gobol", "carrot", "amalo", "bottle-of-salt", "bottle-of-sugar"]
   },
   {
     "id": 9,
@@ -96,7 +96,7 @@
     "name": "riceWithMeat",
     "display_name": "ข้าวหน้าเนื้อ",
     "description": "ข้าวหน้าเนื้อรสชาติเยี่ยม ผัดพร้อมกับเห็ดออร์ค ผสมผสานกันอย่างลงตัว",
-    "ingredients": ["meat", "rice", "orcMushroom", "salt", "sugar"]
+    "ingredients": ["meat", "rice", "orcMushroom", "bottle-of-salt", "bottle-of-sugar"]
   },
   {
     "id": 10,
@@ -110,7 +110,7 @@
       "lammy",
       "tamata",
       "rainbowMushroom",
-      "sugar"
+      "bottle-of-sugar"
     ]
   }
 ]

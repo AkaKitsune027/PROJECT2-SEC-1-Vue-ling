@@ -13,21 +13,11 @@ import { updateUserDetails } from '@/libs/userManagement'
 const router = useRouter()
 const route = useRoute()
 const gameState = useGameState()
-const rawOrder = ref(null)
-const order = ref(null)
 const userStore = useUserStore()
 
 const isPrepareOrder = computed(() => route.name === "prepare-modal")
 
 const emits = defineEmits(['handleConfirmOrder'])
-
-watch(() => rawOrder.value, () => {
-    order.value = {
-        customer: customersData.find(c => c.id === rawOrder.value?.customerId),
-        food: foodsData.find(f => f.id === rawOrder.value?.foodId),
-        specialRequirement: specialRequirementData.find(s => s.id === rawOrder.value?.specialRequirementId),
-    }
-}, { immediate: true, deep: true })
 
 function genarateOrder() {
     const randomCustomerIndex = Math.floor(Math.random() * customersData.length)
@@ -50,13 +40,10 @@ function genarateOrder() {
 
 onMounted(async () => {
     const currentOrder = userStore.user.userDetail.currentOrder
-    if (currentOrder) {
-        rawOrder.value = currentOrder
-        return
-    }
-    rawOrder.value = genarateOrder()
+    if (currentOrder) return
+    gameState.rawOrder = genarateOrder()
     userStore.user.userDetail = await updateUserDetails(userStore.user.id, {
-        'currentOrder': rawOrder.value,
+        'currentOrder': gameState.rawOrder,
         isCurrentOrderCommitted: false
     })
 })
@@ -72,10 +59,10 @@ const handleCancelOrder = async () => {
     else {
         router.replace({ name: "cooking-page" })
         gameState.isPreparePhase = true
-        rawOrder.value = genarateOrder()
-        console.log('regenerated:', rawOrder.value);
+        userStore.user.userDetail.currentOrder = genarateOrder()
+        console.log('regenerated:', gameState.rawOrder);
         userStore.user.userDetail = await updateUserDetails(userStore.user.id, {
-            'currentOrder': rawOrder.value,
+            'currentOrder': gameState.rawOrder,
             isCurrentOrderCommitted: false
         })
     }
@@ -92,7 +79,6 @@ const handleConfirmOrder = async () => {
         emits('handleConfirmOrder')
     }
     else {
-        order?.value
         router.replace({ name: "cooking-page" })
     }
 
@@ -158,7 +144,7 @@ const handleConfirmOrder = async () => {
             <p class="text-xl bg-base text-center font-bold border border-white">ใบสั่งอาหาร </p>
 
             <div class="flex justify-end fixed">
-                <button class="bg-third m-2 p-2 rounded-lg" :title="order.customer?.description">
+                <button class="bg-third m-2 p-2 rounded-lg" :title="gameState.currentOrder.customer?.description">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search"
                         viewBox="0 0 16 16">
                         <path
@@ -169,14 +155,14 @@ const handleConfirmOrder = async () => {
 
             <div class="flex justify-center bg-white">
                 <!-- <img :src="`/customer/${order?.customer.name}.png`" class="w-40 h-40"> -->
-                <img :src="`/customer/${order.customer?.name}.png`" class="w-40 h-40">
+                <img :src="`/customer/${gameState.currentOrder.customer?.name}.png`" class="w-40 h-40">
             </div>
             <p class="bg-primary text-white text-md text-center py-1 border border-white">ลูกค้า : {{
-                order.customer?.display_name }}
+    gameState.currentOrder.customer?.display_name }}
             </p>
 
-            <p class="bg-white p-2"> ฉันต้องการ {{ order.food?.display_name }} </p>
-            <p class="bg-white px-2">แต่{{ order.specialRequirement?.description }}</p>
+            <p class="bg-white p-2"> ฉันต้องการ {{ gameState.currentOrder.food?.display_name }} </p>
+            <p class="bg-white px-2">แต่{{ gameState.currentOrder.specialRequirement?.description }}</p>
 
             <div class="flex justify-around py-4">
 
