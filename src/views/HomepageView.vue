@@ -2,19 +2,23 @@
 import { useUserStore } from "@/stores/user";
 import { useRouter } from "vue-router"
 import { useSoundStore } from "@/stores/sounds";
-
+import { ref } from "vue";
+import ConfirmDeleteUserModal from "@/components/ConfirmDeleteUserModal.vue";
 
 
 const router = useRouter()
 const userStore = useUserStore()
-const soundStore = useSoundStore();
+const soundStore = useSoundStore()
+const isDeleteModalVisible = ref(false)
 
 function handleToGame() {
   router.push({ name: "cooking-page" });
   soundStore.playSound('bgm', '/sounds/background.mp3');
 }
 
-
+function deleteUser() {
+  isDeleteModalVisible.value = true
+}
 </script>
 <template>
   <div class="menu flex flex-col items-center min-h-screen bg-[#fcfbfb]">
@@ -46,7 +50,7 @@ function handleToGame() {
       <div class="flex flex-col justify-center space-y-4 w-full md:w-auto">
         <button @click="handleToGame" class="btn-play h-14">PLAY</button>
         <button class="btn-how text-nowrap h-14">HOW TO PLAY</button>
-        <button class="btn-delete text-nowrap h-14">DELETE</button>
+        <button @click="deleteUser" class="btn-delete text-nowrap h-14">DELETE</button>
       </div>
 
       <!-- Restaurant Info Section -->
@@ -63,6 +67,7 @@ function handleToGame() {
         </label>
       </div>
     </div>
+    <ConfirmDeleteUserModal v-if="isDeleteModalVisible" />
   </div>
 </template>
 
