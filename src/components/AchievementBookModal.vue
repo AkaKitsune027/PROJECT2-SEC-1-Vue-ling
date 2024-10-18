@@ -12,7 +12,7 @@ const selectedMenuIngredients = ref([]) // Store the selected menu ingredients
 
 // Map fiveStarMenus to corresponding food data
 const mappedFiveStarMenus = computed(() => {
-  return ?.userDetail?.fiveStarMenus.map((menu) => {
+  return userStore.user?.userDetail?.fiveStarMenus.map((menu) => {
     const food = foodsData.find((food) => food.id === menu.foodId) // Assuming foods.json has an 'id' field
     // const ingredient = ingredientsData.find((ingredient) => ingredient.id === food.ingredients[0]
     // )
