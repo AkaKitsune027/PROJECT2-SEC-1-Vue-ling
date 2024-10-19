@@ -84,15 +84,15 @@ const handleToggleFoodStoreClick = () => {
         <div
             class="pointer-events-none w-full h-16 absolute bottom-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.5)_100%)]">
         </div>
-        <div class="flex-none bg-base text-center text-xl font-rowdies p-2 ">
+        <div class="flex-none bg-base text-center text-xl font-rowdies p-2">
             <p class="py-3">Ingredient</p>
-            <div class="flex  rounded-lg">
+            <div class="flex rounded-lg">
                 <div @click="handleSelectPage(0)"
                     class="flex-1 flex justify-center cursor-pointer bg-[#c3e0c1] hover:bg-[#90a58e] rounded-lg border border-white">
                     <img src="/meat.png" alt="meat-bar" class="w-12">
                 </div>
                 <div @click="handleSelectPage(1)"
-                    class="flex-1 flex justify-center cursor-pointer bg-[#c3e0c1] hover:bg-[#90a58e] rounded-lg border border-white ">
+                    class="flex-1 flex justify-center cursor-pointer bg-[#c3e0c1] hover:bg-[#90a58e] rounded-lg border border-white">
                     <img src="/vegetable.png" alt="vegetable-bar" class="w-12">
                 </div>
             </div>
@@ -108,9 +108,9 @@ const handleToggleFoodStoreClick = () => {
                 </div>
                 <div class="flex">
                     <img :src="`/meat/${meat.name}.png`" :alt="meat.name" class="w-16" />
-                    <span class="font-serif h-7 px-3 rounded-lg">{{
-                        meat.display_name
-                        }}</span>
+                    <span class="font-serif h-7 px-3 rounded-lg">
+                        {{ meat.display_name }}
+                    </span>
                 </div>
             </button>
             <div v-show="selectedPage === 1" v-for="vegetable in vegetables" :key="vegetable.id" class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border]
@@ -121,9 +121,9 @@ const handleToggleFoodStoreClick = () => {
                 </div>
                 <div class="flex">
                     <img :src="`/vegetable/${vegetable.name}.png`" :alt="vegetable.name" class="w-16" />
-                    <span class="font-serif h-7 px-3 rounded-lg">{{
-                        vegetable.display_name
-                        }}</span>
+                    <span class="font-serif h-7 px-3 rounded-lg">
+                        {{ vegetable.display_name }}
+                    </span>
                 </div>
             </div>
         </div>
