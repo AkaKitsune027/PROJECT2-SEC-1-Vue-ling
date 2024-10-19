@@ -84,8 +84,8 @@ const handleToggleFoodStoreClick = () => {
 
 
 const handleServeClick = () => {
-    const bill = calculatePrice()
-    console.log(bill);
+    
+    calculatePrice()
     
 }
 
