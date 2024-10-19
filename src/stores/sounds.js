@@ -6,7 +6,7 @@ export const useSoundStore = defineStore('sound', () => {
   const sfxAudioSource = new Audio()
   const isBgmPlaying = ref(false)
 
-  bgmAudioSource.volume = 0.30
+  bgmAudioSource.volume = 0.50
   sfxAudioSource.volume = 0.80
 
   function playSound(type, src) {
