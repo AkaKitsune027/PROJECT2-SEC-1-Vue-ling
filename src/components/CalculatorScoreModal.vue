@@ -94,7 +94,7 @@ const closeModal = () => {
           <img
             src="/public/unknownDish.png"
             alt="foodname"
-            class="w-60 drop-shadow--[0_8px_5px_rgba(0,0,0,0.3)]"
+            class="w-40 drop-shadow--[0_8px_5px_rgba(0,0,0,0.3)]"
           />
           <img
             :src="ratingStars(rating)"
@@ -114,6 +114,7 @@ const closeModal = () => {
           <div class="flex justify-around">
             <p class="py-4">Gold: {{  }}</p>
             <p class="py-4">Popularity: {{  }}</p>
+            <p class="py-4">Matching: {{  }}</p>
           </div>
           <p>New Recipe Unlock: </p>
         </div>
