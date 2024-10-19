@@ -56,19 +56,20 @@ const handleCauldronClick = () => {
 
     cauldronInterval = setInterval(() => {
         currentCauldronImageFrame.value++
-        if (currentCauldronImageFrame.value > remainingClick) {
+        if (currentCauldronImageFrame.value > requireClick) {
             currentCauldronImageFrame.value = 0
             countInteractive.value++
             console.log('CurrentCountInteractive: ' + countInteractive.value)
             clearInterval(cauldronInterval)
             cauldronInterval = null
             cauldronRef.value.classList.remove('animate-stir')
+            countInteractive = 0
         }
     }, 700)
     soundStore.playSound('sfx', '/sounds/boiling-water-sound.mp3')
 }
 
-const remainingClick = 4
+const requireClick = 4
 
 async function openAchievementBook() {
     const data = await useUserStore.getData
@@ -134,7 +135,8 @@ const ingredientInCauldron = computed(() => {
             <!-- ? Toggle Food Store Button -->
             <div class="bg-zinc-700 h-[5rem] rounded-r-xl grid place-items-center">
                 <button @click="handleToggleFoodStoreClick" :disabled="gameState.isPreparePhase === false"
-                    class="bg-[#ACC6AA] hover:bg-[#90a58e] w-[calc(100%-2rem)] h-[calc(100%-2rem)] rounded-xl border border-white grid place-items-center">
+                    class="bg-[#ACC6AA] hover:bg-[#90a58e] w-[calc(100%-2rem)] h-[calc(100%-2rem)] rounded-xl border border-white grid place-items-center"
+                    :class="{ grayscale: !gameState.isPreparePhase }">
                     <div v-show="!isShopping" class="flex justify-center items-center gap-2">
                         <img src="/src/assets/bag.svg" alt="shop" class="h-6" />
                         <div class="text-xl text-white">Shop</div>
@@ -158,13 +160,14 @@ const ingredientInCauldron = computed(() => {
                 </div>
                 <div
                     class="row-start-4 col-start-3 bg-white w-fit p-4 rounded-md z-20 select-none pointer-events-none my-3">
-                    คลิกอีก <span class="text-red-600 font-bold">{{ remainingClick - countInteractive }}</span>
+                    คลิกอีก <span class="text-red-600 font-bold">{{ requireClick - countInteractive }}</span>
                     ครั้งเพื่อคนส่วนผสมเข้าด้วยกัน !
                 </div>
             </div>
             <img ref="cauldronRef" :src="currentImage" alt="cauldron" class="select-none pointer-events-none" />
             <button @click="handleCauldronClick"
-                class="absolute rounded-full w-[26%] h-[49%] translate-y-[7%] cursor-pointer"></button>
+                class="absolute rounded-full w-[26%] h-[49%] translate-y-[7%] cursor-pointer disabled:cursor-default"
+                :disabled="gameState.isPreparePhase"></button>
         </div>
 
         <div class="col-start-3 row-start-6 col-span-2">
@@ -189,9 +192,13 @@ const ingredientInCauldron = computed(() => {
 
         <div class="col-start-5 row-start-6 flex justify-center place-items-center">
             <button
-                class="bg-[#77628C] hover:bg-[#5c4b6c] border border-white px-6 rounded-lg h-20 w-52 text-3xl text-white font-rowdies"
-                :class="{ grayscale: remainingClick - countInteractive > 0, disabled: remainingClick - countInteractive > 0 }">Serve
-                !!
+                class="border-2 bg-yellow-400 border-white rounded-lg h-20 w-64 text-3xl text-white font-rowdies disabled:cursor-not-allowed relative hover:contrast-75 transition duration-300 disabled:hover:contrast-100"
+                :class="countInteractive >= 4 ? 'scale-100 saturate-100' : 'scale-90 saturate-[30%]'"
+                :disabled="countInteractive < 4">
+                <div class="absolute w-full h-full grid place-items-center">Serve !!</div>
+                <div class="h-full rounded-lg transition-[width_filter] duration-300 bg-yellow-500" :style="{
+                    width: `${countInteractive * 25}%`
+                }"></div>
             </button>
         </div>
         <div class="col-start-2 row-start-1 row-span-4 flex justify-center">

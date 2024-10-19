@@ -17,18 +17,18 @@ function addSeasoning(id) {
 <template>
     <div>
         <div class="bg-[#ACC6AA] text-center text-lg font-rowdies rounded-lg">Seasoning
-            <div class="bg-zinc-700 flex gap-3 p-2 rounded-lg">
+            <div class="bg-zinc-700 flex gap-3 p-2 rounded-lg h-20">
                 <div @click="addSeasoning(24)"
-                    class="w-20 transition-[border] bg-white rounded-lg hover:bg-gray-300 hover:border-4 border-[#77628C] cursor-pointer flex justify-center">
+                    class="w-20 transition-[border] bg-white rounded-lg hover:bg-gray-300 hover:border-4 border-[#77628C] cursor-pointer flex justify-center bg-[linear-gradient(180deg,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.5)_100%)]">
                     <img src="/seasoning/bottle-of-sugar.png" alt="bottle-of-sugar" class="w-14">
-                    <span class="font-serif h-5 rounded-lg text-sm">
+                    <span class="font-serif h-3 rounded-lg text-sm bg-white absolute translate-y-11">
                         น้ำตาล
                     </span>
                 </div>
                 <div @click="addSeasoning(23)"
-                    class="w-20 transition-[border] bg-white rounded-lg hover:bg-gray-300 hover:border-4 border-[#77628C] cursor-pointer flex justify-center">
+                    class="w-20 transition-[border] bg-white rounded-lg hover:bg-gray-300 hover:border-4 border-[#77628C] cursor-pointer flex justify-center bg-[linear-gradient(180deg,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.5)_100%)]">
                     <img src="/seasoning/bottle-of-salt.png" alt="bottle-of-salt" class="w-14">
-                    <span class="font-serif h-5 rounded-lg text-sm">
+                    <span class="font-serif h-3 rounded-lg text-sm bg-white absolute">
                         เกลือ
                     </span>
                 </div>
