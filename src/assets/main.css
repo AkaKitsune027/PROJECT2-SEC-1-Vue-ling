@@ -18,3 +18,10 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background-color: #5b8085;
 }
+
+@font-face {
+    font-family: 'NukuFont';
+    src: url('../assets/font/nuku-nuku.regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

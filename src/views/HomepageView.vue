@@ -3,12 +3,14 @@ import { ref } from "vue"
 import { useUserStore } from "@/stores/user";
 import { useRouter } from "vue-router"
 import { useSoundStore } from "@/stores/sounds";
+import ConfirmDeleteUserModal from "@/components/ConfirmDeleteUserModal.vue";
 import HowToPlayModal from "@/components/HowToPlayModal.vue"
 
 const router = useRouter()
 const userStore = useUserStore()
 const soundStore = useSoundStore();
 const showHowToPlayModal = ref(false)
+const showDeleteModal = ref(false)
 
 
 function handleToGame() {
@@ -16,11 +18,12 @@ function handleToGame() {
   soundStore.playSound('bgm', '/sounds/background.mp3');
 }
 
-function handleHowToPlay() {
-  showHowToPlayModal.value = true;
+function deleteUser() {
+  showDeleteModal.value = true
 }
-
-
+function handleHowToPlay() {
+  showHowToPlayModal.value = true
+}
 </script>
 <template>
   <div class="menu flex flex-col items-center min-h-screen bg-[#fcfbfb]">
@@ -65,9 +68,10 @@ function handleHowToPlay() {
       <div class="flex flex-col justify-center space-y-4 w-full md:w-auto">
         <button @click="handleToGame" class="btn-play h-14">PLAY</button>
         <button @click="handleHowToPlay" class="btn-how text-nowrap h-14">HOW TO PLAY</button>
-        <button class="btn-delete text-nowrap h-14">DELETE</button>
+        <button @click="deleteUser" class="btn-delete text-nowrap h-14">DELETE</button>
       </div>
     </div>
+    <ConfirmDeleteUserModal v-if="showDeleteModal" @close="showDeleteModal = false" />
     <HowToPlayModal v-if="showHowToPlayModal" @close="showHowToPlayModal = false" />
   </div>
 </template>
