@@ -29,6 +29,11 @@ const router = createRouter({
           name: "how-to-play-modal",
           component: () => import("../components/HowToPlayModal.vue"),
         },
+        {
+          path: "confirm-password",
+          name: "confirm-password-modal",
+          component: () => import("../components/ConfirmDeleteUserModal.vue"),
+        },
       ],
     },
     {

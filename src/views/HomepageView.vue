@@ -3,41 +3,27 @@ import { ref } from "vue"
 import { useUserStore } from "@/stores/user";
 import { useRouter } from "vue-router"
 import { useSoundStore } from "@/stores/sounds";
-<<<<<<< HEAD
-import { ref } from "vue";
 import ConfirmDeleteUserModal from "@/components/ConfirmDeleteUserModal.vue";
-
-
-const router = useRouter()
-const userStore = useUserStore()
-const soundStore = useSoundStore()
-const isDeleteModalVisible = ref(false)
-=======
 import HowToPlayModal from "@/components/HowToPlayModal.vue"
 
 const router = useRouter()
 const userStore = useUserStore()
 const soundStore = useSoundStore();
 const showHowToPlayModal = ref(false)
+const showDeleteModal = ref(false)
 
->>>>>>> 50affeefec0201502981989f3117c053774eceed
 
 function handleToGame() {
   router.push({ name: "cooking-page" });
   soundStore.playSound('bgm', '/sounds/background.mp3');
 }
 
-<<<<<<< HEAD
 function deleteUser() {
-  isDeleteModalVisible.value = true
+  showDeleteModal.value = true
 }
-=======
 function handleHowToPlay() {
-  showHowToPlayModal.value = true;
+  showHowToPlayModal.value = true
 }
-
-
->>>>>>> 50affeefec0201502981989f3117c053774eceed
 </script>
 <template>
   <div class="menu flex flex-col items-center min-h-screen bg-[#fcfbfb]">
@@ -64,16 +50,6 @@ function handleHowToPlay() {
     <div
       class="flex flex-col justify-center md:flex-row mt-8 space-y-4 md:space-y-0 md:space-x-8 p-6 md:p-8 w-4/5"
     >
-<<<<<<< HEAD
-      <!-- Buttons Section -->
-      <div class="flex flex-col justify-center space-y-4 w-full md:w-auto">
-        <button @click="handleToGame" class="btn-play h-14">PLAY</button>
-        <button class="btn-how text-nowrap h-14">HOW TO PLAY</button>
-        <button @click="deleteUser" class="btn-delete text-nowrap h-14">DELETE</button>
-      </div>
-
-=======
->>>>>>> 50affeefec0201502981989f3117c053774eceed
       <!-- Restaurant Info Section -->
       <div
         class="bg-[#f9f9f6] p-8 rounded-lg justify-center shadow-2xl flex flex-col items-center w-full md:w-5/12 h-96"
@@ -92,14 +68,11 @@ function handleHowToPlay() {
       <div class="flex flex-col justify-center space-y-4 w-full md:w-auto">
         <button @click="handleToGame" class="btn-play h-14">PLAY</button>
         <button @click="handleHowToPlay" class="btn-how text-nowrap h-14">HOW TO PLAY</button>
-        <button class="btn-delete text-nowrap h-14">DELETE</button>
+        <button @click="deleteUser" class="btn-delete text-nowrap h-14">DELETE</button>
       </div>
     </div>
-<<<<<<< HEAD
-    <ConfirmDeleteUserModal v-if="isDeleteModalVisible" />
-=======
+    <ConfirmDeleteUserModal v-if="showDeleteModal" @close="showDeleteModal = false" />
     <HowToPlayModal v-if="showHowToPlayModal" @close="showHowToPlayModal = false" />
->>>>>>> 50affeefec0201502981989f3117c053774eceed
   </div>
 </template>
 

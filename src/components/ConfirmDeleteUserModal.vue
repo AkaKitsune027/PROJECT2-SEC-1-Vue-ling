@@ -5,10 +5,10 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const isModalVisible = ref(true)
 
-const closeModal = () => {
-    isModalVisible.value = false;
-    router.push({ name: 'home-page' });
-}
+// const closeModal = () => {
+//     isModalVisible.value = false;
+//     router.push({ name: 'home-page' });
+// }
 
 const confirmDelete = () => {
   
@@ -38,7 +38,7 @@ const confirmDelete = () => {
         <button @click="confirmDelete" class="bg-green-500 text-white px-4 py-2 rounded-lg">Confirm</button>
         
         <!-- ปุ่ม cancel -->
-        <button @click="closeModal" class="bg-red-500 text-white px-4 py-2 rounded-lg">Cancel</button>
+        <button @click="$emit('close')" class="bg-red-500 text-white px-4 py-2 rounded-lg">Cancel</button>
       </div>
     </div>
   </div>
