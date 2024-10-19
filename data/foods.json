@@ -36,7 +36,7 @@
   {
     "id": 4,
     "type": "food",
-    "name": "grilledBoarWithbottle-of-salt",
+    "name": "grilledBoarWithSalt",
     "display_name": "หมูป่าย่างเกลือ",
     "description": "หมูป่าย่างเกลือหอมฉุย ผสมผสานกับรสชาติกลมกล่อมลงตัว",
     "ingredients": ["boarMeat", "galion", "orcMushroom", "bottle-of-salt"]
