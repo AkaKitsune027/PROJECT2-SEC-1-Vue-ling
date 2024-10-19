@@ -63,7 +63,7 @@ const handleCauldronClick = () => {
             clearInterval(cauldronInterval)
             cauldronInterval = null
             cauldronRef.value.classList.remove('animate-stir')
-            countInteractive = 0
+            // countInteractive.value = 0
         }
     }, 700)
     soundStore.playSound('sfx', '/sounds/boiling-water-sound.mp3')

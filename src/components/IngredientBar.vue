@@ -110,7 +110,7 @@ const handleToggleFoodStoreClick = () => {
                     <img :src="`/meat/${meat.name}.png`" :alt="meat.name" class="w-16" />
                     <span class="font-serif h-7 px-3 rounded-lg">{{
                         meat.display_name
-                    }}</span>
+                        }}</span>
                 </div>
             </button>
             <div v-show="selectedPage === 1" v-for="vegetable in vegetables" :key="vegetable.id" class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border]
@@ -123,7 +123,7 @@ const handleToggleFoodStoreClick = () => {
                     <img :src="`/vegetable/${vegetable.name}.png`" :alt="vegetable.name" class="w-16" />
                     <span class="font-serif h-7 px-3 rounded-lg">{{
                         vegetable.display_name
-                    }}</span>
+                        }}</span>
                 </div>
             </div>
         </div>
