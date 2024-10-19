@@ -57,24 +57,26 @@ const handleCauldronClick = () => {
 
     cauldronInterval = setInterval(() => {
         currentCauldronImageFrame.value++
-        if (currentCauldronImageFrame.value > 4) {
+        if (currentCauldronImageFrame.value > requireClick) {
             currentCauldronImageFrame.value = 0
             countInteractive.value++
             console.log('CurrentCountInteractive: ' + countInteractive.value)
             clearInterval(cauldronInterval)
             cauldronInterval = null
             cauldronRef.value.classList.remove('animate-stir')
+            // countInteractive.value = 0
         }
     }, 700)
     soundStore.playSound('sfx', '/sounds/boiling-water-sound.mp3')
 }
+
+const requireClick = 4
 
 async function openAchievementBook() {
     const data = await useUserStore.getData
     console.log(data)
 
     router.push({ name: "achievement-book-modal" })
-    // console.log(showAchievementBook.value)
 }
 
 const handleToggleFoodStoreClick = () => {
@@ -129,7 +131,8 @@ async function openScoreModal() {
         </div>
     </div>
 
-    <div class="bg-[url('/bg.png')] bg-cover w-screen h-[calc(100vh-4rem)] grid grid-cols-5 grid-rows-6">
+    <div
+        class="bg-[url('/bg.png')] bg-cover w-screen h-[calc(100vh-4rem)] grid grid-cols-5 grid-rows-6 overflow-hidden">
         <div class="grid row-span-5 pt-6">
             <IngredientBar v-if="!isShopping" :userIngredients="userStore.user.userDetail.ingredients" />
             <ShopBar v-else-if="isShopping" />
@@ -138,7 +141,8 @@ async function openScoreModal() {
             <!-- ? Toggle Food Store Button -->
             <div class="bg-zinc-700 h-[5rem] rounded-r-xl grid place-items-center">
                 <button @click="handleToggleFoodStoreClick" :disabled="gameState.isPreparePhase === false"
-                    class="bg-[#ACC6AA] hover:bg-[#90a58e] w-[calc(100%-2rem)] h-[calc(100%-2rem)] rounded-xl border border-white grid place-items-center">
+                    class="bg-[#ACC6AA] hover:bg-[#90a58e] w-[calc(100%-2rem)] h-[calc(100%-2rem)] rounded-xl border border-white grid place-items-center"
+                    :class="{ grayscale: !gameState.isPreparePhase }">
                     <div v-show="!isShopping" class="flex justify-center items-center gap-2">
                         <img src="/src/assets/bag.svg" alt="shop" class="h-6" />
                         <div class="text-xl text-white">Shop</div>
@@ -155,34 +159,57 @@ async function openScoreModal() {
         </div>
         <div class="row-span-3 col-span-2 col-start-3 row-start-3 flex justify-center items-center z-60">
             <!-- ! Cauldron -->
-            <img ref="cauldronRef" :src="currentImage" alt="cauldron" class="select-none cursor-pointer"
-                @click="handleCauldronClick" />
-        </div>
-
-        <div
-            class="bg-[#ACC6AA] col-span-2 col-start-3 row-start-6 flex rounded-xl shadow-neutral-500 shadow-md z-0 relative justify-center">
-            <div class="flex justify-center place-items-center gap-2 flex-wrap mx-6 w-[60%]">
-                <div v-for="(ingd, index) in gameState.ingredientInCauldron" :key="index"
-                    class="bg-white border-2 border-[#e9d1ff] rounded-lg w-10 h-10 flex justify-center items-center ">
-                    <img :src="`/${ingd.type}/${ingd.name}.png`" class="w-10 h-10">
+            <div v-show="!gameState.isPreparePhase" class="row-start-4 col-start-4 fixed">
+                <div>
+                    <img src="/src/assets/mouse.svg" class="w-16 select-none pointer-events-none hover:bg-white" />
+                    <div class="animate-ping absolute h-full w-full rounded-full bg-white opacity-75"></div>
+                </div>
+                <div
+                    class="row-start-4 col-start-3 bg-white w-fit p-4 rounded-md z-20 select-none pointer-events-none my-3">
+                    คลิกอีก <span class="text-red-600 font-bold">{{ requireClick - countInteractive }}</span>
+                    ครั้งเพื่อคนส่วนผสมเข้าด้วยกัน !
                 </div>
             </div>
-            <!-- ปุ่มถังขยะ -->
-            <div class="w-28 flex items-center justify-end">
-                <div class="flex justify-end transform">
-                    <button @click="gameState.dropCooking"
-                        class="bg-alert-200 hover:bg-[#7f4641] border border-white w-12 rounded-lg flex justify-center">
-                        <img src="/src/assets/trash.svg" alt="trash" class="w-6" />
-                    </button>
+            <img ref="cauldronRef" :src="currentImage" alt="cauldron" class="select-none pointer-events-none" />
+            <button @click="handleCauldronClick"
+                class="absolute rounded-full w-[26%] h-[49%] translate-y-[7%] cursor-pointer disabled:cursor-default"
+                :disabled="gameState.isPreparePhase"></button>
+        </div>
+
+
+        <div class="col-start-3 row-start-6 col-span-2">
+            <div class="bg-[#ACC6AA] flex rounded-xl shadow-neutral-500 shadow-md relative justify-center h-full">
+                <div class="flex justify-center place-items-center gap-2 flex-wrap mx-6 w-[60%]">
+                    <div v-for="(ingd, index) in ingredientInCauldron" :key="index"
+                        class="bg-white border-2 border-[#e9d1ff] rounded-lg w-10 h-10 flex justify-center items-center ">
+                        <img :src="`/${ingd.type}/${ingd.name}.png`" class="w-10 h-10">
+                    </div>
+
+                </div>
+                <!-- ปุ่มถังขยะ -->
+                <div class="w-28 flex items-center justify-end">
+                    <div class="flex justify-end transform">
+                        <button @click="gameState.dropCooking"
+                            class="bg-alert-200 hover:bg-[#7f4641] border border-white w-12 rounded-lg flex justify-center">
+                            <img src="/src/assets/trash.svg" alt="trash" class="w-6" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="col-start-5 row-start-6 flex justify-center place-items-center">
-            <button @click="handleServeClick"
-                class="bg-[#77628C] hover:bg-[#5c4b6c] border border-white px-6 rounded-lg h-20 w-52 text-3xl text-white font-rowdies">Serve!!
-            </button>
+            <button
+                class="border-2 bg-yellow-400 border-white rounded-lg h-20 w-64 text-3xl text-white font-rowdies disabled:cursor-not-allowed relative hover:contrast-75 transition duration-300 disabled:hover:contrast-100"
+                :class="countInteractive >= 4 ? 'scale-100 saturate-100' : 'scale-90 saturate-[30%]'"
+                :disabled="countInteractive < 4">
+                <div class="absolute w-full h-full grid place-items-center">Serve !!</div>
+                <div class="h-full rounded-lg transition-[width_filter] duration-300 bg-yellow-500" :style="{
+                    width: `${countInteractive * 25}%`
+                }"></div>
+            </button> 
         </div>
+        
         <div class="col-start-2 row-start-1 row-span-4 flex justify-center">
             <RecipesModal />
         </div>
@@ -194,9 +221,9 @@ async function openScoreModal() {
             <div class="bg-[#614b3c] h-[50%] px-2 shadow-neutral-500 shadow-md"></div>
             <div class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md shadow-neutral-500 shadow-md">
                 <div class="bg-white w-[5rem] h-[60%] grid place-items-center relative cursor-pointer rounded-md">
-                    <div class="absolute h-3 w-3 -translate-x-1 -translate-y-1 top-0 left-0">
+                    <div class="absolute h-5 w-5 -translate-x-1 -translate-y-1 top-0 left-0">
                         <div class="animate-ping absolute h-full w-full rounded-full bg-red-600 opacity-75"></div>
-                        <div class="relative rounded-full h-3 w-3 bg-red-600"></div>
+                        <div class="relative rounded-full h-4 w-4 bg-red-600"></div>
                     </div>
                     <img src="../assets/person-fill.svg" class="w-[90%] justify-center" />
                 </div>

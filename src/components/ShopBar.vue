@@ -36,7 +36,8 @@ const closeModal = () => {
 
 <template>
   <div class="relative flex flex-col overflow-hidden rounded-r-xl">
-    <div class="pointer-events-none w-full h-16 absolute bottom-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.5)_100%)]">
+    <div
+      class="pointer-events-none w-full h-16 absolute bottom-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.5)_100%)]">
     </div>
     <!-- ส่วนหัวสำหรับเลือกหมวดหมู่ -->
     <div class="flex-none bg-base text-center text-xl font-rowdies p-2">

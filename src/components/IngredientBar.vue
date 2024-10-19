@@ -13,7 +13,6 @@ const props = defineProps({
     }
 })
 
-const test = ref(true)
 const userStore = useUserStore()
 const gameState = useGameState()
 const showBag = ref(false)
@@ -27,7 +26,6 @@ const meats = ref([])
 const vegetables = ref([])
 
 watchEffect(() => {
-
     console.log(props.userIngredients)
 
     const mappedIngredients = props.userIngredients.map((ingd) => {
@@ -49,6 +47,10 @@ watchEffect(() => {
 })
 
 const handleIngredientClick = async (targetIngredient) => {
+
+    if (targetIngredient.amount < 1) return
+    if (gameState.cauldron.length >= 14) return
+
     const updateIngredients = userStore.user.userDetail.ingredients.map((ingd) => {
         return {
             id: ingd.id,
@@ -84,7 +86,7 @@ const handleToggleFoodStoreClick = () => {
         </div>
         <div class="flex-none bg-base text-center text-xl font-rowdies p-2">
             <p class="py-3">Ingredient</p>
-            <div class="flex  rounded-lg">
+            <div class="flex rounded-lg">
                 <div @click="handleSelectPage(0)"
                     class="flex-1 flex justify-center cursor-pointer bg-[#c3e0c1] hover:bg-[#90a58e] rounded-lg border border-white">
                     <img src="/meat.png" alt="meat-bar" class="w-12">
@@ -97,20 +99,20 @@ const handleToggleFoodStoreClick = () => {
         </div>
         <div
             class="flex-auto bg-zinc-700 p-2 flex flex-col items-center gap-2 max-h-[28rem] overflow-y-auto custom-scrollbar">
-            <div :disable="test" @click="handleIngredientClick(meat)" v-show="selectedPage === 0" v-for="meat in meats"
+            <button @click="handleIngredientClick(meat)" v-show="selectedPage === 0" v-for="meat in meats"
                 :key="meat.id" class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border]
-            cursor-pointer rounded-lg w-10/12 h-20 flex">
+            cursor-pointer rounded-lg w-10/12 h-20 flex" :class="{ 'grayscale': meat.amount === 0 }">
                 <div class="bg-secondary-100 text-white p-1 rounded-full h-[40%] flex items-center justify-between border-2
             border-secondary-200">
                     {{ meat.amount }}
                 </div>
                 <div class="flex">
                     <img :src="`/meat/${meat.name}.png`" :alt="meat.name" class="w-16" />
-                    <span class="font-serif h-7 px-3 rounded-lg">{{
-                        meat.display_name
-                    }}</span>
+                    <span class="font-serif h-7 px-3 rounded-lg">
+                        {{ meat.display_name }}
+                    </span>
                 </div>
-            </div>
+            </button>
             <div v-show="selectedPage === 1" v-for="vegetable in vegetables" :key="vegetable.id" class="bg-white hover:bg-gray-300 hover:border-4 border-[#77628C] transition-[border]
             cursor-pointer rounded-lg w-10/12 h-20 flex" @click="handleIngredientClick(vegetable)">
                 <div class="bg-secondary-100 text-white p-1 rounded-full h-[40%] flex justify-center items-center border-2
@@ -119,9 +121,9 @@ const handleToggleFoodStoreClick = () => {
                 </div>
                 <div class="flex">
                     <img :src="`/vegetable/${vegetable.name}.png`" :alt="vegetable.name" class="w-16" />
-                    <span class="font-serif h-7 px-3 rounded-lg">{{
-                        vegetable.display_name
-                    }}</span>
+                    <span class="font-serif h-7 px-3 rounded-lg">
+                        {{ vegetable.display_name }}
+                    </span>
                 </div>
             </div>
         </div>
