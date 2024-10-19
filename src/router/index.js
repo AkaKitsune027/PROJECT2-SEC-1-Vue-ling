@@ -22,6 +22,19 @@ const router = createRouter({
       path: "/homepage",
       name: "home-page",
       component: () => import("@/views/HomepageView.vue"),
+
+      children: [
+        {
+          path: "how-to-play",
+          name: "how-to-play-modal",
+          component: () => import("../components/HowToPlayModal.vue"),
+        },
+        {
+          path: "confirm-password",
+          name: "confirm-password-modal",
+          component: () => import("../components/ConfirmDeleteUserModal.vue"),
+        },
+      ],
     },
     {
       path: "/setup",
@@ -48,6 +61,11 @@ const router = createRouter({
           path: "achievement-book",
           name: "achievement-book-modal",
           component: () => import("../components/AchievementBookModal.vue"),
+        },
+        {
+          path: "calculate-score",
+          name: "calculate-score-modal",
+          component: () => import("../components/CalculatorScoreModal.vue"),
         },
       ],
     },

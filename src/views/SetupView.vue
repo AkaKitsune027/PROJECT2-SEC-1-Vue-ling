@@ -26,13 +26,13 @@ const handleSetOutletName = async () => {
 
 <template>
   <div
-    class="page flex flex-col items-center justify-center min-h-screen isekai-background"
+    class="font-sunday flex flex-col items-center justify-center min-h-screen isekai-background"
   >
-    <div class="w-full h-96 max-w-md bg-white p-8 rounded-lg shadow-lg">
-      <h2 class="text-2xl text-center bold text-[#6c4949]">
+    <div class="w-full h-96 max-w-md bg-white p-8 rounded-lg shadow">
+      <h2 class="text-2xl text-center font-bold text-[#6c4949]">
         Create Your Restaurant
       </h2>
-      <img src="/Home.svg" alt="Restaurant" class="w-24 h-24 object-cover ml-36 mt-4" />
+      <img src="/logoHome2.png" alt="Restaurant" class="w-24 h-24 object-cover ml-36 mt-4" />
       <label class="block text-[#6c4949] font-bold mt-4" for="restaurant-name"
         >RESTAURANT NAME <span class="text-red-600">*</span>
       </label>
@@ -47,7 +47,7 @@ const handleSetOutletName = async () => {
       <button
         @click="handleSetOutletName"
         :disabled="!restaurantName"
-        class="w-full bold bg-[#3f6a45] text-white py-3 rounded-lg hover:bg-brown-700 mt-2 disabled:bg-gray-400"
+        class="w-full font-bold bg-[#3f6a45] text-white py-3 rounded-lg hover:bg-brown-700 mt-2 disabled:bg-gray-400"
       >
         CREATE
       </button>
@@ -56,15 +56,17 @@ const handleSetOutletName = async () => {
 </template>
 
 <style scoped>
-.page {
-  font-family: "SUNDAY";
-}
 
 .isekai-background {
   position: relative;
   /* background-color: #231414; ed9848*/
-  background-image: linear-gradient(10deg, #a15852 0%, #eeaa69 100%);
+  background-image: linear-gradient(10deg, #d6b4bd 0%, #8cc293 100%);
+  /* background-image: url('../assets/bg-restaurant.jpg'); */
+  background-size: cover; /* ทำให้ภาพคลุมทั้งหน้า */
   overflow: hidden;
 }
-  
+
+.shadow {
+ box-shadow: 0px 0px 30px #868383;
+}
 </style>

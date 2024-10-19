@@ -148,7 +148,7 @@ export async function validateUsername(username) {
 }
 
 //Delete method - Delete account
-export async function deleteUser(username) {
+export async function deleteUser(username,password) {
   try {
     const res = await fetch(SERVER_URL + '/users', {
       method: 'DELETE'
@@ -197,4 +197,20 @@ export async function updateUserDetails(userId, updateData) {
     console.error(error)
   }
   return patchedUser.userDetail
+}
+
+export async function updateUser(userId, updateData) {
+  try {
+    const res = await fetch(`${SERVER_URL}/users/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updateData),
+    })
+    const updatedData = await res.json()
+    return updatedData
+  } catch (error) {
+    console.log("Error:", error)
+  }
 }
