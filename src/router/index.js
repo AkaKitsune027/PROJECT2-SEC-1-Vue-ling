@@ -62,6 +62,11 @@ const router = createRouter({
           name: "achievement-book-modal",
           component: () => import("../components/AchievementBookModal.vue"),
         },
+        {
+          path: "calculate-score",
+          name: "calculate-score-modal",
+          component: () => import("../components/CalculatorScoreModal.vue"),
+        },
       ],
     },
   ],

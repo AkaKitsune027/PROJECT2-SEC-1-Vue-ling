@@ -1,9 +1,9 @@
 <script setup>
-import { ref, computed } from "vue"
-import { useRouter } from "vue-router"
-import { useUserStore } from "@/stores/user"
-import foodsData from "../../data/foods.json"
-import ingredientsData from "../../data/ingredients.json"
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user'
+import foodsData from '../../data/foods.json'
+import ingredientsData from '../../data/ingredients.json'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -25,7 +25,7 @@ const mappedFiveStarMenus = computed(() => {
 })
 
 const closeModal = () => {
-  router.push({ name: "cooking-page" })
+  router.push({ name: 'cooking-page' })
 }
 
 function showSelectedMenu(menu) {
@@ -41,23 +41,23 @@ function showSelectedMenu(menu) {
       )
       console.log(`Exists indx: ${existsIngredientIndex}`)
       if (existsIngredientIndex === -1) {
-        if (["meat", "vegetable"].includes(ingredientName)) {
+        if (['meat', 'vegetable'].includes(ingredientName)) {
           ingredients.push({
             type: ingredientName,
             name: ingredientName,
             display_name: `${
-              ingredientName === "meat" ? "เนื้อ" : "ผัก"
+              ingredientName === 'meat' ? 'เนื้อ' : 'ผัก'
             }อะไรก็ได้`,
             amount: 1,
             // image: `/meat/meat.png`,
           })
           console.log(ingredientName)
           console.log(ingredients)
-        } else if (["salt", "sugar"].includes(ingredientName)) {
+        } else if (['salt', 'sugar'].includes(ingredientName)) {
           ingredients.push({
-            type: "seasoning",
-            name: "bottle-of-" + ingredientName,
-            display_name: `${ingredientName === "salt" ? "เกลือ" : "น้ำตาล"}`,
+            type: 'seasoning',
+            name: 'bottle-of-' + ingredientName,
+            display_name: `${ingredientName === 'salt' ? 'เกลือ' : 'น้ำตาล'}`,
             amount: 1,
           })
         } else {
@@ -86,7 +86,7 @@ function showSelectedMenu(menu) {
 <template>
   <!-- Modal -->
   <div
-    class="fixed inset-0 bg-gray-800 bg-opacity-70 flex justify-center items-center pl-20"
+    class="fixed inset-0 bg-gray-800 bg-opacity-70 flex justify-center items-center pl-10"
   >
     <div class="relative w-full max-w-2xl max-h-full">
       <!-- Modal content -->
@@ -127,7 +127,9 @@ function showSelectedMenu(menu) {
               class="col-span-2 col-start-2 flex justify-center"
             />
           </div>
-          <div class="pt-0 p-8 flex flex-col gap-2 lg:grid grid-cols-3 grid-flow-row lg:gap-6">
+          <div
+            class="pt-0 p-8 flex flex-col gap-2 lg:grid grid-cols-3 grid-flow-row lg:gap-6"
+          >
             <div
               @click="showSelectedMenu(menu)"
               v-for="(menu, index) in mappedFiveStarMenus"
@@ -178,7 +180,7 @@ function showSelectedMenu(menu) {
               !selectedMenu?.display_name,
           }"
         >
-          {{ selectedMenu?.display_name || "Mystery Menu" }}
+          {{ selectedMenu?.display_name || 'Mystery Menu' }}
         </h1>
         <div class="flex justify-center items-center">
           <img
@@ -198,7 +200,7 @@ function showSelectedMenu(menu) {
           >
             {{
               selectedMenu?.description ||
-              "Achieve a 5-star rating to collect all of these menus!"
+              'Achieve a 5-star rating to collect all of these menus!'
             }}
           </p>
         </div>
