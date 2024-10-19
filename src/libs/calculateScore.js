@@ -58,11 +58,8 @@ export function calculatePrice() {
       }
 
       if (condition.type === 'double') {
-        for (const ingdName of Object.keys(
-          actualRecipeIngredients[condition.value]
-        )) {
-          actualRecipeIngredients[condition.value][ingdName] =
-            actualRecipeIngredients[condition.value][ingdName] * 2
+        for (const ingdName in actualRecipeIngredients[condition.value]) {
+          actualRecipeIngredients[condition.value][ingdName] = actualRecipeIngredients[condition.value][ingdName] * 2
         }
         continue
       }
@@ -73,9 +70,7 @@ export function calculatePrice() {
       }
 
       if (condition.type === 'replace') {
-        const quantity = Object.values(
-          actualRecipeIngredients[condition.value.replace]
-        ).reduce((acc, cur) => acc + cur, 0)
+        const quantity = Object.values(actualRecipeIngredients[condition.value.replace]).reduce((acc, cur) => acc + cur, 0)
         actualRecipeIngredients[condition.value.replace] = {}
 
         const ingdData = getIngredientData(condition.value.with)
