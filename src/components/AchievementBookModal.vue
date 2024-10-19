@@ -52,13 +52,6 @@ function showSelectedMenu(menu) {
           })
           console.log(ingredientName)
           console.log(ingredients)
-        } else if (['salt', 'sugar'].includes(ingredientName)) {
-          ingredients.push({
-            type: 'seasoning',
-            name: 'bottle-of-' + ingredientName,
-            display_name: `${ingredientName === 'salt' ? 'เกลือ' : 'น้ำตาล'}`,
-            amount: 1,
-          })
         } else {
           ingredients.push({
             ...ingredientsData.find((i) => i.name === ingredientName),

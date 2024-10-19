@@ -148,15 +148,21 @@ export async function validateUsername(username) {
 }
 
 //Delete method - Delete account
-export async function deleteUser(username,password) {
+export async function deleteUser(id) {
   try {
-    const res = await fetch(SERVER_URL + '/users', {
-      method: 'DELETE'
+    const response = await fetch(`${SERVER_URL}/users/${id}`, {
+      method: "DELETE",
     })
+    
+    const deletedUser = await response.json()
+
+    console.log("Deleted user:", deletedUser)
+    return deletedUser
   } catch (error) {
-    console.log('Error:', error)
+    console.log("Error:", error)
   }
 }
+
 
 //Patch method - Edit user data
 export async function patchUser(userId, patchData) {

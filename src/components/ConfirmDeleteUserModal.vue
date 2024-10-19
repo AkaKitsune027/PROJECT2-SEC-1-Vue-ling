@@ -1,17 +1,20 @@
 <script setup>
+import { deleteUser } from '@/libs/userManagement';
+import { useUserStore } from '@/stores/user';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-const router = useRouter();
+const router = useRouter()
 const isModalVisible = ref(true)
+const userStore = useUserStore()
+const currentPassword = ref('')
 
-// const closeModal = () => {
-//     isModalVisible.value = false;
-//     router.push({ name: 'home-page' });
-// }
-
-const confirmDelete = () => {
-  
+const confirmDelete = async () => {
+  const currentUser = userStore.user
+  if (currentPassword.value === currentUser.password) {
+    await deleteUser(currentUser.id)
+    router.push({ name: 'login-page' })
+  }
 }
 </script>
 
@@ -29,6 +32,7 @@ const confirmDelete = () => {
       <span class="text-gray-700 mb-2 block text-center">Your Password :</span>
       <input
         type="password"
+        v-model="currentPassword"
         placeholder="Type your password"
         class="w-full px-4 py-2 mb-4 rounded-lg border bg-[#96ab97] border-[#4c4541] focus:outline-none focus:border-[#4c4541]"
       />

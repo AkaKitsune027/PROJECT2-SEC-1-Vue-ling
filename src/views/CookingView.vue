@@ -12,6 +12,7 @@ import RecipesModal from '@/components/RecipesModal.vue'
 import Sound from '@/components/Sound.vue'
 import ShopBar from '@/components/ShopBar.vue'
 import ingredientsData from '../../data/ingredients.json'
+import { calculatePrice } from '../libs/calculateScore'
 
 const router = useRouter()
 const soundStore = useSoundStore()
@@ -83,13 +84,12 @@ const handleToggleFoodStoreClick = () => {
 }
 
 
-const ingredientInCauldron = computed(() => {
-    const ingredientInCauldron = gameState.cauldron.map(ingdId => {
-        const ingd = ingredientsData.find(element => element.id === ingdId)
-        return ingd
-    })
-    return ingredientInCauldron
-})
+
+const handleServeClick = () => {
+    
+    calculatePrice()
+    
+}
 
 async function openScoreModal() {
     // const data = await useUserStore.getData
@@ -176,6 +176,7 @@ async function openScoreModal() {
                 :disabled="gameState.isPreparePhase"></button>
         </div>
 
+
         <div class="col-start-3 row-start-6 col-span-2">
             <div class="bg-[#ACC6AA] flex rounded-xl shadow-neutral-500 shadow-md relative justify-center h-full">
                 <div class="flex justify-center place-items-center gap-2 flex-wrap mx-6 w-[60%]">
@@ -183,6 +184,7 @@ async function openScoreModal() {
                         class="bg-white border-2 border-[#e9d1ff] rounded-lg w-10 h-10 flex justify-center items-center ">
                         <img :src="`/${ingd.type}/${ingd.name}.png`" class="w-10 h-10">
                     </div>
+
                 </div>
                 <!-- ปุ่มถังขยะ -->
                 <div class="w-28 flex items-center justify-end">
@@ -205,8 +207,9 @@ async function openScoreModal() {
                 <div class="h-full rounded-lg transition-[width_filter] duration-300 bg-yellow-500" :style="{
                     width: `${countInteractive * 25}%`
                 }"></div>
-            </button>
+            </button> 
         </div>
+        
         <div class="col-start-2 row-start-1 row-span-4 flex justify-center">
             <RecipesModal />
         </div>

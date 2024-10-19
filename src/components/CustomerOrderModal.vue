@@ -13,21 +13,11 @@ import { updateUserDetails } from '@/libs/userManagement'
 const router = useRouter()
 const route = useRoute()
 const gameState = useGameState()
-const rawOrder = ref(null)
-const order = ref(null)
 const userStore = useUserStore()
 
 const isPrepareOrder = computed(() => route.name === "prepare-modal")
 
 const emits = defineEmits(['handleConfirmOrder'])
-
-watch(() => rawOrder.value, () => {
-    order.value = {
-        customer: customersData.find(c => c.id === rawOrder.value?.customerId),
-        food: foodsData.find(f => f.id === rawOrder.value?.foodId),
-        specialRequirement: specialRequirementData.find(s => s.id === rawOrder.value?.specialRequirementId),
-    }
-}, { immediate: true, deep: true })
 
 function genarateOrder() {
     const randomCustomerIndex = Math.floor(Math.random() * customersData.length)
@@ -50,13 +40,10 @@ function genarateOrder() {
 
 onMounted(async () => {
     const currentOrder = userStore.user.userDetail.currentOrder
-    if (currentOrder) {
-        rawOrder.value = currentOrder
-        return
-    }
-    rawOrder.value = genarateOrder()
+    if (currentOrder) return
+    gameState.rawOrder = genarateOrder()
     userStore.user.userDetail = await updateUserDetails(userStore.user.id, {
-        'currentOrder': rawOrder.value,
+        'currentOrder': gameState.rawOrder,
         isCurrentOrderCommitted: false
     })
 })
@@ -72,10 +59,12 @@ const handleCancelOrder = async () => {
     else {
         router.replace({ name: "cooking-page" })
         gameState.isPreparePhase = true
-        rawOrder.value = genarateOrder()
-        console.log('regenerated:', rawOrder.value)
+
+        userStore.user.userDetail.currentOrder = genarateOrder()
+        console.log('regenerated:', gameState.rawOrder)
+
         userStore.user.userDetail = await updateUserDetails(userStore.user.id, {
-            'currentOrder': rawOrder.value,
+            'currentOrder': gameState.rawOrder,
             isCurrentOrderCommitted: false
         })
     }
@@ -92,7 +81,6 @@ const handleConfirmOrder = async () => {
         emits('handleConfirmOrder')
     }
     else {
-        order?.value
         router.replace({ name: "cooking-page" })
     }
 
@@ -158,9 +146,9 @@ const handleConfirmOrder = async () => {
             <p class="text-xl bg-base text-center font-bold border border-white">ใบสั่งอาหาร </p>
 
             <div class="flex justify-end fixed">
-                <button class="bg-third m-2 p-2 rounded-lg" :title="order.customer?.description">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" class="bi bi-search"
-                        viewBox="0 0 16 16">
+
+                <button class="bg-third m-2 p-2 rounded-lg" :title="gameState.currentOrder.customer?.description">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search" viewBox="0 0 16 16">
                         <path
                             d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
@@ -168,15 +156,16 @@ const handleConfirmOrder = async () => {
                 <p class="flex items-center text-gray-600">ชี้ค้างไว้เพื่อสำรวจลูกค้า</p>
             </div>
 
-            <div class="flex justify-center bg-white py-14">
-                <img :src="`/customer/${order.customer?.name}.png`" class="w-40 h-40">
+
+            <div class="flex justify-center bg-white">
+                <img :src="`/customer/${gameState.currentOrder.customer?.name}.png`" class="w-40 h-40">
             </div>
             <p class="bg-primary text-white text-md text-center py-1 border border-white">ลูกค้า : {{
-                order.customer?.display_name }}
+    gameState.currentOrder.customer?.display_name }}
             </p>
 
-            <p class="bg-white p-2"> ฉันต้องการ {{ order.food?.display_name }} </p>
-            <p class="bg-white px-2">แต่{{ order.specialRequirement?.description }}</p>
+            <p class="bg-white p-2"> ฉันต้องการ {{ gameState.currentOrder.food?.display_name }} </p>
+            <p class="bg-white px-2">แต่{{ gameState.currentOrder.specialRequirement?.description }}</p>
 
             <div class="flex justify-around py-2">
 
