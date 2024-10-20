@@ -1,22 +1,22 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 // หน้าที่กำลังแสดงและจำนวนหน้าทั้งหมด
-const currentPage = ref(1);
-const totalPages = 5; // เปลี่ยนตามจำนวนหน้าที่ต้องการ
+const currentPage = ref(1)
+const totalPages = 5 // เปลี่ยนตามจำนวนหน้าที่ต้องการ
 
 // ฟังก์ชันสำหรับเปลี่ยนหน้า
 const nextPage = () => {
   if (currentPage.value < totalPages) {
-    currentPage.value++;
+    currentPage.value++
   }
-};
+}
 
 const prevPage = () => {
   if (currentPage.value > 1) {
-    currentPage.value--;
+    currentPage.value--
   }
-};
+}
 </script>
 
 <template>
@@ -25,7 +25,8 @@ const prevPage = () => {
     <div class="order-board relative w-3/4 h-3/4 p-5 rounded-lg shadow-lg">
       <!-- ปุ่มปิด -->
       <div class="flex justify-end">
-        <button @click="$emit('close')" class="bg-red-500 text-white px-4 py-2 rounded-lg absolute top-2 right-2">X</button>
+        <button @click="$emit('close')"
+          class="bg-red-500 text-white px-4 py-2 rounded-lg absolute top-2 right-2">X</button>
       </div>
 
       <!-- หัวข้อ "How to Play" -->
@@ -37,9 +38,15 @@ const prevPage = () => {
       <div class="content-container mt-10 px-5 py-3 text-center text-gray-900 overflow-y-auto">
         <div class="page-header">
           <!-- หัวข้อของแต่ละหน้า -->
-          <h3 v-if="currentPage === 1" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">การทำอาหาร</h3>
+          <!-- <h3 v-if="currentPage === 1" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">การทำอาหาร</h3>
           <h3 v-if="currentPage === 2" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">การใช้วัตถุดิบ</h3>
           <h3 v-if="currentPage === 3" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">ระบบชื่อเสียงร้าน</h3>
+          <h3 v-if="currentPage === 4" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">สูตรอาหาร</h3>
+          <h3 v-if="currentPage === 5" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">สมุดสะสม</h3> -->
+          <h3 v-if="currentPage === 1" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">Ingredients</h3>
+          <h3 v-if="currentPage === 2" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">การใช้วัตถุดิบ</h3>
+          <h3 v-if="currentPage === 3" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">ระบบชื่อเสียงร้าน
+          </h3>
           <h3 v-if="currentPage === 4" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">สูตรอาหาร</h3>
           <h3 v-if="currentPage === 5" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">สมุดสะสม</h3>
         </div>
@@ -47,9 +54,10 @@ const prevPage = () => {
         <!-- ส่วนเนื้อหา ให้อยู่กึ่งกลางในแนวตั้ง -->
         <div class="page-content flex-grow flex items-center justify-center">
           <div v-if="currentPage === 1" class="content text-left">
-            <p>ใส่ได้มากที่สุด 10-12 อย่าง</p>
-            <p>วัตถุดิบมีทั้งหมด * อย่าง แบ่งเป็น 2 ประเภท</p>
-            <p>ราคาจะเริ่มต้น 1 - 100 gold</p>
+            <!-- <div v-for="(ingd, index) in ingredientInCauldron" :key="index"
+              class="bg-white border-2 border-[#e9d1ff] rounded-lg w-10 h-10 flex justify-center items-center ">
+              <img :src="`/${ingd.type}/${ingd.name}.png`" class="w-10 h-10">
+            </div> -->
           </div>
 
           <div v-if="currentPage === 2" class="content text-left">
@@ -78,9 +86,8 @@ const prevPage = () => {
 
       <!-- Pagination Dots -->
       <div class="pagination-dots absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        <span v-for="page in totalPages" :key="page" 
-              class="dot w-4 h-4 rounded-full"
-              :class="{'bg-gray-700': currentPage === page, 'bg-gray-300': currentPage !== page}"></span>
+        <span v-for="page in totalPages" :key="page" class="dot w-4 h-4 rounded-full"
+          :class="{ 'bg-gray-700': currentPage === page, 'bg-gray-300': currentPage !== page }"></span>
       </div>
     </div>
   </div>
@@ -104,18 +111,21 @@ const prevPage = () => {
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* จัดหัวข้อให้อยู่ด้านบน */
+  justify-content: flex-start;
+  /* จัดหัวข้อให้อยู่ด้านบน */
 }
 
 .page-header h3 {
-  margin-top: 1rem; /* ทำให้ h3 อยู่ห่างจาก How to Play ประมาณ mt-3 */
+  margin-top: 1rem;
+  /* ทำให้ h3 อยู่ห่างจาก How to Play ประมาณ mt-3 */
 }
 
 .page-content {
   flex-grow: 1;
   display: flex;
   justify-content: center;
-  align-items: center; /* จัดเนื้อหาให้อยู่ตรงกลางในแนวตั้ง */
+  align-items: center;
+  /* จัดเนื้อหาให้อยู่ตรงกลางในแนวตั้ง */
 }
 
 .content p {

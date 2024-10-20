@@ -1,35 +1,41 @@
 <script setup>
-import { computed, ref } from 'vue';
-import foods from '../../data/foods.json';
-import { useUserStore } from "@/stores/user";
+import { computed, ref } from 'vue'
+import foods from '../../data/foods.json'
+import { useUserStore } from "@/stores/user"
+import { getIngredientData } from '../libs/utils'
 
 // ดึงข้อมูลผู้ใช้จาก store
-const userStore = useUserStore();
-const selectedRecipe = ref(null); // เก็บค่าของสูตรที่เลือก
-const isOpenModal = ref(false); // สถานะเปิด/ปิด modal
+const userStore = useUserStore()
+const selectedRecipe = ref(null) // เก็บค่าของสูตรที่เลือก
+const isOpenModal = ref(false) // สถานะเปิด/ปิด modal
 
 // กำหนดสูตรที่ปลดล็อกได้ของผู้ใช้
-const userRecipes = userStore.user.userDetail.recipes;
+const userRecipes = userStore.user.userDetail.recipes
+
 const unlockedRecipes = computed(() => {
     // กรองสูตรที่ปลดล็อกแล้วจาก foods.json โดยเช็ค isUnlock ของ user
     return foods.filter((food) =>
         userRecipes?.some((recipe) => recipe.id === food.id && recipe.isUnlock === true)
-    );
-});
+    )
+})
+
+const ingredients = computed(() => {
+    return selectedRecipe.value.ingredients?.map((ingdName) => getIngredientData(ingdName))
+})
 
 // ฟังก์ชันเพื่อเปิด modal เมื่อเลือกสูตรอาหาร
 const openModal = () => {
     if (selectedRecipe.value) {
-        isOpenModal.value = true;
+        isOpenModal.value = true
     }
-};
+}
 
 // ฟังก์ชันเพื่อปิด modal และรีเซ็ต selectedRecipe
 const closeModal = () => {
-    isOpenModal.value = false;
+    isOpenModal.value = false
     // รีเซ็ต selectedRecipe หลังจากปิด modal เพื่อให้สามารถเลือกสูตรเดิมได้อีกครั้ง
-    selectedRecipe.value = null;
-};
+    selectedRecipe.value = null
+}
 </script>
 
 <template>
@@ -47,8 +53,8 @@ const closeModal = () => {
                 <!-- แสดงรายการสูตรอาหาร -->
                 <option v-for="recipe in unlockedRecipes" :key="recipe.id" :value="recipe"
                     class="text-slate-800 rounded-md  cursor-pointer">
-                <!-- ใช้ display_name เป็นข้อความที่แสดงในรายการ -->
-                 
+                    <!-- ใช้ display_name เป็นข้อความที่แสดงในรายการ -->
+
                     {{ recipe.display_name }}
                 </option>
             </select>
@@ -65,9 +71,9 @@ const closeModal = () => {
                 <!-- ถ้าวัตถุดิบเกิน 5 รายการจะมี scroll -->
                 <div :class="{ 'max-h-40 overflow-y-auto': selectedRecipe.ingredients.length > 5 }">
                     <ul class="list-disc ml-5">
-                        <li v-for="ingredient in selectedRecipe.ingredients" :key="ingredient"
-                            class="text-gray-600 flex items-center">      
-                            {{ ingredient }}
+                        <li v-for="(ingredient, index) in ingredients" :key="index"
+                            class="text-gray-600 flex items-center">
+                            {{ ingredient.display_name }}
                         </li>
                     </ul>
                 </div>

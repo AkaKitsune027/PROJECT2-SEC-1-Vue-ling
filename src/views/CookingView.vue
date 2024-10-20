@@ -88,15 +88,10 @@ const handleToggleFoodStoreClick = () => {
 }
 
 const handleServeClick = () => {
-  calculatePrice()
+    calculatePrice()
+    router.push({ name: "calculate-score-modal" })
 }
 
-async function openScoreModal() {
-  // const data = await useUserStore.getData
-  // console.log(data)
-
-  router.push({ name: "calculate-score-modal" })
-}
 </script>
 
 <template>
@@ -115,8 +110,6 @@ async function openScoreModal() {
       </div>
 
       <div class="relative">
-        <!-- <img src="/minibar.png" class="absolute z-0" /> -->
-
         <div class="flex flex-row relative z-10 gap-2">
           <button>
             <img src="/book.png" class="w-10" />
@@ -164,50 +157,33 @@ async function openScoreModal() {
     <div class="row-start-6 col-start-2 flex justify-center items-end">
       <SeasoningBar />
     </div>
-    <div
-      class="row-span-3 col-span-2 col-start-3 row-start-3 flex justify-center items-center z-60">
-      <!-- ! Cauldron -->
-      <div
-        v-show="!gameState.isPreparePhase"
-        class="row-start-4 col-start-4 fixed">
-        <div>
-          <img
-            src="/src/assets/mouse.svg"
-            class="w-16 select-none pointer-events-none hover:bg-white" />
-          <div
-            class="animate-ping absolute h-full w-full rounded-full bg-white opacity-75"></div>
+        <div class="row-span-3 col-span-2 col-start-3 row-start-3 flex justify-center items-center z-60">
+            <!-- ! Cauldron -->
+            <div v-show="!gameState.isPreparePhase" class="row-start-4 col-start-4 fixed">
+                <div>
+                    <img src="/src/assets/mouse.svg" class="w-16 select-none pointer-events-none hover:bg-white" />
+                    <div class="animate-ping absolute h-full w-full rounded-full bg-white opacity-75"></div>
+                </div>
+                <div
+                    class="row-start-4 col-start-3 bg-white w-fit p-4 rounded-md z-20 select-none pointer-events-none my-3">
+                    คลิกอีก <span class="text-red-600 font-bold">{{ requireClick - countInteractive }}</span>
+                    ครั้งเพื่อคนส่วนผสมเข้าด้วยกัน !
+                </div>
+            </div>
+            <img ref="cauldronRef" :src="currentImage" alt="cauldron" class="select-none pointer-events-none" />
+            <button @click="handleCauldronClick"
+                class="absolute rounded-full w-[26%] h-[49%] translate-y-[7%] cursor-pointer disabled:cursor-default"
+                :disabled="gameState.isPreparePhase"></button>
         </div>
-        <div
-          class="row-start-4 col-start-3 bg-white w-fit p-4 rounded-md z-20 select-none pointer-events-none my-3">
-          คลิกอีก
-          <span class="text-red-600 font-bold">{{
-            requireClick - countInteractive
-          }}</span>
-          ครั้งเพื่อคนส่วนผสมเข้าด้วยกัน !
-        </div>
-      </div>
-      <img
-        ref="cauldronRef"
-        :src="currentImage"
-        alt="cauldron"
-        class="select-none pointer-events-none" />
-      <button
-        @click="handleCauldronClick"
-        class="absolute rounded-full w-[26%] h-[49%] translate-y-[7%] cursor-pointer disabled:cursor-default"
-        :disabled="gameState.isPreparePhase"></button>
-    </div>
 
-    <div class="col-start-3 row-start-6 col-span-2">
-      <div
-        class="bg-[#ACC6AA] flex rounded-xl shadow-neutral-500 shadow-md relative justify-center h-full">
-        <div
-          class="flex justify-center place-items-center gap-2 flex-wrap mx-6 w-[60%]">
-          <div
-            v-for="(ingd, index) in ingredientInCauldron"
-            :key="index"
-            class="bg-white border-2 border-[#e9d1ff] rounded-lg w-10 h-10 flex justify-center items-center">
-            <img :src="`/${ingd.type}/${ingd.name}.png`" class="w-10 h-10" />
-          </div>
+
+        <div class="col-start-3 row-start-6 col-span-2">
+            <div class="bg-[#ACC6AA] flex rounded-xl shadow-neutral-500 shadow-md relative justify-center h-full">
+                <div class="flex justify-center place-items-center gap-2 flex-wrap mx-6 w-[60%]">
+                    <div v-for="(ingd, index) in gameState.ingredientInCauldron" :key="index"
+                        class="bg-white border-2 border-[#e9d1ff] rounded-lg w-10 h-10 flex justify-center items-center ">
+                        <img :src="`/${ingd.type}/${ingd.name}.png`" class="w-10 h-10">
+                    </div>
         </div>
         <!-- ปุ่มถังขยะ -->
         <div class="w-28 flex items-center justify-end">
@@ -221,26 +197,18 @@ async function openScoreModal() {
         </div>
       </div>
     </div>
-
-    <div class="col-start-5 row-start-6 flex justify-center place-items-center">
-      <button
-        class="border-2 bg-yellow-400 border-white rounded-lg h-20 w-64 text-3xl text-white font-rowdies disabled:cursor-not-allowed relative hover:contrast-75 transition duration-300 disabled:hover:contrast-100"
-        :class="
-          countInteractive >= 4
-            ? 'scale-100 saturate-100'
-            : 'scale-90 saturate-[30%]'
-        "
-        :disabled="countInteractive < 4">
-        <div class="absolute w-full h-full grid place-items-center">
-          Serve !!
+        <div class="col-start-5 row-start-6 flex justify-center place-items-center">
+            <button @click="handleServeClick"
+                class="border-2 bg-yellow-400 border-white rounded-lg h-20 w-64 text-3xl text-white font-rowdies disabled:cursor-not-allowed relative hover:contrast-75 transition duration-300 disabled:hover:contrast-100"
+                :class="countInteractive >= 4 ? 'scale-100 saturate-100' : 'scale-90 saturate-[30%]'"
+                :disabled="countInteractive < 4">
+                <div class="absolute w-full h-full grid place-items-center">Serve
+                    !!</div>
+                <div class="h-full rounded-lg transition-[width_filter] duration-300 bg-yellow-500" :style="{
+                    width: `${countInteractive * 25}%`
+                }"></div>
+            </button>
         </div>
-        <div
-          class="h-full rounded-lg transition-[width_filter] duration-300 bg-yellow-500"
-          :style="{
-            width: `${countInteractive * 25}%`,
-          }"></div>
-      </button>
-    </div>
 
     <div class="col-start-2 row-start-1 row-span-4 flex justify-center">
       <RecipesModal />

@@ -74,9 +74,10 @@ const handleIngredientClick = async (targetIngredient) => {
     console.dir(updatedUserDetail)
 }
 
-const handleToggleFoodStoreClick = () => {
-    emits('toggleFoodStoreClick')
-}
+// const handleToggleFoodStoreClick = () => {
+//     emits('toggleFoodStoreClick')
+// }
+
 </script>
 
 <template>
