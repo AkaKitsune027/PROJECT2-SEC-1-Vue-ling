@@ -32,6 +32,7 @@ export function calculatePrice() {
   const foodName = recipe.display_name //ชื่ออาหารของ order นี้
   let recipeUnlockId = null // ตัวแปรสำหรับเก็บ id ของสูตรที่ถูกเปิดล็อค
   let gold = 0 // ตัวแปรสำหรับเก็บค่า gold ที่ได้
+  let pop = userStore.user.userDetail.popularity // ตัวแปรสำหรับเก็บค่า popularity ของผู้เล่น
 
   for (const ingdName of recipe.ingredients) {
     if (['meat', 'vegetable'].includes(ingdName)) {
@@ -245,12 +246,44 @@ export function calculatePrice() {
     console.log('อย่าโกงดิ๊')
   }
 
+
+
   // คำนวนค่า gold ที่ได้
   for (const ingredient of serve) {
     const ingdData = getIngredientData(ingredient.name)
     gold += ingdData.price
   }
   gold += matchedIngredients * 30
+
+
+  // คำนวนค่า popularity ที่ได้
+  if (userStore.user.userDetail.popularity >= 0) {
+    
+    if (stars >= 4) {
+      pop = (5 - Math.round((pop + 50) / 20))//เพิ่ม
+    } 
+     if (stars === 3) {
+      pop = 0
+    }
+    if ( stars <= 2) {
+      pop = Math.round((pop + 50) / 20) * -1 //ลด
+    } 
+  } 
+  if (userStore.user.userDetail.popularity < 0) {
+    if (stars >= 4) {
+       pop = Math.round(((pop * -1) + 50) / 20)
+    }
+    if (stars === 3) {
+      pop = 0
+    }
+    if (stars <= 2) {
+      pop = (5 - Math.round(((pop * -1) + 50) / 20)) * -1
+    } 
+  }
+    
+  
+
+
 
   console.log(`actualRecipeIngredients`, actualRecipeIngredients)
   console.log('Serve', serve)
@@ -264,6 +297,7 @@ export function calculatePrice() {
   console.log(`recipeUnlockId = ${recipeUnlockId}`)
   console.log(`gold:${gold}`)
   console.log(userStore.user.userDetail.fiveStarMenus[recipe.id - 1])
+  console.log(`pop:${pop}`)
   
 
   return {
@@ -275,6 +309,7 @@ export function calculatePrice() {
     review,
     foodName,
     recipeUnlockId,
-    gold
+    gold,
+    pop
   }
 }
