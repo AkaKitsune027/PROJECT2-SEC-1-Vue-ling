@@ -1,5 +1,6 @@
 import { useUserStore } from '@/stores/user'
 import ingredientsData from '../../data/ingredients.json'
+import foodData from '../../data/foods.json'
 import { useGameState } from '@/stores/gameState'
 
 function getIngredientData(ingredientName) {
@@ -21,8 +22,15 @@ export function calculatePrice() {
     vegetable: {},
     seasoning: {},
     category: {},
-    have: []
+    have: [],
+    doNotHave: []
   }
+
+  let totalIngredients = 0 // ตัวนับสำหรับวัตถุดิบทั้งหมดใน actualRecipeIngredients (ไม่รวม notHave)
+  let matchedIngredients = 0 // ตัวนับสำหรับวัตถุดิบที่ตรงกับสูตรรวม
+  let doNotHaveCount = 0 // ตัวนับสำหรับวัตถุดิบที่อยู่ใน notHave
+  const foodName = recipe.display_name //ชื่ออาหารของorderนี้
+  let recipeUnlockId = null // ตัวแปรสำหรับเก็บ id ของสูตรที่ถูกเปิดล็อค
 
   for (const ingdName of recipe.ingredients) {
     if (['meat', 'vegetable'].includes(ingdName)) {
@@ -52,14 +60,16 @@ export function calculatePrice() {
             }
             actualRecipeIngredients[ingdType][ingdType] = currentQuatity
           }
-          actualRecipeIngredients[ingdType][ingdType] += condition.value[ingdType]
+          actualRecipeIngredients[ingdType][ingdType] +=
+            condition.value[ingdType]
         }
         continue
       }
 
       if (condition.type === 'double') {
         for (const ingdName in actualRecipeIngredients[condition.value]) {
-          actualRecipeIngredients[condition.value][ingdName] = actualRecipeIngredients[condition.value][ingdName] * 2
+          actualRecipeIngredients[condition.value][ingdName] =
+            actualRecipeIngredients[condition.value][ingdName] * 2
         }
         continue
       }
@@ -70,7 +80,9 @@ export function calculatePrice() {
       }
 
       if (condition.type === 'replace') {
-        const quantity = Object.values(actualRecipeIngredients[condition.value.replace]).reduce((acc, cur) => acc + cur, 0)
+        const quantity = Object.values(
+          actualRecipeIngredients[condition.value.replace]
+        ).reduce((acc, cur) => acc + cur, 0)
         actualRecipeIngredients[condition.value.replace] = {}
 
         const ingdData = getIngredientData(condition.value.with)
@@ -114,11 +126,18 @@ export function calculatePrice() {
       if (condition.type === 'doNotHave') {
         for (const noNeedIngd of condition.value) {
           const ingdData = getIngredientData(noNeedIngd)
-          if (actualRecipeIngredients[ingdData.type][noNeedIngd]) {
+
+          if (!actualRecipeIngredients.doNotHave.includes(noNeedIngd)) {
+            actualRecipeIngredients.doNotHave.push(noNeedIngd)
+          }
+
+          if (
+            actualRecipeIngredients[ingdData.type] &&
+            actualRecipeIngredients[ingdData.type][noNeedIngd]
+          ) {
             delete actualRecipeIngredients[ingdData.type][noNeedIngd]
           }
         }
-        continue
       }
 
       if (condition.type === 'specificModify') {
@@ -134,5 +153,112 @@ export function calculatePrice() {
       }
     }
   }
-  console.log(actualRecipeIngredients)
+
+  // นับจำนวนวัตถุดิบทั้งหมดใน actualRecipeIngredients (ไม่รวม notHave)
+  for (const category in actualRecipeIngredients) {
+    if (
+      category === 'have' ||
+      category === 'category' ||
+      category === 'doNotHave'
+    )
+      continue
+    totalIngredients += Object.keys(actualRecipeIngredients[category]).reduce(
+      (acc, key) => acc + actualRecipeIngredients[category][key],
+      0
+    )
+  }
+
+  // คัดลอก actualRecipeIngredients เพื่อทำการลบวัตถุดิบที่แมชออก
+  const tempIngredients = JSON.parse(JSON.stringify(actualRecipeIngredients))
+
+  // ตรวจสอบการแมชและลบวัตถุดิบที่ใช้แล้วออก
+  for (const ingredient of serve) {
+    const category = ingredient.type
+    const name = ingredient.name
+
+    // ตรวจสอบว่า ingredient นี้อยู่ใน notHave หรือไม่
+    if (
+      actualRecipeIngredients.doNotHave &&
+      actualRecipeIngredients.doNotHave.includes(name)
+    ) {
+      doNotHaveCount += 1 // เพิ่มตัวนับถ้า ingredient อยู่ใน notHave
+    } else if (
+      tempIngredients[category] &&
+      tempIngredients[category][name] > 0
+    ) {
+      matchedIngredients += 1
+      tempIngredients[category][name] -= 1 // ลบวัตถุดิบที่ใช้แล้ว
+    }
+  }
+
+  // คำนวณเปอร์เซ็นต์การแมช
+  let matchPercentage =
+    totalIngredients > 0
+      ? Math.round((matchedIngredients / totalIngredients) * 100)
+      : 0
+
+  // จัดการเงื่อนไข doNotHave
+  if (doNotHaveCount === 1 && matchPercentage > 60) {
+    matchPercentage = 60 // ถ้ามี 1 วัตถุดิบที่ห้ามใส่
+  } else if (doNotHaveCount > 1) {
+    matchPercentage = 10 // ถ้ามีมากกว่า 1 วัตถุดิบที่ห้ามใส่
+  }
+
+  // คำนวณคะแนนตามเปอร์เซ็นต์การแมช
+  let stars = 0
+  if (matchPercentage >= 100) {
+    stars = 5
+  } else if (matchPercentage >= 80) {
+    stars = 4
+  } else if (matchPercentage >= 60) {
+    stars = 3
+  } else if (matchPercentage >= 40) {
+    stars = 2
+  } else {
+    stars = 1
+  }
+  let review = ''
+
+  // ตรวจสอบรีวิวตามดาวที่ได้
+  if (stars === 5) {
+    review = spr.goodReview
+  } else if (stars === 4 || stars === 3) {
+    review = spr.normalReview
+  } else {
+    review = spr.badReview
+  }
+
+  //สุ่มสูตรใหม่เมื่อผู้เบ่นทำอาหารได้ 5 ดาว
+  if (stars === 5) {
+    const lockedRecipes = userStore.user.userDetail.recipes.filter(
+      (recipe) => recipe.isUnlock === false
+    )
+
+    if (lockedRecipes.length > 0) {
+      recipeUnlockId =
+        lockedRecipes[Math.floor(Math.random() * lockedRecipes.length)].id
+    }
+  }
+
+  console.log(`actualRecipeIngredients${actualRecipeIngredients}`)
+  console.log(`serve${serve}`)
+  console.log(`Total Ingredients: ${totalIngredients}`)
+  console.log(`Matched Ingredients: ${matchedIngredients}`)
+  console.log(`DoNotHave Count: ${doNotHaveCount}`)
+  console.log(`Matching Percentage: ${matchPercentage}%`)
+  console.log(`foodName:${foodName}`)
+  console.log(`stars:${stars}`)
+  console.log(`review:${review}`)
+  console.log(`recipeUnlockId = ${recipeUnlockId}`)
+
+  return {
+    totalIngredients,
+    matchedIngredients,
+    matchPercentage,
+    doNotHaveCount,
+    stars,
+    review,
+    foodName,
+    recipeUnlockId
+  }
 }

@@ -180,7 +180,7 @@ async function openScoreModal() {
         <div class="col-start-3 row-start-6 col-span-2">
             <div class="bg-[#ACC6AA] flex rounded-xl shadow-neutral-500 shadow-md relative justify-center h-full">
                 <div class="flex justify-center place-items-center gap-2 flex-wrap mx-6 w-[60%]">
-                    <div v-for="(ingd, index) in ingredientInCauldron" :key="index"
+                    <div v-for="(ingd, index) in gameState.ingredientInCauldron" :key="index"
                         class="bg-white border-2 border-[#e9d1ff] rounded-lg w-10 h-10 flex justify-center items-center ">
                         <img :src="`/${ingd.type}/${ingd.name}.png`" class="w-10 h-10">
                     </div>
@@ -200,6 +200,7 @@ async function openScoreModal() {
 
         <div class="col-start-5 row-start-6 flex justify-center place-items-center">
             <button
+                @click="handleServeClick"
                 class="border-2 bg-yellow-400 border-white rounded-lg h-20 w-64 text-3xl text-white font-rowdies disabled:cursor-not-allowed relative hover:contrast-75 transition duration-300 disabled:hover:contrast-100"
                 :class="countInteractive >= 4 ? 'scale-100 saturate-100' : 'scale-90 saturate-[30%]'"
                 :disabled="countInteractive < 4">
