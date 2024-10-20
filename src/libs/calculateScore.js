@@ -29,8 +29,9 @@ export function calculatePrice() {
   let totalIngredients = 0 // ตัวนับสำหรับวัตถุดิบทั้งหมดใน actualRecipeIngredients (ไม่รวม notHave)
   let matchedIngredients = 0 // ตัวนับสำหรับวัตถุดิบที่ตรงกับสูตรรวม
   let doNotHaveCount = 0 // ตัวนับสำหรับวัตถุดิบที่อยู่ใน notHave
-  const foodName = recipe.display_name //ชื่ออาหารของorderนี้
+  const foodName = recipe.display_name //ชื่ออาหารของ order นี้
   let recipeUnlockId = null // ตัวแปรสำหรับเก็บ id ของสูตรที่ถูกเปิดล็อค
+  let gold = 0 // ตัวแปรสำหรับเก็บค่า gold ที่ได้
 
   for (const ingdName of recipe.ingredients) {
     if (['meat', 'vegetable'].includes(ingdName)) {
@@ -228,8 +229,10 @@ export function calculatePrice() {
     review = spr.badReview
   }
 
-  //สุ่มสูตรใหม่เมื่อผู้เบ่นทำอาหารได้ 5 ดาว
-  if (stars === 5) {
+  
+
+  // สุ่มสูตรใหม่เมื่อผู้เล่นทำอาหารได้ 5 ดาว
+  if (stars === 5 && userStore.user.userDetail.fiveStarMenus[recipe.id - 1].isUnlock === false) {
     const lockedRecipes = userStore.user.userDetail.recipes.filter(
       (recipe) => recipe.isUnlock === false
     )
@@ -238,10 +241,19 @@ export function calculatePrice() {
       recipeUnlockId =
         lockedRecipes[Math.floor(Math.random() * lockedRecipes.length)].id
     }
+  } else {
+    console.log('อย่าโกงดิ๊')
   }
 
-  console.log(`actualRecipeIngredients${actualRecipeIngredients}`)
-  console.log(`serve${serve}`)
+  // คำนวนค่า gold ที่ได้
+  for (const ingredient of serve) {
+    const ingdData = getIngredientData(ingredient.name)
+    gold += ingdData.price
+  }
+  gold += matchedIngredients * 30
+
+  console.log(`actualRecipeIngredients`, actualRecipeIngredients)
+  console.log('Serve', serve)
   console.log(`Total Ingredients: ${totalIngredients}`)
   console.log(`Matched Ingredients: ${matchedIngredients}`)
   console.log(`DoNotHave Count: ${doNotHaveCount}`)
@@ -250,6 +262,9 @@ export function calculatePrice() {
   console.log(`stars:${stars}`)
   console.log(`review:${review}`)
   console.log(`recipeUnlockId = ${recipeUnlockId}`)
+  console.log(`gold:${gold}`)
+  console.log(userStore.user.userDetail.fiveStarMenus[recipe.id - 1])
+  
 
   return {
     totalIngredients,
@@ -259,6 +274,7 @@ export function calculatePrice() {
     stars,
     review,
     foodName,
-    recipeUnlockId
+    recipeUnlockId,
+    gold
   }
 }
