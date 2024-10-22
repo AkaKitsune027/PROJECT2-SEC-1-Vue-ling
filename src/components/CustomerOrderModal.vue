@@ -58,6 +58,7 @@ const handleCancelOrder = async () => {
     }
     else {
         router.replace({ name: "cooking-page" })
+        gameState.countInteractive = 0
         gameState.isPreparePhase = true
 
         userStore.user.userDetail.currentOrder = genarateOrder()
@@ -66,11 +67,13 @@ const handleCancelOrder = async () => {
         userStore.user.userDetail = await updateUserDetails(userStore.user.id, {
             'currentOrder': gameState.rawOrder,
             isCurrentOrderCommitted: false
+
         })
     }
 }
 
 const handleConfirmOrder = async () => {
+
     if (gameState.isPreparePhase) {
         router.replace({ name: "cooking-modal" })
         gameState.isPreparePhase = false
@@ -148,7 +151,8 @@ const handleConfirmOrder = async () => {
             <div class="flex justify-end fixed">
 
                 <button class="bg-third m-2 p-2 rounded-lg" :title="gameState.currentOrder.customer?.description">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search"
+                        viewBox="0 0 16 16">
                         <path
                             d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
@@ -156,12 +160,11 @@ const handleConfirmOrder = async () => {
                 <p class="flex items-center text-gray-600">ชี้ค้างไว้เพื่อสำรวจลูกค้า</p>
             </div>
 
-
-            <div class="flex justify-center bg-white">
+            <div class="flex justify-center bg-white py-10">
                 <img :src="`/customer/${gameState.currentOrder.customer?.name}.png`" class="w-40 h-40">
             </div>
             <p class="bg-primary text-white text-md text-center py-1 border border-white">ลูกค้า : {{
-    gameState.currentOrder.customer?.display_name }}
+                gameState.currentOrder.customer?.display_name }}
             </p>
 
             <p class="bg-white p-2"> ฉันต้องการ {{ gameState.currentOrder.food?.display_name }} </p>
