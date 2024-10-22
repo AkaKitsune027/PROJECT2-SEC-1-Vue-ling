@@ -43,9 +43,9 @@ function handleHowToPlay() {
       <div
         class="bg-[#f9f9f6] p-8 rounded-lg justify-center shadow-2xl flex flex-col items-center w-full md:w-5/12 h-96">
         <img src="/logoHome2.png" alt="Restaurant" class="w-32 h-32 object-cover " />
-        <p class="text-center font-bold text-lg text-[#2d2d2d]">{{ userStore.user.username }}</p>
-        <p class="text-[#2d2d2d] text-lg mt-4">YOUR RESTAURANT</p>
-        <label class="bg-[#98ab96a5] w-full h-16 text-center py-4 text-white rounded-md text-lg">
+        <p class="text-center font-bold text-lg text-[#2d2d2d] font-rowdies">{{ userStore.user.username }}</p>
+        <p class="text-[#2d2d2d] text-lg mt-4 font-rowdies">YOUR RESTAURANT</p>
+        <label class="bg-[#98ab96a5] w-full h-16 text-center py-4 text-white rounded-md text-lg font-noto-thai">
           {{ userStore.user.outletName }}
         </label>
       </div>

@@ -60,7 +60,7 @@ const closeModal = () => {
 
     <!-- แสดงเนื้อหา Meat หรือ Vegetable ขึ้นอยู่กับ selectedPage -->
     <div
-      class="flex-auto bg-zinc-700 p-2 flex flex-col items-center gap-2 max-h-[28rem] overflow-y-auto custom-scrollbar">
+      class="flex-auto bg-zinc-700 p-2 flex flex-col items-center gap-2 max-h-[28rem] overflow-y-auto shop custom-scrollbar">
 
       <!-- แสดง meat เมื่อ selectedPage === 0 -->
       <div v-show="selectedPage === 0" v-for="meat in meats" :key="meat.id"

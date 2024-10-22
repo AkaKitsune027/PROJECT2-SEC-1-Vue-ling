@@ -63,13 +63,39 @@ const vegetables = computed(() => {
         </div>
 
         <div v-if="currentPage === 1" class="text-left">
-          <p class="my-3">ขั้นตอนในการเล่นเกม</p>
-          <div class="flex items-center gap-3">
+          <p class="my-3 text-xl font-bold">ขั้นตอนในการเล่นเกม</p>
+
+          <div class="flex gap-3">
+            <div class="flex flex-start justify-between">
+
+              <div class="flex mx-4">
+                <span
+                  class=" bg-slate-200 border-4 border-slate-400 rounded-full flex justify-center items-center w-10 h-10 font-bold mx-4 ">
+                  1
+                </span>
+                <span class="my-2">ซื้อของเตรียมไว้สำหรับทำอาหาร</span>
+              </div>
+
+              <div class="flex gap-4 justify-center">
+                <img src="/public/res1.png" alt="res1" class="border-4 h-72">
+                <img src="/public/res2.png" alt="res2" class="border-4 h-72">
+              </div>
+
+
+            </div>
+          </div>
+
+          <div class="flex mx-4">
             <span
-              class=" bg-slate-200 border-4 border-slate-400 rounded-full flex justify-center items-center w-10 h-10 font-bold">
-              1
+              class=" bg-slate-200 border-4 border-slate-400 rounded-full flex justify-center items-center w-10 h-10 font-bold mx-4 ">
+              2
             </span>
-            <span>ซื้อของเตรียมไว้สำหรับทำอาหาร</span>
+            <span class="y-2">ซื้อของเตรียมไว้สำหรับทำอาหาร</span>
+          </div>
+
+          <div class="flex gap-4 justify-center">
+            <img src="/public/res1.png" alt="res1" class="border-4 h-72">
+            <img src="/public/res2.png" alt="res2" class="border-4 h-72">
           </div>
         </div>
 
