@@ -31,13 +31,13 @@ function back() {
                 วัตถุดิบในหม้อที่ถูกลบ<span
                     class=" underline text-[#b12c2c]">จะหายไปจากคลังของคุณและไม่ได้รับเงินค่าวัตถุดิบคืน</span>ยืนยันที่จะลบวัตถุดิบในหม้อหรือไม่?
             </p>
-            <div class="flex justify-center gap-2 mt-3">
+            <div class="flex justify-center gap-10 mt-3">
                 <!-- ปุ่ม confirm -->
                 <button @click="handleCancelCooking"
-                    class="bg-[#269f3e] text-white px-4 py-2 rounded-lg">Confirm</button>
+                    class="bg-[#269f3e] text-white px-4 py-2 rounded-lg">ยืนยัน</button>
 
                 <!-- ปุ่ม cancel -->
-                <button @click="back" class="bg-red-500 text-white px-4 py-2 rounded-lg">Cancel</button>
+                <button @click="back" class="bg-red-500 text-white px-4 py-2 rounded-lg">ยกเลิก</button>
             </div>
         </div>
     </div>

@@ -129,7 +129,7 @@ function handleCancelCooking() {
 
   <div
     class="bg-[url('/kitchen-room1.png')] bg-cover w-screen pt-[4rem] h-screen grid grid-cols-5 grid-rows-6 overflow-hidden">
-    <div class="grid row-span-5 pt-6">
+    <div class="grid row-span-5">
       <IngredientBar
         v-if="!isShopping"
         :userIngredients="userStore.user.userDetail.ingredients" />
