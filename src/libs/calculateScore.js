@@ -2,10 +2,7 @@ import { useUserStore } from '@/stores/user'
 import ingredientsData from '../../data/ingredients.json'
 import foodData from '../../data/foods.json'
 import { useGameState } from '@/stores/gameState'
-
-function getIngredientData(ingredientName) {
-  return ingredientsData.find((ingd) => ingd.name === ingredientName)
-}
+import { getIngredientData } from './utils'
 
 export function calculatePrice() {
   const userStore = useUserStore()
@@ -148,7 +145,7 @@ export function calculatePrice() {
           actualRecipeIngredients[ingdData.type][ingdName] =
             actualRecipeIngredients[ingdData.type][ingdName]
               ? actualRecipeIngredients[ingdData.type][ingdName] +
-                condition.value[ingdName]
+              condition.value[ingdName]
               : condition.value[ingdName]
         }
         continue

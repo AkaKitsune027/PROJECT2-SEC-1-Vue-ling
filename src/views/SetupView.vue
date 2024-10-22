@@ -60,8 +60,13 @@ const handleSetOutletName = async () => {
 .isekai-background {
   position: relative;
   /* background-color: #231414; ed9848*/
-  background-image: linear-gradient(10deg, #d6b4bd 0%, #8cc293 100%);
-  /* background-image: url('../assets/bg-restaurant.jpg'); */
+  /* background-image: linear-gradient(10deg, #5c4e47 0%, #faf2b4 100%); */
+  background: linear-gradient(
+    135deg,
+    rgb(103, 95, 87) 5%,
+    rgb(241, 234, 186) 60%,
+    #70665e 100%
+  );
   background-size: cover; /* ทำให้ภาพคลุมทั้งหน้า */
   overflow: hidden;
 }
