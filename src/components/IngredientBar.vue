@@ -48,6 +48,8 @@ watchEffect(() => {
 
 const handleIngredientClick = async (targetIngredient) => {
 
+    if (gameState.isPreparePhase) return
+
     if (targetIngredient.amount < 1) return
     if (gameState.cauldron.length >= 14) return
 
@@ -65,6 +67,9 @@ const handleIngredientClick = async (targetIngredient) => {
         console.log(updateIngredients)
 
         gameState.addToCauldron(targetIngredient.id)
+
+        console.log(gameState.cauldron)
+
     } else {
         console.error('Error to update user data.')
     }
@@ -81,19 +86,21 @@ const handleIngredientClick = async (targetIngredient) => {
 </script>
 
 <template>
-    <div class="relative flex flex-col overflow-hidden rounded-r-xl">
+    <div class="relative flex flex-col overflow-hidden rounded-r-xl font-noto-thai">
         <div
             class="pointer-events-none w-full h-16 absolute bottom-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.5)_100%)]">
         </div>
-        <div class="flex-none bg-base text-center text-xl font-rowdies p-2">
-            <p class="py-3">Ingredient</p>
+        <div class="flex-none bg-base text-center text-xl p-2">
+            <p class="py-3 font-bold">วัตถุดิบ</p>
             <div class="flex rounded-lg">
                 <div @click="handleSelectPage(0)"
-                    class="flex-1 flex justify-center cursor-pointer bg-[#c3e0c1] hover:bg-[#90a58e] rounded-lg border border-white">
+                    class="flex-1 flex justify-center cursor-pointer bg-[#c3e0c1] hover:bg-[#90a58e] rounded-lg border border-white"
+                    :class="{ 'bg-[#90a58e]': selectedPage === 0 }">
                     <img src="/meat.png" alt="meat-bar" class="w-12">
                 </div>
                 <div @click="handleSelectPage(1)"
-                    class="flex-1 flex justify-center cursor-pointer bg-[#c3e0c1] hover:bg-[#90a58e] rounded-lg border border-white">
+                    class="flex-1 flex justify-center cursor-pointer bg-[#c3e0c1] hover:bg-[#90a58e] rounded-lg border border-white"
+                    :class="{ 'bg-[#90a58e]': selectedPage === 1 }">
                     <img src="/vegetable.png" alt="vegetable-bar" class="w-12">
                 </div>
             </div>
@@ -109,7 +116,7 @@ const handleIngredientClick = async (targetIngredient) => {
                 </div>
                 <div class="flex">
                     <img :src="`/meat/${meat.name}.png`" :alt="meat.name" class="w-16" />
-                    <span class="font-serif h-7 px-3 rounded-lg">
+                    <span class="h-7 px-3 rounded-lg">
                         {{ meat.display_name }}
                     </span>
                 </div>

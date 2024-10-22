@@ -1,4 +1,5 @@
 <script setup>
+
 import { computed, onMounted, ref, watchEffect } from "vue"
 import { useRouter } from "vue-router"
 import { useUserStore } from "@/stores/user"
@@ -11,13 +12,14 @@ import GoldAndPopularity from "@/components/GoldAndPopularity.vue"
 import RecipesModal from "@/components/RecipesModal.vue"
 import Sound from "@/components/Sound.vue"
 import ShopBar from "@/components/ShopBar.vue"
-import ingredientsData from "../../data/ingredients.json"
 import { calculatePrice } from "../libs/calculateScore"
+
 
 const router = useRouter()
 const soundStore = useSoundStore()
 const userStore = useUserStore()
 const gameState = useGameState()
+// const showHowToPlayModal = ref(false)
 
 const isShow = ref(true)
 const handleConfirmOrderClick = () => {
@@ -39,7 +41,6 @@ function handleOrderSignClick() {
 
 // Image animation
 const cauldronRef = ref(null)
-const countInteractive = ref(0)
 const currentCauldronImageFrame = ref(0)
 const currentImage = computed(() => {
   const cauldronImage = [
@@ -55,26 +56,23 @@ const isShopping = ref(false)
 
 let cauldronInterval = null
 const handleCauldronClick = () => {
-  if (countInteractive.value > 3 || cauldronInterval) return
+    if (gameState.countInteractive > gameState.requireClick || cauldronInterval) return
 
-  cauldronRef.value.classList.add("animate-stir")
+    cauldronRef.value.classList.add('animate-stir')
 
-  cauldronInterval = setInterval(() => {
-    currentCauldronImageFrame.value++
-    if (currentCauldronImageFrame.value > requireClick) {
-      currentCauldronImageFrame.value = 0
-      countInteractive.value++
-      console.log("CurrentCountInteractive: " + countInteractive.value)
-      clearInterval(cauldronInterval)
-      cauldronInterval = null
-      cauldronRef.value.classList.remove("animate-stir")
-      // countInteractive.value = 0
-    }
-  }, 700)
-  soundStore.playSound("sfx", "/sounds/boiling-water-sound.mp3")
+    cauldronInterval = setInterval(() => {
+        currentCauldronImageFrame.value++
+        if (currentCauldronImageFrame.value > 4) {
+            currentCauldronImageFrame.value = 0
+            gameState.countInteractive++
+            console.log('CurrentgameState.countInteractive: ' + gameState.countInteractive)
+            clearInterval(cauldronInterval)
+            cauldronInterval = null
+            cauldronRef.value.classList.remove('animate-stir')
+        }
+    }, 700)
+    soundStore.playSound('sfx', '/sounds/boiling-water-sound.mp3')
 }
-
-const requireClick = 4
 
 async function openAchievementBook() {
   const data = await useUserStore.getData
@@ -95,29 +93,34 @@ const handleServeClick = () => {
 </script>
 
 <template>
-  <div class="w-screen h-[4rem] p-3 z-50 fixed top-0 bg-transparent">
-    <div class="flex justify-between">
-      <RouterLink to="/homepage">
-        <button
-          class="hover:shadow-md w-12 transform transition-transform duration-300 hover:scale-110">
-          <img src="/arrow-back2.png" class="w-11" />
-        </button>
-      </RouterLink>
 
-      <div
-        class="absolute pointer-events-none text-center w-[calc(100%-1.5rem)] font-rowdies text-3xl text-white">
-        Isekai Cooking
-      </div>
+    <div class="bg-[#71A0A5] border drop-shadow-md w-screen h-[4rem] p-3 font-noto-thai">
+        <div class="flex justify-between">
+            <RouterLink to="/homepage">
+                <button class="bg-[#ACC6AA] hover:bg-[#90a58e] w-12 rounded-lg border border-white">
+                    <img src="/src/assets/arrow-back.svg" class="w-10" />
+                </button>
+            </RouterLink>
 
-      <div class="relative">
-        <div class="flex flex-row relative z-10 gap-2">
-          <button>
-            <img src="/book.png" class="w-10" />
-          </button>
-          <button @click="openAchievementBook">
-            <img src="/trophy.png" class="w-10" />
-          </button>
-          <Sound />
+            <div
+                class="absolute pointer-events-none text-center w-[calc(100%-1.5rem)] text-3xl text-white font-rowdies">
+                Isekai Cooking
+            </div>
+
+            <div class="flex gap-3">
+
+                <button @click="handleHowToPlay"
+                    class="bg-[#ACC6AA] hover:bg-[#90a58e] flex justify-center w-12 rounded-lg h-10 border border-white">
+                    <img src="/src/assets/book-open.svg" class="w-10" />
+                </button>
+
+                <button @click="openAchievementBook"
+                    class="bg-[#ACC6AA] hover:bg-[#90a58e] flex justify-center items-center w-12 rounded-lg h-10 border border-white">
+                    <img src="/src/assets/trophy.svg" class="w-10" />
+                </button>
+
+                <Sound />
+            </div>
         </div>
       </div>
     </div>
@@ -157,16 +160,45 @@ const handleServeClick = () => {
     <div class="row-start-6 col-start-2 flex justify-center items-end">
       <SeasoningBar />
     </div>
+
+    <div
+        class="bg-[url('/bg.png')] bg-cover w-screen h-[calc(100vh-4rem)] grid grid-cols-5 grid-rows-6 overflow-hidden font-noto-thai">
+        <div class="grid row-span-5 pt-6">
+            <IngredientBar v-if="!isShopping" :userIngredients="userStore.user.userDetail.ingredients" />
+            <ShopBar v-else-if="isShopping" />
+        </div>
+        <div class="row-start-6 col-start-1 pt-2">
+            <!-- ? Toggle Food Store Button -->
+            <div class="bg-zinc-700 h-[5rem] rounded-r-xl grid place-items-center">
+                <button @click="handleToggleFoodStoreClick" :disabled="gameState.isPreparePhase === false"
+                    class="bg-base hover:bg-[#90a58e] w-[calc(100%-2rem)] h-[calc(100%-2rem)] rounded-xl border border-white grid place-items-center active:scale-95 hover:scale-105 transition"
+                    :class="{ grayscale: !gameState.isPreparePhase, 'bg-[#9d8a69]': isShopping, 'hover:bg-[#d1ba91]': isShopping }">
+                    <div v-show="!isShopping" class="flex justify-center items-center gap-2">
+                        <img src="/src/assets/bag.svg" alt="shop" class="h-6" />
+                        <div class="text-xl text-white">ร้านค้า</div>
+                    </div>
+                    <div v-show="isShopping" class="flex justify-center items-center gap-2">
+                        <img src="/src/assets/home.svg" alt="home" class="h-6" />
+                        <div class="text-xl text-white">กลับร้าน</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <div class="row-start-6 col-start-2 flex justify-center items-end">
+            <SeasoningBar />
+        </div>
+
         <div class="row-span-3 col-span-2 col-start-3 row-start-3 flex justify-center items-center z-60">
             <!-- ! Cauldron -->
             <div v-show="!gameState.isPreparePhase" class="row-start-4 col-start-4 fixed">
-                <div>
+                <!-- <div>
                     <img src="/src/assets/mouse.svg" class="w-16 select-none pointer-events-none hover:bg-white" />
                     <div class="animate-ping absolute h-full w-full rounded-full bg-white opacity-75"></div>
-                </div>
+                </div> -->
                 <div
                     class="row-start-4 col-start-3 bg-white w-fit p-4 rounded-md z-20 select-none pointer-events-none my-3">
-                    คลิกอีก <span class="text-red-600 font-bold">{{ requireClick - countInteractive }}</span>
+                    คลิกอีก <span class="text-red-600 font-bold">{{ gameState.requireClick - gameState.countInteractive
+                        }}</span>
                     ครั้งเพื่อคนส่วนผสมเข้าด้วยกัน !
                 </div>
             </div>
@@ -199,14 +231,12 @@ const handleServeClick = () => {
     </div>
         <div class="col-start-5 row-start-6 flex justify-center place-items-center">
             <button @click="handleServeClick"
-                class="border-2 bg-yellow-400 border-white rounded-lg h-20 w-64 text-3xl text-white font-rowdies disabled:cursor-not-allowed relative hover:contrast-75 transition duration-300 disabled:hover:contrast-100"
-                :class="countInteractive >= 4 ? 'scale-100 saturate-100' : 'scale-90 saturate-[30%]'"
-                :disabled="countInteractive < 4">
-                <div class="absolute w-full h-full grid place-items-center">Serve
-                    !!</div>
-                <div class="h-full rounded-lg transition-[width_filter] duration-300 bg-yellow-500" :style="{
-                    width: `${countInteractive * 25}%`
-                }"></div>
+                class="border-2 bg-yellow-400 border-white rounded-lg h-20 w-64 text-3xl text-white disabled:cursor-not-allowed relative hover:contrast-75 transition duration-300 disabled:hover:contrast-100"
+                :class="gameState.countInteractive >= gameState.requireClick ? 'scale-100 saturate-100' : 'scale-90 saturate-[30%]'"
+                :disabled="gameState.isPreparePhase">
+                <div class="absolute w-full h-full grid place-items-center">เสิร์ฟ !!</div>
+                <div class="h-full rounded-lg transition-[width_filter] duration-300 bg-yellow-500"
+                    :style="{ width: `${gameState.countInteractive * (100 / gameState.requireClick)}%` }"></div>
             </button>
         </div>
 

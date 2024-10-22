@@ -19,6 +19,15 @@
     background-color: #5b8085;
 }
 
+.shop.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #9d8a69;
+    border-radius: 7px;
+}
+
+.shop.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #695c46;
+}
+
 @font-face {
     font-family: 'NukuFont';
     src: url('../assets/font/nuku-nuku.regular.ttf') format('truetype');

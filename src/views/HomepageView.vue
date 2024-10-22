@@ -48,6 +48,7 @@ const logout = () => {
     >
       <!-- Restaurant Info Section -->
       <div
+
         class="bg-[#f9f9f6] p-8 rounded-lg justify-center shadow-2xl flex flex-col items-center w-full md:w-5/12 h-fit"
       >
         <img
@@ -56,7 +57,7 @@ const logout = () => {
           class="w-32 h-32 object-cover"
         />
         <div class="flex w-full mt-4">
-          <p class="text-[#2d2d2d] text-xl font-bold mr-8 text-center mt-4">UserName</p>
+          <p class="text-[#2d2d2d] text-xl font-rowdies font-bold mr-8 text-center mt-4">UserName</p>
           <label
             class="bg-[#b9bcbda5] w-64 h-16 text-center py-4 text-black rounded-md text-xl"
           >
@@ -64,9 +65,9 @@ const logout = () => {
           </label>
         </div>
         <div class="flex w-full mt-2">
-          <p class="text-[#2d2d2d] text-bas font-bold mr-4 text-center mt-2">YOUR RESTAURANT</p>
+          <p class="text-[#2d2d2d] text-bas font-bold  font-rowdies mr-4 text-center mt-2">YOUR RESTAURANT</p>
           <label
-            class="bg-[#b9bcbda5] w-96 h-16 text-center py-4 text-[#000000] rounded-md text-xl"
+            class="bg-[#b9bcbda5] w-96 h-16 text-center py-4 text-[#000000] rounded-md text-xl font-noto-thai"
           >
             {{ userStore.user.outletName }}
           </label>
