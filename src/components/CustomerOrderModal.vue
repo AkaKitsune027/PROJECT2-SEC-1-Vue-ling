@@ -19,7 +19,7 @@ const isPrepareOrder = computed(() => route.name === "prepare-modal")
 
 const emits = defineEmits(['handleConfirmOrder'])
 
-function genarateOrder() {
+function generateOrder() {
     const randomCustomerIndex = Math.floor(Math.random() * customersData.length)
     const randomFoodIndex = Math.floor(Math.random() * foodsData.length)
 
@@ -41,7 +41,7 @@ function genarateOrder() {
 onMounted(async () => {
     const currentOrder = userStore.user.userDetail.currentOrder
     if (currentOrder) return
-    gameState.rawOrder = genarateOrder()
+    gameState.rawOrder = generateOrder()
     userStore.user.userDetail = await updateUserDetails(userStore.user.id, {
         'currentOrder': gameState.rawOrder,
         isCurrentOrderCommitted: false
@@ -60,7 +60,7 @@ const handleCancelOrder = async () => {
         router.replace({ name: "cooking-page" })
         gameState.isPreparePhase = true
 
-        userStore.user.userDetail.currentOrder = genarateOrder()
+        userStore.user.userDetail.currentOrder = generateOrder()
         console.log('regenerated:', gameState.rawOrder)
 
         userStore.user.userDetail = await updateUserDetails(userStore.user.id, {
@@ -148,7 +148,8 @@ const handleConfirmOrder = async () => {
             <div class="flex justify-end fixed">
 
                 <button class="bg-third m-2 p-2 rounded-lg" :title="gameState.currentOrder.customer?.description">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search"
+                        viewBox="0 0 16 16">
                         <path
                             d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
@@ -161,7 +162,7 @@ const handleConfirmOrder = async () => {
                 <img :src="`/customer/${gameState.currentOrder.customer?.name}.png`" class="w-40 h-40">
             </div>
             <p class="bg-primary text-white text-md text-center py-1 border border-white">ลูกค้า : {{
-    gameState.currentOrder.customer?.display_name }}
+                gameState.currentOrder.customer?.display_name }}
             </p>
 
             <p class="bg-white p-2"> ฉันต้องการ {{ gameState.currentOrder.food?.display_name }} </p>

@@ -281,7 +281,7 @@
   {
     "id": 20,
     "type": "monster",
-    "description": "ข้าแพ้เนื้อจำพวกหมู กาลิออน และเห็ดทุกชนิด",
+    "description": "ข้าแพ้ไข่และเห็ดทุกชนิด อย่าให้ข้าเห็นพวกมันเชียว",
     "badReview": "จะ.. เจ้าใส่อะไรมา ข้าบอกแล้วว่า.. *อ๊อคค",
     "normalReview": "พอใช้ได้ แต่ข้ารู้สึกคันตามตัวนิดหน่อยนะ",
     "goodReview": "อาหารอร่อยมาก เจ้ามีความสามารถสูงมากเลยนะ",
@@ -289,11 +289,10 @@
       {
         "type": "doNotHave",
         "value": [
-          "orcMeat",
-          "boarMeat",
-          "galion",
+          "redEyesSnakeEggs",
           "mysticMushroom",
-          "rainbowMushroom"
+          "rainbowMushroom",
+          "orcMushroom"
         ]
       }
     ]
