@@ -57,13 +57,21 @@ const closeModal = () => {
     class="fixed inset-0 bg-gray-800 flex justify-center items-center bg-opacity-70"
   >
     <div class="relative w-full max-w-2xl max-h-full">
-      <div class="bg-white rounded-2xl shadow">
+      <div class="bg-[#fff8e2] rounded-2xl shadow">
+        <img
+          :src="`/medal-bronze.png`"
+          alt="medal"
+          class="w-44 absolute -top-8 -left-16 -rotate-[10deg]"
+        />
+
         <!-- Modal header -->
-        <div class="relative flex items-center justify-center pt-8 pb-5">
-          <h1 class="text-4xl font-bold font-rowdies text-gray-600">REVIEW</h1>
+        <div class="relative flex items-center justify-center pt-8">
+          <h1 class="text-4xl font-extrabold font-noto-thai text-gray-600">
+            สรุปผลรวมคะแนน
+          </h1>
           <button
             @click="closeModal"
-            class="absolute top-6 right-6 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+            class="absolute top-6 right-6 text-gray-400 bg-transparent hover:bg-[#ffedb2] hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
           >
             <svg
               class="w-3 h-3"
@@ -82,6 +90,7 @@ const closeModal = () => {
             </svg>
           </button>
         </div>
+
         <!-- Modal body -->
         <!-- <div v-for="food in mappedFiveStarMenus" key="food.id">
           <img
@@ -92,16 +101,16 @@ const closeModal = () => {
         </div> -->
         <div class="flex flex-col justify-center items-center p-4">
           <img
-            src="/public/unknownDish.png"
+            src="/foods/beachSoup.png"
             alt="foodname"
             class="w-40 drop-shadow--[0_8px_5px_rgba(0,0,0,0.3)]"
           />
           <img
             :src="ratingStars(rating)"
             alt="Star Rating"
-            class="w-1/2 mt-2"
+            class="w-1/2 mt-1"
           />
-          <p class="text-4xl font-bold font-noto-thai text-gray-600 mt-4">
+          <p class="text-4xl font-bold font-noto-thai text-gray-600 mt-3">
             ซุปชายหาด
           </p>
         </div>
@@ -110,17 +119,34 @@ const closeModal = () => {
         <div
           class="pt-4 pb-8 text-xl font-bold font-noto-thai text-gray-600 text-center"
         >
-          <p class="text-2xl">Review: {{ specialRequirement[1].goodReview }}</p>
-          <div class="flex justify-around">
-            <p class="py-4">Gold: {{  }}</p>
-            <p class="py-4">Popularity: {{  }}</p>
-            <p class="py-4">Matching: {{  }}</p>
+          <div class="text-start px-12">
+            <p class="pb-4">
+              ความต้องการพิเศษ: <span class="font-medium">{{ specialRequirement[1].description }}</span>
+            </p>
+            <p>รีวิว: <span class="font-medium">{{ specialRequirement[1].goodReview }}</span></p>
           </div>
-          <p>New Recipe Unlock: </p>
+          <div class="grid grid-cols-3 gap-4 py-8 px-12 text-start">
+            <p>โกลด์: <span class="font-medium">200 💰</span></p>
+            <p>ชื่อเสียง: <span class="font-medium">4.5 📣</span></p>
+            <p>ความถูกต้อง: <span class="font-medium">20%</span></p>
+          </div>
+          <div class="gradient flex flex-row justify-center bg-amber-200 p-2">
+            <p>รางวัลพิเศษสำหรับการปลดล็อก 5 ดาว :</p>
+            <p>&nbsp;สูตร<span>ข้าวผัดราชาหมู</span></p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.gradient {
+  background: rgb(249, 242, 149);
+  background: linear-gradient(135deg,
+      rgba(249, 242, 149, 0.75) 0%,
+      rgba(224, 170, 62, 0.75) 35%,
+      rgba(250, 243, 152, 0.75) 75%,
+      rgba(184, 138, 68, 0.75) 100%);
+}
+</style>

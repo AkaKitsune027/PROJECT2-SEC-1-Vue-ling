@@ -192,8 +192,11 @@ const handleConfirmOrder = async () => {
                 gameState.currentOrder.customer?.display_name }}
             </p>
 
-            <p class="bg-white p-2"> ฉันต้องการ {{ gameState.currentOrder.food?.display_name }} </p>
-            <p class="bg-white px-2">แต่{{ gameState.currentOrder.specialRequirement?.description }}</p>
+            <div class="font-noto-thai">
+                <p class="bg-white p-2">ฉันต้องการ <span class="font-extrabold">{{ gameState.currentOrder.food?.display_name }}</span></p>
+                <p class="bg-white p-2"><span class="font-bold">คำอธิบายเมนู: </span> {{ gameState.currentOrder.food?.description }}</p>
+                <p class="bg-white px-2 pb-2 text-green-600">แต่{{ gameState.currentOrder.specialRequirement?.description }}</p>
+            </div>
 
             <div class="flex justify-around pt-2">
 
