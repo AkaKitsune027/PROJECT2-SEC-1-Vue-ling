@@ -56,7 +56,7 @@ const isShopping = ref(false)
 
 let cauldronInterval = null
 const handleCauldronClick = () => {
-    if (gameState.countInteractive > gameState.requireClick || cauldronInterval) return
+    if (gameState.countInteractive >= gameState.requireClick || cauldronInterval) return
 
     cauldronRef.value.classList.add('animate-stir')
 
@@ -91,13 +91,12 @@ const handleServeClick = () => {
 }
 
 function handleCancelCooking() {
-  router.push({ name: "cancel-order-modal" })
+    router.push({ name: "cancel-order-modal" })
 }
 
 </script>
 
 <template>
-
     <div class="w-screen h-[4rem] p-3 z-50 fixed top-0 bg-transparent">
         <div class="flex justify-between">
             <RouterLink to="/homepage">
@@ -135,8 +134,8 @@ function handleCancelCooking() {
             <!-- ? Toggle Food Store Button -->
             <div class="bg-zinc-700 h-[5rem] rounded-r-xl grid place-items-center">
                 <button @click="handleToggleFoodStoreClick" :disabled="gameState.isPreparePhase === false"
-                    class="bg-base hover:bg-[#90a58e] w-[calc(100%-2rem)] h-[calc(100%-2rem)] rounded-xl border border-white grid place-items-center active:scale-95 hover:scale-105 transition"
-                    :class="{ grayscale: !gameState.isPreparePhase, 'bg-[#9d8a69]': isShopping, 'hover:bg-[#d1ba91]': isShopping }">
+                    class="w-[calc(100%-2rem)] h-[calc(100%-2rem)] rounded-xl border border-white grid place-items-center active:scale-95 hover:scale-105 transition"
+                    :class="[{ grayscale: !gameState.isPreparePhase }, isShopping ? 'bg-[#9d8a69] hover:bg-[#d1ba91]' : 'bg-base hover:bg-[#90a58e]']">
                     <div v-show="!isShopping" class="flex justify-center items-center gap-2">
                         <img src="/src/assets/bag.svg" alt="shop" class="h-6" />
                         <div class="text-xl text-white">ร้านค้า</div>
@@ -161,9 +160,7 @@ function handleCancelCooking() {
                 </div> -->
                 <div
                     class="row-start-4 col-start-3 bg-white w-fit p-4 rounded-md z-20 select-none pointer-events-none my-3">
-                    คลิกอีก <span class="text-red-600 font-bold">{{ gameState.requireClick -
-                        gameState.countInteractive
-                        }}</span>
+                    คลิกอีก <span class="text-red-600 font-bold">{{ gameState.requireClick }}</span>
                     ครั้งเพื่อคนส่วนผสมเข้าด้วยกัน !
                 </div>
             </div>
@@ -182,25 +179,24 @@ function handleCancelCooking() {
                         <img :src="`/${ingd.type}/${ingd.name}.png`" class="w-10 h-10">
                     </div>
                 </div>
-        <!-- ปุ่มถังขยะ -->
-        <div class="w-28 flex items-center justify-end">
-          <div class="flex justify-end transform">
-            <button  :disabled="gameState.cauldron.length === 0" 
-              @click="handleCancelCooking"
-              :class="gameState.cauldron.length === 0 ? 'cursor-not-allowed opacity-50' : ''"
-              class="bg-alert-200 hover:bg-[#7f4641] border border-white w-12 rounded-lg flex justify-center">
-              <img src="/src/assets/trash.svg" alt="trash" class="w-6" />
-            </button>
-          </div>
+                <!-- ปุ่มถังขยะ -->
+                <div class="w-28 flex items-center justify-end">
+                    <div class="flex justify-end transform">
+                        <button :disabled="gameState.cauldron.length === 0" @click="handleCancelCooking"
+                            :class="gameState.cauldron.length === 0 ? 'cursor-not-allowed opacity-50' : ''"
+                            class="bg-alert-200 hover:bg-[#7f4641] border border-white w-12 rounded-lg flex justify-center">
+                            <img src="/src/assets/trash.svg" alt="trash" class="w-6" />
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
         <div class="col-start-5 row-start-6 flex justify-center place-items-center">
             <button @click="handleServeClick"
                 class="border-2 bg-yellow-400 border-white rounded-lg h-20 w-64 text-3xl text-white disabled:cursor-not-allowed relative hover:contrast-75 transition duration-300 disabled:hover:contrast-100"
                 :class="gameState.countInteractive >= gameState.requireClick ? 'scale-100 saturate-100' : 'scale-90 saturate-[30%]'"
-                :disabled="gameState.isPreparePhase">
+                :disabled="gameState.isPreparePhase || gameState.countInteractive < gameState.requireClick">
                 <div class="absolute w-full h-full grid place-items-center">เสิร์ฟ !!</div>
                 <div class="h-full rounded-lg transition-[width_filter] duration-300 bg-yellow-500"
                     :style="{ width: `${gameState.countInteractive * (100 / gameState.requireClick)}%` }"></div>

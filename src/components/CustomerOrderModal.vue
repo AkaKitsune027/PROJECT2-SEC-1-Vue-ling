@@ -71,31 +71,31 @@ const handleCancelOrder = async () => {
 
         // กำหนดค่า currentOrder ใหม่
         userStore.user.userDetail.currentOrder = generateOrder()
-        console.log('regenerated:', gameState.rawOrder);
+        console.log('regenerated:', gameState.rawOrder)
 
         // อัปเดตข้อมูลผู้ใช้
         const updateData = {
             currentOrder: gameState.rawOrder,
             isCurrentOrderCommitted: false,
             popularity: updatedPopularity // ลดค่าชื่อเสียง
-        };
+        }
 
         try {
             const updatedUserDetails = await updateUserDetails(userStore.user.id, updateData)
 
             if (updatedUserDetails && updatedUserDetails.popularity === updatedPopularity) {
-                userStore.user.userDetail.popularity = updatedUserDetails.popularity;
-                userStore.user.userDetail.currentOrder = updatedUserDetails.currentOrder;
+                userStore.user.userDetail.popularity = updatedUserDetails.popularity
+                userStore.user.userDetail.currentOrder = updatedUserDetails.currentOrder
                 await updateUser(userStore.user.id, userStore.user)
             } else {
-                useUserStore.user = null;
+                useUserStore.user = null
                 router.push({ name: 'login-page' })
             }
         } catch (error) {
             console.error(error)
         }
     }
-};
+}
 
 const handleConfirmOrder = async () => {
 
@@ -193,9 +193,12 @@ const handleConfirmOrder = async () => {
             </p>
 
             <div class="font-noto-thai">
-                <p class="bg-white p-2">ฉันต้องการ <span class="font-extrabold">{{ gameState.currentOrder.food?.display_name }}</span></p>
-                <p class="bg-white p-2"><span class="font-bold">คำอธิบายเมนู: </span> {{ gameState.currentOrder.food?.description }}</p>
-                <p class="bg-white px-2 pb-2 text-green-600">แต่{{ gameState.currentOrder.specialRequirement?.description }}</p>
+                <p class="bg-white p-2">ฉันต้องการ <span class="font-extrabold">{{
+                    gameState.currentOrder.food?.display_name }}</span></p>
+                <p class="bg-white p-2"><span class="font-bold">คำอธิบายเมนู: </span> {{
+                    gameState.currentOrder.food?.description }}</p>
+                <p class="bg-white px-2 pb-2 text-green-600">แต่{{
+                    gameState.currentOrder.specialRequirement?.description }}</p>
             </div>
 
             <div class="flex justify-around pt-2">
@@ -208,7 +211,7 @@ const handleConfirmOrder = async () => {
                     <div class="flex flex-col justify-center items-center ">
                         <button @click="closeModal"
                             class="bg-emerald-600 hover:bg-emerald-700 w-28 h-14 flex justify-center items-center border border-gray-500 hover:border hover:border-white text-white rounded-lg">
-                            ทำอาหาร
+                            กลับไปทำอาหาร
                         </button>
                     </div>
                     <div class="flex flex-col justify-center items-center ">

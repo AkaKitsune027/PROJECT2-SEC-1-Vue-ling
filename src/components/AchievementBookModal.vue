@@ -42,9 +42,8 @@ function showSelectedMenu(menu) {
           ingredients.push({
             type: ingredientName,
             name: ingredientName,
-            display_name: `${
-              ingredientName === "meat" ? "เนื้อ" : "ผัก"
-            }อะไรก็ได้`,
+            display_name: `${ingredientName === "meat" ? "เนื้อ" : "ผัก"
+              }อะไรก็ได้`,
             amount: 1,
           })
           console.log(ingredientName)
@@ -67,17 +66,15 @@ function showSelectedMenu(menu) {
 
 <template>
   <!-- Modal -->
-  <div class="fixed inset-0 bg-gray-800 bg-opacity-70 flex justify-center items-center">
-    <div class="relative flex justify-center w-[600px] z-[100]">
+  <div class="fixed inset-0 bg-gray-800 bg-opacity-70 flex justify-center items-center z-[100]">
+    <div class="relative flex justify-center w-[600px]">
       <!-- Modal content -->
       <div class="relative bg-white rounded-lg shadow">
         <!-- Modal header -->
         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
           <h3 class="text-4xl font-bold font-noto-thai text-gray-600 pl-3">สมุดแห่งเกียรติยศ</h3>
-          <button
-            @click="closeModal"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-          >
+          <button @click="closeModal"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -89,34 +86,22 @@ function showSelectedMenu(menu) {
           <div class="grid grid-cols-4 pt-2">
             <img src="/5stars.png" alt="banner" class="col-span-2 col-start-2 flex justify-center" />
           </div>
-          <div
-            class="pt-0 p-8 flex flex-col gap-2 lg:grid grid-cols-3 grid-flow-row lg:gap-6">
-            <div
-              @click="showSelectedMenu(menu)"
-              v-for="(menu, index) in mappedFiveStarMenus"
-              :key="index"
-              :class="{
-                grayscale: !menu.isUnlock,
-                'hover:scale-[1.03] duration-300': menu.isUnlock,
-              }"
-              class="gradient rounded-lg shadow-xl border-4 border-[#eed285] p-1 cursor-pointer">
+          <div class="pt-0 p-8 flex flex-col gap-2 lg:grid grid-cols-3 grid-flow-row lg:gap-6">
+            <div @click="showSelectedMenu(menu)" v-for="(menu, index) in mappedFiveStarMenus" :key="index" :class="{
+              grayscale: !menu.isUnlock,
+              'hover:scale-[1.03] duration-300': menu.isUnlock,
+            }" class="gradient rounded-lg shadow-xl border-4 border-[#eed285] p-1 cursor-pointer">
               <div v-if="menu.isUnlock">
-                <img
-                  :src="`/foods/${menu.name}.png`"
-                  alt="food.name"
+                <img :src="`/foods/${menu.name}.png`" alt="food.name"
                   class="w-full h-auto drop-shadow-[0_8px_5px_rgba(0,0,0,0.3)]" />
-                <p
-                  class="text-center mt-1 font-semibold text-lg font-noto-thai text-gray-600">
+                <p class="text-center mt-1 font-semibold text-lg font-noto-thai text-gray-600">
                   {{ menu.display_name }}
                 </p>
               </div>
 
               <div v-else class="opacity-55">
-                <img
-                  src="/unknownDish.png"
-                  alt="unknown-dish"
-                  class="w-full h-auto" />
-                <p class="text-center mt-1 font-semibold text-gray-600">
+                <img src="/unknownDish.png" alt="unknown-dish" class="w-full h-auto" />
+                <p class="text-center mt-1 font-semibold text-gray-600 font-noto-thai">
                   ล็อก
                 </p>
               </div>
@@ -194,12 +179,10 @@ function showSelectedMenu(menu) {
 
 .gradient {
   background: rgb(249, 242, 149);
-  background: linear-gradient(
-    135deg,
-    rgba(249, 242, 149, 0.75) 0%,
-    rgba(224, 170, 62, 0.75) 35%,
-    rgba(250, 243, 152, 0.75) 75%,
-    rgba(184, 138, 68, 0.75) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(249, 242, 149, 0.75) 0%,
+      rgba(224, 170, 62, 0.75) 35%,
+      rgba(250, 243, 152, 0.75) 75%,
+      rgba(184, 138, 68, 0.75) 100%);
 }
 </style>

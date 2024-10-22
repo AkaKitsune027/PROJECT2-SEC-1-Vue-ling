@@ -47,7 +47,7 @@ watchEffect(() => {
 })
 
 const handleIngredientClick = async (targetIngredient) => {
-
+    if (gameState.countInteractive >= gameState.requireClick) return
     if (gameState.isPreparePhase) return
 
     if (targetIngredient.amount < 1) return
@@ -94,13 +94,13 @@ const handleIngredientClick = async (targetIngredient) => {
             <p class="py-3 font-bold">วัตถุดิบ</p>
             <div class="flex rounded-lg">
                 <div @click="handleSelectPage(0)"
-                    class="flex-1 flex justify-center cursor-pointer bg-[#c3e0c1] hover:bg-[#90a58e] rounded-lg border border-white"
-                    :class="{ 'bg-[#90a58e]': selectedPage === 0 }">
+                    class="flex-1 flex justify-center cursor-pointer hover:bg-[#90a58e] rounded-lg border border-white"
+                    :class="selectedPage === 0 ? 'bg-[#90a58e]' : 'bg-[#c3e0c1]'">
                     <img src="/meat.png" alt="meat-bar" class="w-12">
                 </div>
                 <div @click="handleSelectPage(1)"
-                    class="flex-1 flex justify-center cursor-pointer bg-[#c3e0c1] hover:bg-[#90a58e] rounded-lg border border-white"
-                    :class="{ 'bg-[#90a58e]': selectedPage === 1 }">
+                    class="flex-1 flex justify-center cursor-pointer hover:bg-[#90a58e] rounded-lg border border-white"
+                    :class="selectedPage === 1 ? 'bg-[#90a58e]' : 'bg-[#c3e0c1]'">
                     <img src="/vegetable.png" alt="vegetable-bar" class="w-12">
                 </div>
             </div>
@@ -129,7 +129,7 @@ const handleIngredientClick = async (targetIngredient) => {
                 </div>
                 <div class="flex">
                     <img :src="`/vegetable/${vegetable.name}.png`" :alt="vegetable.name" class="w-16" />
-                    <span class="font-serif h-7 px-3 rounded-lg">
+                    <span class="h-7 px-3 rounded-lg">
                         {{ vegetable.display_name }}
                     </span>
                 </div>

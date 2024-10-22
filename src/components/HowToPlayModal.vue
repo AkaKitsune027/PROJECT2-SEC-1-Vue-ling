@@ -77,8 +77,8 @@ const vegetables = computed(() => {
               </div>
 
               <div class="flex gap-4 justify-center">
-                <img src="/public/res1.png" alt="res1" class="border-4 h-72">
-                <img src="/public/res2.png" alt="res2" class="border-4 h-72">
+                <img src="/res1.png" alt="res1" class="border-4 h-72">
+                <img src="/res2.png" alt="res2" class="border-4 h-72">
               </div>
 
 

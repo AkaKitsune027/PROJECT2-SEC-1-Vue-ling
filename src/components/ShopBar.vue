@@ -51,14 +51,14 @@ const closeModal = () => {
       <div class="flex  rounded-lg">
         <!-- ปุ่มเลือก Meat -->
         <div @click="handleSelectPage(0)"
-          class="flex-1 flex justify-center cursor-pointer bg-[#ffe3b2] hover:bg-[#9d8a69] rounded-lg border border-white"
-          :class="{ 'bg-[#9d8a69]': selectedPage === 0 }">
+          class="flex-1 flex justify-center cursor-pointer hover:bg-[#9d8a69] rounded-lg border border-white"
+          :class="selectedPage === 0 ? 'bg-[#9d8a69]' : 'bg-[#ffe3b2]'">
           <img src="/meat.png" alt="meat-bar" class="w-12">
         </div>
         <!-- ปุ่มเลือก Vegetable -->
         <div @click="handleSelectPage(1)"
-          class="flex-1 flex justify-center cursor-pointer bg-[#ffe3b2] hover:bg-[#9d8a69] rounded-lg border border-white"
-          :class="{ 'bg-[#9d8a69]': selectedPage === 1 }">
+          class="flex-1 flex justify-center cursor-pointer hover:bg-[#9d8a69] rounded-lg border border-white"
+          :class="selectedPage === 1 ? 'bg-[#9d8a69]' : 'bg-[#ffe3b2]'">
           <img src="/vegetable.png" alt="vegetable-bar" class="w-12">
         </div>
       </div>
@@ -78,8 +78,7 @@ const closeModal = () => {
         <div class="flex items-center gap-2">
           <p class="text-sm text-gray-700">{{ meat.price }}$</p>
           <!-- ปุ่ม Buy -->
-          <button @click="openModal(meat)"
-            class="bg-green-400 hover:bg-green-600 text-white py-1 px-2 rounded-lg">
+          <button @click="openModal(meat)" class="bg-green-400 hover:bg-green-600 text-white py-1 px-2 rounded-lg">
             ซื้อ
           </button>
         </div>
@@ -95,8 +94,7 @@ const closeModal = () => {
         <div class="flex items-center gap-2">
           <p class="text-sm text-gray-700">{{ vegetable.price }}$</p>
           <!-- ปุ่ม Buy -->
-          <button @click="openModal(vegetable)"
-            class="bg-green-400 hover:bg-green-600 text-white py-1 px-2 rounded-lg">
+          <button @click="openModal(vegetable)" class="bg-green-400 hover:bg-green-600 text-white py-1 px-2 rounded-lg">
             Buy
           </button>
         </div>

@@ -49,19 +49,20 @@ const logout = () => {
           class="bg-[#f9f9f6] p-8 rounded-lg justify-center shadow-2xl flex flex-col items-center w-full md:w-5/12 h-fit">
           <img src="/logoHome2.png" alt="Restaurant" class="w-32 h-32 object-cover" />
           <div class="flex w-full mt-4">
-            <p class="text-[#2d2d2d] text-xl font-rowdies font-bold mr-8 text-center mt-4">UserName</p>
-            <label class="bg-[#b9bcbda5] w-64 h-16 text-center py-4 text-black rounded-md text-xl">
+            <p class="text-[#2d2d2d] text-m font-rowdies font-bold mr-10 text-center mt-4">USERNAME</p>
+            <label class="bg-[#b9bcbda5] w-96 h-16 text-center py-4 text-black rounded-md text-xl font-rowdies">
               {{ userStore.user.username }}
             </label>
           </div>
           <div class="flex w-full mt-2">
-            <p class="text-[#2d2d2d] text-bas font-bold  font-rowdies mr-4 text-center mt-2">YOUR RESTAURANT</p>
-            <label class="bg-[#b9bcbda5] w-96 h-16 text-center py-4 text-[#000000] rounded-md text-xl font-noto-thai">
+            <p class="text-[#2d2d2d] font-bold  font-rowdies mr-4 text-center mt-2">YOUR RESTAURANT</p>
+            <label
+              class="bg-[#b9bcbda5] w-96 h-16 text-center py-4 text-[#000000] rounded-md text-xl font-noto-thai font-bold">
               {{ userStore.user.outletName }}
             </label>
           </div>
 
-          <p class="text-[#8ea6ab] text-base mt-4">
+          <p class="text-[#768175] text-base mt-4">
             Do you want to delete your account?
             <button @click="deleteUser" class="text-nowrap font-bold text-[#f63939] hover:underline">
               Delete
@@ -102,7 +103,7 @@ const logout = () => {
 .btn-play,
 .btn-how {
   /* background-color: #61544b; */
-  background-color: #43906a;
+  background-color: #28724d;
   color: white;
   padding: 10px 5vw;
   border-radius: 8px;

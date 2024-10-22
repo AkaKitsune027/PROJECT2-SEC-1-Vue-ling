@@ -7,6 +7,8 @@ import { useUserStore } from '@/stores/user'
 const gameState = useGameState()
 
 function addSeasoning(id) {
+    if (gameState.countInteractive >= gameState.requireClick) return
+    if (gameState.isPreparePhase) return
     if (gameState.cauldron.length >= 14) return
 
     gameState.cauldron.push(id)
