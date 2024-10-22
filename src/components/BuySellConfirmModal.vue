@@ -1,14 +1,17 @@
 <script setup>
-import { ref, defineEmits, computed } from 'vue'
+import { ref, defineEmits, computed, watch } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { updateUser, updateUserDetails } from '@/libs/userManagement'
 import { useRouter } from 'vue-router'
 
-
-// รับ props ของ item และ type 'buy' 
+// รับ props ของ item และ type 'buy'
 const props = defineProps({
   item: {
     type: Object,
+    required: true
+  },
+  isGoldEnough: {
+    type: Boolean,
     required: true
   }
 })
@@ -17,8 +20,12 @@ const props = defineProps({
 const emit = defineEmits(['close'])
 
 const router = useRouter()
+
 // สร้าง state เพื่อเก็บจำนวนที่จะซื้อหรือขาย
 const quantity = ref(1)
+
+// สร้าง state สำหรับข้อความเตือน
+const errorMessage = ref('')
 
 // คำนวณราคารวม
 const totalPrice = computed(() => {
@@ -31,12 +38,24 @@ const userStore = useUserStore()
 // ฟังก์ชันสำหรับการเพิ่มจำนวน
 const increaseQuantity = () => {
   quantity.value += 1
+  checkGold() // เรียกฟังก์ชันตรวจสอบ gold เมื่อเพิ่มจำนวน
 }
 
 // ฟังก์ชันสำหรับการลดจำนวน
 const decreaseQuantity = () => {
   if (quantity.value > 1) {
     quantity.value -= 1
+    checkGold() // เรียกฟังก์ชันตรวจสอบ gold เมื่อลดจำนวน
+  }
+}
+
+// ฟังก์ชันตรวจสอบ gold
+const checkGold = () => {
+  const currentGold = userStore.user.userDetail.gold
+  if (currentGold < totalPrice.value) {
+    errorMessage.value = 'Gold ไม่เพียงพอสำหรับการซื้อ'
+  } else {
+    errorMessage.value = '' // ลบข้อความเตือนเมื่อ gold เพียงพอ
   }
 }
 
@@ -47,7 +66,6 @@ const handleConfirm = async () => {
   if (currentGold >= totalPrice.value) {
     // มีเงินเพียงพอ ทำการหักเงิน
     const updatedGold = currentGold - totalPrice.value
-    // ตรวจสอบว่ามีวัตถุดิบนี้อยู่ใน inventory หรือไม่
     const ingredientIndex = userStore.user.userDetail.ingredients.findIndex(ingd => ingd.id === props.item.id)
 
     // ถ้ามีอยู่แล้วเพิ่มจำนวน ถ้าไม่มีให้เพิ่มใหม่
@@ -59,11 +77,11 @@ const handleConfirm = async () => {
         amount: quantity.value
       })
     }
+
     // อัปเดตข้อมูลผู้ใช้
     const updateData = {
-        gold: updatedGold,
-        ingredients: userStore.user.userDetail.ingredients
-
+      gold: updatedGold,
+      ingredients: userStore.user.userDetail.ingredients
     }
 
     try {
@@ -78,23 +96,26 @@ const handleConfirm = async () => {
     } catch (error) {
       console.error(error)
     }
-  } else {
-    alert('Gold ไม่เพียงพอสำหรับการซื้อ')
-  }
 
-  emit('close') // ปิด modal หลังจากการซื้อเสร็จสิ้น
+    emit('close') // ปิด modal หลังจากการซื้อเสร็จสิ้น
+  }
 }
 
 // ฟังก์ชันกดยกเลิก (Cancel)
 const handleCancel = () => {
   emit('close') // ส่ง event 'close' เพื่อปิด modal โดยไม่ทำอะไร
 }
+
+// ตรวจสอบการเปลี่ยนแปลงของราคารวมและ gold
+watch([totalPrice, () => userStore.user.userDetail.gold], () => {
+  checkGold() // เรียกฟังก์ชันตรวจสอบ gold ทุกครั้งที่ราคาหรือ gold เปลี่ยนแปลง
+})
 </script>
 
 <template>
-  <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
+  <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10 font-noto-thai">
     <div class="bg-white w-1/3 p-5 rounded-lg shadow-lg text-center relative overflow-visible">
-      <h2 class="text-2xl font-bold">Buy</h2>
+      <h2 class="text-2xl font-bold">ซื้อวัตถุดิบ</h2>
       
       <!-- แสดงรูปภาพ item ที่กด -->
       <div class="my-4">
@@ -110,11 +131,27 @@ const handleCancel = () => {
       </div>
 
       <!-- แสดงราคารวม -->
-      <p class="text-xl mt-4">Total Price: {{ totalPrice }} Gold</p>
-      
-      <div class="flex justify-center gap-4 mt-6">
-        <button @click="handleConfirm" class="bg-green-500 text-white px-4 py-2 rounded-lg">Confirm</button>
-        <button @click="handleCancel" class="bg-red-500 text-white px-4 py-2 rounded-lg">Cancel</button>
+      <p class="text-xl mt-4 ">ราคารวม: {{ totalPrice }} โกลด์</p>
+
+      <!-- ข้อความแจ้งเตือนสีแดง -->
+      <p v-if="!props.isGoldEnough || errorMessage" class="text-red-500 mt-2">
+        {{ errorMessage || 'Gold ไม่เพียงพอสำหรับการซื้อ' }}
+      </p>
+
+      <!-- ปุ่มยืนยัน และยกเลิก -->
+      <div class="flex justify-center gap-4 mt-6 ">
+        <button
+          @click="handleConfirm"
+          class="text-white px-4 py-2 rounded-lg"
+          :class="{
+            'bg-gray-500 opacity-50': errorMessage || !props.isGoldEnough,
+            'bg-green-500': !errorMessage && props.isGoldEnough
+          }"
+          :disabled="errorMessage || !props.isGoldEnough"
+        >
+          ยืนยัน
+        </button>
+        <button @click="handleCancel" class="bg-red-500 text-white px-4 py-2 rounded-lg">ยกเลิก</button>
       </div>
 
       <div class="absolute top-28 -right-20 pointer-events-none">
@@ -124,4 +161,10 @@ const handleCancel = () => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.confirm-button:disabled {
+  background-color: gray;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+</style>
