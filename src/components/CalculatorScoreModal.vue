@@ -61,17 +61,17 @@ const closeModal = () => {
         <img
           :src="`/medal-bronze.png`"
           alt="medal"
-          class="w-44 absolute -top-10 -left-14 -rotate-[10deg]"
+          class="w-44 absolute -top-8 -left-16 -rotate-[10deg]"
         />
 
         <!-- Modal header -->
         <div class="relative flex items-center justify-center pt-8">
-          <h1 class="text-4xl font-semibold font-rowdies text-gray-600">
-            Score Summary
+          <h1 class="text-4xl font-extrabold font-noto-thai text-gray-600">
+            สรุปผลรวมคะแนน
           </h1>
           <button
             @click="closeModal"
-            class="absolute top-6 right-6 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+            class="absolute top-6 right-6 text-gray-400 bg-transparent hover:bg-[#ffedb2] hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
           >
             <svg
               class="w-3 h-3"
@@ -119,18 +119,20 @@ const closeModal = () => {
         <div
           class="pt-4 pb-8 text-xl font-bold font-noto-thai text-gray-600 text-center"
         >
-          <p class="text-2xl pb-4">
-            Description: {{ specialRequirement[1].description }}
-          </p>
-          <p class="text-2xl">Review: {{ specialRequirement[1].goodReview }}</p>
-          <div class="flex justify-around py-8">
-            <p class="">Gold: 200 💰</p>
-            <p class="">Popularity: 4.5 📣</p>
-            <p class="">Matching: 20 %</p>
+          <div class="text-start px-12">
+            <p class="pb-4">
+              ความต้องการพิเศษ: <span class="font-medium">{{ specialRequirement[1].description }}</span>
+            </p>
+            <p>รีวิว: <span class="font-medium">{{ specialRequirement[1].goodReview }}</span></p>
+          </div>
+          <div class="grid grid-cols-3 gap-4 py-8 px-12 text-start">
+            <p>โกลด์: <span class="font-medium">200 💰</span></p>
+            <p>ชื่อเสียง: <span class="font-medium">4.5 📣</span></p>
+            <p>ความถูกต้อง: <span class="font-medium">20%</span></p>
           </div>
           <div class="gradient flex flex-row justify-center bg-amber-200 p-2">
-            <p>รางวัลพิเศษสำหรับการปลดล็อก 5 ดาว: สูตร</p>
-            <p>ข้าวผัดราชาหมู</p>
+            <p>รางวัลพิเศษสำหรับการปลดล็อก 5 ดาว :</p>
+            <p>&nbsp;สูตร<span>ข้าวผัดราชาหมู</span></p>
           </div>
         </div>
       </div>
