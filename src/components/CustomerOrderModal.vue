@@ -58,6 +58,7 @@ const handleCancelOrder = async () => {
     }
     else {
         router.replace({ name: "cooking-page" })
+        gameState.countInteractive = 0
         gameState.isPreparePhase = true
 
         userStore.user.userDetail.currentOrder = generateOrder()
@@ -66,11 +67,13 @@ const handleCancelOrder = async () => {
         userStore.user.userDetail = await updateUserDetails(userStore.user.id, {
             'currentOrder': gameState.rawOrder,
             isCurrentOrderCommitted: false
+
         })
     }
 }
 
 const handleConfirmOrder = async () => {
+
     if (gameState.isPreparePhase) {
         router.replace({ name: "cooking-modal" })
         gameState.isPreparePhase = false
@@ -157,8 +160,7 @@ const handleConfirmOrder = async () => {
                 <p class="flex items-center text-gray-600">ชี้ค้างไว้เพื่อสำรวจลูกค้า</p>
             </div>
 
-
-            <div class="flex justify-center bg-white">
+            <div class="flex justify-center bg-white py-10">
                 <img :src="`/customer/${gameState.currentOrder.customer?.name}.png`" class="w-40 h-40">
             </div>
             <p class="bg-primary text-white text-md text-center py-1 border border-white">ลูกค้า : {{

@@ -41,22 +41,24 @@ const closeModal = () => {
 </script>
 
 <template>
-  <div class="relative flex flex-col overflow-hidden rounded-r-xl">
+  <div class="relative flex flex-col overflow-hidden rounded-r-xl font-noto-thai">
     <div
       class="pointer-events-none w-full h-16 absolute bottom-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.5)_100%)]">
     </div>
     <!-- ส่วนหัวสำหรับเลือกหมวดหมู่ -->
-    <div class="flex-none bg-base text-center text-xl font-rowdies p-2">
-      <p class="py-3">Shop</p>
-      <div class="flex rounded-lg">
+    <div class="flex-none bg-[#d1ba91] text-center text-xl p-2">
+      <p class="py-3 font-bold">ร้านค้า</p>
+      <div class="flex  rounded-lg">
         <!-- ปุ่มเลือก Meat -->
         <div @click="handleSelectPage(0)"
-          class="flex-1 flex justify-center cursor-pointer bg-[#c3e0c1] hover:bg-[#90a58e] rounded-lg border border-white">
+          class="flex-1 flex justify-center cursor-pointer bg-[#ffe3b2] hover:bg-[#9d8a69] rounded-lg border border-white"
+          :class="{ 'bg-[#9d8a69]': selectedPage === 0 }">
           <img src="/meat.png" alt="meat-bar" class="w-12">
         </div>
         <!-- ปุ่มเลือก Vegetable -->
         <div @click="handleSelectPage(1)"
-          class="flex-1 flex justify-center cursor-pointer bg-[#c3e0c1] hover:bg-[#90a58e] rounded-lg border border-white">
+          class="flex-1 flex justify-center cursor-pointer bg-[#ffe3b2] hover:bg-[#9d8a69] rounded-lg border border-white"
+          :class="{ 'bg-[#9d8a69]': selectedPage === 1 }">
           <img src="/vegetable.png" alt="vegetable-bar" class="w-12">
         </div>
       </div>
@@ -64,7 +66,7 @@ const closeModal = () => {
 
     <!-- แสดงเนื้อหา Meat หรือ Vegetable ขึ้นอยู่กับ selectedPage -->
     <div
-      class="flex-auto bg-zinc-700 p-2 flex flex-col items-center gap-2 max-h-[28rem] overflow-y-auto custom-scrollbar">
+      class="flex-auto bg-zinc-700 p-2 flex flex-col items-center gap-2 max-h-[28rem] overflow-y-auto shop custom-scrollbar">
 
       <!-- แสดง meat เมื่อ selectedPage === 0 -->
       <div v-show="selectedPage === 0" v-for="meat in meats" :key="meat.id"
