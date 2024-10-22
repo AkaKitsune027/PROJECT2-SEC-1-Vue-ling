@@ -39,7 +39,7 @@ const closeModal = () => {
 </script>
 
 <template>
-    <div class="max-w-lg mx-auto p-4">
+    <div class="max-w-lg mx-auto p-2 font-noto-thai">
         <div class="form-control mb-4">
             <label for="recipes" class="label">
                 <span class="label-text font-bold bg-white rounded-md p-2 w-64">สูตรอาหาร</span>
@@ -48,7 +48,8 @@ const closeModal = () => {
             <select v-model="selectedRecipe" @change="openModal"
                 class="select select-bordered w-full max-w-xs rounded-md cursor-pointer">
                 <!-- ข้อความเริ่มต้นที่เป็น placeholder -->
-                <option :value="null" disabled selected hidden class="text-slate-400 shadow-lg">เลือกสูตรอาหารของคุณ</option>
+                <option :value="null" disabled selected hidden class="text-slate-400 shadow-lg">เลือกสูตรอาหารของคุณ
+                </option>
 
                 <!-- แสดงรายการสูตรอาหาร -->
                 <option v-for="recipe in unlockedRecipes" :key="recipe.id" :value="recipe"
@@ -61,7 +62,7 @@ const closeModal = () => {
         </div>
 
         <!-- แสดงโมดัลเมื่อ isOpenModal เป็น true -->
-        <div v-if="isOpenModal" class="modal bg-white p-2 rounded-md shadow-lg">
+        <div v-if="isOpenModal" class="modal bg-white p-2 rounded-md shadow-lg ">
             <div class="modal-box relative">
 
                 <h2 class="font-bold text-xl mb-2 text-green-500">สูตร: {{ selectedRecipe.display_name }}</h2>
@@ -79,9 +80,11 @@ const closeModal = () => {
                 </div>
 
                 <!-- ปุ่มปิดโมดัลที่ด้านล่าง -->
-                <div class="modal-action ">
-                    <label @click="closeModal"
-                        class="bg-red-500 rounded-lg p-1 mt-4 cursor-pointer text-white">ปิด</label>
+                <div class="flex justify-end items-center">
+                    <div class="">
+                        <button @click="closeModal"
+                            class="bg-red-500 rounded-lg p-1 mt-4 cursor-pointer text-white w-10">ปิด</button>
+                    </div>
                 </div>
             </div>
 

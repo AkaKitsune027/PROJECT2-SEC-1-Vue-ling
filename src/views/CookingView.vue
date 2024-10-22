@@ -90,6 +90,10 @@ const handleServeClick = () => {
     router.push({ name: "calculate-score-modal" })
 }
 
+function handleCancelCooking() {
+  router.push({ name: "cancel-order-modal" })
+}
+
 </script>
 
 <template>
@@ -178,17 +182,20 @@ const handleServeClick = () => {
                         <img :src="`/${ingd.type}/${ingd.name}.png`" class="w-10 h-10">
                     </div>
                 </div>
-                <!-- ปุ่มถังขยะ -->
-                <div class="w-28 flex items-center justify-end">
-                    <div class="flex justify-end transform">
-                        <button @click="gameState.dropCooking"
-                            class="bg-alert-200 hover:bg-[#7f4641] border border-white w-12 rounded-lg flex justify-center">
-                            <img src="/src/assets/trash.svg" alt="trash" class="w-6" />
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <!-- ปุ่มถังขยะ -->
+        <div class="w-28 flex items-center justify-end">
+          <div class="flex justify-end transform">
+            <button  :disabled="gameState.cauldron.length === 0" 
+              @click="handleCancelCooking"
+              :class="gameState.cauldron.length === 0 ? 'cursor-not-allowed opacity-50' : ''"
+              class="bg-alert-200 hover:bg-[#7f4641] border border-white w-12 rounded-lg flex justify-center">
+              <img src="/src/assets/trash.svg" alt="trash" class="w-6" />
+            </button>
+          </div>
         </div>
+      </div>
+    </div>
+
         <div class="col-start-5 row-start-6 flex justify-center place-items-center">
             <button @click="handleServeClick"
                 class="border-2 bg-yellow-400 border-white rounded-lg h-20 w-64 text-3xl text-white disabled:cursor-not-allowed relative hover:contrast-75 transition duration-300 disabled:hover:contrast-100"

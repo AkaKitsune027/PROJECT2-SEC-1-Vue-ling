@@ -278,9 +278,6 @@ export function calculatePrice() {
     } 
   }
     
-  
-
-
 
   console.log(`actualRecipeIngredients`, actualRecipeIngredients)
   console.log('Serve', serve)

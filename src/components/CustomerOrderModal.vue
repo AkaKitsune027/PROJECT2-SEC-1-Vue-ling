@@ -53,24 +53,49 @@ const closeModal = () => {
 }
 
 const handleCancelOrder = async () => {
+    // ตรวจสอบว่ากำลังอยู่ในขั้นตอนการเตรียมหรือไม่
     if (gameState.isPreparePhase) {
         router.replace({ name: "cooking-page" })
-    }
-    else {
+    } else {
         router.replace({ name: "cooking-page" })
         gameState.countInteractive = 0
         gameState.isPreparePhase = true
 
+        // ลดค่าชื่อเสียง (popularity) ลง 1
+        let updatedPopularity = userStore.user.userDetail.popularity - 1
+
+        // ตรวจสอบว่า popularity ไม่ต่ำกว่า -50
+        if (userStore.user.userDetail.popularity === -50) {
+            updatedPopularity = 0
+        }
+
+        // กำหนดค่า currentOrder ใหม่
         userStore.user.userDetail.currentOrder = generateOrder()
-        console.log('regenerated:', gameState.rawOrder)
+        console.log('regenerated:', gameState.rawOrder);
 
-        userStore.user.userDetail = await updateUserDetails(userStore.user.id, {
-            'currentOrder': gameState.rawOrder,
-            isCurrentOrderCommitted: false
+        // อัปเดตข้อมูลผู้ใช้
+        const updateData = {
+            currentOrder: gameState.rawOrder,
+            isCurrentOrderCommitted: false,
+            popularity: updatedPopularity // ลดค่าชื่อเสียง
+        };
 
-        })
+        try {
+            const updatedUserDetails = await updateUserDetails(userStore.user.id, updateData)
+
+            if (updatedUserDetails && updatedUserDetails.popularity === updatedPopularity) {
+                userStore.user.userDetail.popularity = updatedUserDetails.popularity;
+                userStore.user.userDetail.currentOrder = updatedUserDetails.currentOrder;
+                await updateUser(userStore.user.id, userStore.user)
+            } else {
+                useUserStore.user = null;
+                router.push({ name: 'login-page' })
+            }
+        } catch (error) {
+            console.error(error)
+        }
     }
-}
+};
 
 const handleConfirmOrder = async () => {
 
@@ -135,7 +160,7 @@ const handleConfirmOrder = async () => {
 
     <!-- Cooking phase -->
 
-    <div v-else class="fixed inset-0 flex items-center justify-center bg-opacity-50">
+    <div v-else class="fixed inset-0 flex items-center justify-center bg-opacity-50 font-noto-thai">
         <div class="bg-[#b4a690] p-3 rounded-lg shadow-lg w-1/3 border border-[#706149]">
             <div class="flex justify-end">
                 <button @click="closeModal" class="bg-red-500 hover:bg-red-600 text-white rounded p-2.5 mb-2">
@@ -170,14 +195,26 @@ const handleConfirmOrder = async () => {
             <p class="bg-white p-2"> ฉันต้องการ {{ gameState.currentOrder.food?.display_name }} </p>
             <p class="bg-white px-2">แต่{{ gameState.currentOrder.specialRequirement?.description }}</p>
 
-            <div class="flex justify-around py-2">
+            <div class="flex justify-around pt-2">
 
             </div>
-            <div class="flex justify-center">
-                <button @click="handleCancelOrder"
-                    class="bg-alert-200 hover:bg-alert-300 w-28 h-14 flex justify-center items-center border border-gray-500 hover:border hover:border-white text-white rounded-lg">
-                    ยกเลิกออเดอร์
-                </button>
+            <div class="flex flex-col justify-around  items-center">
+                <p class="text-xs pb-2"><span class="text-red-600 font-bold">คำเตือน:</span>
+                    การยกเลิกออเดอร์มีผลต่อค่าชื่อเสียง โปรดตัดสินใจอย่างรอบคอบ </p>
+                <div class="flex justify-around items-center gap-5 ">
+                    <div class="flex flex-col justify-center items-center ">
+                        <button @click="closeModal"
+                            class="bg-emerald-600 hover:bg-emerald-700 w-28 h-14 flex justify-center items-center border border-gray-500 hover:border hover:border-white text-white rounded-lg">
+                            ทำอาหาร
+                        </button>
+                    </div>
+                    <div class="flex flex-col justify-center items-center ">
+                        <button @click="handleCancelOrder"
+                            class="bg-alert-200 hover:bg-alert-300 w-28 h-14 flex justify-center items-center border border-gray-500 hover:border hover:border-white text-white rounded-lg">
+                            ยกเลิกออเดอร์
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

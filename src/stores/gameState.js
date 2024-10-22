@@ -5,9 +5,11 @@ import foodsData from '../../data/foods.json'
 import ingredientsData from '../../data/ingredients.json'
 import specialRequirementData from '../../data/specialRequirement.json'
 import { useUserStore } from './user'
+import { useRouter } from 'vue-router'
 
 
 export const useGameState = defineStore('gameState', () => {
+  const router = useRouter()
   const userStore = useUserStore()
   const cauldron = ref([])
   const ingredientInCauldron = computed(() => {
@@ -47,9 +49,10 @@ export const useGameState = defineStore('gameState', () => {
     cauldron.value.push(ingdId)
   }
 
-  function dropCooking() {
-    cauldron.value = []
-  }
+   function dropCooking() {
+        cauldron.value = []
+        router.push({ name: 'cooking-page' })
+    }
 
   return { cauldron, isPreparePhase, countInteractive, requireClick, addToCauldron, dropCooking, currentOrder, rawOrder, ingredientInCauldron }
 })
