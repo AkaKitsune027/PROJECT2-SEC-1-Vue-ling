@@ -92,6 +92,10 @@ const handleServeClick = () => {
     router.push({ name: "calculate-score-modal" })
 }
 
+function handleCancelCooking() {
+  router.push({ name: "cancel-order-modal" })
+}
+
 </script>
 
 <template>
@@ -188,8 +192,9 @@ const handleServeClick = () => {
         <!-- ปุ่มถังขยะ -->
         <div class="w-28 flex items-center justify-end">
           <div class="flex justify-end transform">
-            <button
-              @click="gameState.dropCooking"
+            <button  :disabled="gameState.cauldron.length === 0" 
+              @click="handleCancelCooking"
+              :class="gameState.cauldron.length === 0 ? 'cursor-not-allowed opacity-50' : ''"
               class="bg-alert-200 hover:bg-[#7f4641] border border-white w-12 rounded-lg flex justify-center">
               <img src="/src/assets/trash.svg" alt="trash" class="w-6" />
             </button>
