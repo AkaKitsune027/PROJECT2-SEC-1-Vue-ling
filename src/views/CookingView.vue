@@ -1,23 +1,25 @@
 <script setup>
-import { computed, onMounted, ref, watchEffect } from 'vue'
-import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/user'
-import { useSoundStore } from '@/stores/sounds'
-import IngredientBar from '@/components/IngredientBar.vue'
-import SeasoningBar from '@/components/SeasoningBar.vue'
 
-import { useGameState } from '@/stores/gameState'
-import GoldAndPopularity from '@/components/GoldAndPopularity.vue'
-import RecipesModal from '@/components/RecipesModal.vue'
-import Sound from '@/components/Sound.vue'
-import ShopBar from '@/components/ShopBar.vue'
-import ingredientsData from '../../data/ingredients.json'
-import { calculatePrice } from '../libs/calculateScore'
+import { computed, onMounted, ref, watchEffect } from "vue"
+import { useRouter } from "vue-router"
+import { useUserStore } from "@/stores/user"
+import { useSoundStore } from "@/stores/sounds"
+import IngredientBar from "@/components/IngredientBar.vue"
+import SeasoningBar from "@/components/SeasoningBar.vue"
+
+import { useGameState } from "@/stores/gameState"
+import GoldAndPopularity from "@/components/GoldAndPopularity.vue"
+import RecipesModal from "@/components/RecipesModal.vue"
+import Sound from "@/components/Sound.vue"
+import ShopBar from "@/components/ShopBar.vue"
+import { calculatePrice } from "../libs/calculateScore"
+
 
 const router = useRouter()
 const soundStore = useSoundStore()
 const userStore = useUserStore()
 const gameState = useGameState()
+// const showHowToPlayModal = ref(false)
 
 const isShow = ref(true)
 const handleConfirmOrderClick = () => {
@@ -33,44 +35,44 @@ onMounted(() => {
 })
 
 function handleOrderSignClick() {
-    if (gameState.isPreparePhase) router.push({ name: 'prepare-modal' })
-    else router.push({ name: 'cooking-modal' })
+    if (gameState.isPreparePhase) router.push({ name: "prepare-modal" })
+    else router.push({ name: "cooking-modal" })
 }
 
 // Image animation
 const cauldronRef = ref(null)
-const countInteractive = ref(0)
 const currentCauldronImageFrame = ref(0)
 const currentImage = computed(() => {
-    const cauldronImage = ['/cauldron.png', '/1.png', '/2.png', '/3.png', '/4.png']
+    const cauldronImage = [
+        "/cauldron.png",
+        "/1.png",
+        "/2.png",
+        "/3.png",
+        "/4.png",
+    ]
     return cauldronImage[currentCauldronImageFrame.value]
 })
 const isShopping = ref(false)
 
-
-
 let cauldronInterval = null
 const handleCauldronClick = () => {
-    if (countInteractive.value > 3 || cauldronInterval) return
+    if (gameState.countInteractive > gameState.requireClick || cauldronInterval) return
 
     cauldronRef.value.classList.add('animate-stir')
 
     cauldronInterval = setInterval(() => {
         currentCauldronImageFrame.value++
-        if (currentCauldronImageFrame.value > requireClick) {
+        if (currentCauldronImageFrame.value > 4) {
             currentCauldronImageFrame.value = 0
-            countInteractive.value++
-            console.log('CurrentCountInteractive: ' + countInteractive.value)
+            gameState.countInteractive++
+            console.log('CurrentgameState.countInteractive: ' + gameState.countInteractive)
             clearInterval(cauldronInterval)
             cauldronInterval = null
             cauldronRef.value.classList.remove('animate-stir')
-            // countInteractive.value = 0
         }
     }, 700)
     soundStore.playSound('sfx', '/sounds/boiling-water-sound.mp3')
 }
-
-const requireClick = 4
 
 async function openAchievementBook() {
     const data = await useUserStore.getData
@@ -83,49 +85,48 @@ const handleToggleFoodStoreClick = () => {
     isShopping.value = !isShopping.value
 }
 
-
-
 const handleServeClick = () => {
     calculatePrice()
     router.push({ name: "calculate-score-modal" })
 }
 
+function handleCancelCooking() {
+  router.push({ name: "cancel-order-modal" })
+}
+
 </script>
 
 <template>
-    <div class="bg-[#71A0A5] border drop-shadow-md w-screen h-[4rem] p-3 ">
+
+    <div class="w-screen h-[4rem] p-3 z-50 fixed top-0 bg-transparent">
         <div class="flex justify-between">
             <RouterLink to="/homepage">
-                <button class="bg-[#ACC6AA] hover:bg-[#90a58e] w-12 rounded-lg border border-white">
-                    <img src="/src/assets/arrow-back.svg" class="w-10" />
+                <button class="hover:shadow-md w-12 transform transition-transform duration-300 hover:scale-110">
+                    <img src="/arrow-back2.png" class="w-11" />
                 </button>
             </RouterLink>
 
             <div
                 class="absolute pointer-events-none text-center w-[calc(100%-1.5rem)] font-rowdies text-3xl text-white">
-                Isekai
-                Cooking
+                Isekai Cooking
             </div>
 
-            <div class="flex gap-3">
-
-                <button
-                    class="bg-[#ACC6AA] hover:bg-[#90a58e] flex justify-center w-12 rounded-lg h-10 border border-white">
-                    <img src="/src/assets/book-open.svg" class="w-10" />
-                </button>
-
-                <button @click="openAchievementBook"
-                    class="bg-[#ACC6AA] hover:bg-[#90a58e] flex justify-center items-center w-12 rounded-lg h-10 border border-white">
-                    <img src="/src/assets/trophy.svg" class="w-10" />
-                </button>
-
-                <Sound />
+            <div class="relative">
+                <div class="flex flex-row relative z-10 gap-2">
+                    <button>
+                        <img src="/book.png" class="w-10" />
+                    </button>
+                    <button @click="openAchievementBook">
+                        <img src="/trophy.png" class="w-10" />
+                    </button>
+                    <Sound />
+                </div>
             </div>
         </div>
     </div>
 
     <div
-        class="bg-[url('/bg.png')] bg-cover w-screen h-[calc(100vh-4rem)] grid grid-cols-5 grid-rows-6 overflow-hidden">
+        class="bg-[url('/kitchen-room1.png')] bg-cover w-screen pt-[4rem] h-screen grid grid-cols-5 grid-rows-6 overflow-hidden font-noto-thai">
         <div class="grid row-span-5 pt-6">
             <IngredientBar v-if="!isShopping" :userIngredients="userStore.user.userDetail.ingredients" />
             <ShopBar v-else-if="isShopping" />
@@ -134,15 +135,15 @@ const handleServeClick = () => {
             <!-- ? Toggle Food Store Button -->
             <div class="bg-zinc-700 h-[5rem] rounded-r-xl grid place-items-center">
                 <button @click="handleToggleFoodStoreClick" :disabled="gameState.isPreparePhase === false"
-                    class="bg-[#ACC6AA] hover:bg-[#90a58e] w-[calc(100%-2rem)] h-[calc(100%-2rem)] rounded-xl border border-white grid place-items-center"
-                    :class="{ grayscale: !gameState.isPreparePhase }">
+                    class="bg-base hover:bg-[#90a58e] w-[calc(100%-2rem)] h-[calc(100%-2rem)] rounded-xl border border-white grid place-items-center active:scale-95 hover:scale-105 transition"
+                    :class="{ grayscale: !gameState.isPreparePhase, 'bg-[#9d8a69]': isShopping, 'hover:bg-[#d1ba91]': isShopping }">
                     <div v-show="!isShopping" class="flex justify-center items-center gap-2">
                         <img src="/src/assets/bag.svg" alt="shop" class="h-6" />
-                        <div class="text-xl text-white">Shop</div>
+                        <div class="text-xl text-white">ร้านค้า</div>
                     </div>
                     <div v-show="isShopping" class="flex justify-center items-center gap-2">
                         <img src="/src/assets/home.svg" alt="home" class="h-6" />
-                        <div class="text-xl text-white">Back</div>
+                        <div class="text-xl text-white">กลับร้าน</div>
                     </div>
                 </button>
             </div>
@@ -150,16 +151,19 @@ const handleServeClick = () => {
         <div class="row-start-6 col-start-2 flex justify-center items-end">
             <SeasoningBar />
         </div>
+
         <div class="row-span-3 col-span-2 col-start-3 row-start-3 flex justify-center items-center z-60">
             <!-- ! Cauldron -->
             <div v-show="!gameState.isPreparePhase" class="row-start-4 col-start-4 fixed">
-                <div>
+                <!-- <div>
                     <img src="/src/assets/mouse.svg" class="w-16 select-none pointer-events-none hover:bg-white" />
                     <div class="animate-ping absolute h-full w-full rounded-full bg-white opacity-75"></div>
-                </div>
+                </div> -->
                 <div
                     class="row-start-4 col-start-3 bg-white w-fit p-4 rounded-md z-20 select-none pointer-events-none my-3">
-                    คลิกอีก <span class="text-red-600 font-bold">{{ requireClick - countInteractive }}</span>
+                    คลิกอีก <span class="text-red-600 font-bold">{{ gameState.requireClick -
+                        gameState.countInteractive
+                        }}</span>
                     ครั้งเพื่อคนส่วนผสมเข้าด้วยกัน !
                 </div>
             </div>
@@ -177,44 +181,45 @@ const handleServeClick = () => {
                         class="bg-white border-2 border-[#e9d1ff] rounded-lg w-10 h-10 flex justify-center items-center ">
                         <img :src="`/${ingd.type}/${ingd.name}.png`" class="w-10 h-10">
                     </div>
-
                 </div>
-                <!-- ปุ่มถังขยะ -->
-                <div class="w-28 flex items-center justify-end">
-                    <div class="flex justify-end transform">
-                        <button @click="gameState.dropCooking"
-                            class="bg-alert-200 hover:bg-[#7f4641] border border-white w-12 rounded-lg flex justify-center">
-                            <img src="/src/assets/trash.svg" alt="trash" class="w-6" />
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <!-- ปุ่มถังขยะ -->
+        <div class="w-28 flex items-center justify-end">
+          <div class="flex justify-end transform">
+            <button  :disabled="gameState.cauldron.length === 0" 
+              @click="handleCancelCooking"
+              :class="gameState.cauldron.length === 0 ? 'cursor-not-allowed opacity-50' : ''"
+              class="bg-alert-200 hover:bg-[#7f4641] border border-white w-12 rounded-lg flex justify-center">
+              <img src="/src/assets/trash.svg" alt="trash" class="w-6" />
+            </button>
+          </div>
         </div>
+      </div>
+    </div>
 
         <div class="col-start-5 row-start-6 flex justify-center place-items-center">
             <button @click="handleServeClick"
-                class="border-2 bg-yellow-400 border-white rounded-lg h-20 w-64 text-3xl text-white font-rowdies disabled:cursor-not-allowed relative hover:contrast-75 transition duration-300 disabled:hover:contrast-100"
-                :class="countInteractive >= 4 ? 'scale-100 saturate-100' : 'scale-90 saturate-[30%]'"
-                :disabled="countInteractive < 4">
-                <div class="absolute w-full h-full grid place-items-center">Serve
-                    !!</div>
-                <div class="h-full rounded-lg transition-[width_filter] duration-300 bg-yellow-500" :style="{
-                    width: `${countInteractive * 25}%`
-                }"></div>
+                class="border-2 bg-yellow-400 border-white rounded-lg h-20 w-64 text-3xl text-white disabled:cursor-not-allowed relative hover:contrast-75 transition duration-300 disabled:hover:contrast-100"
+                :class="gameState.countInteractive >= gameState.requireClick ? 'scale-100 saturate-100' : 'scale-90 saturate-[30%]'"
+                :disabled="gameState.isPreparePhase">
+                <div class="absolute w-full h-full grid place-items-center">เสิร์ฟ !!</div>
+                <div class="h-full rounded-lg transition-[width_filter] duration-300 bg-yellow-500"
+                    :style="{ width: `${gameState.countInteractive * (100 / gameState.requireClick)}%` }"></div>
             </button>
         </div>
 
         <div class="col-start-2 row-start-1 row-span-4 flex justify-center">
             <RecipesModal />
         </div>
-        <div class="col-start-4 row-start-1 ">
+        <div class="col-start-4 row-start-1">
             <GoldAndPopularity />
         </div>
 
-        <div @click="handleOrderSignClick" class="col-start-5 row-start-1 flex justify-center">
-            <div class="bg-[#614b3c] h-[50%] px-2 shadow-neutral-500 shadow-md"></div>
-            <div class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md shadow-neutral-500 shadow-md">
-                <div class="bg-white w-[5rem] h-[60%] grid place-items-center relative cursor-pointer rounded-md">
+        <div class="col-start-5 row-start-1 flex justify-center">
+            <img src="/borad.png" class="absolute z-0 h-36" />
+            <div
+                class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md mt-2 shadow-neutral-500 shadow-md z-10">
+                <div @click="handleOrderSignClick"
+                    class="bg-white w-[5rem] h-[60%] grid place-items-center relative cursor-pointer rounded-md">
                     <div class="absolute h-5 w-5 -translate-x-1 -translate-y-1 top-0 left-0">
                         <div class="animate-ping absolute h-full w-full rounded-full bg-red-600 opacity-75"></div>
                         <div class="relative rounded-full h-4 w-4 bg-red-600"></div>
@@ -222,7 +227,6 @@ const handleServeClick = () => {
                     <img src="../assets/person-fill.svg" class="w-[90%] justify-center" />
                 </div>
             </div>
-            <div class="bg-[#614b3c] h-[50%] px-2 shadow-neutral-500 shadow-md"></div>
         </div>
 
         <div v-show="isShow" class="col-start-5 row-start-3 row-span-1 flex flex-col justify-center items-center">

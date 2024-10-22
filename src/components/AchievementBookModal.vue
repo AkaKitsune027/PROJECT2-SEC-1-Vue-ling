@@ -1,9 +1,9 @@
 <script setup>
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/user'
-import foodsData from '../../data/foods.json'
-import ingredientsData from '../../data/ingredients.json'
+import { ref, computed } from "vue"
+import { useRouter } from "vue-router"
+import { useUserStore } from "@/stores/user"
+import foodsData from "../../data/foods.json"
+import ingredientsData from "../../data/ingredients.json"
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -22,7 +22,7 @@ const mappedFiveStarMenus = computed(() => {
 })
 
 const closeModal = () => {
-  router.push({ name: 'cooking-page' })
+  router.push({ name: "cooking-page" })
 }
 
 function showSelectedMenu(menu) {
@@ -38,12 +38,12 @@ function showSelectedMenu(menu) {
       )
       console.log(`Exists indx: ${existsIngredientIndex}`)
       if (existsIngredientIndex === -1) {
-        if (['meat', 'vegetable'].includes(ingredientName)) {
+        if (["meat", "vegetable"].includes(ingredientName)) {
           ingredients.push({
             type: ingredientName,
             name: ingredientName,
             display_name: `${
-              ingredientName === 'meat' ? 'เนื้อ' : 'ผัก'
+              ingredientName === "meat" ? "เนื้อ" : "ผัก"
             }อะไรก็ได้`,
             amount: 1,
           })
@@ -89,21 +89,33 @@ function showSelectedMenu(menu) {
           <div class="grid grid-cols-4 pt-2">
             <img src="/5stars.png" alt="banner" class="col-span-2 col-start-2 flex justify-center" />
           </div>
-          <div class="pt-0 p-8 flex flex-col gap-2 lg:grid grid-cols-3 grid-flow-row lg:gap-6">
-            <div @click="showSelectedMenu(menu)" v-for="(menu, index) in mappedFiveStarMenus" :key="index" :class="{
-              grayscale: !menu.isUnlock,
-              'hover:scale-[1.03] duration-300': menu.isUnlock,
-            }" class="gradient rounded-lg shadow-xl border-4 border-[#eed285] p-1 cursor-pointer">
+          <div
+            class="pt-0 p-8 flex flex-col gap-2 lg:grid grid-cols-3 grid-flow-row lg:gap-6">
+            <div
+              @click="showSelectedMenu(menu)"
+              v-for="(menu, index) in mappedFiveStarMenus"
+              :key="index"
+              :class="{
+                grayscale: !menu.isUnlock,
+                'hover:scale-[1.03] duration-300': menu.isUnlock,
+              }"
+              class="gradient rounded-lg shadow-xl border-4 border-[#eed285] p-1 cursor-pointer">
               <div v-if="menu.isUnlock">
-                <img :src="`/foods/${menu.name}.png`" alt="food.name"
+                <img
+                  :src="`/foods/${menu.name}.png`"
+                  alt="food.name"
                   class="w-full h-auto drop-shadow-[0_8px_5px_rgba(0,0,0,0.3)]" />
-                <p class="text-center mt-1 font-semibold text-lg font-noto-thai text-gray-600">
+                <p
+                  class="text-center mt-1 font-semibold text-lg font-noto-thai text-gray-600">
                   {{ menu.display_name }}
                 </p>
               </div>
 
               <div v-else class="opacity-55">
-                <img src="/unknownDish.png" alt="unknown-dish" class="w-full h-auto" />
+                <img
+                  src="/unknownDish.png"
+                  alt="unknown-dish"
+                  class="w-full h-auto" />
                 <p class="text-center mt-1 font-semibold text-gray-600">
                   ล็อก
                 </p>
@@ -182,10 +194,12 @@ function showSelectedMenu(menu) {
 
 .gradient {
   background: rgb(249, 242, 149);
-  background: linear-gradient(135deg,
-      rgba(249, 242, 149, 0.75) 0%,
-      rgba(224, 170, 62, 0.75) 35%,
-      rgba(250, 243, 152, 0.75) 75%,
-      rgba(184, 138, 68, 0.75) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(249, 242, 149, 0.75) 0%,
+    rgba(224, 170, 62, 0.75) 35%,
+    rgba(250, 243, 152, 0.75) 75%,
+    rgba(184, 138, 68, 0.75) 100%
+  );
 }
 </style>
