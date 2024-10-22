@@ -1,10 +1,14 @@
 <script setup>
-import { ref, defineEmits, computed } from 'vue' // Import ref และ defineEmits
+import { ref, defineEmits, computed } from 'vue'
 import BuySellConfirmModal from '../components/BuySellConfirmModal.vue'
 import ingredientsData from '../../data/ingredients.json'
+import { useUserStore } from '@/stores/user' // นำเข้าข้อมูล user
 
 const isModalVisible = ref(false) // สถานะ modal เปิดหรือปิด
 const selectedItem = ref(null) // เก็บข้อมูลของ item ที่ต้องการซื้อ
+const isGoldEnough = ref(false) // สถานะ Gold เพียงพอหรือไม่
+const userStore = useUserStore() // ดึงข้อมูล user จาก store
+const userGold = computed(() => userStore.user.userDetail.gold) // คำนวณ Gold ของผู้ใช้
 
 const meats = computed(() => {
   return ingredientsData.filter(ingredient => ingredient.type === 'meat')
@@ -22,9 +26,11 @@ const handleSelectPage = (pageNumber) => {
   selectedPage.value = pageNumber
 }
 
-// ฟังก์ชันสำหรับเปิด Modal
+// ฟังก์ชันสำหรับเปิด Modal และตรวจสอบ Gold
 const openModal = (item) => {
   selectedItem.value = item
+  // ตรวจสอบว่า Gold เพียงพอหรือไม่
+  isGoldEnough.value = userGold.value >= item.price
   isModalVisible.value = true
 }
 
@@ -71,8 +77,11 @@ const closeModal = () => {
         </div>
         <div class="flex items-center gap-2">
           <p class="text-sm text-gray-700">{{ meat.price }}$</p>
+          <!-- ปุ่ม Buy -->
           <button @click="openModal(meat)"
-            class="bg-green-400 hover:bg-green-600 text-white py-1 px-2 rounded-lg">Buy</button>
+            class="bg-green-400 hover:bg-green-600 text-white py-1 px-2 rounded-lg">
+            ซื้อ
+          </button>
         </div>
       </div>
 
@@ -85,14 +94,17 @@ const closeModal = () => {
         </div>
         <div class="flex items-center gap-2">
           <p class="text-sm text-gray-700">{{ vegetable.price }}$</p>
+          <!-- ปุ่ม Buy -->
           <button @click="openModal(vegetable)"
-            class="bg-green-400 hover:bg-green-600 text-white py-1 px-2 rounded-lg">Buy</button>
+            class="bg-green-400 hover:bg-green-600 text-white py-1 px-2 rounded-lg">
+            Buy
+          </button>
         </div>
       </div>
     </div>
 
     <!-- เรียกใช้ Modal เมื่อ isModalVisible เป็น true -->
-    <BuySellConfirmModal v-if="isModalVisible" :item="selectedItem" @close="closeModal" />
+    <BuySellConfirmModal v-if="isModalVisible" :item="selectedItem" :isGoldEnough="isGoldEnough" @close="closeModal" />
   </div>
 </template>
 
