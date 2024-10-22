@@ -48,7 +48,7 @@ const closeModal = () => {
             <select v-model="selectedRecipe" @change="openModal"
                 class="select select-bordered w-full max-w-xs rounded-md cursor-pointer">
                 <!-- ข้อความเริ่มต้นที่เป็น placeholder -->
-                <option :value="null" disabled selected hidden class="text-slate-400">เลือกสูตรอาหารของคุณ</option>
+                <option :value="null" disabled selected hidden class="text-slate-400 shadow-lg">เลือกสูตรอาหารของคุณ</option>
 
                 <!-- แสดงรายการสูตรอาหาร -->
                 <option v-for="recipe in unlockedRecipes" :key="recipe.id" :value="recipe"

@@ -19,7 +19,7 @@ const isPrepareOrder = computed(() => route.name === "prepare-modal")
 
 const emits = defineEmits(['handleConfirmOrder'])
 
-function genarateOrder() {
+function generateOrder() {
     const randomCustomerIndex = Math.floor(Math.random() * customersData.length)
     const randomFoodIndex = Math.floor(Math.random() * foodsData.length)
 
@@ -41,7 +41,7 @@ function genarateOrder() {
 onMounted(async () => {
     const currentOrder = userStore.user.userDetail.currentOrder
     if (currentOrder) return
-    gameState.rawOrder = genarateOrder()
+    gameState.rawOrder = generateOrder()
     userStore.user.userDetail = await updateUserDetails(userStore.user.id, {
         'currentOrder': gameState.rawOrder,
         isCurrentOrderCommitted: false
@@ -61,7 +61,7 @@ const handleCancelOrder = async () => {
         gameState.countInteractive = 0
         gameState.isPreparePhase = true
 
-        userStore.user.userDetail.currentOrder = genarateOrder()
+        userStore.user.userDetail.currentOrder = generateOrder()
         console.log('regenerated:', gameState.rawOrder)
 
         userStore.user.userDetail = await updateUserDetails(userStore.user.id, {

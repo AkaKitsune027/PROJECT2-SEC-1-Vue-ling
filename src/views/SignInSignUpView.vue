@@ -74,9 +74,11 @@ watch(confirmPassword, () => {
 </script>
 
 <template>
-  <div class="page font-sunday flex flex-col items-center justify-center min-h-screen isekai-background">
-    <div class="w-full max-w-md relative font-bold">
-      <h1 class="text-7xl mb-6 text-center text-shadow text-[#ffffff]">
+
+  <div class=" font-sunday  min-h-screen isekai-background">
+  <div class="fixed inset-0 bg-[#2e2c2c] bg-opacity-15 flex flex-col items-center justify-center min-h-screen">
+    <div class="w-full max-w-md relative font-bold  ">
+      <h1 class="text-7xl mb-6 text-center text-shadow text-[#fcfcfc]">
         ISEKAI COOKING
       </h1>
     </div>
@@ -156,6 +158,7 @@ watch(confirmPassword, () => {
         <!-- </span> -->
       </div>
     </div>
+    </div>
   </div>
 </template>
 
@@ -177,7 +180,6 @@ watch(confirmPassword, () => {
 }
 
 .text-shadow {
-  text-shadow: -2px -4px 50px #000000;
-  /* ขยายเงา */
+  text-shadow: -8px -3px 60px #292727, 2px 3px 80px #fcfafa; /* ขยายเงา */
 }
 </style>
