@@ -1,4 +1,5 @@
 import ingredientsData from '../../data/ingredients.json'
+import foodsData from '../../data/foods.json'
 
 //*from https://medium.com/@stheodorejohn/mastering-deep-cloning-in-javascript-handling-nested-objects-and-arrays-4de203463244#:~:text=You%20can%20now%20use%20the%20deepClone%20function%20to,%27John%27%2C%20age%3A%2030%20%7D%3Bconst%20clone%20%3D%20deepClone%20%28obj%29%3B
 // โคลน opject มาเป็นอีกก้อนนึง
@@ -20,4 +21,8 @@ export function deepClone(obj) {
 
 export function getIngredientData(ingredientName) {
   return ingredientsData.find((ingd) => ingd.name === ingredientName)
+}
+
+export function getFoodDataById(foodId) {
+  return foodsData.find((f) => f.id === foodId)
 }

@@ -62,9 +62,9 @@ const router = createRouter({
           component: () => import("../components/AchievementBookModal.vue"),
         },
         {
-          path: "calculate-score",
-          name: "calculate-score-modal",
-          component: () => import("../components/CalculatorScoreModal.vue"),
+          path: 'calculate-score',
+          name: 'calculate-score-modal',
+          component: () => import('../components/CalculateScoreModal.vue')
         },
         {
           path: "cancel-order",
