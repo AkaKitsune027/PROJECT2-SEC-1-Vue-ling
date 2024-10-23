@@ -6,9 +6,10 @@ import { onMounted } from 'vue'
 import customersData from '../../data/customers.json'
 import foodsData from '../../data/foods.json'
 import specialRequirementData from '../../data/specialRequirement.json'
+
 import { useGameState } from '../stores/gameState'
 import { useUserStore } from '../stores/user'
-import { updateUserDetails } from '../libs/userManagement'
+import { updateUser, updateUserDetails } from '@/libs/userManagement'
 
 const router = useRouter()
 const route = useRoute()
@@ -86,7 +87,6 @@ const handleCancelOrder = async () => {
             if (updatedUserDetails && updatedUserDetails.popularity === updatedPopularity) {
                 userStore.user.userDetail.popularity = updatedUserDetails.popularity
                 userStore.user.userDetail.currentOrder = updatedUserDetails.currentOrder
-                await updateUser(userStore.user.id, userStore.user)
             } else {
                 useUserStore.user = null
                 router.push({ name: 'login-page' })

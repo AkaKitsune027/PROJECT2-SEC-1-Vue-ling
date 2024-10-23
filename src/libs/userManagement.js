@@ -8,8 +8,16 @@ const templateUser = {
     popularity: 0,
     ingredients: [
       {
-        id: 1,
-        amount: 5
+        id: 6,
+        amount: 2
+      },
+      {
+        id: 13,
+        amount: 2 
+      },
+      {
+        id: 18,
+        amount: 2
       }
     ],
     recipes: [
@@ -220,3 +228,28 @@ export async function updateUser(userId, updateData) {
 
   }
 }
+
+export async function resetUser(userId) {
+  try {
+    // ดึงข้อมูล user ปัจจุบันมาก่อน เพื่อเก็บ username และ password
+    const user = await getUserById(userId)
+    const { username, password } = user
+
+    const resetData = {
+      username, // คงค่า username เดิม
+      password, // คงค่า password เดิม
+      outletName: templateUser.outletName,
+      userDetail: templateUser.userDetail
+        
+    
+    }
+
+    // ส่งข้อมูลที่รีเซ็ตไปยังเซิร์ฟเวอร์ด้วยการ PATCH
+    const patchedUser = await patchUser(userId, resetData)
+    return patchedUser
+
+  } catch (error) {
+    console.error("Failed to reset user:", error)
+  }
+}
+

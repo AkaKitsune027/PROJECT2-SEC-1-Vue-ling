@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, watchEffect } from 'vue'
 import customersData from '../../data/customers.json'
 import foodsData from '../../data/foods.json'
 import ingredientsData from '../../data/ingredients.json'
 import specialRequirementData from '../../data/specialRequirement.json'
 import { useUserStore } from './user'
 import { useRouter } from 'vue-router'
+import { resetUser } from '@/libs/userManagement'
 
 
 export const useGameState = defineStore('gameState', () => {
@@ -29,6 +30,27 @@ export const useGameState = defineStore('gameState', () => {
   const requireClick = 3
   const countInteractive = ref(0)
 
+  const totalIngredientsAmount = computed(() => {
+    return userStore.user.userDetail.ingredients?.reduce((total, ingredient) => {
+      return total + (ingredient.amount || 0)
+    }, 0)
+  })
+ 
+  const handleGameOver = async () => {
+    const currentUser = userStore.user.id
+    await resetUser(currentUser)
+    router.push({ name: "setup-page" })
+  }
+  
+  watchEffect(() => {
+    if (userStore.user.userDetail.gold < 5) {
+      if (totalIngredientsAmount.value === 0 && cauldron.value.length === 0) {
+        handleGameOver()
+      }
+      console.log(totalIngredientsAmount)
+    }
+  })
+
   watch(
     () => rawOrder.value,
     () => {
@@ -49,7 +71,7 @@ export const useGameState = defineStore('gameState', () => {
     cauldron.value.push(ingdId)
   }
 
-   function dropCooking() {
+  function dropCooking() {
         cauldron.value = []
         router.push({ name: 'cooking-page' })
     }
