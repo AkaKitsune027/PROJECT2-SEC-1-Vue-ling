@@ -62,7 +62,7 @@ const logout = () => {
             </label>
           </div>
 
-          <p class="text-[#768175] text-base mt-4">
+          <p class="text-[#677265] text-base mt-4">
             Do you want to delete your account?
             <button @click="deleteUser" class="text-nowrap font-bold text-[#f63939] hover:underline">
               Delete

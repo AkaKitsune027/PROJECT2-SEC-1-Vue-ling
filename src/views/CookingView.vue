@@ -158,15 +158,22 @@ function handleCancelCooking() {
                     <img src="/src/assets/mouse.svg" class="w-16 select-none pointer-events-none hover:bg-white" />
                     <div class="animate-ping absolute h-full w-full rounded-full bg-white opacity-75"></div>
                 </div> -->
-                <div
-                    class="row-start-4 col-start-3 bg-white w-fit p-4 rounded-md z-20 select-none pointer-events-none my-3">
-                    คลิกอีก <span class="text-red-600 font-bold">{{ gameState.requireClick }}</span>
-                    ครั้งเพื่อคนส่วนผสมเข้าด้วยกัน !
+                <div class="row-start-4 col-start-3 w-fit p-4 rounded-md z-20 select-none pointer-events-none my-3"
+                    :class="gameState.requireClick - gameState.countInteractive === 0 ? 'bg-yellow-400 shadow-md animate-pulse shadow-white' : 'bg-white scale-80 shadow-inner'">
+                    <span class="animate-pulse"
+                        v-show="(gameState.requireClick - gameState.countInteractive > 0)">คลิกอีก
+                        <span class="text-red-600 font-bold">{{ gameState.requireClick -
+                            gameState.countInteractive }}</span>
+                        ครั้งเพื่อคนส่วนผสมเข้าด้วยกัน !
+                    </span>
+                    <span v-show="(gameState.requireClick - gameState.countInteractive === 0)"
+                        class="text-white scale-100 transition font-bold">พร้อมเสิร์ฟให้ลูกค้าแล้ว !</span>
                 </div>
             </div>
             <img ref="cauldronRef" :src="currentImage" alt="cauldron" class="select-none pointer-events-none" />
             <button @click="handleCauldronClick"
                 class="absolute rounded-full w-[26%] h-[49%] translate-y-[7%] cursor-pointer disabled:cursor-default"
+                :class="gameState.requireClick - gameState.countInteractive === 0 ? 'pointer-events-none' : 'cursor-pointer'"
                 :disabled="gameState.isPreparePhase"></button>
         </div>
 
