@@ -19,7 +19,6 @@ const router = useRouter()
 const soundStore = useSoundStore()
 const userStore = useUserStore()
 const gameState = useGameState()
-// const showHowToPlayModal = ref(false)
 
 const isShow = ref(true)
 const handleConfirmOrderClick = () => {

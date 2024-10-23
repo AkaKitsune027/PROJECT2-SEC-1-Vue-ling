@@ -74,14 +74,7 @@ const handleIngredientClick = async (targetIngredient) => {
         console.error('Error to update user data.')
     }
 
-
-
-    console.dir(updatedUserDetail)
 }
-
-// const handleToggleFoodStoreClick = () => {
-//     emits('toggleFoodStoreClick')
-// }
 
 </script>
 
