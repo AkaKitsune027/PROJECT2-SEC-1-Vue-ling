@@ -13,7 +13,6 @@ const unlockedFood = ref(null)
 const sprFromCustomer = gameState
 const ratingStars = (stars) => `/star-${stars}.png`
 
-// const food = getIngredientData
 onMounted(() => {
   if (summary.value.stars >= 5) {
     unlockedFood.value = getFoodDataById(summary.value.recipeUnlockId)
