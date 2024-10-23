@@ -18,7 +18,6 @@ export function calculatePrice() {
     meat: {},
     vegetable: {},
     seasoning: {},
-    category: {},
     have: [],
     doNotHave: [],
   }
@@ -26,10 +25,9 @@ export function calculatePrice() {
   let totalIngredients = 0 // ตัวนับสำหรับวัตถุดิบทั้งหมดใน actualRecipeIngredients (ไม่รวม notHave)
   let matchedIngredients = 0 // ตัวนับสำหรับวัตถุดิบที่ตรงกับสูตรรวม
   let isBeyondRecipe = false // ตัวเช็คว่าสูตรนี้เกินหรือไม่
-  let isCategoryPassed = false // ตัวเช็คว่าวัตถุดิบในหมวดหมู่ผ่านหรือไม่
   let isMustHavePassed = false // ตัวเช็คว่าวัตถุดิบที่ต้องมีในสูตรผ่านหรือไม่
   let doNotHaveCount = 0 // ตัวนับสำหรับวัตถุดิบที่อยู่ใน notHave
-  const foodName = recipe.display_name //ชื่ออาหารของ order นี้
+  const foodName = recipe.display_name // ชื่ออาหารของ order นี้
   let recipeUnlockId = null // ตัวแปรสำหรับเก็บ id ของสูตรที่ถูกเปิดล็อค
   let gold = 0 // ตัวแปรสำหรับเก็บค่า gold ที่ได้
   let pop = userStore.user.userDetail.popularity // ตัวแปรสำหรับเก็บค่า popularity ของผู้เล่น
@@ -94,25 +92,6 @@ export function calculatePrice() {
 
         const ingdData = getIngredientData(condition.value.with)
         actualRecipeIngredients[ingdData.type][condition.value.with] = quantity
-        continue
-      }
-
-      if (condition.type === 'modifyByCategory') {
-        const targetCategory = condition.value.category
-        let modifier = condition.value.quantity
-
-        for (const ingdType in actualRecipeIngredients) {
-          if (ingdType === 'category') {
-            break
-          }
-          for (const ingdName in actualRecipeIngredients[ingdType]) {
-            const ingdData = getIngredientData(ingdName)
-            if (ingdData && ingdData.category.includes(targetCategory)) {
-              modifier += actualRecipeIngredients[ingdType][ingdName]
-            }
-          }
-          actualRecipeIngredients.category[targetCategory] = modifier
-        }
         continue
       }
 
@@ -215,21 +194,6 @@ export function calculatePrice() {
           }
         }
       }
-    } else if (key === 'category') {
-      for (const ingdCategory in actualRecipeIngredients[key]) {
-        let quantityInServe = 0 // ตัวนับจำนวนวัตถุดิบใน serve
-        quantityInServe = serve.filter((ingd) =>
-          ingd.category.includes(ingdCategory)
-        ).length
-        if (quantityInServe >= actualRecipeIngredients.category[ingdCategory]) {
-          isCategoryPassed = true
-          if (
-            quantityInServe > actualRecipeIngredients.category[ingdCategory]
-          ) {
-            isBeyondRecipe = true
-          }
-        }
-      }
     } else if (key === 'have') {
       if (actualRecipeIngredients.have.length === 0) {
         isMustHavePassed = true
@@ -260,10 +224,6 @@ export function calculatePrice() {
 
   if (isBeyondRecipe) {
     matchPercentage -= 10
-  }
-
-  if (isCategoryPassed === false) {
-    matchPercentage -= 15
   }
 
   if (isMustHavePassed === false) {
@@ -371,7 +331,7 @@ export function calculatePrice() {
     doNotHaveCount,
     stars,
     review,
-    foodName,
+    recipe,
     recipeUnlockId,
     gold,
     pop,

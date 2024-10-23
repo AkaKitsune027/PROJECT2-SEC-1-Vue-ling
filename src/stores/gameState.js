@@ -35,7 +35,7 @@ export const useGameState = defineStore('gameState', () => {
       return total + (ingredient.amount || 0)
     }, 0)
   })
- 
+
   const handleGameOver = async () => {
     const currentUser = userStore.user.id
     await resetUser(currentUser)
