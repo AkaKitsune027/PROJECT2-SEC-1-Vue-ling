@@ -56,7 +56,7 @@ const logout = () => {
           </div>
           <div class="flex w-full mt-2">
             <p class="text-[#2d2d2d] font-bold font-sunday mr-4 text-center mt-2">YOUR RESTAURANT</p>
-            <label class="bg-[#b9bcbda5] w-96 h-16 text-center py-4 text-[#000000] rounded-md text-xl font-noto-thai">
+            <label class="bg-[#b9bcbda5] w-96 h-16 text-center py-4 text-[#000000] rounded-md text-xl font-sunday">
               {{ userStore.user.outletName }}
             </label>
           </div>
