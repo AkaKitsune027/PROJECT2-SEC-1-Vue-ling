@@ -4,7 +4,7 @@ import { ref, computed } from 'vue'
 
 // หน้าที่กำลังแสดงและจำนวนหน้าทั้งหมด
 const currentPage = ref(1)
-const totalPages = 5 // เปลี่ยนตามจำนวนหน้าที่ต้องการ
+const totalPages = 3 // เปลี่ยนตามจำนวนหน้าที่ต้องการ
 
 // ฟังก์ชันสำหรับเปลี่ยนหน้า
 const nextPage = () => {
@@ -32,7 +32,7 @@ const vegetables = computed(() => {
 <template>
   <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10 font-noto-thai">
     <!-- กระดานคำสั่ง (Order Board) -->
-    <div class="order-board relative w-3/4 h-3/4 p-5 rounded-lg shadow-lg">
+    <div class="order-board relative w-4/5 h-3/4 rounded-lg shadow-lg">
       <!-- ปุ่มปิด -->
       <div class="flex justify-end">
         <button @click="$emit('close')"
@@ -48,18 +48,13 @@ const vegetables = computed(() => {
       <div class="mt-10 px-5 py-3 text-center text-gray-900 overflow-y-auto m-10">
         <div class="page-header">
           <!-- หัวข้อของแต่ละหน้า -->
-          <!-- <h3 v-if="currentPage === 1" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">การทำอาหาร</h3>
-          <h3 v-if="currentPage === 2" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">การใช้วัตถุดิบ</h3>
-          <h3 v-if="currentPage === 3" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">ระบบชื่อเสียงร้าน</h3>
-          <h3 v-if="currentPage === 4" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">สูตรอาหาร</h3>
-          <h3 v-if="currentPage === 5" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">สมุดสะสม</h3> -->
-          <h3 v-if="currentPage === 1" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">วิธีการเล่น</h3>
+          <h3 v-if="currentPage === 1" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3 font-bold">
+            วิธีการเล่น</h3>
           <h3 v-if="currentPage === 2" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3 font-bold">วัตถุดิบ
           </h3>
-          <h3 v-if="currentPage === 3" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">ระบบชื่อเสียงร้าน
+          <h3 v-if="currentPage === 3" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3 font-bold">
+            ระบบโกลด์และชื่อเสียง
           </h3>
-          <h3 v-if="currentPage === 4" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">สูตรอาหาร</h3>
-          <h3 v-if="currentPage === 5" class="text-2xl border-2 border-gray-300 p-2 rounded-lg mt-3">สมุดสะสม</h3>
         </div>
 
         <div v-if="currentPage === 1" class="text-left">
@@ -68,37 +63,167 @@ const vegetables = computed(() => {
           <div class="flex gap-3">
             <div class="flex flex-start justify-between">
 
-              <div class="flex mx-4">
+              <div class="flex my-2 justify-center items-center ">
                 <span
-                  class=" bg-slate-200 border-4 border-slate-400 rounded-full flex justify-center items-center w-10 h-10 font-bold mx-4 ">
+                  class=" bg-slate-200 border-4 border-slate-400 rounded-full justify-center items-center  flex w-10 h-10 font-bold mx-4 ">
                   1
                 </span>
-                <span class="my-2">ซื้อของเตรียมไว้สำหรับทำอาหาร</span>
+                <div class="font-bold">ซื้อของเตรียมไว้สำหรับทำอาหาร</div>
               </div>
-
-              <div class="flex gap-4 justify-center">
-                <img src="/res1.png" alt="res1" class="border-4 h-72">
-                <img src="/res2.png" alt="res2" class="border-4 h-72">
-              </div>
-
-
             </div>
-          </div>
 
-          <div class="flex mx-4">
-            <span
-              class=" bg-slate-200 border-4 border-slate-400 rounded-full flex justify-center items-center w-10 h-10 font-bold mx-4 ">
-              2
-            </span>
-            <span class="y-2">ซื้อของเตรียมไว้สำหรับทำอาหาร</span>
           </div>
-
-          <div class="flex gap-4 justify-center">
+          <div class="flex gap-4 justify-center items-center">
             <img src="/res1.png" alt="res1" class="border-4 h-72">
             <img src="/res2.png" alt="res2" class="border-4 h-72">
+            <img src="/res3.png" alt="res2" class="border-4 h-64">
           </div>
+          <div class="px-14 py-4 bg-white border-2 rounded-lg">
+            ก่อนที่เราจะทำเมนูใด ๆ ให้ลูกค้า เราจะต้องซื้อวัตถุดิบที่จะนำมาทำอาหารเท่าที่ต้องการ
+            โดยกดไปที่ปุ่มร้านค้าในแถบวัตถุดิบที่มุมล่าง จากนั้นแถบจะเปลี่ยนเป็นแถบร้านค้า
+            เราสามารถเลือกซื้อของอะไรก็ได้ กี่ชิ้นก็ได้ <span class="text-red-600">แต่ก็ต้องบริหารเงินดี ๆ นะ
+              ถ้าเงินไม่พอจะไม่สามารถซื้อของได้และอาจแพ้เกมได้ด้วยนะ</span>
+          </div>
+
+          <div class="flex gap-3">
+            <div class="flex flex-start justify-between">
+
+              <div class="flex my-2 justify-center items-center ">
+                <span
+                  class=" bg-slate-200 border-4 border-slate-400 rounded-full flex justify-center items-center w-10 h-10 font-bold mx-4 ">
+                  2
+                </span>
+                <div class="font-bold">รับออเดอร์</div>
+              </div>
+            </div>
+
+          </div>
+          <div class="flex gap-4 justify-center items-center">
+            <img src="/order1.png" alt="order1" class="border-4 h-52">
+            <img src="/order2.png" alt="order2" class="border-4 h-52">
+            <img src="/order3.png" alt="order3" class="border-4 h-52">
+          </div>
+          <div class="px-14 py-4 bg-white border-2 rounded-lg">
+            เมื่อซื้อของเสร็จแล้ว เราจะต้องรับออเดอร์ที่เข้ามาโดยการคลิกที่ <span
+              class="text-yellow-600">'แผ่นออเดอร์รูปคน'</span> ที่แปะอยู่กับไม้
+            <br />เมื่อกดมาแล้ว ถ้าเราจะ <span class="text-green-600">'อ่านข้อมูลและรับออเดอร์'</span> ให้เรา <span
+              class="text-green-600">'ติ๊กถูก'</span>
+            <br />แต่ถ้าเราจะ <span class="text-red-600">'ไม่อ่านข้อมูลและไม่รับออเดอร์'</span> ให้เรา <span
+              class="text-red-600">'ติ๊กกากบาท' </span>
+            <span class="text-gray-600">(เมื่อปฏิเสธจะไม่มีผลอะไรเหมือนการปิดร้านชั่วคราว
+              และลูกค้าคนอื่นจะเข้ามาสั่งแทน)</span>
+            <br />จากนั้นเกมจะพาเราไปยังหน้ารายละเอียดอาหารที่ลูกค้าสั่ง
+            โดยจะข้อมูลจะประกอบไปด้วย
+            <br />
+            <span class="text-yellow-600">'ชื่อเมนูที่ลูกค้าต้องการ', 'คำอธิบายของเมนูนั้น ๆ'
+              และ 'ความต้องการเพิ่มเติมของลูกค้า'</span>
+            <p class="text-red-600"> !! คำเตือน : แต่ถ้าเราเลือกที่จะ 'ไม่รับออเดอร์หลังจากอ่านรายละเอียดแล้ว'
+              เราจะเสียค่าชื่อเสียง
+              เนื่องจากรับมาแล้วแต่ปฏิเสธออเดอร์ภายหลัง</p>
+          </div>
+
+          <div class="flex gap-3">
+            <div class="flex flex-start justify-between">
+
+              <div class="flex my-2 justify-center items-center ">
+                <span
+                  class=" bg-slate-200 border-4 border-slate-400 rounded-full flex justify-center items-center w-10 h-10 font-bold mx-4 ">
+                  3
+                </span>
+                <div class="font-bold">ทำอาหาร</div>
+              </div>
+            </div>
+
+          </div>
+          <div class="flex gap-4 justify-center items-center">
+            <img src="/cook1.png" alt="cook1" class="border-4 h-40">
+            <img src="/cook2.png" alt="cook2" class="border-4 h-32">
+            <img src="/cook3.png" alt="cook3" class="border-4 h-32">
+            <img src="/cook4.png" alt="cook4" class="border-4 h-32">
+          </div>
+
+          <div class="px-14 py-4 bg-white border-2 rounded-lg">
+            เราจะเริ่มทำอาหารตามออเดอร์ โดยถ้าจำรายละเอียดออเดอร์ไม่ได้ สามารถกดที่ 'แผ่นออเดอร์รูปคน'
+            เพื่อดูรายละเอียดอีกครั้งได้
+            <br>จากนั้นให้เราเลือกวัตถุดิบที่คิดว่าลูกค้าจะชอบ จาก <span
+              class="text-yellow-600">'ชื่อเมนูที่ลูกค้าต้องการ' และ
+              'ความต้องการเพิ่มเติมของลูกค้า'</span>
+            <br><span class="text-yellow-600">จากนั้นคนหม้อให้วัตถุดิบเข้ากัน 3 ครั้ง
+              จากนั้นเราจะสามารถเสิร์ฟอาหารให้ลูกค้าได้</span>
+          </div>
+
+          <div class="flex gap-3">
+            <div class="flex flex-start justify-between">
+
+              <div class="flex my-2 justify-center items-center ">
+                <span
+                  class=" bg-slate-200 border-4 border-slate-400 rounded-full flex justify-center items-center w-10 h-10 font-bold mx-4 ">
+                  4
+                </span>
+                <div class="font-bold">คำนวณอาหาร</div>
+              </div>
+            </div>
+
+          </div>
+          <div class="flex gap-4 justify-center items-center">
+            <div class="flex gap-4 justify-center items-center">
+              <img src="/cal1.png" alt="cal1" class="border-4 h-32">
+              <img src="/cal2.png" alt="cal2" class="border-4 w-80">
+              <img src="/cal3.png" alt="cal3" class="border-4 h-32">
+              <img src="/recp.png" alt="recp" class="border-4 h-52">
+            </div>
+
+          </div>
+
+          <div class="px-14 py-4 bg-white border-2 rounded-lg">
+            เมื่อกดปุ่ม เสิร์ฟ เราจะได้หน้าที่แสดงรายละเอียดการให้คะแนนต่าง ๆ ได้แก่ <br />
+            <span class="text-yellow-600">'ดาว', 'ชื่ออาหาร', 'ความต้องการเพิ่มเติมของลูกค้า', 'รีวิว', 'โกลด์',
+              'ชื่อเสียง' และ
+              'ความถูกต้องของเมนู'</span>
+            <br />โดยการคะแนนเมนูจะมีทั้งหมด 5 ช่วง
+            <br />- 0 - 39 คะแนน (1 ดาว / 20%)
+            <br />- 40 - 59 คะแนน (2 ดาว / 40%)
+            <br />- 60 - 79 คะแนน (3 ดาว / 60%)
+            <br />- 80 - 99 คะแนน (4ดาว /80%)
+            <br />- 100 คะแนน (5ดาว / 100%)
+            <br />
+            <span class="text-yellow-600">หากเราทำอาหารได้ดี หรือได้ 5 ดาว เราจะได้รับสูตรต้นตำรับของเมนูอื่นมา 1 เมนู
+              และจะได้รับการบันทึกเมนู 5
+              ดาว ลง archievement</span>
+            <br>
+          </div>
+
+          <div class="flex gap-3">
+            <div class="flex flex-start justify-between">
+
+              <div class="flex my-2 justify-center items-center ">
+                <span
+                  class=" bg-slate-200 border-4 border-slate-400 rounded-full flex justify-center items-center w-10 h-10 font-bold mx-4 ">
+                  4
+                </span>
+                <div class="font-bold">สมุดแห่งเกียรติยศ และสูตรอาหาร</div>
+              </div>
+            </div>
+
+          </div>
+          <div class="flex gap-4 justify-center items-center">
+            <img src="/ar1.png" alt="ar1" class="border-4 h-40">
+            <img src="/ar2.png" alt="ar2" class="border-4 w-96">
+            <img src="/ar3.png" alt="ar3" class="border-4 w-96">
+          </div>
+
+          <div class="px-14 py-4 bg-white border-2 rounded-lg">
+            นอกจากนั้น เรายังมีระบบที่ <span class="text-yellow-600">บันทึกความสำเร็จของเมนูอาหาร</span>อีกด้วย
+            โดยมีเงื่อนไข คือ <span class="text-yellow-600">เราต้องทำเมนูนั้นให้ได้ 5 ดาว</span>
+            <br>ถ้าเราทำอาหารได้ 5 ดาว เราจะมีหน้าตาของอาหาร กรอบสีทอง วัตถุดิบ และคำอธิบายของอาหารโผล่ขึ้นมา
+            <br>ถ้าเราทำอาหารได้ไม่ถึง 5 ดาว เมนูนั้น ๆ จะถูกล็อกไว้เป็นเมนูปริศนา
+            เราจะไม่เห็นหน้าตาของเมนูนั้นและกรอบจะยังคงเป็นสีเทา
+          </div>
+
         </div>
 
+
+        <!--** หน้าที่ 2  -->
         <div v-if="currentPage === 2" class="text-left flex justify-center">
           <div class="flex flex-col items-center">
             <div
@@ -128,20 +253,61 @@ const vegetables = computed(() => {
                 </div>
               </div>
             </div>
+
+            <div
+              class="text-lg flex my-6 bg-[#c576dd] text-white w-[50%] h-10 text-center items-center justify-center rounded-lg">
+              เครื่องปรุง
+            </div>
+
+            <div class="bg-[#efd3f7] flex gap-6 justify-start py-4 w-full">
+
+              <div class="flex-col bg-white border-2 p-2 items-center rounded-lg min-w-20 flex flex-wrap m-3">
+                <img src="/seasoning/bottle-of-sugar.png" alt="sugar" class="w-20 h-20 " />
+                <div class="bg-[#d196e1] text-center font-bold rounded-lg px-6">น้ำตาล</div>
+                <div class="m-4 text-wrap w-36">เครื่องปรุงอเนกประสงค์ รสหวาน ว่ากันว่าชาวต่างโลกเป็นผู้คิดค้นสิ่งนี้
+                </div>
+              </div>
+              <div
+                class="flex-col bg-white border-2 p-2 justify-center items-center rounded-lg min-w-20 flex flex-wrap m-3">
+                <img src="/seasoning/bottle-of-salt.png" alt="salt" class="w-20 h-20" />
+                <div class="bg-[#d196e1] text-center font-bold rounded-lg px-6">เกลือ</div>
+                <div class="m-4 text-wrap w-36">เครื่องปรุงอเนกประสงค์ รสเค็ม ว่ากันว่าชาวต่างโลกเป็นผู้คิดค้นสิ่งนี้
+                </div>
+              </div>
+
+            </div>
           </div>
+        </div>
 
-
-          <div v-if="currentPage === 3" class="content text-left">
-            <p>ชื่อเสียงจะลดถ้าทำอาหารได้ 3 ดาวลงไป...</p>
-            <p>ชื่อเสียงจะบวกถ้าทำอาหารได้ 3 ดาวขึ้นไป...</p>
+        <!--** หน้าที่ 3  -->
+        <div v-if="currentPage === 3" class="text-left">
+          <div class="flex justify-center py-4">
+            <img src="/pop.png" alt="pop" class="w-7/12" />
           </div>
+          <div class="bg-white px-3 rounded-lg">
+            <div>
+              <li class="font-bold text-lg">ระบบโกลด์</li>
+              โกลด์เป็นสิ่งที่มีไว้เพื่อใช้จ่ายในหน้าร้านค้า
+              <br>วิธีการได้รับโกลด์ คือ การทำออเดอร์ส่งลูกค้า ยิ่งทำได้ดาวมาก ลูกค้ายิ่งจ่ายเงินมาก
+              <p class="text-red-500">!! คำเตือน : ถ้าหากเงินของเราเหลือน้อยกว่าเงินขั้นต่ำของวัตถุดิบที่ต่ำที่สุด
+                ระบบเกมจะเด้งให้ไปตั้งชื่อร้านค้าใหม่ และเริ่มต้นร้านค้านั้นใหม่ทันที <br>'ทุกอย่าง'
+                ในร้านอาหารเก่าจะถูกลบออกไปทั้งหมด</p>
+            </div>
 
-          <div v-if="currentPage === 4" class="content text-left">
-            <p>สูตรต้นตำรับ...</p>
-          </div>
-
-          <div v-if="currentPage === 5" class="content text-left">
-            <p>ถ้าหากเราทำอาหารได้ 5 ดาว...</p>
+            <div class="py-4">
+              <li class="font-bold text-lg">ระบบชื่อเสียง</li>
+              ระบบชื่อเสียงจะใช้ในการได้รับทิปค่าอาหาร 2 เท่า และการได้รับค่าอาหารครึ่งราคา
+              <br>ชื่อเสียงจะมีระยะตั้งแต่ -50 ถึง 50
+              <li>ได้รับทิปค่าอาหาร 2 เท่า: <span class="text-green-600">ยิ่งค่าชื่อเสียงมาก ยิ่งมีโอกาส (%) ที่จะได้ทิป
+                  2 เท่ามากขึ้นเท่านั้น</span>
+                เช่น ถ้าค่าชื่อเสียงเป็น 20 เราจะมีโอกาสได้ทิป 2 เท่า เป็น 20 % </li>
+              <li>การได้รับค่าอาหารครึ่งราคา:
+                <span class="text-red-600">ยิ่งค่าชื่อเสียงน้อย ยิ่งมีโอกาส (%)
+                  ที่ลูกค้าจะจ่ายครึ่งราคามากขึ้นเท่านั้น</span> เช่น
+                ถ้าค่าชื่อเสียงเป็น -20 เราจะมีโอกาสได้รับเงินค่าอาหารครึ่งราคา เป็น 20 %
+              </li>
+              <br>
+            </div>
           </div>
         </div>
       </div>

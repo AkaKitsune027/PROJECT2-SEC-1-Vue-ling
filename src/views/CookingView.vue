@@ -109,6 +109,7 @@ function handleCancelCooking() {
                 class="absolute pointer-events-none text-center w-[calc(100%-1.5rem)] font-rowdies text-3xl text-white">
                 Isekai Cooking
             </div>
+            <!-- <div class=""></div> -->
 
             <div class="relative">
                 <div class="flex flex-row relative z-10 gap-2">
@@ -159,7 +160,7 @@ function handleCancelCooking() {
                     <div class="animate-ping absolute h-full w-full rounded-full bg-white opacity-75"></div>
                 </div> -->
                 <div class="row-start-4 col-start-3 w-fit p-4 rounded-md z-20 select-none pointer-events-none my-3"
-                    :class="gameState.requireClick - gameState.countInteractive === 0 ? 'bg-yellow-400 shadow-md animate-pulse shadow-white' : 'bg-white scale-80 shadow-inner'">
+                    :class="gameState.requireClick - gameState.countInteractive === 0 ? 'bg-yellow-400' : 'bg-white scale-80 shadow-inner'">
                     <span class="animate-pulse"
                         v-show="(gameState.requireClick - gameState.countInteractive > 0)">คลิกอีก
                         <span class="text-red-600 font-bold">{{ gameState.requireClick -
@@ -202,9 +203,10 @@ function handleCancelCooking() {
         <div class="col-start-5 row-start-6 flex justify-center place-items-center">
             <button @click="handleServeClick"
                 class="border-2 bg-yellow-400 border-white rounded-lg h-20 w-64 text-3xl text-white disabled:cursor-not-allowed relative hover:contrast-75 transition duration-300 disabled:hover:contrast-100"
-                :class="gameState.countInteractive >= gameState.requireClick ? 'scale-100 saturate-100' : 'scale-90 saturate-[30%]'"
+                :class="gameState.countInteractive >= gameState.requireClick ? 'scale-100 saturate-100 animate-pulse shadow-md shadow-white' : 'scale-90 saturate-[30%]'"
                 :disabled="gameState.isPreparePhase || gameState.countInteractive < gameState.requireClick">
-                <div class="absolute w-full h-full grid place-items-center">เสิร์ฟ !!</div>
+                <div class="absolute w-full h-full grid place-items-center">เสิร์ฟ
+                    !!</div>
                 <div class="h-full rounded-lg transition-[width_filter] duration-300 bg-yellow-500"
                     :style="{ width: `${gameState.countInteractive * (100 / gameState.requireClick)}%` }"></div>
             </button>
@@ -218,7 +220,7 @@ function handleCancelCooking() {
         </div>
 
         <div class="col-start-5 row-start-1 flex justify-center">
-            <img src="/borad.png" class="absolute z-0 h-36" />
+            <img src="/board.png" class="absolute z-0 h-36" />
             <div
                 class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md mt-2 shadow-neutral-500 shadow-md z-10">
                 <div @click="handleOrderSignClick"
