@@ -32,14 +32,7 @@ const signout = () => {
 <template>
   <div class="menu min-h-screen ">
     <div class="fixed inset-0 bg-[#2e2c2c] bg-opacity-40 flex flex-col items-center min-h-screen ">
-      <div class="w-screen h-20 flex justify-end py-4 px-8">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256">
-          <path fill="currentColor"
-            d="M212.92 17.69a8 8 0 0 0-6.86-1.45l-128 32A8 8 0 0 0 72 56v110.08A36 36 0 1 0 88 196V62.25l112-28v99.83A36 36 0 1 0 216 164V24a8 8 0 0 0-3.08-6.31" />
-        </svg>
-      </div>
-      <!-- Title -->
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-center text-[#ffffff]">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl mt-20 font-bold text-center text-[#ffffff]">
         ISEKAI COOKING
       </h1>
 
@@ -57,7 +50,7 @@ const signout = () => {
           <div class="flex w-full mt-2">
             <p class="text-[#2d2d2d] font-bold font-sunday mr-4 text-center mt-2">YOUR RESTAURANT</p>
 
-            <label class="bg-[#b9bcbda5] w-96 h-16 text-center py-4 text-[#000000] rounded-md text-xl font-rowdies">
+            <label class="bg-[#b9bcbda5] w-96 h-16 text-center py-4 text-[#000000] rounded-md text-xl font-sunday">
               {{ userStore.user.outletName }}
             </label>
           </div>
