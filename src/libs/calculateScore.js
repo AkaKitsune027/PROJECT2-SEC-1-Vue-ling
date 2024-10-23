@@ -1,7 +1,7 @@
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '../stores/user'
 import ingredientsData from '../../data/ingredients.json'
 import foodData from '../../data/foods.json'
-import { useGameState } from '@/stores/gameState'
+import { useGameState } from '../stores/gameState'
 import { getIngredientData } from './utils'
 
 export function calculatePrice() {
@@ -227,7 +227,7 @@ export function calculatePrice() {
     review = spr.badReview
   }
 
-  
+
 
   // สุ่มสูตรใหม่เมื่อผู้เล่นทำอาหารได้ 5 ดาว
   if (stars === 5 && userStore.user.userDetail.fiveStarMenus[recipe.id - 1].isUnlock === false) {
@@ -240,7 +240,7 @@ export function calculatePrice() {
         lockedRecipes[Math.floor(Math.random() * lockedRecipes.length)].id
     }
   } else {
-    console.log('อย่าโกงดิ๊')
+
   }
 
 
@@ -255,44 +255,44 @@ export function calculatePrice() {
 
   // คำนวนค่า popularity ที่ได้
   if (userStore.user.userDetail.popularity >= 0) {
-    
+
     if (stars >= 4) {
       pop = (5 - Math.round((pop + 50) / 20))//เพิ่ม
-    } 
-     if (stars === 3) {
+    }
+    if (stars === 3) {
       pop = 0
     }
-    if ( stars <= 2) {
+    if (stars <= 2) {
       pop = Math.round((pop + 50) / 20) * -1 //ลด
-    } 
-  } 
+    }
+  }
   if (userStore.user.userDetail.popularity < 0) {
     if (stars >= 4) {
-       pop = Math.round(((pop * -1) + 50) / 20)
+      pop = Math.round(((pop * -1) + 50) / 20)
     }
     if (stars === 3) {
       pop = 0
     }
     if (stars <= 2) {
       pop = (5 - Math.round(((pop * -1) + 50) / 20)) * -1
-    } 
+    }
   }
-    
 
-  console.log(`actualRecipeIngredients`, actualRecipeIngredients)
-  console.log('Serve', serve)
-  console.log(`Total Ingredients: ${totalIngredients}`)
-  console.log(`Matched Ingredients: ${matchedIngredients}`)
-  console.log(`DoNotHave Count: ${doNotHaveCount}`)
-  console.log(`Matching Percentage: ${matchPercentage}%`)
-  console.log(`foodName:${foodName}`)
-  console.log(`stars:${stars}`)
-  console.log(`review:${review}`)
-  console.log(`recipeUnlockId = ${recipeUnlockId}`)
-  console.log(`gold:${gold}`)
-  console.log(userStore.user.userDetail.fiveStarMenus[recipe.id - 1])
-  console.log(`pop:${pop}`)
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return {
     totalIngredients,

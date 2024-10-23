@@ -1,9 +1,9 @@
 <script setup>
 import { computed, onMounted, ref, watch, watchEffect } from 'vue'
 import ingredientData from '../../data/ingredients.json'
-import { useUserStore } from '@/stores/user'
-import { getUserById, patchUser, updateUserDetails } from '@/libs/userManagement'
-import { useGameState } from '@/stores/gameState'
+import { useUserStore } from '../stores/user'
+import { getUserById, patchUser, updateUserDetails } from '../libs/userManagement'
+import { useGameState } from '../stores/gameState'
 
 defineEmits(['toggleFoodStoreClick'])
 
@@ -26,7 +26,7 @@ const meats = ref([])
 const vegetables = ref([])
 
 watchEffect(() => {
-    console.log(props.userIngredients)
+
 
     const mappedIngredients = props.userIngredients.map((ingd) => {
         const ingredient = (ingredientData).find((ingdData) => ingd.id === ingdData.id)
@@ -64,18 +64,18 @@ const handleIngredientClick = async (targetIngredient) => {
     const updatedUserDetail = await updateUserDetails(userStore.user.id, { ingredients: updateIngredients })
     if (updatedUserDetail) {
         userStore.user.userDetail = updatedUserDetail
-        console.log(updateIngredients)
+
 
         gameState.addToCauldron(targetIngredient.id)
 
-        console.log(gameState.cauldron)
+
 
     } else {
         console.error('Error to update user data.')
     }
 
 
-    console.log(gameState.cauldron)
+
     console.dir(updatedUserDetail)
 }
 

@@ -2,7 +2,7 @@
 import { ref, defineEmits, computed } from 'vue'
 import BuySellConfirmModal from '../components/BuySellConfirmModal.vue'
 import ingredientsData from '../../data/ingredients.json'
-import { useUserStore } from '@/stores/user' // นำเข้าข้อมูล user
+import { useUserStore } from '../stores/user' // นำเข้าข้อมูล user
 
 const isModalVisible = ref(false) // สถานะ modal เปิดหรือปิด
 const selectedItem = ref(null) // เก็บข้อมูลของ item ที่ต้องการซื้อ

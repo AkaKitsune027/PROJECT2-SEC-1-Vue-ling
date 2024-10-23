@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import foods from '../../data/foods.json'
-import { useUserStore } from "@/stores/user"
+import { useUserStore } from "../stores/user"
 import { getIngredientData } from '../libs/utils'
 
 // ดึงข้อมูลผู้ใช้จาก store

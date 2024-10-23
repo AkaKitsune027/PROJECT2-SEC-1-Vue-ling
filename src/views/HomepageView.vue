@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from "vue"
-import { useUserStore } from "@/stores/user"
+import { useUserStore } from "../stores/user"
 import { useRouter } from "vue-router"
-import { useSoundStore } from "@/stores/sounds"
-import ConfirmDeleteUserModal from "@/components/ConfirmDeleteUserModal.vue"
-import HowToPlayModal from "@/components/HowToPlayModal.vue"
+import { useSoundStore } from "../stores/sounds"
+import ConfirmDeleteUserModal from "../components/ConfirmDeleteUserModal.vue"
+import HowToPlayModal from "../components/HowToPlayModal.vue"
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -25,7 +25,7 @@ function handleHowToPlay() {
   showHowToPlayModal.value = true
 }
 
-const logout = () => {
+const signout = () => {
   router.push({ name: "login-page" })
 }
 </script>
@@ -56,7 +56,7 @@ const logout = () => {
           </div>
           <div class="flex w-full mt-2">
             <p class="text-[#2d2d2d] font-bold font-sunday mr-4 text-center mt-2">YOUR RESTAURANT</p>
-            <label class="bg-[#b9bcbda5] w-96 h-16 text-center py-4 text-[#000000] rounded-md text-xl font-noto-thai">
+            <label class="bg-[#b9bcbda5] w-96 h-16 text-center py-4 text-[#000000] rounded-md text-xl font-rowdies">
               {{ userStore.user.outletName }}
             </label>
           </div>
@@ -67,8 +67,8 @@ const logout = () => {
               Delete
             </button>
           </p>
-          <button @click="logout"
-            class="logout text-white font-bold bg-[#52443b] rounded-md w-28 h-10 mt-4">Logout</button>
+          <button @click="signout" class="signout text-white font-bold bg-[#52443b] rounded-md w-28 h-10 mt-4">Sign
+            out</button>
         </div>
 
         <!-- Buttons Section -->
@@ -91,7 +91,7 @@ const logout = () => {
   /* background-image: linear-gradient(10deg, #e7bfca 0%, #f0f4f1 100%); */
   text-emphasis: none;
   -shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-  background-image: url("../assets/bg-homepage.png");
+  background-image: url("/bg-homepage.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -119,7 +119,7 @@ const logout = () => {
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.logout:hover {
+.signout:hover {
   background-color: #676056;
   transform: translateY(-5px);
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);

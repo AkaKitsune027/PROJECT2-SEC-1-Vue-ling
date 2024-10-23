@@ -6,9 +6,9 @@ import { onMounted } from 'vue'
 import customersData from '../../data/customers.json'
 import foodsData from '../../data/foods.json'
 import specialRequirementData from '../../data/specialRequirement.json'
-import { useGameState } from '@/stores/gameState'
-import { useUserStore } from '@/stores/user'
-import { updateUserDetails } from '@/libs/userManagement'
+import { useGameState } from '../stores/gameState'
+import { useUserStore } from '../stores/user'
+import { updateUserDetails } from '../libs/userManagement'
 
 const router = useRouter()
 const route = useRoute()
@@ -71,7 +71,7 @@ const handleCancelOrder = async () => {
 
         // กำหนดค่า currentOrder ใหม่
         userStore.user.userDetail.currentOrder = generateOrder()
-        console.log('regenerated:', gameState.rawOrder)
+
 
         // อัปเดตข้อมูลผู้ใช้
         const updateData = {
@@ -105,7 +105,7 @@ const handleConfirmOrder = async () => {
         userStore.user.userDetail = await updateUserDetails(userStore.user.id, {
             isCurrentOrderCommitted: true
         })
-        console.log(gameState.isPreparePhase)
+
         emits('handleConfirmOrder')
     }
     else {

@@ -1,4 +1,4 @@
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '../stores/user'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -11,17 +11,17 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login-page',
-      component: () => import('@/views/SignInSignUpView.vue')
+      component: () => import('../views/SignInSignUpView.vue')
     },
     {
       path: '/sign-up',
       name: 'signup-page',
-      component: () => import('@/views/SignInSignUpView.vue')
+      component: () => import('../views/SignInSignUpView.vue')
     },
     {
       path: '/homepage',
       name: 'home-page',
-      component: () => import('@/views/HomepageView.vue'),
+      component: () => import('../views/HomepageView.vue'),
 
       children: [
         {
@@ -39,12 +39,12 @@ const router = createRouter({
     {
       path: '/setup',
       name: 'setup-page',
-      component: () => import('@/views/SetupView.vue')
+      component: () => import('../views/SetupView.vue')
     },
     {
       path: '/game',
       name: 'cooking-page',
-      component: () => import('@/views/CookingView.vue'),
+      component: () => import('../views/CookingView.vue'),
       children: [
         {
           path: 'prepare-order',

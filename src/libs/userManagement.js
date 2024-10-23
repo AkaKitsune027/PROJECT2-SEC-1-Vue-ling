@@ -153,13 +153,13 @@ export async function deleteUser(id) {
     const response = await fetch(`${SERVER_URL}/users/${id}`, {
       method: "DELETE",
     })
-    
+
     const deletedUser = await response.json()
 
-    console.log("Deleted user:", deletedUser)
+
     return deletedUser
   } catch (error) {
-    console.log("Error:", error)
+
   }
 }
 
@@ -175,10 +175,10 @@ export async function patchUser(userId, patchData) {
       body: JSON.stringify(patchData)
     })
     const patchedData = await res.json()
-    console.log('Patch data', patchData, patchedData)
+
     return patchedData
   } catch (error) {
-    console.log('Error:', error)
+
   }
 }
 
@@ -217,6 +217,6 @@ export async function updateUser(userId, updateData) {
     const updatedData = await res.json()
     return updatedData
   } catch (error) {
-    console.log("Error:", error)
+
   }
 }

@@ -2,16 +2,16 @@
 
 import { computed, onMounted, ref, watchEffect } from "vue"
 import { useRouter } from "vue-router"
-import { useUserStore } from "@/stores/user"
-import { useSoundStore } from "@/stores/sounds"
-import IngredientBar from "@/components/IngredientBar.vue"
-import SeasoningBar from "@/components/SeasoningBar.vue"
+import { useUserStore } from "../stores/user"
+import { useSoundStore } from "../stores/sounds"
+import IngredientBar from "../components/IngredientBar.vue"
+import SeasoningBar from "../components/SeasoningBar.vue"
 
-import { useGameState } from "@/stores/gameState"
-import GoldAndPopularity from "@/components/GoldAndPopularity.vue"
-import RecipesModal from "@/components/RecipesModal.vue"
-import Sound from "@/components/Sound.vue"
-import ShopBar from "@/components/ShopBar.vue"
+import { useGameState } from "../stores/gameState"
+import GoldAndPopularity from "../components/GoldAndPopularity.vue"
+import RecipesModal from "../components/RecipesModal.vue"
+import Sound from "../components/Sound.vue"
+import ShopBar from "../components/ShopBar.vue"
 import { calculatePrice } from "../libs/calculateScore"
 
 
@@ -57,6 +57,7 @@ const isShopping = ref(false)
 let cauldronInterval = null
 const handleCauldronClick = () => {
     if (gameState.countInteractive >= gameState.requireClick || cauldronInterval) return
+    if (gameState.cauldron.length === 0) return
 
     cauldronRef.value.classList.add('animate-stir')
 
@@ -65,7 +66,7 @@ const handleCauldronClick = () => {
         if (currentCauldronImageFrame.value > 4) {
             currentCauldronImageFrame.value = 0
             gameState.countInteractive++
-            console.log('CurrentgameState.countInteractive: ' + gameState.countInteractive)
+
             clearInterval(cauldronInterval)
             cauldronInterval = null
             cauldronRef.value.classList.remove('animate-stir')
@@ -76,7 +77,7 @@ const handleCauldronClick = () => {
 
 async function openAchievementBook() {
     const data = await useUserStore.getData
-    console.log(data)
+
 
     router.push({ name: "achievement-book-modal" })
 }
@@ -99,17 +100,24 @@ function handleCancelCooking() {
 <template>
     <div class="w-screen h-[4rem] p-3 z-50 fixed top-0 bg-transparent">
         <div class="flex justify-between">
+
             <RouterLink to="/homepage">
-                <button class="hover:shadow-md w-12 transform transition-transform duration-300 hover:scale-110">
-                    <img src="/arrow-back2.png" class="w-11" />
-                </button>
+                <div class="flex">
+                    <button class="hover:shadow-md w-12 transform transition-transform duration-300 hover:scale-110">
+                        <img src="/arrow-back2.png" class="w-11" />
+                    </button>
+                    <div class="pointer-events-none font-rowdies text-3xl text-white">
+                        Isekai Cooking
+                    </div>
+                </div>
             </RouterLink>
 
             <div
-                class="absolute pointer-events-none text-center w-[calc(100%-1.5rem)] font-rowdies text-3xl text-white">
-                Isekai Cooking
+                class="flex justify-center items-center text-bold text-white text-xl bg-yellow-900 w-40 rounded-lg border-2 border-white font-rowdies">
+                {{
+                    userStore.user.outletName }}
             </div>
-            <!-- <div class=""></div> -->
+            <!-- <div class="">{{ userStore.user.outletName }}</div> -->
 
             <div class="relative">
                 <div class="flex flex-row relative z-10 gap-2">
@@ -123,6 +131,7 @@ function handleCancelCooking() {
                 </div>
             </div>
         </div>
+
     </div>
 
     <div
@@ -154,11 +163,8 @@ function handleCancelCooking() {
 
         <div class="row-span-3 col-span-2 col-start-3 row-start-3 flex justify-center items-center z-60">
             <!-- ! Cauldron -->
-            <div v-show="!gameState.isPreparePhase" class="row-start-4 col-start-4 fixed">
-                <!-- <div>
-                    <img src="/src/assets/mouse.svg" class="w-16 select-none pointer-events-none hover:bg-white" />
-                    <div class="animate-ping absolute h-full w-full rounded-full bg-white opacity-75"></div>
-                </div> -->
+            <div v-show="!gameState.isPreparePhase && gameState.cauldron.length !== 0"
+                class="row-start-4 col-start-4 fixed">
                 <div class="row-start-4 col-start-3 w-fit p-4 rounded-md z-20 select-none pointer-events-none my-3"
                     :class="gameState.requireClick - gameState.countInteractive === 0 ? 'bg-yellow-400' : 'bg-white scale-80 shadow-inner'">
                     <span class="animate-pulse"
@@ -225,7 +231,8 @@ function handleCancelCooking() {
                 class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md mt-2 shadow-neutral-500 shadow-md z-10">
                 <div @click="handleOrderSignClick"
                     class="bg-white w-[5rem] h-[60%] grid place-items-center relative cursor-pointer rounded-md">
-                    <div class="absolute h-5 w-5 -translate-x-1 -translate-y-1 top-0 left-0">
+                    <div v-show="gameState.isPreparePhase"
+                        class="absolute h-5 w-5 -translate-x-1 -translate-y-1 top-0 left-0">
                         <div class="animate-ping absolute h-full w-full rounded-full bg-red-600 opacity-75"></div>
                         <div class="relative rounded-full h-4 w-4 bg-red-600"></div>
                     </div>
