@@ -71,7 +71,7 @@ export const useGameState = defineStore('gameState', () => {
     cauldron.value.push(ingdId)
   }
 
-   function dropCooking() {
+  function dropCooking() {
         cauldron.value = []
         router.push({ name: 'cooking-page' })
     }
