@@ -13,14 +13,19 @@ import RecipesModal from "../components/RecipesModal.vue"
 import Sound from "../components/Sound.vue"
 import ShopBar from "../components/ShopBar.vue"
 import { calculatePrice } from "../libs/calculateScore"
-
+import HowToPlayModal from "../components/HowToPlayModal.vue"
 
 const router = useRouter()
 const soundStore = useSoundStore()
 const userStore = useUserStore()
 const gameState = useGameState()
+const showHowToPlayModal = ref(false)
 
 const isShow = ref(true)
+
+function handleHowToPlay() {
+    showHowToPlayModal.value = true
+}
 const handleConfirmOrderClick = () => {
     if (isShopping.value) isShopping.value = false
 }
@@ -119,7 +124,7 @@ function handleCancelCooking() {
 
             <div class="relative">
                 <div class="flex flex-row relative z-10 gap-2">
-                    <button>
+                    <button @click="handleHowToPlay">
                         <img src="/book.png" class="w-10" />
                     </button>
                     <button @click="openAchievementBook">
@@ -229,7 +234,7 @@ function handleCancelCooking() {
                 class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md mt-2 shadow-neutral-500 shadow-md">
                 <div @click="handleOrderSignClick"
 
-                    class="bg-white w-[5rem] h-[60%] grid place-items-center relative cursor-pointer rounded-md">
+                    class="bg-white w-[7rem] h-[90%] grid place-items-center relative cursor-pointer rounded-md">
                     <div v-show="gameState.isPreparePhase"
                         class="absolute h-5 w-5 -translate-x-1 -translate-y-1 top-0 left-0">
 
@@ -241,6 +246,7 @@ function handleCancelCooking() {
             </div>
         </div>
     </div>
+    <HowToPlayModal v-if="showHowToPlayModal" @close="showHowToPlayModal = false" />
     <RouterView @handleConfirmOrder="handleConfirmOrderClick" />
 </template>
 
