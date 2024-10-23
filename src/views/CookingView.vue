@@ -97,7 +97,7 @@ function handleCancelCooking() {
 </script>
 
 <template>
-    <div class="w-screen h-[4rem] p-3 z-50 fixed top-0 bg-transparent">
+    <div class="w-screen h-[4rem] p-3 fixed top-0 bg-transparent">
         <div class="flex justify-between">
             <RouterLink to="/homepage">
                 <button class="hover:shadow-md w-12 transform transition-transform duration-300 hover:scale-110">
@@ -220,14 +220,14 @@ function handleCancelCooking() {
         <div class="col-start-5 row-start-1 flex justify-center">
             <img src="/borad.png" class="absolute z-0 h-36" />
             <div
-                class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md mt-2 shadow-neutral-500 shadow-md z-10">
+                class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md mt-2 shadow-neutral-500 shadow-md">
                 <div @click="handleOrderSignClick"
-                    class="bg-white w-[5rem] h-[60%] grid place-items-center relative cursor-pointer rounded-md">
+                    class="bg-white w-[10rem] h-[100%] grid place-items-center relative cursor-pointer rounded-md">
                     <div class="absolute h-5 w-5 -translate-x-1 -translate-y-1 top-0 left-0">
                         <div class="animate-ping absolute h-full w-full rounded-full bg-red-600 opacity-75"></div>
                         <div class="relative rounded-full h-4 w-4 bg-red-600"></div>
-                    </div>
-                    <img src="../assets/person-fill.svg" class="w-[90%] justify-center" />
+                      </div>
+                      <img src="../assets/person-fill.svg" class="w-[80%] justify-center" />
                 </div>
             </div>
         </div>

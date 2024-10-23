@@ -8,8 +8,16 @@ const templateUser = {
     popularity: 0,
     ingredients: [
       {
-        id: 1,
-        amount: 5
+        id: 6,
+        amount: 2
+      },
+      {
+        id: 13,
+        amount: 2 
+      },
+      {
+        id: 18,
+        amount: 2
       }
     ],
     recipes: [
