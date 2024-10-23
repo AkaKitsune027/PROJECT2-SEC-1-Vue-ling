@@ -28,8 +28,7 @@ export default {
       },
       fontFamily: {
         sunday: ["SUNDAY"],
-        nuku: ["NukuFont", "sans-serif"],
-        rowdies: ["ROWDIES"],
+        rowdies: ["ROWDIES", "Noto Sans Thai"],
         "noto-thai": ["Noto Sans Thai", "sans-serif"],
       },
     },
