@@ -88,7 +88,7 @@ function showSelectedMenu(menu) {
           </div>
           <div class="pt-0 p-8 flex flex-col gap-2 lg:grid grid-cols-3 grid-flow-row lg:gap-6">
             <div @click="showSelectedMenu(menu)" v-for="(menu, index) in mappedFiveStarMenus" :key="index" :class="{
-              grayscale: !menu.isUnlock,
+              'grayscale pointer-events-none': !menu.isUnlock,
               'hover:scale-[1.03] duration-300': menu.isUnlock,
             }" class="gradient rounded-lg shadow-xl border-4 border-[#eed285] p-1 cursor-pointer">
               <div v-if="menu.isUnlock">

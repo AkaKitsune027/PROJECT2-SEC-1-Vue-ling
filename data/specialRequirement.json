@@ -119,16 +119,15 @@
   {
     "id": 9,
     "type": "human",
-    "description": "ข้าอยากได้กลิ่นอาหารทะเลในเมนูนี้ ใส่เพิ่มมา 1 ชิ้น",
+    "description": "ข้าอยากได้กลิ่นอาหารทะเลในเมนูนี้ ใส่หนวดคราเคนเพิ่มมาให้ข้า 1 ชิ้น",
     "badReview": "เจ้าอยากเป็นเชฟ? เลิกฝันเถอะ",
     "normalReview": "อร่อยดี เเต่ข้าว่ามันดีกว่านี้ได้",
     "goodReview": "เจ้าเป็นได้แน่สุดยอดเชฟน่ะ!!!",
     "conditions": [
       {
-        "type": "modifyByCategory",
+        "type": "specificModify",
         "value": {
-          "category": "seafood",
-          "quantity": 1
+          "krakenTentacles": 1
         }
       }
     ]
