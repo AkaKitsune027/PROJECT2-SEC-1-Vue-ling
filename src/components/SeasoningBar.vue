@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { useGameState } from '@/stores/gameState'
-import { useUserStore } from '@/stores/user'
+import { useGameState } from '../stores/gameState'
+import { useUserStore } from '../stores/user'
 
 
 const gameState = useGameState()

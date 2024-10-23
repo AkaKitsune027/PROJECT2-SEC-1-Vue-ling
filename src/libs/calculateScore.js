@@ -1,7 +1,7 @@
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '../stores/user'
 import ingredientsData from '../../data/ingredients.json'
 import foodData from '../../data/foods.json'
-import { useGameState } from '@/stores/gameState'
+import { useGameState } from '../stores/gameState'
 import { getIngredientData } from './utils'
 
 export function calculatePrice() {
@@ -150,26 +150,6 @@ export function calculatePrice() {
     )
   }
 
-  // ตรวจสอบการแมชและลบวัตถุดิบที่ใช้แล้วออก
-  // for (const ingredient of serve) {
-  //   const category = ingredient.type
-  //   const name = ingredient.name
-
-  //   // ตรวจสอบว่า ingredient นี้อยู่ใน notHave หรือไม่
-  //   if (
-  //     actualRecipeIngredients.doNotHave &&
-  //     actualRecipeIngredients.doNotHave.includes(name)
-  //   ) {
-  //     doNotHaveCount += 1 // เพิ่มตัวนับถ้า ingredient อยู่ใน notHave
-  //   } else if (
-  //     tempIngredients[category] &&
-  //     tempIngredients[category][name] > 0
-  //   ) {
-  //     matchedIngredients += 1
-  //     tempIngredients[category][name] -= 1 // ลบวัตถุดิบที่ใช้แล้ว
-  //   }
-  // }
-
   for (const key in actualRecipeIngredients) {
     if (key === 'meat' || key === 'vegetable' || key === 'seasoning') {
       const ingdType = key
@@ -276,7 +256,7 @@ export function calculatePrice() {
         lockedRecipes[Math.floor(Math.random() * lockedRecipes.length)].id
     }
   } else {
-    console.log('อย่าโกงดิ๊')
+
   }
 
   // คำนวนค่า gold ที่ได้
@@ -288,8 +268,10 @@ export function calculatePrice() {
 
   // คำนวนค่า popularity ที่ได้
   if (userStore.user.userDetail.popularity >= 0) {
+
     if (stars >= 4) {
       pop = 5 - Math.round((pop + 50) / 20) //เพิ่ม
+
     }
     if (stars === 3) {
       pop = 0
@@ -300,29 +282,19 @@ export function calculatePrice() {
   }
   if (userStore.user.userDetail.popularity < 0) {
     if (stars >= 4) {
+
       pop = Math.round((pop * -1 + 50) / 20)
+
     }
     if (stars === 3) {
       pop = 0
     }
     if (stars <= 2) {
+
       pop = (5 - Math.round((pop * -1 + 50) / 20)) * -1
     }
   }
 
-  console.log(`actualRecipeIngredients`, actualRecipeIngredients)
-  console.log('Serve', serve)
-  console.log(`Total Ingredients: ${totalIngredients}`)
-  console.log(`Matched Ingredients: ${matchedIngredients}`)
-  console.log(`DoNotHave Count: ${doNotHaveCount}`)
-  console.log(`Matching Percentage: ${matchPercentage}%`)
-  console.log(`foodName:${foodName}`)
-  console.log(`stars:${stars}`)
-  console.log(`review:${review}`)
-  console.log(`recipeUnlockId = ${recipeUnlockId}`)
-  console.log(`gold:${gold}`)
-  console.log(userStore.user.userDetail.fiveStarMenus[recipe.id - 1])
-  console.log(`pop:${pop}`)
 
   return {
     totalIngredients,

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue"
-import { useUserStore } from "@/stores/user"
-import { useSoundStore } from "@/stores/sounds"
+import { useUserStore } from "../stores/user"
+import { useSoundStore } from "../stores/sounds"
 
 const soundStore = useSoundStore()
 // ฟังก์ชันสำหรับสลับการเล่นเพลง
@@ -40,11 +40,7 @@ function playBackgroundMusic() {
                     d="M10.9375 6.35468C10.9375 5.81239 11.1389 5.28943 11.5027 4.88725C11.8665 4.48507 12.3667 4.23235 12.9063 4.17812L25.1222 2.95653L20.2611 7.81764L13.125 8.53125V14.9537L10.9375 17.1412V8.75V6.5625V6.35468Z"
                     fill="white" />
             </svg> -->
-      <img
-        v-if="soundStore.isBgmPlaying"
-        src="/musicPlay.png"
-        class="w-10"
-        alt="Play Icon" />
+      <img v-if="soundStore.isBgmPlaying" src="/musicPlay.png" class="w-10" alt="Play Icon" />
       <img v-else src="/musicPause.png" class="w-10" alt="Pause Icon" />
     </div>
   </button>

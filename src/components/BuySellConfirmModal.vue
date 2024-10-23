@@ -1,7 +1,7 @@
 <script setup>
 import { ref, defineEmits, computed, watch } from 'vue'
-import { useUserStore } from '@/stores/user'
-import { updateUser, updateUserDetails } from '@/libs/userManagement'
+import { useUserStore } from '../stores/user'
+import { updateUser, updateUserDetails } from '../libs/userManagement'
 import { useRouter } from 'vue-router'
 
 // รับ props ของ item และ type 'buy'
@@ -116,13 +116,13 @@ watch([totalPrice, () => userStore.user.userDetail.gold], () => {
   <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10 font-noto-thai">
     <div class="bg-white w-1/3 p-5 rounded-lg shadow-lg text-center relative overflow-visible">
       <h2 class="text-2xl font-bold">ซื้อวัตถุดิบ</h2>
-      
+
       <!-- แสดงรูปภาพ item ที่กด -->
       <div class="my-4">
         <img :src="`/${item.type}/${item.name}.png`" alt="item" class="mx-auto w-32 h-32">
         <p class="text-xl">{{ item.display_name }}</p>
       </div>
-      
+
       <!-- แสดงการเพิ่ม/ลดจำนวน -->
       <div class="flex items-center justify-center gap-3">
         <button @click="decreaseQuantity" class="bg-gray-300 px-4 py-2 rounded-lg">-</button>
@@ -140,22 +140,17 @@ watch([totalPrice, () => userStore.user.userDetail.gold], () => {
 
       <!-- ปุ่มยืนยัน และยกเลิก -->
       <div class="flex justify-center gap-4 mt-6 ">
-        <button
-          @click="handleConfirm"
-          class="text-white px-4 py-2 rounded-lg"
-          :class="{
-            'bg-gray-500 opacity-50': errorMessage || !props.isGoldEnough,
-            'bg-green-500': !errorMessage && props.isGoldEnough
-          }"
-          :disabled="errorMessage || !props.isGoldEnough"
-        >
+        <button @click="handleConfirm" class="text-white px-4 py-2 rounded-lg" :class="{
+          'bg-gray-500 opacity-50': errorMessage || !props.isGoldEnough,
+          'bg-green-500': !errorMessage && props.isGoldEnough
+        }" :disabled="errorMessage || !props.isGoldEnough">
           ยืนยัน
         </button>
         <button @click="handleCancel" class="bg-red-500 text-white px-4 py-2 rounded-lg">ยกเลิก</button>
       </div>
 
       <div class="absolute top-28 -right-20 pointer-events-none">
-        <img src="../assets/cat.png" width="250" height="200">
+        <img src="/cat.png" width="250" height="200">
       </div>
     </div>
   </div>

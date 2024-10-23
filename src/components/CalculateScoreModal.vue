@@ -1,10 +1,9 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/user'
-import { useGameState } from '@/stores/gameState'
-import { calculatePrice } from '@/libs/calculateScore'
-import { getFoodDataById } from '@/libs/utils'
+import { useGameState } from '../stores/gameState'
+import { calculatePrice } from '../libs/calculateScore'
+import { getFoodDataById } from '../libs/utils'
 
 const router = useRouter()
 const gameState = useGameState()

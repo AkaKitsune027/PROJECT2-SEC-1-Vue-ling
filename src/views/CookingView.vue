@@ -2,16 +2,16 @@
 
 import { computed, onMounted, ref, watchEffect } from "vue"
 import { useRouter } from "vue-router"
-import { useUserStore } from "@/stores/user"
-import { useSoundStore } from "@/stores/sounds"
-import IngredientBar from "@/components/IngredientBar.vue"
-import SeasoningBar from "@/components/SeasoningBar.vue"
+import { useUserStore } from "../stores/user"
+import { useSoundStore } from "../stores/sounds"
+import IngredientBar from "../components/IngredientBar.vue"
+import SeasoningBar from "../components/SeasoningBar.vue"
 
-import { useGameState } from "@/stores/gameState"
-import GoldAndPopularity from "@/components/GoldAndPopularity.vue"
-import RecipesModal from "@/components/RecipesModal.vue"
-import Sound from "@/components/Sound.vue"
-import ShopBar from "@/components/ShopBar.vue"
+import { useGameState } from "../stores/gameState"
+import GoldAndPopularity from "../components/GoldAndPopularity.vue"
+import RecipesModal from "../components/RecipesModal.vue"
+import Sound from "../components/Sound.vue"
+import ShopBar from "../components/ShopBar.vue"
 import { calculatePrice } from "../libs/calculateScore"
 
 
@@ -19,7 +19,6 @@ const router = useRouter()
 const soundStore = useSoundStore()
 const userStore = useUserStore()
 const gameState = useGameState()
-// const showHowToPlayModal = ref(false)
 
 const isShow = ref(true)
 const handleConfirmOrderClick = () => {
@@ -57,6 +56,7 @@ const isShopping = ref(false)
 let cauldronInterval = null
 const handleCauldronClick = () => {
     if (gameState.countInteractive >= gameState.requireClick || cauldronInterval) return
+    if (gameState.cauldron.length === 0) return
 
     cauldronRef.value.classList.add('animate-stir')
 
@@ -65,7 +65,7 @@ const handleCauldronClick = () => {
         if (currentCauldronImageFrame.value > 4) {
             currentCauldronImageFrame.value = 0
             gameState.countInteractive++
-            console.log('CurrentgameState.countInteractive: ' + gameState.countInteractive)
+
             clearInterval(cauldronInterval)
             cauldronInterval = null
             cauldronRef.value.classList.remove('animate-stir')
@@ -76,7 +76,7 @@ const handleCauldronClick = () => {
 
 async function openAchievementBook() {
     const data = await useUserStore.getData
-    console.log(data)
+
 
     router.push({ name: "achievement-book-modal" })
 }
@@ -99,15 +99,22 @@ function handleCancelCooking() {
 <template>
     <div class="w-screen h-[4rem] p-3 fixed top-0 bg-transparent">
         <div class="flex justify-between">
+
             <RouterLink to="/homepage">
-                <button class="hover:shadow-md w-12 transform transition-transform duration-300 hover:scale-110">
-                    <img src="/arrow-back2.png" class="w-11" />
-                </button>
+                <div class="flex">
+                    <button class="hover:shadow-md w-12 transform transition-transform duration-300 hover:scale-110">
+                        <img src="/arrow-back2.png" class="w-11" />
+                    </button>
+                    <div class="pointer-events-none font-rowdies text-3xl text-white">
+                        Isekai Cooking
+                    </div>
+                </div>
             </RouterLink>
 
             <div
-                class="absolute pointer-events-none text-center w-[calc(100%-1.5rem)] font-rowdies text-3xl text-white">
-                Isekai Cooking
+                class="flex justify-center items-center text-bold text-white text-xl bg-yellow-900 w-40 rounded-lg border-2 border-white font-rowdies">
+                {{
+                    userStore.user.outletName }}
             </div>
 
             <div class="relative">
@@ -122,6 +129,7 @@ function handleCancelCooking() {
                 </div>
             </div>
         </div>
+
     </div>
 
     <div
@@ -153,13 +161,10 @@ function handleCancelCooking() {
 
         <div class="row-span-3 col-span-2 col-start-3 row-start-3 flex justify-center items-center z-60">
             <!-- ! Cauldron -->
-            <div v-show="!gameState.isPreparePhase" class="row-start-4 col-start-4 fixed">
-                <!-- <div>
-                    <img src="/src/assets/mouse.svg" class="w-16 select-none pointer-events-none hover:bg-white" />
-                    <div class="animate-ping absolute h-full w-full rounded-full bg-white opacity-75"></div>
-                </div> -->
+            <div v-show="!gameState.isPreparePhase && gameState.cauldron.length !== 0"
+                class="row-start-4 col-start-4 fixed">
                 <div class="row-start-4 col-start-3 w-fit p-4 rounded-md z-20 select-none pointer-events-none my-3"
-                    :class="gameState.requireClick - gameState.countInteractive === 0 ? 'bg-yellow-400 shadow-md animate-pulse shadow-white' : 'bg-white scale-80 shadow-inner'">
+                    :class="gameState.requireClick - gameState.countInteractive === 0 ? 'bg-yellow-400' : 'bg-white scale-80 shadow-inner'">
                     <span class="animate-pulse"
                         v-show="(gameState.requireClick - gameState.countInteractive > 0)">คลิกอีก
                         <span class="text-red-600 font-bold">{{ gameState.requireClick -
@@ -202,9 +207,10 @@ function handleCancelCooking() {
         <div class="col-start-5 row-start-6 flex justify-center place-items-center">
             <button @click="handleServeClick"
                 class="border-2 bg-yellow-400 border-white rounded-lg h-20 w-64 text-3xl text-white disabled:cursor-not-allowed relative hover:contrast-75 transition duration-300 disabled:hover:contrast-100"
-                :class="gameState.countInteractive >= gameState.requireClick ? 'scale-100 saturate-100' : 'scale-90 saturate-[30%]'"
+                :class="gameState.countInteractive >= gameState.requireClick ? 'scale-100 saturate-100 animate-pulse shadow-md shadow-white' : 'scale-90 saturate-[30%]'"
                 :disabled="gameState.isPreparePhase || gameState.countInteractive < gameState.requireClick">
-                <div class="absolute w-full h-full grid place-items-center">เสิร์ฟ !!</div>
+                <div class="absolute w-full h-full grid place-items-center">เสิร์ฟ
+                    !!</div>
                 <div class="h-full rounded-lg transition-[width_filter] duration-300 bg-yellow-500"
                     :style="{ width: `${gameState.countInteractive * (100 / gameState.requireClick)}%` }"></div>
             </button>
@@ -218,36 +224,21 @@ function handleCancelCooking() {
         </div>
 
         <div class="col-start-5 row-start-1 flex justify-center">
-            <img src="/borad.png" class="absolute z-0 h-36" />
+            <img src="/board.png" class="absolute z-0 h-36" />
             <div
                 class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md mt-2 shadow-neutral-500 shadow-md">
                 <div @click="handleOrderSignClick"
-                    class="bg-white w-[10rem] h-[100%] grid place-items-center relative cursor-pointer rounded-md">
-                    <div class="absolute h-5 w-5 -translate-x-1 -translate-y-1 top-0 left-0">
+
+                    class="bg-white w-[5rem] h-[60%] grid place-items-center relative cursor-pointer rounded-md">
+                    <div v-show="gameState.isPreparePhase"
+                        class="absolute h-5 w-5 -translate-x-1 -translate-y-1 top-0 left-0">
+
                         <div class="animate-ping absolute h-full w-full rounded-full bg-red-600 opacity-75"></div>
                         <div class="relative rounded-full h-4 w-4 bg-red-600"></div>
                       </div>
                       <img src="../assets/person-fill.svg" class="w-[80%] justify-center" />
                 </div>
             </div>
-        </div>
-
-        <div v-show="isShow" class="col-start-5 row-start-3 row-span-1 flex flex-col justify-center items-center">
-            <!-- <div class="my-9 pointer-events-none">
-                <img src="/src/assets/arrow-up.svg" class="animate-bounce w-[70%] h-[70%] my-9 fill-red-600" />
-            </div> -->
-            <!-- <div class="col-start-5 row-start- row-span-2 flex">
-            </div> -->
-            <!-- <div class="col-start-5 row-start-4 row-span-2 flex">
-                <div class="bg-white p-10 rounded-lg mb-5">
-                    <p class="text-red-600 py-2">* โปรดระวัง: หากคุณคลิกที่ปุ่มออเดอร์
-                        คุณจะต้องเลือกระหว่างรับออเดอร์หรือไม่รับออเดอร์ *</p>
-                    <li>ถ้าคุณรับออเดอร์ คุณจะต้องทำอาหารให้เสร็จและในระหว่างนั้นจะไม่สามารถสั่งซื้อของได้</li>
-                    <li class="py-4">ถ้าคุณไม่รับออเดอร์ คุณจะต้องเสียค่าชื่อเสียง</li>
-                    <button @click="handleGameGuideConfirm"
-                        class="bg-green-500 rounded-lg px-3 text-white flex">เข้าใจแล้วล่ะ</button>
-                </div>
-            </div> -->
         </div>
     </div>
     <RouterView @handleConfirmOrder="handleConfirmOrderClick" />

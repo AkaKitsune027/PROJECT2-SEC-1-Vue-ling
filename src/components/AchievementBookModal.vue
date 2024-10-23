@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from "vue"
 import { useRouter } from "vue-router"
-import { useUserStore } from "@/stores/user"
+import { useUserStore } from "../stores/user"
 import foodsData from "../../data/foods.json"
 import ingredientsData from "../../data/ingredients.json"
 
@@ -28,15 +28,15 @@ const closeModal = () => {
 function showSelectedMenu(menu) {
   if (menu.isUnlock) {
     selectedMenu.value = menu // Set the selected menu data
-    console.log(`Selected menu: ${menu.name}`)
+
 
     const ingredients = [] // Store the selected menu ingredients
     for (const ingredientName of selectedMenu.value.ingredients) {
-      console.log(selectedMenu.value.ingredients)
+
       const existsIngredientIndex = ingredients.findIndex(
         (i) => i.name === ingredientName
       )
-      console.log(`Exists indx: ${existsIngredientIndex}`)
+
       if (existsIngredientIndex === -1) {
         if (["meat", "vegetable"].includes(ingredientName)) {
           ingredients.push({
@@ -46,8 +46,8 @@ function showSelectedMenu(menu) {
               }อะไรก็ได้`,
             amount: 1,
           })
-          console.log(ingredientName)
-          console.log(ingredients)
+
+
         } else {
           ingredients.push({
             ...ingredientsData.find((i) => i.name === ingredientName),
@@ -59,7 +59,7 @@ function showSelectedMenu(menu) {
       }
     }
     selectedMenuIngredients.value = ingredients
-    console.log(ingredients)
+
   }
 }
 </script>

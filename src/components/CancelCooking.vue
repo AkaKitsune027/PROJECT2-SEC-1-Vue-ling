@@ -1,6 +1,6 @@
 <script setup>
-import { useUserStore } from "@/stores/user"
-import { useGameState } from '@/stores/gameState'
+import { useUserStore } from "../stores/user"
+import { useGameState } from '../stores/gameState'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 
@@ -21,7 +21,7 @@ function back() {
     <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 font-noto-thai">
         <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full h-64">
             <div class="flex justify-center">
-                <img src="@/assets/icons/alert.svg" alt="Cancel" class="w-16 h-16 ">
+                <img src="../assets/icons/alert.svg" alt="Cancel" class="w-16 h-16 ">
             </div>
             <p class="text-2xl font-bold mb-2 text-center">
                 คำเตือน

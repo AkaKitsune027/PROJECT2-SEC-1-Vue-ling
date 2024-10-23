@@ -1,7 +1,7 @@
 <script setup>
 import { useRouter } from "vue-router"
 import { ref, computed, watch } from "vue"
-import { useUserStore } from "@/stores/user"
+import { useUserStore } from "../stores/user"
 import { useRoute } from "vue-router"
 
 const userStore = useUserStore()
@@ -171,7 +171,7 @@ watch(confirmPassword, () => {
   position: relative;
   /* background-color: #231414; ed9848*/
   /* background-image: linear-gradient(10deg, #a15852 0%, #eeaa69 100%); */
-  background-image: url("../assets/bg-isekai.png");
+  background-image: url("/bg-isekai.png");
   background-size: cover;
   /* ทำให้ภาพคลุมทั้งหน้า */
   background-position: center;

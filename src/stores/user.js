@@ -2,7 +2,7 @@ import {
   createUser,
   getUserByUsername,
   validateUsername
-} from '@/libs/userManagement'
+} from '../libs/userManagement'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
@@ -14,7 +14,7 @@ export const useUserStore = defineStore('user', () => {
 
     if (actualUser && actualUser.password === password) {
       user.value = actualUser
-      console.log('Login success: ', user.value)
+
     } else {
       user.value = null // ถ้า username หรือ password ไม่ถูกต้อง
     }
