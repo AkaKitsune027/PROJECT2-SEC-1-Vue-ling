@@ -9,8 +9,8 @@
 | 65130500068 | Ratikorn   Damgurnglubpanavanit | <li>Gold function</li> <li>Summary Modal</li> <li>Fetch all data for achievement</li> <li>Gameplay design and UI (Achievement book)</li> <li>Generate image</li> <li>Calculate score together</li> <li>Fetch summary score</li>| 20% |
 | 65130500070 | Wanassanan Tri-apibanwongsa     | <li>Order modal UI</li> <li>User management : PATCH method</li> <li>Fetch data for ingredient bar and decrease items when use</li> <li>Gameplay design & UI <br>(Cooking view, Ingredient bar, Seasoning bar, Order modal, Indicator)</li> <li>Cauldron animation</li> <li>Generate image</li> <li>Calculate score together</li> <li>Fix bug</li> <li>Manual</li>| 20% |
 | 65130500071 | Woranuch   Naritnet             | <li>How to play modal</li> <li>Popularity function</li> <li>Cooking function</li> <li>Gameplay UI (Store)</li> <li>Buy Modal & Buy function</li> <li>Generate image</li> <li>Calculate score together</li> <li>Video/Subtitle</li> | 20% |
-| 65130500111 | Pimpajee   Seththirungplop      | <li>Delete account function</li> <li>SignIn function</li> <li>Fetch data for show on signIn and homepage</li> <li>Validate password</li> <li>User management: DELETE , POST method</li> <li>Gameplay design & UI (SignIn, SignUp, Setup store name, Main menu)</li> <li>Calculate score together</li> <li>Function reset user</li> | 20% |
-| 65130500125 | Achmavee    Sanuwong            | <li>Sound Management</li> <li>Recipe</li> <li>All JSON File</li> <li>User management : GET method</li> <li>db.json structure</li> <li>fetch data for popularity and gold bar</li> <li>Generate order function(random)</li> <li>Order modal condition</li> <li>User store</li> <li>Calculate score together</li> | 20% |
+| 65130500111 | Pimpajee   Seththirungplop      | <li>Delete account function</li> <li>SignIn function</li> <li>Fetch data for show on signIn and homepage</li> <li>Validate password</li> <li>User management: DELETE , POST method</li> <li>Gameplay design & UI (SignIn, SignUp, Setup store name, Main menu)</li> <li>User store</li> <li>Calculate score together</li> <li>Function reset user</li> | 20% |
+| 65130500125 | Achmavee    Sanuwong            | <li>Sound Management</li> <li>Recipe</li> <li>All JSON File</li> <li>User management : GET method</li> <li>db.json structure</li> <li>fetch data for popularity and gold bar</li> <li>Generate order function(random)</li> <li>Order modal condition</li> <li>Calculate score together</li> | 20% |
 
 </div>
 <br />
@@ -134,7 +134,7 @@
 
 <div align='center'>
   
-  [<img src="https://github.com/user-attachments/assets/38aa5105-69f3-401c-81ff-efaa3fefbf2a" width="800px" />](https://drive.google.com/file/d/1PvdQnf5ULgXpgG2WjSmvYz4OZId2Z6ON/view?usp=drive_link)
+  [<img src="https://github.com/user-attachments/assets/38aa5105-69f3-401c-81ff-efaa3fefbf2a" width="800px" />](https://drive.google.com/file/d/1y4vH2QM2btEmK2cu8Eh2XlksgDjzTLQX/view?usp=sharing)
 
 </div>
 <br />
