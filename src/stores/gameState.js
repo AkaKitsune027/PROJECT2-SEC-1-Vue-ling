@@ -8,7 +8,6 @@ import { useUserStore } from './user'
 import { useRouter } from 'vue-router'
 import { resetUser } from '@/libs/userManagement'
 
-
 export const useGameState = defineStore('gameState', () => {
   const router = useRouter()
   const userStore = useUserStore()
@@ -31,17 +30,20 @@ export const useGameState = defineStore('gameState', () => {
   const countInteractive = ref(0)
 
   const totalIngredientsAmount = computed(() => {
-    return userStore.user.userDetail.ingredients?.reduce((total, ingredient) => {
-      return total + (ingredient.amount || 0)
-    }, 0)
+    return userStore.user.userDetail.ingredients?.reduce(
+      (total, ingredient) => {
+        return total + (ingredient.amount || 0)
+      },
+      0
+    )
   })
 
   const handleGameOver = async () => {
     const currentUser = userStore.user.id
     await resetUser(currentUser)
-    router.push({ name: "setup-page" })
+    router.push({ name: 'setup-page' })
   }
-  
+
   watchEffect(() => {
     if (userStore.user.userDetail.gold < 5) {
       if (totalIngredientsAmount.value === 0 && cauldron.value.length === 0) {
@@ -61,7 +63,7 @@ export const useGameState = defineStore('gameState', () => {
         food: foodsData.find((f) => f.id === rawOrder.value?.foodId),
         specialRequirement: specialRequirementData.find(
           (s) => s.id === rawOrder.value?.specialRequirementId
-        )
+        ),
       }
     },
     { immediate: true, deep: true }
@@ -72,10 +74,18 @@ export const useGameState = defineStore('gameState', () => {
   }
 
   function dropCooking() {
-        cauldron.value = []
-        router.push({ name: 'cooking-page' })
-    }
+    cauldron.value = []
+  }
 
-  return { cauldron, isPreparePhase, countInteractive, requireClick, addToCauldron, dropCooking, currentOrder, rawOrder, ingredientInCauldron }
+  return {
+    cauldron,
+    isPreparePhase,
+    countInteractive,
+    requireClick,
+    addToCauldron,
+    dropCooking,
+    currentOrder,
+    rawOrder,
+    ingredientInCauldron,
+  }
 })
-

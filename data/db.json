@@ -1,0 +1,194 @@
+{
+  "users": [
+    {
+      "id": "9efc",
+      "username": "int203",
+      "password": "12345678",
+      "outletName": "Vueling",
+      "userDetail": {
+        "gold": 416311.5,
+        "popularity": 100,
+        "ingredients": [
+          {
+            "id": 1,
+            "amount": 2
+          },
+          {
+            "id": 21,
+            "amount": 15
+          },
+          {
+            "id": 2,
+            "amount": 22
+          },
+          {
+            "id": 3,
+            "amount": 14
+          },
+          {
+            "id": 11,
+            "amount": 82
+          },
+          {
+            "id": 12,
+            "amount": 82
+          },
+          {
+            "id": 13,
+            "amount": 81
+          },
+          {
+            "id": 14,
+            "amount": 32
+          },
+          {
+            "id": 9,
+            "amount": 16
+          },
+          {
+            "id": 4,
+            "amount": 72
+          },
+          {
+            "id": 20,
+            "amount": 30
+          },
+          {
+            "id": 19,
+            "amount": 39
+          },
+          {
+            "id": 18,
+            "amount": 70
+          },
+          {
+            "id": 17,
+            "amount": 90
+          },
+          {
+            "id": 16,
+            "amount": 9
+          },
+          {
+            "id": 15,
+            "amount": 17
+          },
+          {
+            "id": 7,
+            "amount": 66
+          },
+          {
+            "id": 10,
+            "amount": 1
+          },
+          {
+            "id": 5,
+            "amount": 18
+          },
+          {
+            "id": 6,
+            "amount": 14
+          },
+          {
+            "id": 8,
+            "amount": 14
+          },
+          {
+            "id": 22,
+            "amount": 3
+          }
+        ],
+        "recipes": [
+          {
+            "id": 1,
+            "isUnlock": false
+          },
+          {
+            "id": 2,
+            "isUnlock": false
+          },
+          {
+            "id": 3,
+            "isUnlock": true
+          },
+          {
+            "id": 4,
+            "isUnlock": true
+          },
+          {
+            "id": 5,
+            "isUnlock": true
+          },
+          {
+            "id": 6,
+            "isUnlock": true
+          },
+          {
+            "id": 7,
+            "isUnlock": false
+          },
+          {
+            "id": 8,
+            "isUnlock": true
+          },
+          {
+            "id": 9,
+            "isUnlock": true
+          },
+          {
+            "id": 10,
+            "isUnlock": true
+          }
+        ],
+        "isCurrentOrderCommitted": false,
+        "currentOrder": {
+          "customerId": 9,
+          "foodId": 8,
+          "specialRequirementId": 6
+        },
+        "fiveStarMenus": [
+          {
+            "foodId": 1,
+            "isUnlock": false
+          },
+          {
+            "foodId": 2,
+            "isUnlock": true
+          },
+          {
+            "foodId": 3,
+            "isUnlock": false
+          },
+          {
+            "foodId": 4,
+            "isUnlock": false
+          },
+          {
+            "foodId": 5,
+            "isUnlock": true
+          },
+          {
+            "foodId": 6,
+            "isUnlock": true
+          },
+          {
+            "foodId": 7,
+            "isUnlock": true
+          },
+          {
+            "foodId": 8,
+            "isUnlock": false
+          },
+          {
+            "foodId": 9,
+            "isUnlock": false
+          },
+          {
+            "foodId": 10,
+            "isUnlock": true
+          }
+        ]
+      }
+    }
+  ]
+}

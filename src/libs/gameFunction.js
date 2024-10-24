@@ -1,6 +1,8 @@
 import { useUserStore } from '../stores/user'
 import ingredientsData from '../../data/ingredients.json'
-import foodData from '../../data/foods.json'
+import foodsData from '../../data/foods.json'
+import customersData from '../../data/customers.json'
+import specialRequirementData from '../../data/specialRequirement.json'
 import { useGameState } from '../stores/gameState'
 import { getIngredientData } from './utils'
 
@@ -256,7 +258,6 @@ export function calculatePrice() {
         lockedRecipes[Math.floor(Math.random() * lockedRecipes.length)].id
     }
   } else {
-
   }
 
   // คำนวนค่า gold ที่ได้
@@ -266,35 +267,25 @@ export function calculatePrice() {
   }
   gold += matchedIngredients * 30
 
+  const currentPop = userStore.user.userDetail.popularity
   // คำนวนค่า popularity ที่ได้
-  if (userStore.user.userDetail.popularity >= 0) {
-
+  if (currentPop >= 0) {
     if (stars >= 4) {
-      pop = 5 - Math.round((pop + 50) / 20) //เพิ่ม
-
-    }
-    if (stars === 3) {
+      pop = 5 - Math.floor((currentPop + 50) / 20) //เพิ่ม
+    } else if (stars === 3) {
       pop = 0
+    } else if (stars <= 2) {
+      pop = Math.ceil((currentPop + 50) / 20) * -1 //ลด
     }
-    if (stars <= 2) {
-      pop = Math.round((pop + 50) / 20) * -1 //ลด
+  } else if (currentPop < 0) {
+    if (stars >= 4) {
+      pop = Math.ceil((currentPop * -1 + 50) / 20)
+    } else if (stars === 3) {
+      pop = 0
+    } else if (stars <= 2) {
+      pop = (5 - Math.floor((currentPop * -1 + 50) / 20)) * -1
     }
   }
-  if (userStore.user.userDetail.popularity < 0) {
-    if (stars >= 4) {
-
-      pop = Math.round((pop * -1 + 50) / 20)
-
-    }
-    if (stars === 3) {
-      pop = 0
-    }
-    if (stars <= 2) {
-
-      pop = (5 - Math.round((pop * -1 + 50) / 20)) * -1
-    }
-  }
-
 
   return {
     totalIngredients,
@@ -307,5 +298,29 @@ export function calculatePrice() {
     recipeUnlockId,
     gold,
     pop,
+  }
+}
+
+export function generateOrder() {
+  const randomCustomerIndex = Math.floor(Math.random() * customersData.length)
+  const randomFoodIndex = Math.floor(Math.random() * foodsData.length)
+
+  const customer = customersData[randomCustomerIndex]
+  const food = foodsData[randomFoodIndex]
+
+  const filteredSpecialRequirements = specialRequirementData.filter(
+    (sr) => customer.type === sr.type
+  )
+  const randomSpecialRequirementIndex = Math.floor(
+    Math.random() * filteredSpecialRequirements.length
+  )
+
+  const specialRequirement =
+    filteredSpecialRequirements[randomSpecialRequirementIndex]
+
+  return {
+    customerId: customer.id,
+    foodId: food.id,
+    specialRequirementId: specialRequirement.id,
   }
 }

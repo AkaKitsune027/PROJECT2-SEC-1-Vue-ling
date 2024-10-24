@@ -10,6 +10,7 @@ const router = useRouter()
 
 function handleCancelCooking() {
     gameState.dropCooking()
+    router.push({ name: "cooking-page" })
 }
 
 function back() {
