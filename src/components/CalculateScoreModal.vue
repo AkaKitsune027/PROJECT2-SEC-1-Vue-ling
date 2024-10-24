@@ -26,8 +26,6 @@ onMounted(async () => {
     currentOrder: generateOrder(),
   }
 
-  console.log('updateData: ', updateData)
-
   if (summary.stars === 5 && summary.recipeUnlockId) {
     unlockedFood.value = getFoodDataById(summary.recipeUnlockId)
     updateData['fiveStarMenus'] = JSON.parse(
@@ -56,6 +54,7 @@ onMounted(async () => {
   }
 
   updateData.gold += price.value
+  updateData.popularity += summary.pop
 
   if (updateData.popularity > 50) {
     updateData.popularity = 50

@@ -72,7 +72,7 @@ const closeModal = () => {
                     <ul class="list-disc ml-5">
                         <li v-for="(ingredient, index) in ingredients" :key="index"
                             class="text-gray-600 flex items-center">
-                            {{ ingredient.display_name }}
+                            {{ ingredient?.display_name }}
                         </li>
                     </ul>
                 </div>
