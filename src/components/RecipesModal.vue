@@ -9,13 +9,11 @@ const userStore = useUserStore()
 const selectedRecipe = ref(null) // เก็บค่าของสูตรที่เลือก
 const isOpenModal = ref(false) // สถานะเปิด/ปิด modal
 
-// กำหนดสูตรที่ปลดล็อกได้ของผู้ใช้
-const userRecipes = userStore.user.userDetail.recipes
 
 const unlockedRecipes = computed(() => {
     // กรองสูตรที่ปลดล็อกแล้วจาก foods.json โดยเช็ค isUnlock ของ user
     return foods.filter((food) =>
-        userRecipes?.some((recipe) => recipe.id === food.id && recipe.isUnlock === true)
+        userStore.user.userDetail.recipes?.some((recipe) => recipe.id === food.id && recipe.isUnlock === true)
     )
 })
 

@@ -29,5 +29,5 @@ coverage
 
 *.tsbuildinfo
 
-data/db.json
-.env
+# data/db.json
+# .env

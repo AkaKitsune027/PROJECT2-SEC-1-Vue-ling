@@ -12,7 +12,6 @@ import GoldAndPopularity from "../components/GoldAndPopularity.vue"
 import RecipesModal from "../components/RecipesModal.vue"
 import Sound from "../components/Sound.vue"
 import ShopBar from "../components/ShopBar.vue"
-import { calculatePrice } from "../libs/calculateScore"
 import HowToPlayModal from "../components/HowToPlayModal.vue"
 
 const router = useRouter()
@@ -79,10 +78,7 @@ const handleCauldronClick = () => {
     soundStore.playSound('sfx', '/sounds/boiling-water-sound.mp3')
 }
 
-async function openAchievementBook() {
-    const data = await useUserStore.getData
-
-
+const openAchievementBook = () => {
     router.push({ name: "achievement-book-modal" })
 }
 
@@ -91,7 +87,6 @@ const handleToggleFoodStoreClick = () => {
 }
 
 const handleServeClick = () => {
-    calculatePrice()
     router.push({ name: "calculate-score-modal" })
 }
 
@@ -119,7 +114,7 @@ function handleCancelCooking() {
             <div
                 class="flex justify-center items-center text-bold text-white text-xl bg-yellow-900 w-40 rounded-lg border-2 border-white font-rowdies">
                 {{
-                    userStore.user.outletName }}
+                userStore.user.outletName }}
             </div>
 
             <div class="relative">
@@ -233,15 +228,14 @@ function handleCancelCooking() {
             <div
                 class="bg-[#c5a691] w-[7rem] flex justify-center items-center rounded-md mt-2 shadow-neutral-500 shadow-md">
                 <div @click="handleOrderSignClick"
-
                     class="bg-white w-[7rem] h-[90%] grid place-items-center relative cursor-pointer rounded-md">
                     <div v-show="gameState.isPreparePhase"
                         class="absolute h-5 w-5 -translate-x-1 -translate-y-1 top-0 left-0">
 
                         <div class="animate-ping absolute h-full w-full rounded-full bg-red-600 opacity-75"></div>
                         <div class="relative rounded-full h-4 w-4 bg-red-600"></div>
-                      </div>
-                      <img src="../assets/person-fill.svg" class="w-[80%] justify-center" />
+                    </div>
+                    <img src="../assets/person-fill.svg" class="w-[80%] justify-center" />
                 </div>
             </div>
         </div>

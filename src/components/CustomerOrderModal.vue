@@ -1,15 +1,12 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { onMounted } from 'vue'
 
-import customersData from '../../data/customers.json'
-import foodsData from '../../data/foods.json'
-import specialRequirementData from '../../data/specialRequirement.json'
-
 import { useGameState } from '../stores/gameState'
 import { useUserStore } from '../stores/user'
-import { updateUser, updateUserDetails } from '@/libs/userManagement'
+import { updateUserDetails } from '@/libs/userManagement'
+import { generateOrder } from '../libs/gameFunction'
 
 const router = useRouter()
 const route = useRoute()
@@ -19,25 +16,6 @@ const userStore = useUserStore()
 const isPrepareOrder = computed(() => route.name === "prepare-modal")
 
 const emits = defineEmits(['handleConfirmOrder'])
-
-function generateOrder() {
-    const randomCustomerIndex = Math.floor(Math.random() * customersData.length)
-    const randomFoodIndex = Math.floor(Math.random() * foodsData.length)
-
-    const customer = customersData[randomCustomerIndex]
-    const food = foodsData[randomFoodIndex]
-
-    const filteredSpecialRequirements = specialRequirementData.filter(sr => customer.type === sr.type)
-    const randomSpecialRequirementIndex = Math.floor(Math.random() * filteredSpecialRequirements.length)
-
-    const specialRequirement = filteredSpecialRequirements[randomSpecialRequirementIndex]
-
-    return {
-        customerId: customer.id,
-        foodId: food.id,
-        specialRequirementId: specialRequirement.id,
-    }
-}
 
 onMounted(async () => {
     const currentOrder = userStore.user.userDetail.currentOrder
@@ -66,8 +44,8 @@ const handleCancelOrder = async () => {
         let updatedPopularity = userStore.user.userDetail.popularity - 1
 
         // ตรวจสอบว่า popularity ไม่ต่ำกว่า -50
-        if (userStore.user.userDetail.popularity === -50) {
-            updatedPopularity = 0
+        if (userStore.user.userDetail.popularity <= -50) {
+            updatedPopularity = -50
         }
 
         // กำหนดค่า currentOrder ใหม่
