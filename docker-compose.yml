@@ -16,8 +16,8 @@ services:
     networks:
       - frontier
       - backtier
-    # volumes:
-    #   - ./json-datalib:/app/data
+    volumes:
+      - ./json-datalib:/app/data
 
   proxy:
     depends_on:
