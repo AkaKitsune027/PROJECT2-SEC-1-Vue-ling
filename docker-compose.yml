@@ -1,0 +1,43 @@
+name: isekai-cooking
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile-fe
+    restart: on-failure:5
+    networks:
+      - frontier
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile-be
+    restart: on-failure:5
+    networks:
+      - backtier
+    volumes:
+      - ./db.json:/app/db.json
+
+  proxy:
+    depends_on:
+      - frontend
+      - backend
+    image: nginx:alpine
+    restart: on-failure:5
+    networks:
+      - frontier
+    ports:
+      - '80:80'
+    configs:
+      - source: proxy_config
+        target: /etc/nginx/conf.d/proxy.conf
+
+networks:
+  frontier:
+    driver: bridge
+  backtier:
+    driver: bridge
+
+configs:
+  proxy_config:
+    file: ./proxy_conf/proxy.conf
