@@ -17,7 +17,7 @@ services:
       - frontier
       - backtier
     volumes:
-      - ./db-persist.json:/app/data/db.json
+      - ./data/db-persist.json:/app/data/db.json
 
   proxy:
     depends_on:
