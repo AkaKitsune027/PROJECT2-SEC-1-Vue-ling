@@ -3,5 +3,5 @@ WORKDIR /app
 RUN npm init -y && npm install json-server
 COPY ./data/db.json ./data/db.json 
 VOLUME ./json-datalib/ /app/data/
-CMD [ "npx", "json-server", "--watch", "./data/db.json", "--port 5001" ]
+CMD [ "npx", "json-server", "--watch", "./data/db.json", "--port", "5001" ]
 EXPOSE 5001
