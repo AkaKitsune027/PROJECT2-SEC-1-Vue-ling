@@ -1,7 +1,7 @@
 FROM node:lts-alpine AS build-state 
 WORKDIR /app
 RUN npm init -y && npm install json-server
-COPY ./data/db.json ./data/db.json 
+COPY ./data/db.json /app/data/db.json 
 VOLUME ./json-datalib/ /app/data/
-CMD [ "npx", "json-server", "--watch", "./data/db.json", "--port", "5001" ]
+CMD [ "npx", "json-server", "--watch", "/app/data/db.json", "--port", "5001" ]
 EXPOSE 5001
