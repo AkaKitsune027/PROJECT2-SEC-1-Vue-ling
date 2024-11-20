@@ -16,7 +16,7 @@ services:
     networks:
       - backtier
     volumes:
-      - ./db.json:/app/db.json
+      - ./json-datalib:/app/data
 
   proxy:
     depends_on:
