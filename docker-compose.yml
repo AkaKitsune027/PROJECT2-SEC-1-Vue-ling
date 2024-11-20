@@ -15,8 +15,8 @@ services:
     restart: on-failure:5
     networks:
       - backtier
-    volumes:
-      - ./json-datalib:/app/data
+    # volumes:
+    #   - ./json-datalib:/app/data
 
   proxy:
     depends_on:
